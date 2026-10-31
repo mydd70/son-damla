@@ -117,12 +117,12 @@ var KS = globalThis.KS = globalThis.KS || {};
     ] },
     { id: 'g5_baba', gun: 5, dilim: 'sabah', mekan: 'tepe', satirlar: [
       { kim: 'ic', metin: 'Telefon yalnızca tepede çekiyor. Babam bugün arayacağım demişti.' },
-      { kim: 'baba', metin: 'Mehmet? Sesin geliyor mu?' },
+      { kim: 'baba', ses: 'telefon', metin: 'Mehmet? Sesin geliyor mu?' },
       { kim: 'mehmet', metin: 'Geliyor baba! Ne zaman geleceksin?' },
       { kim: 'baba', metin: 'İnşaatta bir iş var, belki... Annen nasıl? {keci} nasıl?' },
       { kim: 'mehmet', metin: '{keci} hasta. Kuyu da azalıyor. Öğretmen ölçtü.' },
       { kim: 'baba', metin: 'Sen muhtarla konuş. O adamı bir tek muhtar...' },
-      { kim: 'ic', metin: 'Kesildi. "O adam" kim?' }
+      { kim: 'ic', ses: 'hat_kesilir', metin: 'Kesildi. "O adam" kim?' }
     ] },
     { id: 'g5_hatirlatma', gun: 5, dilim: 'sabah', kosul: olcumYok, mekan: 'avlu', satirlar: [
       { kim: 'anne', metin: 'O kâğıt hâlâ cebinde mi? Muhtar akşamları muhtarlıkta olur.' }
@@ -153,7 +153,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'anne', metin: 'Bugün dışarıda fazla kalma.' }
     ] },
     { id: 'g8_obruk', gun: 8, dilim: 'ogle', mekan: 'komsu_tarlasi', mekanSecenek: function () { return { obruk: true }; }, satirlar: [
-      { kim: 'ic', metin: 'Rıza Amca\'nın tarlası... Toprak yarılmış. Kocaman bir çukur.' },
+      { kim: 'ic', ses: 'gurultu', metin: 'Rıza Amca\'nın tarlası... Toprak yarılmış. Kocaman bir çukur.' },
       { kim: 'komsu', metin: '(çukurun kenarında, eli titreyerek) Dün burada pancar vardı.' },
       { kim: 'komsu', metin: 'Kırk yıldır bu toprağı sürüyorum. Kırk yıl!' },
       { kim: 'mehmet', metin: 'Rıza Amca, uzak durun, kenarı çöküyor.' },
@@ -170,6 +170,20 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'komsu', kosul: function (d) { return d.komsu.ikna; }, metin: '(ağır ağır ayağa kalkar) Benim tarlam çöktü. Bir sonraki kimin tarlası? (elini kaldırır) Ben de varım. Motorum da sayaç taksın.' },
       { kim: 'muhtar', kosul: function (d) { return d.komsu.ikna; }, metin: '(bir an Rıza\'ya bakar, başını sallar)' },
       { kim: 'komsu', kosul: function (d) { return !d.komsu.ikna; }, metin: 'Benim belgem var. Kimse bana ne kadar su çekeceğimi söyleyemez. (çıkıp gider)' }
+    ] },
+
+    // ---------- Gün 1 öğreticileri ----------
+    { id: 'ogretici_dagitim', satirlar: [
+      { kim: 'ekran', metin: 'Bugünkü payımız: {pay} damla. Evin, keçinin ve bahçenin ihtiyacı daha fazla.' },
+      { kim: 'ekran', metin: 'Kime ne kadar vereceğine sen karar ver. Yetmeyen gösterge düşer.' },
+      { kim: 'ekran', metin: '"Kuyudan fazladan çek" düğmesi 4 damla daha verir. Ama kuyu bundan etkilenir.' }
+    ] },
+    { id: 'ogretici_keci', satirlar: [
+      { kim: 'ekran', metin: '{keci} seni bekliyor: sırtını tara, su kabını göster, yemini ver.' }
+    ] },
+    { id: 'ogretici_harita', satirlar: [
+      { kim: 'ekran', metin: 'Akşamları bir eve uğrayabilir ya da ailenle vakit geçirebilirsin.' },
+      { kim: 'ekran', metin: 'Haritada gitmek istediğin yere dokun.' }
     ] },
 
     // ---------- Sabah durum satırları (her sabah, gün 1 hariç) ----------
@@ -337,7 +351,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     // ---------- Ortak ----------
     { id: 'ev_isi', mekan: 'avlu', satirlar: [
       { kim: 'anne', metin: 'Mehmet, bugün bana yardım et. Tek başıma yetişemiyorum.' },
-      { kim: 'ic', kosul: tekGun, metin: 'Çamaşır, bulaşık, bebeğin bezi. {keci}\'ye bugün bakamadım.' },
+      { kim: 'ic', kosul: tekGun, metin: 'Çamaşır, bulaşık, bebeğin bezi. {keci} bugün bakımsız kaldı.' },
       { kim: 'ic', kosul: ciftGun, metin: 'Çamaşır, bulaşık, bebeğin bezi. Bahçeye bugün bakamadım.' }
     ] },
     { id: 'kuyu_uyari', satirlar: [
@@ -346,7 +360,7 @@ var KS = globalThis.KS = globalThis.KS || {};
 
     // ---------- Sonlar ----------
     { id: 'son_iyi_sarnic', mekan: 'sarnic', mekanSecenek: function () { return { onarildi: true }; }, satirlar: [
-      { kim: 'ekran', metin: 'Ekim. İlk yağmur.' },
+      { kim: 'ekran', ortam: 'yagmur', metin: 'Ekim. İlk yağmur.' },
       { kim: 'ic', metin: 'Sarnıcın oluğundan su akıyor. Muhtarla Rıza Amca yan yana duruyor, ikisi de ıslak, ikisi de susuyor.' },
       { kim: 'muhtar', metin: 'Seksen dokuzda da böyle durmuştuk, hatırlıyor musun?' },
       { kim: 'komsu', metin: 'Hatırlıyorum. Sonra motoru aldım, sen de peşime düştün.' },
@@ -358,27 +372,27 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'komsu', metin: '(güler) Benim inadım da değmezdi.' }
     ] },
     { id: 'son_iyi_ev', mekan: 'avlu', satirlar: [
-      { kim: 'ekran', metin: 'Köy çeşmesinden ilk damla.' },
+      { kim: 'ekran', ortam: null, metin: 'Köy çeşmesinden ilk damla.' },
       { kim: 'ic', metin: 'Az. Ama akıyor.' },
       { kim: 'ic', kosul: function (d) { return d.gosterge.keci >= KS.config.KECI.sutEsigi; }, metin: '{keci} sabah sağıldı. Annem peynir mayalıyor.' },
       { kim: 'ic', kosul: function (d) { return d.gosterge.keci < KS.config.KECI.sutEsigi; }, metin: '{keci} ayağa kalktı. Yavaş yavaş toparlanıyor.' },
-      { kim: 'baba', metin: 'Ben geldim.' },
+      { kim: 'baba', ses: 'kapi', metin: 'Ben geldim.' },
       { kim: 'ic', metin: 'Babam şehirde iş bulamamış. Ama köyde iş var artık. Sarnıç, borular, sayaçlar.' },
-      { kim: 'ekran', metin: 'Zor ama birlikte kaldık.' }
+      { kim: 'ekran', ses: 'bebek_gul', metin: 'Zor ama birlikte kaldık.' }
     ] },
     { id: 'son_kotu_avlu', mekan: 'avlu', satirlar: [
       { kim: 'ekran', kosul: function (d) { return d.komsu.ikna; }, metin: 'Plan kabul edildi. Ama kuyuya yetişemedi.' },
       { kim: 'anne', metin: 'Kamyon gelmiş. Eşyalar hazır mı?' },
-      { kim: 'ic', metin: '{keci}\'yi pazarda sattık. Yol parası lazımdı.' },
+      { kim: 'ic', metin: 'Keçimiz {keci} pazarda satıldı. Yol parası lazımdı.' },
       { kim: 'ic', kosul: evDusuk, metin: 'Annem günlerdir konuşmuyor.' },
       { kim: 'ic', kosul: function (d) { return d.gosterge.kiler === 0; }, metin: 'Son günlerde sofrada ekmekten başka bir şey yoktu.' }
     ] },
     { id: 'son_kotu_yol', mekan: 'koy_cikisi', satirlar: [
-      { kim: 'ic', metin: 'Fatma Nine\'yle Hasan Dede kapının önündeydi. El salladılar. Onlar gitmiyor. Nereye gitsinler?' },
+      { kim: 'ic', sesSoner: ['kamyon', 'bebek_agla'], metin: 'Fatma Nine\'yle Hasan Dede kapının önündeydi. El salladılar. Onlar gitmiyor. Nereye gitsinler?' },
       { kim: 'ic', metin: 'Uzakta şehir. Dumanın altında.' }
     ] },
     { id: 'son_kotu_sarnic', mekan: 'sarnic', satirlar: [
-      { kim: 'ekran', metin: 'Ekim. İlk yağmur.' },
+      { kim: 'ekran', ortam: 'yagmur', metin: 'Ekim. İlk yağmur.' },
       { kim: 'ekran', metin: 'Kırık sarnıca ve boş avluya yağmur yağdı.' },
       { kim: 'ekran', metin: 'İş işten geçti.' }
     ] }
@@ -450,6 +464,9 @@ var KS = globalThis.KS = globalThis.KS || {};
     KS.OLAYLAR.forEach(function (o) {
       o.satirlar.forEach(function (s) {
         if (!KS.KARAKTERLER[s.kim]) uyarilar.push(o.id + ': tanımsız karakter ' + s.kim);
+        [s.ses, s.ortam].concat(s.sesSoner || []).forEach(function (id) {
+          if (id && !KS.config.SES.liste[id]) uyarilar.push(o.id + ': tanımsız ses ' + id);
+        });
       });
       etkiDenetle(o.id, o);
       (o.secenekler || []).forEach(function (sc) {

@@ -7,6 +7,11 @@ KS.METIN = {
   tr: {
     oyunAdi: 'Köyümün Suyu',
     basla: 'Başla',
+    devamEt: 'Devam et',
+    yeniOyun: 'Yeni oyun',
+    atla: 'Atla',
+    sesDugmesi: 'Sesi aç ya da kapat',
+    yonUyari: 'Cihazını yatay çevir',
     keciSoru: 'Keçimizin adı ne?',
     tamam: 'Tamam',
     devam: 'Devam',
@@ -38,7 +43,7 @@ KS.METIN = {
     yenidenDene: 'Yeniden dene',
     otYonerge: 'Otların üstüne dokunarak yol. {n} saniyen var.',
     otSureBitti: 'Süre bitti, bahçede ot kaldı.',
-    keciTara: '{keci}\'nin sırtını tara: üstünde basılı tutup sağa sola sürükle.',
+    keciTara: '{keci} seni bekliyor. Sırtını tara: üstünde basılı tutup sağa sola sürükle.',
     keciSu: 'Su kabını göster.',
     keciYem: 'Yemini ver.',
     suKabi: 'Su kabı',
@@ -69,6 +74,11 @@ KS.METIN = {
   en: {
     oyunAdi: 'Water of My Village',
     basla: 'Start',
+    devamEt: 'Continue',
+    yeniOyun: 'New game',
+    atla: 'Skip',
+    sesDugmesi: 'Turn sound on or off',
+    yonUyari: 'Rotate your device to landscape',
     keciSoru: "What is our goat's name?",
     tamam: 'OK',
     devam: 'Continue',
@@ -154,6 +164,20 @@ KS.DURUM_EN = {
 KS.YER_EN = {
   ev: 'Home', yasliCift: 'Old couple', muhtar: "Headman's office", ogretmen: 'School',
   komsu: "Neighbor's house", komsuTarlasi: "Neighbor's field", kuyu: 'Village well', sarnic: 'Cistern', tepe: 'Hill'
+};
+
+// Dil tercihi: başlangıç ekranında seçilir, hatırlanır.
+KS.dilSec = function (dil) {
+  if (!KS.METIN[dil]) return;
+  KS.dil = dil;
+  try { localStorage.setItem(KS.config.DIL_ANAHTAR, dil); } catch (e) { /* önemsiz */ }
+};
+
+KS.dilYukle = function () {
+  try {
+    var kayitli = localStorage.getItem(KS.config.DIL_ANAHTAR);
+    if (kayitli && KS.METIN[kayitli]) KS.dil = kayitli;
+  } catch (e) { /* önemsiz */ }
 };
 
 // Eksik anahtarda Türkçeye düşer, o da yoksa anahtarı gösterir; oyun durmaz.

@@ -3,7 +3,7 @@
 Okurken düzeltmen için yazıldı; kod değil. Aşama 4'te story.js'e aynı id'lerle aktarılacak.
 
 **Yazım kuralları**
-- `{keci}` = oyuncunun verdiği keçi adı.
+- `{keci}` = oyuncunun verdiği keçi adı. Ad hep yalın yazılır, ek almaz: oyuncunun yazdığı ada uyan eki önceden bilemeyiz ("Benek'nin" gibi bozuk çıkar).
 - `[ses: ...]` ses ipucu, `[sahne: ...]` arka plan, `(iç ses)` Mehmet'in düşüncesi.
 - `> ` ile başlayan satırlar oyuncu seçenekleri. `{A1}` gibi etiketler argüman öğrenme ya da iletme anlarıdır.
 - Geçici isimler: yaşlı çift **Hasan Dede ve Fatma Nine**, komşu **Rıza Amca**, öğretmen **Zeynep Öğretmen**. Beğenmezsen değiştir; hepsi tek yerden değişecek.
@@ -35,7 +35,7 @@ Okurken düzeltmen için yazıldı; kod değil. Aşama 4'te story.js'e aynı id'
 - **Ekran:** "Kuyudan fazladan çek" düğmesi 4 damla daha verir. Ama kuyu bundan etkilenir.
 
 ### Öğretici: keçi bakımı
-- **Ekran:** {keci}'nin sırtını tara, su kabını göster, yemini ver.
+- **Ekran:** {keci} seni bekliyor: sırtını tara, su kabını göster, yemini ver.
 
 ### g1_tanima – Gün 1 öğle [sahne: kuyu_basi]
 - **Mehmet (iç ses):** Kuyu başı yine kalabalık. Bidonlar sıra sıra.
@@ -299,7 +299,7 @@ Okurken düzeltmen için yazıldı; kod değil. Aşama 4'te story.js'e aynı id'
 
 ## Zorunlu ev işi (ev 3'ün altına düşerse ertesi sabah)
 - **Anne:** Mehmet, bugün bana yardım et. Tek başıma yetişemiyorum.
-- **Mehmet (iç ses):** Çamaşır, bulaşık, bebeğin bezi. {keci}'ye bugün bakamadım.
+- **Mehmet (iç ses):** Çamaşır, bulaşık, bebeğin bezi. {keci} bugün bakımsız kaldı. *(çift günde: Bahçeye bugün bakamadım.)*
 
 ## Sabah iç sesi (ev göstergesine göre)
 - **Ev düşük:** Annem gece yine uyumadı, sesinden anlıyorum. / Kardeşim ağlıyor, annemin sesi kısık.
@@ -382,7 +382,7 @@ Okurken düzeltmen için yazıldı; kod değil. Aşama 4'te story.js'e aynı id'
 - [sahne: avlu]
 - *(komşu ikna edildiyse)* **Ekran:** Plan kabul edildi. Ama kuyuya yetişemedi.
 - **Anne:** Kamyon gelmiş. Eşyalar hazır mı?
-- **Mehmet (iç ses):** {keci}'yi pazarda sattık. Yol parası lazımdı.
+- **Mehmet (iç ses):** Keçimiz {keci} pazarda satıldı. Yol parası lazımdı.
 - *(ev düşükse)* **Mehmet (iç ses):** Annem günlerdir konuşmuyor.
 - *(kiler boşsa)* **Mehmet (iç ses):** Son günlerde sofrada ekmekten başka bir şey yoktu.
 - [sahne: koy_cikisi]

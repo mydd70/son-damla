@@ -1,6 +1,6 @@
 # İlerleme
 
-Son güncelleme: 31 Ekim 2026, Aşama 4 bitti.
+Son güncelleme: 31 Ekim 2026, Aşama 5 bitti.
 
 | İş | Durum |
 |---|---|
@@ -13,8 +13,14 @@ Son güncelleme: 31 Ekim 2026, Aşama 4 bitti.
 | Aşama 3: ot yolma, keçi bakımı, zorunlu ev işi, Hızlı geç | Bitti, etiket `asama-3` |
 | İlk yayın | Bitti: https://mydd70.github.io/koyumun-suyu/ (depo: mydd70/koyumun-suyu) |
 | Aşama 4: tüm olaylar, ikna, defter, toplantı, iki son | Bitti, etiket `asama-4` |
+| Aşama 5: kayıt, öğretici, atlama, ses altyapısı, tam ekran, yön uyarısı, dil seçimi | Bitti, etiket `asama-5` |
 
-Sıradaki: Aşama 5 (kolaylıklar), kullanıcının onayıyla.
+Sıradaki: Aşama 6 (SVG sahneler ve renk filtresi), kullanıcının onayıyla.
+
+## Ses dosyaları
+`assets/audio/<ad>.mp3` olarak konur; eksik olan sessiz geçer.
+- Belgedekiler: `ruzgar`, `cirkir`, `yagmur`, `bebek_agla`, `bebek_gul`, `keci`, `kamyon`
+- Taslaktaki ek ipuçları: `telefon`, `hat_kesilir`, `gurultu`, `kapi`
 
 ## Kullanıcının bakacağı konular
 - Kötü sonda "Ekim. İlk yağmur." başta değil sonda (taslak böyle); belge bölüm 10 "ikisi de bununla başlar" diyor.

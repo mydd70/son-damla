@@ -158,6 +158,7 @@ KS.ui = KS.ui || {};
     };
     yem.onclick = function () {
       yem.disabled = true;
+      KS.ses.cal('keci');
       kontrol.bekleyipBitir();
     };
   }

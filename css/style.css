@@ -60,9 +60,36 @@ button:disabled { opacity: 0.4; cursor: default; }
   display: flex;
   align-items: center;
   gap: 1.4em;
-  padding: 0.5em 1em;
+  padding: 0.5em 3.6em 0.5em 1em;
   background: var(--panel);
   font-size: 0.85em;
+}
+#sesDugme {
+  position: absolute;
+  z-index: 6;
+  top: 0.35em; right: 0.5em;
+  padding: 0.2em 0.4em;
+  background: transparent;
+}
+#sesDugme:hover { background: var(--toprak-koyu); }
+.atla { position: absolute; top: 0.6em; right: 0.8em; padding: 0.15em 0.7em; font-size: 0.8em; background: transparent; border: 0.1em solid var(--bos); }
+.dil-secimi { display: flex; gap: 0.5em; font-size: 0.85em; }
+.dil-secimi button { background: transparent; border: 0.1em solid var(--bos); }
+.dil-secimi button.secili { background: var(--toprak-koyu); border-color: var(--toprak); }
+#yonUyari { display: none; }
+@media (orientation: portrait) and (max-width: 900px) {
+  #yonUyari {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2em;
+    text-align: center;
+    font-size: 1.4rem;
+    background: var(--koyu);
+  }
 }
 .gun-etiketi { font-weight: 600; white-space: nowrap; margin-right: auto; }
 .gosterge { position: relative; }

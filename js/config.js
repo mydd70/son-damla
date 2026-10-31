@@ -83,7 +83,29 @@ KS.config = {
     bahce: [[2, 'Kurumuş'], [4, 'Susuz'],  [7, 'İdare eder'],   [10, 'Yeşil']]
   },
 
-  KAYIT: { anahtar: 'koyumun-suyu-kayit', surum: 1 }
+  KAYIT: { anahtar: 'koyumun-suyu-kayit', surum: 1 },
+  DIL_ANAHTAR: 'koyumun-suyu-dil',
+
+  // --- Ses: dosyalar assets/audio/<id>.mp3; yoksa sessiz geçilir ---
+  SES: {
+    anahtar: 'koyumun-suyu-ses',
+    klasor: 'assets/audio/', uzanti: '.mp3',
+    sonmeSure: 4000, sonmeAdim: 20,      // milisaniye, adım: uzaklaşarak sönme
+    ortam: { sabah: 'ruzgar', ogle: 'ruzgar', aksam: 'cirkir' },
+    liste: {
+      ruzgar:      { seviye: 0.25, dongu: true },
+      cirkir:      { seviye: 0.25, dongu: true },
+      yagmur:      { seviye: 0.5,  dongu: true },
+      bebek_agla:  { seviye: 0.3 },
+      bebek_gul:   { seviye: 0.5 },
+      keci:        { seviye: 0.5 },
+      kamyon:      { seviye: 0.6 },
+      telefon:     { seviye: 0.5 },
+      hat_kesilir: { seviye: 0.5 },
+      gurultu:     { seviye: 0.7 },
+      kapi:        { seviye: 0.5 }
+    }
+  }
 };
 
 if (typeof module !== 'undefined') module.exports = KS.config;

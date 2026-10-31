@@ -3,26 +3,39 @@ var KS = globalThis.KS = globalThis.KS || {};
 
 (function () {
   var ui = KS.ui;
+  var kayitAcik = true;   // ?gun=N denemeleri asıl kaydı ezmesin
+
+  function ortamSesi() {
+    KS.ses.ortamCal(KS.config.SES.ortam[KS.state.dilim]);
+  }
 
   function yeniOyun(tekrar) {
     KS.state = KS.yeniDurum();
     if (tekrar) KS.tekrarOyunIsaretle(KS.state);
+    var kayit = KS.yukle();
     ui.baslangicAc(function () {
       ui.keciIsmiAc(function (ad) {
         KS.keciAdiVer(KS.state, ad);
         gunBasla();
       });
-    });
+    }, kayit ? function () {
+      KS.state = kayit;
+      gunBasla();
+    } : null);
   }
 
   // ---------- Sabah ----------
 
+  // Kayıt, günün başından önceki durumu tutar; "Devam et" o günü baştan başlatır.
   function gunBasla() {
+    if (kayitAcik) KS.kaydet(KS.state);
     var r = KS.gunBaslat(KS.state);
     ui.gostergeCiz();
     ui.sahneGoster('avlu');
     ui.gunKartiAc(KS.state.gun, function () {
       ui.degisimGoster(r.degisimler);
+      ortamSesi();
+      if (r.aglama) KS.ses.cal('bebek_agla');
       var olaylar = KS.state.gun > 1 ? [KS.olayGetir('sabah_durum')] : [];
       olaylar = olaylar.concat(KS.olaylariGetir(KS.state.gun, 'sabah', KS.state));
       ui.olaylariOynat(olaylar, r, function () {
@@ -32,12 +45,19 @@ var KS = globalThis.KS = globalThis.KS || {};
     });
   }
 
+  function ilkGunOgretici(id, sonraki) {
+    if (KS.state.gun === 1) ui.diyalogOynat(KS.olayGetir(id), null, sonraki);
+    else sonraki();
+  }
+
   function dagitim() {
     ui.sahneGoster('avlu');
-    ui.dagitimAc(function (secim, fazla) {
-      var r = KS.dagitimUygula(KS.state, secim, fazla);
-      ui.degisimGoster(r.degisimler);
-      kuyuUyarisiVarsa(r.kuyuUyari, sabahIsi);
+    ilkGunOgretici('ogretici_dagitim', function () {
+      ui.dagitimAc(function (secim, fazla) {
+        var r = KS.dagitimUygula(KS.state, secim, fazla);
+        ui.degisimGoster(r.degisimler);
+        kuyuUyarisiVarsa(r.kuyuUyari, sabahIsi);
+      });
     });
   }
 
@@ -48,7 +68,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       ogle();
     }
     if (KS.miniOyunTuru(KS.state) === 'evIsi') ui.diyalogOynat(KS.olayGetir('ev_isi'), null, tamamla);
-    else ui.miniOyunAc(tamamla);
+    else ilkGunOgretici('ogretici_keci', function () { ui.miniOyunAc(tamamla); });
   }
 
   // ---------- Öğle ----------
@@ -57,6 +77,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     KS.dilimGec(KS.state, 'ogle');
     ui.gostergeCiz();
     ui.sahneYenile();
+    ortamSesi();
     if (KS.olayBul(KS.state.gun, 'ogle')) {
       var r = KS.ogleOlayi(KS.state);
       ui.degisimGoster(r.degisimler);
@@ -82,6 +103,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     KS.dilimGec(KS.state, 'aksam');
     ui.gostergeCiz();
     ui.sahneYenile();
+    ortamSesi();
     var d = KS.state;
     if (d.gun === KS.config.GUN_SAYISI) {
       ui.olaylariOynat(KS.olaylariGetir(d.gun, 'aksam', d), null, toplanti);
@@ -90,7 +112,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     var olaylar = KS.olaylariGetir(d.gun, 'aksam', d);
     if (d.gosterge.ev >= KS.config.EV.yuksekAlt) olaylar.push(KS.olayGetir('anne_ipucu'));
     ui.olaylariOynat(olaylar, null, function () {
-      ui.haritaAc(aksamSecimi);
+      ilkGunOgretici('ogretici_harita', function () { ui.haritaAc(aksamSecimi); });
     });
   }
 
@@ -117,9 +139,14 @@ var KS = globalThis.KS = globalThis.KS || {};
 
   function toplanti() {
     var r = KS.toplanti(KS.state);
+    if (kayitAcik) KS.kaydiSil();
+    KS.ses.ortamCal(null);
     ui.degisimGoster(r.degisimler);
     ui.olaylariOynat(KS.sonOlaylari(r.sonuc.iyi), r, function () {
-      ui.sonAc(r.sonuc, function () { yeniOyun(true); });
+      ui.sonAc(r.sonuc, function () {
+        KS.ses.ortamCal(null);
+        yeniOyun(true);
+      });
     });
   }
 
@@ -134,10 +161,14 @@ var KS = globalThis.KS = globalThis.KS || {};
 
   function baslat() {
     var p = new URLSearchParams(location.search);
+    KS.dilYukle();
+    KS.ses.tercihYukle();
     if (p.get('dil') && KS.METIN[p.get('dil')]) KS.dil = p.get('dil');
+    ui.dilYenile();
     KS.state = KS.yeniDurum();
     if (p.get('debug') === '1') ui.debugBaslat();
     if (p.get('gun')) {
+      kayitAcik = false;
       KS.state = KS.gunIcinDurum(parseInt(p.get('gun'), 10));
       gunBasla();
     } else {

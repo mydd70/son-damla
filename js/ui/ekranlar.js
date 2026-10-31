@@ -1,4 +1,4 @@
-// ui/ekranlar.js – Tam ekran kartlar: başlangıç, keçiye isim, gün geçişi.
+// ui/ekranlar.js – Tam ekran kartlar (başlangıç, keçiye isim, gün geçişi), ses düğmesi, dile bağlı sabit metinler.
 var KS = globalThis.KS = globalThis.KS || {};
 KS.ui = KS.ui || {};
 
@@ -19,13 +19,55 @@ KS.ui = KS.ui || {};
     return b;
   }
 
+  // Destekleyen cihazlarda tam ekran; reddedilirse oyun aynen sürer.
+  function tamEkranIste() {
+    var kok = document.documentElement;
+    if (!kok.requestFullscreen) return;
+    var p = kok.requestFullscreen();
+    if (p) p.catch(function () { /* önemsiz */ });
+  }
+
   KS.ui.ekran = ekran;
   KS.ui.ekranDugmesi = dugme;
 
-  KS.ui.baslangicAc = function (bitince) {
+  // Sayfa başlığı, dil etiketi, yön uyarısı ve ses düğmesi seçili dile göre.
+  KS.ui.dilYenile = function () {
+    document.documentElement.lang = KS.dil;
+    document.title = KS.t('oyunAdi');
+    document.getElementById('yonUyari').textContent = KS.t('yonUyari');
+    sesDugmesiCiz();
+  };
+
+  function sesDugmesiCiz() {
+    var b = document.getElementById('sesDugme');
+    b.textContent = KS.ses.acikMi() ? '🔊' : '🔇';
+    b.title = KS.t('sesDugmesi');
+    b.setAttribute('aria-label', KS.t('sesDugmesi'));
+    b.onclick = function () {
+      KS.ses.degistir();
+      sesDugmesiCiz();
+    };
+  }
+
+  // devam: kayıt varsa "Devam et" için işlev, yoksa null.
+  KS.ui.baslangicAc = function (yeni, devam) {
     var e = ekran();
     e.appendChild(KS.ui.el('h1', '', KS.t('oyunAdi')));
-    e.appendChild(dugme(KS.t('basla'), bitince));
+
+    var diller = KS.ui.el('div', 'dil-secimi');
+    [['tr', 'Türkçe'], ['en', 'English']].forEach(function (d) {
+      var b = KS.ui.el('button', KS.dil === d[0] ? 'secili' : '', d[1]);
+      b.onclick = function () {
+        KS.dilSec(d[0]);
+        KS.ui.dilYenile();
+        KS.ui.baslangicAc(yeni, devam);
+      };
+      diller.appendChild(b);
+    });
+    e.appendChild(diller);
+
+    if (devam) e.appendChild(dugme(KS.t('devamEt'), function () { tamEkranIste(); devam(); }));
+    e.appendChild(dugme(KS.t(devam ? 'yeniOyun' : 'basla'), function () { tamEkranIste(); yeni(); }));
   };
 
   // bitince(ad): boş bırakılırsa varsayılanı logic.js verir.

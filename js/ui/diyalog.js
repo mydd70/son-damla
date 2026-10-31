@@ -5,6 +5,15 @@ KS.ui = KS.ui || {};
 (function () {
   var sonMekan = 'avlu', sonSecenek = {};
 
+  // Boşluk ve Enter sonraki satıra geçer; basılı tutmak diyaloğu hızlandırır, seçeneklerde durur.
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== ' ' && e.key !== 'Enter') return;
+    var kutu = document.getElementById('diyalog');
+    if (kutu.hidden || !kutu.onclick || !document.getElementById('defter').hidden) return;
+    e.preventDefault();
+    kutu.onclick();
+  });
+
   KS.ui.sahneGoster = function (mekan, secenek) {
     sonMekan = mekan;
     sonSecenek = secenek || {};
@@ -17,7 +26,13 @@ KS.ui = KS.ui || {};
   };
 
   function metinHazirla(oge) {
-    return KS.metinSec(oge).replace(/\{keci\}/g, KS.state.keciAdi);
+    return KS.metinSec(oge).replace(/\{keci\}/g, KS.state.keciAdi).replace(/\{pay\}/g, KS.state.su.pay);
+  }
+
+  function satirSesi(satir) {
+    if ('ortam' in satir) KS.ses.ortamCal(satir.ortam);
+    if (satir.ses) KS.ses.cal(satir.ses);
+    (satir.sesSoner || []).forEach(KS.ses.calSonerek);
   }
 
   function portreCiz(kim) {
@@ -76,8 +91,22 @@ KS.ui = KS.ui || {};
     function goster() {
       var son = i === satirlar.length - 1;
       var govde = satirCiz(kutu, satirlar[i]);
-      if (son && secenekler.length) seceneklerCiz(govde);
-      else govde.appendChild(KS.ui.el('div', 'sonraki-isaret', '▼'));
+      satirSesi(satirlar[i]);
+      if (son && secenekler.length) { seceneklerCiz(govde); return; }
+      govde.appendChild(KS.ui.el('div', 'sonraki-isaret', '▼'));
+      if (!son) kutu.appendChild(atlaDugmesi());
+    }
+
+    // Olayın sonuna atlar: seçenek varsa onu gösterir, etkiler kapanışta yine uygulanır.
+    function atlaDugmesi() {
+      var b = KS.ui.el('button', 'atla', KS.t('atla'));
+      b.onclick = function (e) {
+        e.stopPropagation();
+        i = satirlar.length - 1;
+        if (secenekler.length) goster();
+        else kapat();
+      };
+      return b;
     }
 
     if (!satirlar.length) { bitince(); return; }
