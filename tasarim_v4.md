@@ -200,7 +200,7 @@ Görev listesi. Örnek maddeler: "Öğretmenin ölçümünü muhtara götür", "
 ## 13. Sanat ve ses
 - **SVG sahneler (Claude):** Her mekân için kodla çizilmiş sahne. Hem yer tutucu hem de kullanıcının YZ ile üreteceği arka planların düzen referansı. Asset yoksa oyun SVG ile çalışır.
 - **Mekânlar:** avlu, köy yolu, kuyu başı, yaşlı çiftin evi, tepe, komşunun tarlası (obruk), muhtarlık/toplantı yeri, sarnıç, köy çıkışı + köy haritası.
-- **Arka planlar (kullanıcı):** ChatGPT ile, SVG düzenlerine ve portre tarzına uygun. Mekân başına tek görsel; sabah/öğle/akşam kodla renk filtresiyle.
+- **Arka planlar (kullanıcı):** ChatGPT ile, SVG düzenlerine ve portre tarzına uygun. Mekân başına tek görsel; sabah/öğle/akşam ve sonlardaki yağmur kodla renk filtresiyle.
 - **Portreler (kullanıcı):** PixelLab; ifade varyantları gerekirse Gemini ile.
 - **Sesler (kullanıcı):** Freesound CC0, Kenney: cırcır böceği, rüzgâr, keçi, bebek ağlaması, bebek gülmesi, kamyon, yağmur. Müzik isteğe bağlı.
 - Yetişmeyen sahneler metin kartıyla anlatılır.

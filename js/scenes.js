@@ -22,15 +22,28 @@ var KS = globalThis.KS = globalThis.KS || {};
   var ZAMAN = {
     sabah: { renk: '#FFC98A', saydam: 0.22, karis: 'multiply', gunesX: 170, gunesY: 120, gunesR: 34 },
     ogle:  { renk: '#FFFFFF', saydam: 0,    karis: 'normal',   gunesX: 480, gunesY: 60,  gunesR: 30 },
-    aksam: { renk: '#C2552E', saydam: 0.45, karis: 'multiply', gunesX: 800, gunesY: 200, gunesR: 40 }
+    aksam: { renk: '#C2552E', saydam: 0.45, karis: 'multiply', gunesX: 800, gunesY: 200, gunesR: 40 },
+    yagmur: { renk: '#5F7486', saydam: 0.55, karis: 'multiply', gunesYok: true }   // sonlardaki "Ekim. İlk yağmur."
   };
+
+  // Eğik yağmur çizgileri: sabit düzen (her çizimde aynı).
+  function yagmurCizgileri() {
+    var s = '';
+    for (var i = 0; i < 90; i++) {
+      var x = (i * 137) % G, y = (i * 83) % Y;
+      s += '<line x1="' + x + '" y1="' + y + '" x2="' + (x - 7) + '" y2="' + (y + 22) + '" stroke="#DCE6EC" stroke-width="1.5" opacity="0.45"/>';
+    }
+    return s;
+  }
 
   // ---------- Yapı taşları ----------
 
   function gok(z) {
     var t = ZAMAN[z];
-    return '<rect width="' + G + '" height="' + Y + '" fill="' + P.gok + '"/>' +
-      '<rect y="200" width="' + G + '" height="140" fill="' + P.gokAlt + '" opacity="0.7"/>' +
+    var gokRenk = '<rect width="' + G + '" height="' + Y + '" fill="' + P.gok + '"/>' +
+      '<rect y="200" width="' + G + '" height="140" fill="' + P.gokAlt + '" opacity="0.7"/>';
+    if (t.gunesYok) return gokRenk;
+    return gokRenk +
       '<circle cx="' + t.gunesX + '" cy="' + t.gunesY + '" r="' + (t.gunesR + 18) + '" fill="' + P.gunes + '" opacity="0.35"/>' +
       '<circle cx="' + t.gunesX + '" cy="' + t.gunesY + '" r="' + t.gunesR + '" fill="' + P.gunes + '"/>';
   }
@@ -316,7 +329,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     komsu_tarlasi: function (o) {
       var s = uzakTepeler(280) + zemin(300, 4);
       s += tarlaSiralari(330, 540);
-      s += kerpicEv(40, 200, 170, 110, { pencereler: [24], kapiX: 104 });
+      s += kerpicEv(40, 200, 170, 110, { pencereler: [24], kapiX: 104, isik: o.isik });
       s += motorKulubesi(300, 320);
       if (o.obruk) s += obruk(620, 430);
       s += elektrikDiregi(250, 310) + elektrikDiregi(900, 320) + teller(250, 900, 174);
@@ -450,11 +463,12 @@ var KS = globalThis.KS = globalThis.KS || {};
       govde = gok(zaman) + zemin(330);
     }
     var t = ZAMAN[zaman];
-    var isik = t.saydam > 0 && id !== 'harita'
+    var isik = t.saydam > 0 && !secenek.etiketler   // etiketli harita yalnızca referans görseli
       ? '<rect width="' + G + '" height="' + Y + '" fill="' + t.renk + '" opacity="' + t.saydam + '" style="mix-blend-mode:' + t.karis + '"/>'
       : '';
+    var yagmur = zaman === 'yagmur' ? yagmurCizgileri() : '';
     return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + G + ' ' + Y + '" preserveAspectRatio="xMidYMid slice" role="img" aria-label="' + id + '">' +
-      govde + isik + '</svg>';
+      govde + isik + yagmur + '</svg>';
   };
 })();
 

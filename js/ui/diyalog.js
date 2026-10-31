@@ -3,7 +3,7 @@ var KS = globalThis.KS = globalThis.KS || {};
 KS.ui = KS.ui || {};
 
 (function () {
-  var sonMekan = 'avlu', sonSecenek = {};
+  var sonMekan = 'avlu', sonSecenek = {}, sonZaman = null;
 
   // Boşluk ve Enter sonraki satıra geçer; basılı tutmak diyaloğu hızlandırır, seçeneklerde durur.
   document.addEventListener('keydown', function (e) {
@@ -14,15 +14,22 @@ KS.ui = KS.ui || {};
     kutu.onclick();
   });
 
-  KS.ui.sahneGoster = function (mekan, secenek) {
+  // zaman verilmezse günün dilimi kullanılır. Akşam pencereler yanar, sulanan bahçe yeşerir.
+  KS.ui.sahneGoster = function (mekan, secenek, zaman) {
     sonMekan = mekan;
     sonSecenek = secenek || {};
-    document.getElementById('arkaplan').innerHTML = KS.sahne(mekan, KS.state.dilim, sonSecenek);
+    sonZaman = zaman || null;
+    var d = KS.state;
+    var ciz = Object.assign({
+      isik: d.dilim === 'aksam' && !zaman,
+      yesil: d.gosterge.bahce >= KS.config.BAHCE.sebzeEsigi
+    }, sonSecenek);
+    document.getElementById('arkaplan').innerHTML = KS.sahne(mekan, zaman || d.dilim, ciz);
   };
 
   // Dilim değişince aynı mekânı yeni ışıkla çizer.
   KS.ui.sahneYenile = function () {
-    KS.ui.sahneGoster(sonMekan, sonSecenek);
+    KS.ui.sahneGoster(sonMekan, sonSecenek, sonZaman);
   };
 
   function metinHazirla(oge) {
@@ -56,7 +63,7 @@ KS.ui = KS.ui || {};
   // olay: story.js biçimi. r: satır koşullarına verilen eylem sonucu. bitince: diyalog kapanınca çağrılır.
   KS.ui.diyalogOynat = function (olay, r, bitince) {
     var d = KS.state;
-    if (olay.mekan) KS.ui.sahneGoster(olay.mekan, olay.mekanSecenek ? olay.mekanSecenek(d) : {});
+    if (olay.mekan) KS.ui.sahneGoster(olay.mekan, olay.mekanSecenek ? olay.mekanSecenek(d) : {}, olay.zaman);
     var satirlar = olay.satirlar.filter(function (s) { return !s.kosul || s.kosul(d, r || {}); });
     var kutu = document.getElementById('diyalog');
     var i = 0;

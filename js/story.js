@@ -359,7 +359,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     ] },
 
     // ---------- Sonlar ----------
-    { id: 'son_iyi_sarnic', mekan: 'sarnic', mekanSecenek: function () { return { onarildi: true }; }, satirlar: [
+    { id: 'son_iyi_sarnic', mekan: 'sarnic', zaman: 'yagmur', mekanSecenek: function () { return { onarildi: true }; }, satirlar: [
       { kim: 'ekran', ortam: 'yagmur', metin: 'Ekim. İlk yağmur.' },
       { kim: 'ic', metin: 'Sarnıcın oluğundan su akıyor. Muhtarla Rıza Amca yan yana duruyor, ikisi de ıslak, ikisi de susuyor.' },
       { kim: 'muhtar', metin: 'Seksen dokuzda da böyle durmuştuk, hatırlıyor musun?' },
@@ -371,7 +371,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'muhtar', metin: 'Haklıydım belki. Ama seni kaybetmeye değmezdi.' },
       { kim: 'komsu', metin: '(güler) Benim inadım da değmezdi.' }
     ] },
-    { id: 'son_iyi_ev', mekan: 'avlu', satirlar: [
+    { id: 'son_iyi_ev', mekan: 'avlu', zaman: 'sabah', mekanSecenek: function () { return { yesil: true }; }, satirlar: [
       { kim: 'ekran', ortam: null, metin: 'Köy çeşmesinden ilk damla.' },
       { kim: 'ic', metin: 'Az. Ama akıyor.' },
       { kim: 'ic', kosul: function (d) { return d.gosterge.keci >= KS.config.KECI.sutEsigi; }, metin: '{keci} sabah sağıldı. Annem peynir mayalıyor.' },
@@ -380,18 +380,18 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'ic', metin: 'Babam şehirde iş bulamamış. Ama köyde iş var artık. Sarnıç, borular, sayaçlar.' },
       { kim: 'ekran', ses: 'bebek_gul', metin: 'Zor ama birlikte kaldık.' }
     ] },
-    { id: 'son_kotu_avlu', mekan: 'avlu', satirlar: [
+    { id: 'son_kotu_avlu', mekan: 'avlu', zaman: 'sabah', mekanSecenek: function () { return { yesil: false }; }, satirlar: [
       { kim: 'ekran', kosul: function (d) { return d.komsu.ikna; }, metin: 'Plan kabul edildi. Ama kuyuya yetişemedi.' },
       { kim: 'anne', metin: 'Kamyon gelmiş. Eşyalar hazır mı?' },
       { kim: 'ic', metin: 'Keçimiz {keci} pazarda satıldı. Yol parası lazımdı.' },
       { kim: 'ic', kosul: evDusuk, metin: 'Annem günlerdir konuşmuyor.' },
       { kim: 'ic', kosul: function (d) { return d.gosterge.kiler === 0; }, metin: 'Son günlerde sofrada ekmekten başka bir şey yoktu.' }
     ] },
-    { id: 'son_kotu_yol', mekan: 'koy_cikisi', satirlar: [
+    { id: 'son_kotu_yol', mekan: 'koy_cikisi', zaman: 'ogle', satirlar: [
       { kim: 'ic', sesSoner: ['kamyon', 'bebek_agla'], metin: 'Fatma Nine\'yle Hasan Dede kapının önündeydi. El salladılar. Onlar gitmiyor. Nereye gitsinler?' },
       { kim: 'ic', metin: 'Uzakta şehir. Dumanın altında.' }
     ] },
-    { id: 'son_kotu_sarnic', mekan: 'sarnic', satirlar: [
+    { id: 'son_kotu_sarnic', mekan: 'sarnic', zaman: 'yagmur', satirlar: [
       { kim: 'ekran', ortam: 'yagmur', metin: 'Ekim. İlk yağmur.' },
       { kim: 'ekran', metin: 'Kırık sarnıca ve boş avluya yağmur yağdı.' },
       { kim: 'ekran', metin: 'İş işten geçti.' }

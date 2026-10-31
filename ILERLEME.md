@@ -1,6 +1,6 @@
 # İlerleme
 
-Son güncelleme: 31 Ekim 2026, Aşama 5 bitti.
+Son güncelleme: 31 Ekim 2026, Aşama 6 bitti.
 
 | İş | Durum |
 |---|---|
@@ -14,8 +14,9 @@ Son güncelleme: 31 Ekim 2026, Aşama 5 bitti.
 | İlk yayın | Bitti: https://mydd70.github.io/koyumun-suyu/ (depo: mydd70/koyumun-suyu) |
 | Aşama 4: tüm olaylar, ikna, defter, toplantı, iki son | Bitti, etiket `asama-4` |
 | Aşama 5: kayıt, öğretici, atlama, ses altyapısı, tam ekran, yön uyarısı, dil seçimi | Bitti, etiket `asama-5` |
+| Aşama 6: sahneler oyun durumuna bağlandı, harita ve yağmur ışığı | Bitti, etiket `asama-6` |
 
-Sıradaki: Aşama 6 (SVG sahneler ve renk filtresi), kullanıcının onayıyla.
+Sıradaki: Aşama 7 (son metinler, ardından İngilizce çeviri), kullanıcının okumasıyla.
 
 ## Ses dosyaları
 `assets/audio/<ad>.mp3` olarak konur; eksik olan sessiz geçer.
