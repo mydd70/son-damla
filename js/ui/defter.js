@@ -18,7 +18,7 @@ KS.ui.defterAc = function () {
     panel.appendChild(el('h3', '', KS.t('defterGorevler')));
     var gorevler = el('ul', 'defter-liste');
     icerik.gorevler.forEach(function (g) {
-      gorevler.appendChild(el('li', g.tamam ? 'tamam' : '', (g.tamam ? '✓ ' : '') + KS.t('gorev_' + g.id, { sayi: g.sayi, gereken: g.gereken })));
+      gorevler.appendChild(el('li', g.tamam ? 'tamam' : '', (g.tamam ? '✓ ' : '') + KS.t('gorev_' + g.id, { sayi: g.sayi, gereken: g.gereken, gun: KS.config.OLCUM.teslimSonGun })));
     });
     panel.appendChild(gorevler);
   }

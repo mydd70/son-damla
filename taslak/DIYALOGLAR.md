@@ -82,6 +82,7 @@ Okurken düzeltmen için yazıldı; kod değil. Aşama 4'te story.js'e aynı id'
 - **Mehmet:** Bu çok mu?
 - **Zeynep Öğretmen:** Bu hızla giderse kış gelmeden kuyu boşa döner.
 - **Zeynep Öğretmen:** Bunu muhtara götürmek lazım. Benden duyunca "öğretmen hanım yine hesap yapmış" diyor. Senin elinden alsın.
+- **Zeynep Öğretmen:** *(kâğıdı katlayıp uzatır)* Al. Cebinden düşürme.
 - **Ekran:** Defter: "Öğretmenin ölçümünü muhtara götür (gün 5 akşamına kadar)."
 - > Kuyu tamamen kurursa ne olur? {A2}
 - > Tamam, götürürüm.
@@ -274,7 +275,7 @@ Okurken düzeltmen için yazıldı; kod değil. Aşama 4'te story.js'e aynı id'
 - **Yardım 2:** **Fatma Nine:** Bu son, oğlum. Artık bize de zor yetiyor. Bir daha getiremeyiz, gücenme.
 
 ### Muhtar
-- **A3 öğrenilmediyse (gün 3'ten):** **Muhtar:** Otur Mehmet. Babanı soran oldu mu? ... Rıza mı? *(A3 diyaloğuna bağlanır, "Biz Rıza'yla askere beraber gittik" ile başlar.)*
+- **A3 öğrenilmediyse (gün 3'ten):** **Muhtar:** Otur Mehmet. Babandan haber var mı? **Mehmet:** Yok. Muhtar amca, siz Rıza Amca'yla neden konuşmuyorsunuz? *(A3 diyaloğuna bağlanır, "Biz Rıza'yla askere beraber gittik" ile başlar.)*
 - **Genel:** **Muhtar:** Köy dediğin, bir kuyunun etrafına toplanmış birkaç ev. Kuyu giderse köy de gider.
 
 ### Öğretmen
@@ -313,7 +314,7 @@ Okurken düzeltmen için yazıldı; kod değil. Aşama 4'te story.js'e aynı id'
 - Kuyudan fazla çekmek kolay. Yarın yine çekersin, öbür gün yine. Sonra?
 
 ## Kuyu uyarısı (seviye ilk kez 50'nin altına inince)
-- **Zeynep Öğretmen:** Bu sabah ip yine uzadı. Böyle giderse cumaya kuyu dibi görecek.
+- **Zeynep Öğretmen:** Bu sabah ip yine uzadı. Böyle giderse cumaya kuyu dibi görecek. *(gün 9'da: Bu sabah ip yine uzadı. Akşamki toplantı boşa gitmesin.)*
 
 ## Keçi durum satırları
 - **Süt vermeye başlayınca (ilk kez ≥5):** **Anne:** {keci} bu sabah süt verdi! Az ama verdi.
@@ -372,6 +373,8 @@ Okurken düzeltmen için yazıldı; kod değil. Aşama 4'te story.js'e aynı id'
 - **Mehmet (iç ses):** Az. Ama akıyor.
 - *(keçi ≥5)* **Mehmet (iç ses):** {keci} sabah sağıldı. Annem peynir mayalıyor.
 - *(keçi <5)* **Mehmet (iç ses):** {keci} ayağa kalktı. Yavaş yavaş toparlanıyor.
+- *(ev düşükse)* **Mehmet (iç ses):** Annem hâlâ yorgun. Ama bu sabah ilk kez gülümsedi.
+- *(kiler boşsa)* **Mehmet (iç ses):** Sofra hâlâ yoksul. Ama artık köyce paylaşıyoruz.
 - [ses: kapı]
 - **Babam:** Ben geldim.
 - **Mehmet (iç ses):** Babam şehirde iş bulamamış. Ama köyde iş var artık. Sarnıç, borular, sayaçlar.

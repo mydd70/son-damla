@@ -19,6 +19,19 @@ var KS = globalThis.KS = globalThis.KS || {};
   function sohbet(d, r) { return r.sohbet; }
   function sohbetDegil(d, r) { return !r.sohbet; }
 
+  // Anne o an işe yarayacak ipucunu verir: önce geciken ölçüm, sonra öğrenilmemiş anılar, sonunda kuyu.
+  function anneIpucu(d) {
+    if (d.bayraklar.olcumElde && KS.gorevZiyaretiMi(d, 'muhtar')) return 'olcum';
+    if (bilmiyor('A1')(d)) return 'nine';
+    if (bilmiyor('A3')(d)) return 'dostluk';
+    return 'kuyu';
+  }
+  function ipucu(ad) { return function (d) { return anneIpucu(d) === ad; }; }
+
+  // Ağlama sesi ve yazısı aynı karardan gelsin (KS.gunBaslat sonucu).
+  function agliyor(d, r) { return r.aglama; }
+  function aglamiyor(d, r) { return !r.aglama; }
+
   // Argüman anlatımları hem gün olayında hem akşam ziyaretinde kullanılır.
   var A1_SATIRLAR = [
     { kim: 'dede', metin: 'Ah, o dere... Muhtarlığın önünden akardı. Kıyısında koca bir söğüt vardı.' },
@@ -99,7 +112,8 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'mehmet', metin: 'Bu çok mu?' },
       { kim: 'ogretmen', metin: 'Bu hızla giderse kış gelmeden kuyu boşa döner.' },
       { kim: 'ogretmen', metin: 'Bunu muhtara götürmek lazım. Benden duyunca "öğretmen hanım yine hesap yapmış" diyor. Senin elinden alsın.' },
-      { kim: 'ekran', metin: 'Defter: "Öğretmenin ölçümünü muhtara götür (gün 5 akşamına kadar)."' }
+      { kim: 'ogretmen', metin: '(kâğıdı katlayıp uzatır) Al. Cebinden düşürme.' },
+      { kim: 'ekran', metin: 'Defter: "Öğretmenin ölçümünü muhtara götür (gün {sonGun} akşamına kadar)."' }
     ], secenekler: [
       { metin: 'Kuyu tamamen kurursa ne olur?', etkiler: { arguman: 'A2' }, sonraki: 'g3_a2' },
       { metin: 'Tamam, götürürüm.' }
@@ -176,7 +190,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     { id: 'ogretici_dagitim', satirlar: [
       { kim: 'ekran', metin: 'Bugünkü payımız: {pay} damla. Evin, keçinin ve bahçenin ihtiyacı daha fazla.' },
       { kim: 'ekran', metin: 'Kime ne kadar vereceğine sen karar ver. Yetmeyen gösterge düşer.' },
-      { kim: 'ekran', metin: '"Kuyudan fazladan çek" düğmesi 4 damla daha verir. Ama kuyu bundan etkilenir.' }
+      { kim: 'ekran', metin: '"Kuyudan fazladan çek" düğmesi {fazla} damla daha verir. Ama kuyu bundan etkilenir.' }
     ] },
     { id: 'ogretici_keci', satirlar: [
       { kim: 'ekran', metin: '{keci} seni bekliyor: sırtını tara, su kabını göster, yemini ver.' }
@@ -188,8 +202,8 @@ var KS = globalThis.KS = globalThis.KS || {};
 
     // ---------- Sabah durum satırları (her sabah, gün 1 hariç) ----------
     { id: 'sabah_durum', mekan: 'avlu', satirlar: [
-      { kim: 'ic', kosul: ve(evDusuk, tekGun), metin: 'Annem gece yine uyumadı, sesinden anlıyorum.' },
-      { kim: 'ic', kosul: ve(evDusuk, ciftGun), metin: 'Kardeşim ağlıyor, annemin sesi kısık.' },
+      { kim: 'ic', kosul: ve(evDusuk, aglamiyor), metin: 'Annem gece yine uyumadı, sesinden anlıyorum.' },
+      { kim: 'ic', kosul: ve(evDusuk, agliyor), metin: 'Kardeşim ağlıyor, annemin sesi kısık.' },
       { kim: 'ic', kosul: ve(evOrta, tekGun), metin: 'Güneş daha doğmadan sıcak. Bugün de uzun bir gün.' },
       { kim: 'ic', kosul: ve(evOrta, ciftGun), metin: 'Kuyu başındaki sıraya erken gitmeliyim.' },
       { kim: 'ic', kosul: evYuksek, metin: 'Annem mutfakta türkü mırıldanıyor. Ne zamandır duymamıştım.' },
@@ -199,17 +213,17 @@ var KS = globalThis.KS = globalThis.KS || {};
 
     // ---------- Akşam başı: anne ipucu (ev yüksekse) ----------
     { id: 'anne_ipucu', mekan: 'avlu', satirlar: [
-      { kim: 'anne', kosul: function (d) { return d.gun % 4 === 1; }, metin: 'Rıza Amca\'yla muhtar eskiden can ciğerdi. Ne oldu bilmiyorum.' },
-      { kim: 'anne', kosul: function (d) { return d.gun % 4 === 2; }, metin: 'Fatma Nine\'yi ziyaret et. Yaşlılar konuşacak birini arıyor.' },
-      { kim: 'anne', kosul: function (d) { return d.gun % 4 === 3; }, metin: 'Öğretmen hanım akıllı kadın. Ama muhtar laftan çok kâğıda inanır.' },
-      { kim: 'anne', kosul: function (d) { return d.gun % 4 === 0; }, metin: 'Kuyudan fazla çekmek kolay. Yarın yine çekersin, öbür gün yine. Sonra?' }
+      { kim: 'anne', kosul: ipucu('dostluk'), metin: 'Rıza Amca\'yla muhtar eskiden can ciğerdi. Ne oldu bilmiyorum.' },
+      { kim: 'anne', kosul: ipucu('nine'), metin: 'Fatma Nine\'yi ziyaret et. Yaşlılar konuşacak birini arıyor.' },
+      { kim: 'anne', kosul: ipucu('olcum'), metin: 'Öğretmen hanım akıllı kadın. Ama muhtar laftan çok kâğıda inanır.' },
+      { kim: 'anne', kosul: ipucu('kuyu'), metin: 'Kuyudan fazla çekmek kolay. Yarın yine çekersin, öbür gün yine. Sonra?' }
     ] },
 
     // ---------- Öğle eylemleri (id: ogle_<eylem>) ----------
     { id: 'ogle_komsuyaSu', mekan: 'komsu_tarlasi', mekanSecenek: function (d) { return { obruk: d.gun >= KS.config.OBRUK_GUNU }; }, satirlar: [
       { kim: 'mehmet', metin: 'Annem gönderdi, iki bidon su.' },
       { kim: 'komsu', metin: 'Benim kuyum var. (bidonları yine de alır) Otur, bir çay iç.' },
-      { kim: 'ekran', kosul: function (d) { return !sonGun(d); }, metin: 'Yarınki paydan 2 damla eksilecek.' }
+      { kim: 'ekran', kosul: function (d) { return !sonGun(d); }, metin: 'Yarınki paydan {maliyet} damla eksilecek.' }
     ] },
     { id: 'ogle_bahceEkIs', mekan: 'avlu', satirlar: [
       { kim: 'ic', metin: 'Toprağın üstünü kuru otla örttüm. Öğretmen öyle demişti, su buharlaşmasın diye.' }
@@ -272,7 +286,8 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'ekran', metin: 'Defter: "Ölçüm muhtara ulaştı."' }
     ] },
     { id: 'ziyaret_muhtar_a3', ziyaret: 'muhtar', kosul: ve(sohbetDegil, function (d, r) { return !r.gorev; }, bilmiyor('A3')), mekan: 'muhtarlik', etkiler: { arguman: 'A3' }, satirlar: [
-      { kim: 'muhtar', metin: 'Otur Mehmet. Babanı soran oldu mu? ... Rıza mı?' }
+      { kim: 'muhtar', metin: 'Otur Mehmet. Babandan haber var mı?' },
+      { kim: 'mehmet', metin: 'Yok. Muhtar amca, siz Rıza Amca\'yla neden konuşmuyorsunuz?' }
     ].concat(A3_SATIRLAR) },
     { id: 'ziyaret_muhtar_genel', ziyaret: 'muhtar', kosul: ve(sohbetDegil, function (d, r) { return !r.gorev; }, biliyor('A3')), mekan: 'muhtarlik', satirlar: [
       { kim: 'muhtar', metin: 'Köy dediğin, bir kuyunun etrafına toplanmış birkaç ev. Kuyu giderse köy de gider.' }
@@ -312,7 +327,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     ] },
     { id: 'kars_bir_arguman', satirlar: [
       { kim: 'komsu', metin: 'Laf çok, evlat. Bir laf ne değiştirir?' },
-      { kim: 'ekran', metin: 'Defter: "Komşuyu ikna et: 1/2"' }
+      { kim: 'ekran', metin: 'Defter: "Komşuyu ikna et: 1/{gereken}"' }
     ] },
     { id: 'kars_ikna', satirlar: [
       { kim: 'komsu', metin: '(uzun süre susar)' },
@@ -354,8 +369,9 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'ic', kosul: tekGun, metin: 'Çamaşır, bulaşık, bebeğin bezi. {keci} bugün bakımsız kaldı.' },
       { kim: 'ic', kosul: ciftGun, metin: 'Çamaşır, bulaşık, bebeğin bezi. Bahçeye bugün bakamadım.' }
     ] },
-    { id: 'kuyu_uyari', satirlar: [
-      { kim: 'ogretmen', metin: 'Bu sabah ip yine uzadı. Böyle giderse cumaya kuyu dibi görecek.' }
+    { id: 'kuyu_uyari', mekan: 'kuyu_basi', satirlar: [
+      { kim: 'ogretmen', kosul: function (d) { return !sonGun(d); }, metin: 'Bu sabah ip yine uzadı. Böyle giderse cumaya kuyu dibi görecek.' },
+      { kim: 'ogretmen', kosul: sonGun, metin: 'Bu sabah ip yine uzadı. Akşamki toplantı boşa gitmesin.' }
     ] },
 
     // ---------- Sonlar ----------
@@ -376,6 +392,8 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'ic', metin: 'Az. Ama akıyor.' },
       { kim: 'ic', kosul: function (d) { return d.gosterge.keci >= KS.config.KECI.sutEsigi; }, metin: '{keci} sabah sağıldı. Annem peynir mayalıyor.' },
       { kim: 'ic', kosul: function (d) { return d.gosterge.keci < KS.config.KECI.sutEsigi; }, metin: '{keci} ayağa kalktı. Yavaş yavaş toparlanıyor.' },
+      { kim: 'ic', kosul: evDusuk, metin: 'Annem hâlâ yorgun. Ama bu sabah ilk kez gülümsedi.' },
+      { kim: 'ic', kosul: function (d) { return d.gosterge.kiler === 0; }, metin: 'Sofra hâlâ yoksul. Ama artık köyce paylaşıyoruz.' },
       { kim: 'baba', ses: 'kapi', metin: 'Ben geldim.' },
       { kim: 'ic', metin: 'Babam şehirde iş bulamamış. Ama köyde iş var artık. Sarnıç, borular, sayaçlar.' },
       { kim: 'ekran', ses: 'bebek_gul', metin: 'Zor ama birlikte kaldık.' }

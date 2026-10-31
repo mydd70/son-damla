@@ -70,8 +70,13 @@ KS.ui = KS.ui || {};
       }
       var kutu = document.querySelector('[data-gosterge="' + dg.ad + '"]');
       if (!kutu) return;
+      // Çubuk yeniden çizilse de silinmesin diye yazı sahnenin kendisine eklenir.
+      var oyun = document.getElementById('oyun');
+      var alan = oyun.getBoundingClientRect(), yer = kutu.getBoundingClientRect();
       var fark = el('div', 'fark' + (dg.fark < 0 ? ' eksi' : ''), (dg.fark > 0 ? '+' : '−') + Math.abs(dg.fark));
-      kutu.appendChild(fark);
+      fark.style.left = (yer.left - alan.left + yer.width / 2) + 'px';
+      fark.style.top = (yer.bottom - alan.top) + 'px';
+      oyun.appendChild(fark);
       fark.addEventListener('animationend', function () { fark.remove(); });
     });
   };

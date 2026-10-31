@@ -102,7 +102,7 @@ button:disabled { opacity: 0.4; cursor: default; }
 
 .fark {
   position: absolute;
-  top: 100%; left: 50%;
+  z-index: 6;
   font-weight: 700;
   color: var(--krem);
   text-shadow: 0 0 0.3em #000;
@@ -255,6 +255,7 @@ button.fazla-acik { background: var(--kirmizi); }
 
 /* ---------- Defter ---------- */
 .defter-dugme { padding: 0.3em 0.8em; }
+body.mini-acik .defter-dugme { visibility: hidden; }   /* mini oyun sayacı arkada akmasın */
 #defter { position: absolute; inset: 0; z-index: 5; background: rgba(18, 10, 7, 0.6); }
 .defter-panel { top: 50%; width: 60%; }
 .defter-panel h3 { margin: 0.6em 0 0.2em; font-size: 0.95em; color: var(--sari); }

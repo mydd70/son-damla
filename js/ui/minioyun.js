@@ -18,11 +18,13 @@ KS.ui = KS.ui || {};
       panel.appendChild(gec);
     }
     katman.appendChild(panel);
+    document.body.classList.add('mini-acik');
 
     var bitti = false, temizle = null;
     function bitir() {
       if (bitti) return;
       bitti = true;
+      document.body.classList.remove('mini-acik');
       if (temizle) temizle();
       katman.textContent = '';
       bitince();

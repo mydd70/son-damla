@@ -83,7 +83,7 @@ KS.config = {
     bahce: [[2, 'Kurumuş'], [4, 'Susuz'],  [7, 'İdare eder'],   [10, 'Yeşil']]
   },
 
-  KAYIT: { anahtar: 'koyumun-suyu-kayit', surum: 1 },
+  KAYIT: { anahtar: 'koyumun-suyu-kayit', surum: 2 },   // durum yapısı değişince artırılır
   DIL_ANAHTAR: 'koyumun-suyu-dil',
 
   // --- Ses: dosyalar assets/audio/<id>.mp3; yoksa sessiz geçilir ---

@@ -28,6 +28,7 @@ KS.yeniDurum = function () {
       olcumElde: false,
       olcumTeslim: false,
       kuyuUyari: false,
+      kuyuUyariBekliyor: false,   // gün sonunda inildiyse uyarı ertesi sabah söylenir
       zorunluEvIsi: false,
       motorKapali: false,
       camur: false,
@@ -68,6 +69,17 @@ KS.kaydet = function (durum) {
   }
 };
 
+// Kayıtta güncel durumun bütün alanları var mı?
+function kayitYapisiUyumlu(durum) {
+  var ornek = KS.yeniDurum();
+  function alanlarVar(o, kayit) {
+    return !!kayit && Object.keys(o).every(function (k) { return k in kayit; });
+  }
+  return alanlarVar(ornek, durum) && ['gosterge', 'su', 'bayraklar', 'komsu'].every(function (alan) {
+    return alanlarVar(ornek[alan], durum[alan]);
+  });
+}
+
 // Uyumsuz ya da bozuk kayıt yok sayılır; oyun çökmez.
 KS.yukle = function () {
   try {
@@ -75,7 +87,7 @@ KS.yukle = function () {
     var ham = localStorage.getItem(KS.config.KAYIT.anahtar);
     if (!ham) return null;
     var durum = JSON.parse(ham);
-    if (!durum || durum.surum !== KS.config.KAYIT.surum) return null;
+    if (!durum || durum.surum !== KS.config.KAYIT.surum || !kayitYapisiUyumlu(durum)) return null;
     return durum;
   } catch (e) {
     console.warn('Kayıt okunamadı, yok sayıldı:', e);

@@ -38,6 +38,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       if (r.aglama) KS.ses.cal('bebek_agla');
       var olaylar = KS.state.gun > 1 ? [KS.olayGetir('sabah_durum')] : [];
       olaylar = olaylar.concat(KS.olaylariGetir(KS.state.gun, 'sabah', KS.state));
+      if (r.kuyuUyari) olaylar.push(KS.olayGetir('kuyu_uyari'));
       ui.olaylariOynat(olaylar, r, function () {
         if (r.olay && r.olay.karsilasma) ui.karsilasmaOynat('zorunlu', dagitim);
         else dagitim();
@@ -62,6 +63,7 @@ var KS = globalThis.KS = globalThis.KS || {};
   }
 
   function sabahIsi() {
+    ui.sahneGoster('avlu');
     function tamamla() {
       var r = KS.miniOyunTamamla(KS.state);
       ui.degisimGoster(r.degisimler);
@@ -106,7 +108,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     ortamSesi();
     var d = KS.state;
     if (d.gun === KS.config.GUN_SAYISI) {
-      ui.olaylariOynat(KS.olaylariGetir(d.gun, 'aksam', d), null, toplanti);
+      toplanti();
       return;
     }
     var olaylar = KS.olaylariGetir(d.gun, 'aksam', d);
@@ -128,24 +130,26 @@ var KS = globalThis.KS = globalThis.KS || {};
   }
 
   function gunSonu() {
-    ui.duyuru(KS.t('ertesiPay', { n: KS.ertesiGunPayi(KS.state) }), function () {
-      var r = KS.gunBitir(KS.state);
-      ui.degisimGoster(r.degisimler);
-      kuyuUyarisiVarsa(r.kuyuUyari, gunBasla);
-    });
+    // Gün sonu değişimleri (kiler, kuyu) gün kartından önce görünsün diye duyurudan önce uygulanır.
+    var r = KS.gunBitir(KS.state);
+    ui.degisimGoster(r.degisimler);
+    ui.duyuru(KS.t('ertesiPay', { n: KS.ertesiGunPayi(KS.state) }), gunBasla);
   }
 
   // ---------- Son ----------
 
   function toplanti() {
+    // Kuyunun son düşüşü toplantıdan önce uygulanır (belge bölüm 7).
     var r = KS.toplanti(KS.state);
     if (kayitAcik) KS.kaydiSil();
-    KS.ses.ortamCal(null);
     ui.degisimGoster(r.degisimler);
-    ui.olaylariOynat(KS.sonOlaylari(r.sonuc.iyi), r, function () {
-      ui.sonAc(r.sonuc, function () {
-        KS.ses.ortamCal(null);
-        yeniOyun(true);
+    ui.olaylariOynat(KS.olaylariGetir(KS.state.gun, 'aksam', KS.state), r, function () {
+      KS.ses.ortamCal(null);
+      ui.olaylariOynat(KS.sonOlaylari(r.sonuc.iyi), r, function () {
+        ui.sonAc(r.sonuc, function () {
+          KS.ses.ortamCal(null);
+          yeniOyun(true);
+        });
       });
     });
   }

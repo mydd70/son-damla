@@ -23,5 +23,11 @@ Sıradaki: Aşama 7 (son metinler, ardından İngilizce çeviri), kullanıcını
 - Belgedekiler: `ruzgar`, `cirkir`, `yagmur`, `bebek_agla`, `bebek_gul`, `keci`, `kamyon`
 - Taslaktaki ek ipuçları: `telefon`, `hat_kesilir`, `gurultu`, `kapi`
 
-## Kullanıcının bakacağı konular
+## Kullanıcının karar vereceği konular
 - Kötü sonda "Ekim. İlk yağmur." başta değil sonda (taslak böyle); belge bölüm 10 "ikisi de bununla başlar" diyor.
+- Komşu ikna olduktan sonra "Komşuya su götür" açık ve bedelli: kapatılsın mı?
+- Metin hacmi yaklaşık 1.900 kelime, hedef 4-5 bindi: uzatılsın mı?
+
+## Bilinen küçük konular
+- Anne ipucu duruma göre seçiliyor; aynı cümle ardışık akşamlarda tekrar edebilir.
+- `d.gun % 2` (tek gün keçi, çift gün ot) `logic.js` içinde kaldı: oyunun yapısı, denge sayısı değil.

@@ -154,8 +154,12 @@ var KS = globalThis.KS = globalThis.KS || {};
     var ilkSut = !d.bayraklar.ilkSut && d.gosterge.keci >= k.KECI.sutEsigi;
     if (ilkSut) d.bayraklar.ilkSut = true;
 
+    var kuyuUyari = d.bayraklar.kuyuUyariBekliyor;
+    d.bayraklar.kuyuUyariBekliyor = false;
+
     var r = sonuc(true, {
       ilkSut: ilkSut,
+      kuyuUyari: kuyuUyari,
       zorunluEvIsi: d.bayraklar.zorunluEvIsi,
       aglama: d.gun <= k.EV.aglamaHerSabahSonGun || d.gosterge.ev < k.EV.aglamaEsigi,
       olay: KS.olayBul(d.gun, 'sabah')
@@ -451,7 +455,7 @@ var KS = globalThis.KS = globalThis.KS || {};
   KS.gunBitir = function (d) {
     var k = c();
     if (d.gun >= k.GUN_SAYISI) return hata('Son gün toplantıyla biter.');
-    var r = sonuc(true, { kilerBos: false, kuyuUyari: false });
+    var r = sonuc(true, { kilerBos: false });
     if (d.gosterge.keci >= k.KECI.sutEsigi) degistir(d, 'kiler', k.KILER.sut, r.degisimler);
     if (d.gosterge.bahce >= k.BAHCE.sebzeEsigi) degistir(d, 'kiler', k.KILER.sebze, r.degisimler);
     if (d.gosterge.kiler >= k.KILER.tuketim) {
@@ -461,7 +465,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       degistir(d, 'ev', k.EV.kilerBos, r.degisimler);
     }
     kuyuGunSonu(d, r.degisimler);
-    r.kuyuUyari = kuyuUyariKontrol(d);
+    if (kuyuUyariKontrol(d)) d.bayraklar.kuyuUyariBekliyor = true;
     if (d.gosterge.ev < k.EV.zorunluEsik) d.bayraklar.zorunluEvIsi = true;
     gunlukYaz(d, 'gün bitti, kuyu ' + d.gosterge.kuyu);
     return r;

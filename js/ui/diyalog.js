@@ -33,7 +33,14 @@ KS.ui = KS.ui || {};
   };
 
   function metinHazirla(oge) {
-    return KS.metinSec(oge).replace(/\{keci\}/g, KS.state.keciAdi).replace(/\{pay\}/g, KS.state.su.pay);
+    var k = KS.config;
+    return KS.metinSec(oge)
+      .replace(/\{keci\}/g, KS.state.keciAdi)
+      .replace(/\{pay\}/g, KS.state.su.pay)
+      .replace(/\{fazla\}/g, k.FAZLA_CEKME.damla)
+      .replace(/\{maliyet\}/g, k.KOMSUYA_SU.maliyet)
+      .replace(/\{sonGun\}/g, k.OLCUM.teslimSonGun)
+      .replace(/\{gereken\}/g, k.IKNA.gerekenArguman);
   }
 
   function satirSesi(satir) {
