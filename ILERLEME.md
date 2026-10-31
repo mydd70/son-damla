@@ -1,37 +1,30 @@
 # İlerleme
 
-Son güncelleme: 31 Ekim 2026, Aşama 6 bitti.
+Son güncelleme: 31 Ekim 2026 akşamı. Ayrıntılı devir notu ve açık konular: `YENI_OTURUM_BASLANGIC.md`.
 
 | İş | Durum |
 |---|---|
-| Aşama 0: yerel kurulum (GitHub yok) | Bitti, etiket `asama-0` |
-| Aşama 1: sabitler, mantık, simülasyon | Bitti, etiket `asama-1`, sonuçlar `sim/SONUC.md` |
-| SVG referans sahneleri + PNG + promptlar | Bitti: `js/scenes.js`, `referans/sahneler/`, `referans/PROMPTLAR.md` |
+| Aşama 0: yerel kurulum | Bitti, `asama-0` |
+| Aşama 1: sabitler, mantık, simülasyon | Bitti, `asama-1`, sonuçlar `sim/SONUC.md` |
 | Veri doğrulama | Bitti: `referans/VERILER.md` |
-| Diyalog taslağı | Bitti: `taslak/DIYALOGLAR.md` |
-| Aşama 2: ana iskelet, dil altyapısı | Bitti, etiket `asama-2` |
-| Aşama 3: ot yolma, keçi bakımı, zorunlu ev işi, Hızlı geç | Bitti, etiket `asama-3` |
-| İlk yayın | Bitti: https://mydd70.github.io/koyumun-suyu/ (depo: mydd70/koyumun-suyu) |
-| Aşama 4: tüm olaylar, ikna, defter, toplantı, iki son | Bitti, etiket `asama-4` |
-| Aşama 5: kayıt, öğretici, atlama, ses altyapısı, tam ekran, yön uyarısı, dil seçimi | Bitti, etiket `asama-5` |
-| Aşama 6: sahneler oyun durumuna bağlandı, harita ve yağmur ışığı | Bitti, etiket `asama-6` |
-| Aşama 8 (devam ediyor): yükleme kodu ve 9 arka plan | Bağlandı |
+| Aşama 2: ana iskelet, dil altyapısı | Bitti, `asama-2` |
+| Aşama 3: mini oyunlar, zorunlu ev işi | Bitti, `asama-3` |
+| İlk yayın | Bitti: https://mydd70.github.io/koyumun-suyu/ (depo mydd70/koyumun-suyu) |
+| Aşama 4: olaylar, ikna, defter, toplantı, sonlar | Bitti, `asama-4` |
+| Aşama 5: kayıt, öğretici, atlama, ses altyapısı, tam ekran, dil seçimi | Bitti, `asama-5` |
+| Aşama 6: sahneler, renk filtresi | Bitti, `asama-6` |
+| Oynanış paketi (dilim düğmesi, gün planı, gri su satırı, ipucu penceresi, harita düşünceleri, ikna kuralları, gün 7 sahnesi) | Bitti, etiketsiz |
+| Aşama 7: metin | **Devam ediyor.** Diyalog v2 oyunda; kullanıcı kesinleştirecek, sonra İngilizce çeviri |
+| Aşama 8: görsel | **Devam ediyor.** 12 arka plan bağlı; portre, ampul, keçi, ses bekleniyor |
+| Aşama 9: test ve son yayın | Başlamadı |
 
-Sıradaki: Aşama 7 (son metinler, ardından İngilizce çeviri), kullanıcının okumasıyla.
+Sıradaki: kullanıcı "metin hazır" der, farklar `js/story.js`'e aktarılır, ardından İngilizce çeviri.
 
 ## Görsel durumu
-- 12 arka plan da oyunda; `sarnic` ve `sarnic_onarildi` kapalı havalı çizildi, üstüne renk katmanı konmaz.
-- Portreler bekleniyor. Yeni görsel eklemek: WebP'ye çevir, `assets/img/` ya da `assets/portraits/` altına koy, `config.js`'te `GORSEL.dosyalar` / `PORTRE.dosyalar` listesine ekle, `KAYNAKLAR.md`'ye yaz.
+- Yeni görsel eklemek: WebP'ye çevir, `assets/img/` ya da `assets/portraits/` altına koy, `config.js`'te `GORSEL.dosyalar` / `PORTRE.dosyalar` listesine ekle, `KAYNAKLAR.md`'ye yaz.
 - Kaynak PNG'ler `gptgörselleri/` altında, depoya girmez.
 
 ## Ses dosyaları
 `assets/audio/<ad>.mp3` olarak konur; eksik olan sessiz geçer.
 - Belgedekiler: `ruzgar`, `cirkir`, `yagmur`, `bebek_agla`, `bebek_gul`, `keci`, `kamyon`
 - Taslaktaki ek ipuçları: `telefon`, `hat_kesilir`, `gurultu`, `kapi`
-
-## Kullanıcının karar vereceği konular
-- Metin hacmi yaklaşık 1.900 kelime, hedef 4-5 bindi: uzatılsın mı?
-
-## Bilinen küçük konular
-- Anne ipucu duruma göre seçiliyor; aynı cümle ardışık akşamlarda tekrar edebilir.
-- `d.gun % 2` (tek gün keçi, çift gün ot) `logic.js` içinde kaldı: oyunun yapısı, denge sayısı değil.

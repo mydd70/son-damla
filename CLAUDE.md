@@ -2,7 +2,7 @@
 
 GameUP Türkiye hackathonu için tarayıcı oyunu. Teslim: 1 Kasım 2026 Pazar 23:59. Özellik dondurma: Pazar 14:00.
 
-Tek geçerli tasarım belgesi `tasarim_v4.md`. Kod kuralları bölüm 16, onay gerektiren işler bölüm 17, aşamalar bölüm 18. Hangi aşamada olunduğu `ILERLEME.md` ve git etiketlerinde (`asama-N`).
+Tek geçerli tasarım belgesi `tasarim_v4.md`. Kod kuralları bölüm 16, onay gerektiren işler bölüm 17, aşamalar bölüm 18. Hangi aşamada olunduğu `ILERLEME.md` ve git etiketlerinde (`asama-N`). Oturum devri, alınmış kararlar, açık konular ve test notları `YENI_OTURUM_BASLANGIC.md`'de: yeni oturumda önce onu oku. Yayın: https://mydd70.github.io/koyumun-suyu/ (`main`'e push yeter). `taslak/DIYALOGLAR.md` ile `js/story.js` aynı metni taşır; biri değişince öbürü de güncellenir.
 
 ## Çalışma biçimi
 - Kullanıcıyla Türkçe, net, kısa, abartısız konuş. Uygun görmediğin yerde itiraz et.

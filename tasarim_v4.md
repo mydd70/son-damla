@@ -13,6 +13,7 @@ Kodlamaya hazır sürüm. v3'ten değişenler: gecikmeli plan, gün-dilim tablos
 - Gerçekçilik ikinci planda: mevsim ve hukuki ayrıntılar oyunun akışı için sadeleştirilebilir.
 
 ## 2. Hikaye
+- **Oyunun mesajı:** Yeraltı suyu ortaktır; kararı suçlayarak değil, ölçeni ve hatırlayanı dinleyerek birlikte verirsek köy ayakta kalır. Metin vaaz vermez, kimse yalnızca kötü adam değildir (köy de Rıza'yı dışlar).
 - Ağustos 2025, Konya Ovası'nda küçük bir köy, son 65 yılın en kurak dönemi.
 - Mehmet (geçici isim), 12 yaşında. Ev: anne, bebek kardeş, keçi (adını oyuncu verir; geçim kaynağı süt/peynir, bebeğin besini değil). Baba şehirde iş arıyor. Ailenin yalnızca bahçesi var.
 - Açılış: Keçi ayağa kalkamıyor, bebek ağlıyor. Annesiyle sabah konuşması; Mehmet bir çözüm aramaya karar verir.
@@ -38,7 +39,7 @@ Sabah olayları dilim harcamaz. Öğle olayı o günün öğle eylemini, akşam 
 | 4 | Sakin gün. Annenin çiçeği (tek seferlik) | Serbest | Serbest. Ölçüm teslim edilmediyse anne hatırlatır |
 | 5 | **Olay:** Baba araması (tepe), sinyal kesilir. Ölçüm teslim edilmediyse anne tekrar hatırlatır | Serbest | Serbest. **Ölçüm teslimi için son akşam** |
 | 6 | — | **Olay:** Muhtarlıkta plan (güçlü ya da gecikmeli), sarnıç onarımı başlar; argüman 3 isteğe bağlı | Serbest |
-| 7 | Sakin gün. **Olay:** Kuyu başında komşuyla zorunlu karşılaşma | Serbest | Serbest |
+| 7 | Sakin gün. **Olay:** Kuyu başında köylüler Rıza'ya sırayı kapatır (sahne, ikna konuşması yok); komşuya su götürme açılır | Serbest | Serbest |
 | 8 | Sıcak dalga mesajı | **Olay:** Obruk, komşunun tarlası, zorunlu karşılaşma | Serbest |
 | 9 | — | Serbest (son şans) | **Olay:** Köy toplantısı ve oylama → Son |
 
@@ -55,7 +56,7 @@ Serbest öğle günleri: 3, 4, 5, 7, 9. Serbest akşamlar: 1-8.
 ### Öğle eylemleri (serbest öğlelerde biri seçilir)
 | Eylem | Etki | Sınır |
 |---|---|---|
-| Komşuya su götür | Komşuyla karşılaşma; ertesi günün payından 2 damla düşer (metinle söylenir). Gün 9'da ertesi gün olmadığı için bedelsizdir | En fazla 2 kez; komşu ikna olunca kapanır |
+| Komşuya su götür | Komşuyla karşılaşma; ertesi günün payından 2 damla düşer (metinle söylenir). Gün 9'da ertesi gün olmadığı için bedelsizdir | Gün 7 sahnesinden sonra açılır (pratikte gün 7 ve 9 öğlesi); en fazla 2 kez; komşu ikna olunca kapanır |
 | Bahçede ek iş | Bahçe +1 | — |
 | Evde yardım | Ev +1 | — |
 | Babayı ara (tepe) | Ev +1 | 1 kez, gün 3'ten sonra |
@@ -141,12 +142,14 @@ Tüm sayılar kodda tek dosyada (config.js) durur.
 Simülasyon hedefi: dikkatli profil iyi sona rahat, pasif profil kötü sona ulaşır.
 
 ## 8. İkna sistemi
-- **Karşılaşmalar:** akşam ziyareti (1 kez), öğle "komşuya su götür" (en fazla 2, gün 9 öğlesi dahil), gün 7 sabah zorunlu, gün 8 öğle zorunlu (obruk).
+- **Karşılaşmalar:** akşam ziyareti (1 kez), öğle "komşuya su götür" (gün 7 ve 9), gün 8 öğle zorunlu (obruk). Gün 7 sabahı karşılaşma değil, sahnedir.
 - **3 argüman ve kaynakları:**
   - A1, dere/söğüt anısı: gün 2 yaşlı çift olayı ya da sonraki yaşlı çift ziyareti
   - A2, obruk uyarısı: gün 3 ölçüm olayı ya da öğretmen ziyareti
   - A3, eski dostluk anısı: muhtar ziyareti (gün 3'ten) ya da gün 6 plan olayı. Anı yalnızca dostluğu anlatır, küslüğün sebebini değil.
-- Bir karşılaşmada o ana kadar öğrenilmiş tüm argümanlar iletilebilir.
+- **Bir karşılaşmada en fazla 1 argüman** söylenir, sonra konuşma biter; bu yüzden ikna için en az iki karşılaşma gerekir ve gün 9 tek başına kurtarmaz.
+- **Obruk uyarısı (A2) gün 8'den önce sayılmaz, kilitlenmez de** ("Rıza Amca buna şimdilik inanmıyor."); o konuşmayı harcar.
+- **Yanlış seçenekler kaba değil, "yanlış yaklaşım"dır:** iyi seçenek duyduğunu anlatır, yanlış olan hüküm, öğüt ya da emir verir. Kodda hâlâ `kaba` adıyla geçer.
 - **2 argüman iletilince komşu ikna olur:** toplantıda evet der, motoru gün 9 sabahı durur. Gün 9 öğlesinde ikna edilirse toplantıda yine evet der ama motor o gün çalışmış olur (kuyu −3).
 - **Kabalık:** Kaba seçim ilgili argümanı kilitler (görünür geri bildirim) ve o konuşmayı bitirir. Sonraki karşılaşmada özür seçeneği kilidi açar. Gün 8'de kaba seçim yapılırsa aynı konuşmada geri alınabilir ("Dur, öyle demek istemedim").
 - İpuçları: annenin akşam cümleleri, baba telefonu, doğal diyaloglar.
@@ -162,7 +165,7 @@ Görev listesi. Örnek maddeler: "Öğretmenin ölçümünü muhtara götür", "
 - **Kötü:** Keçi yol parası için satılır, kamyonla göç, yaşlı çiftin kapısının önünden geçilir, uzakta dumanlı şehir, bebeğin ağlaması kamyonla uzaklaşarak söner (ölüm çağrışımı olmamalı), boş avluya ve kırık sarnıca yağmur.
 - Ev ve kiler değerleri sonda birer satırı değiştirir.
 - **Kötü son akışı:** bitiş sahnesi → neyin eksik kaldığını anlatan maddeler (mantık üretir, suçlamayan dille) → final metni → Tekrar oyna.
-  - Maddeler: "Komşu planı desteklemedi, motoru çalışmaya devam etti" · "Kuyu çok düştü" · "Ölçüm geç ulaştı, plan zayıf kaldı" (yalnızca gecikmeli plan ve kuyu yetmediyse)
+  - Maddeler: "Plan oylamada eşit kaldı; Rıza Amca'yla köprü kurulamadı" · "Kuyu toparlanamayacak kadar düştü" · "Ölçüm geç ulaştı, plan geç ve zayıf kuruldu" (yalnızca gecikmeli plan ve kuyu yetmediyse)
 - **İyi son akışı:** bitiş sahnesi → final metni → Tekrar oyna.
 - **Final metni:** Şimdilik tek bir geçici metin bloğu; içeriği kullanıcı sonra yazar.
 - Tekrar oyna baştan başlatır.

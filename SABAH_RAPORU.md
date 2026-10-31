@@ -1,5 +1,7 @@
 # Sabah raporu – 31 Ekim 2026
 
+> **Eski belge.** Yalnızca 31 Ekim sabahının durumunu anlatır, birçok kararı değişti. Güncel durum için `YENI_OTURUM_BASLANGIC.md` ve `ILERLEME.md`.
+
 Gece planlanan beş işin hepsi bitti. Her iş ayrı commit'te; geri almak istediğin olursa git geçmişinden dönülebilir.
 
 ## Bitenler

@@ -5,7 +5,7 @@
 2. İlk mesajda iki görsel yükle: anne portresi (tarz ve palet için) ve `sahneler/avlu.png` (düzen için). Ortak tarz bloğunu ve avlu promptunu yapıştır.
 3. Sonraki mekânlarda yalnızca o mekânın PNG'sini yükle ve "Aynı köy, aynı tarz ve palet. Şimdi:" diye başlayıp mekân promptunu yapıştır.
 4. Yalnızca öğle ışığında üret. Sabah ve akşam tonlarını oyun kodla ekliyor (`sahneler/ornek_avlu_sabah.png` ve `ornek_avlu_aksam.png` örnek).
-5. Kaydederken dosya adını tablodaki gibi ver ve `assets/img/` klasörüne koy. Oyun bu adları otomatik tanıyacak; görsel yoksa SVG sahneyi kullanır.
+5. **Güncel:** Ham PNG'yi `gptgörselleri/` klasörüne koy, Claude inceleyip WebP'ye çevirerek `assets/img/` altına tablodaki adla yerleştirir ve `config.js`'teki listeye ekler. Listede olmayan mekân SVG ile çizilir.
 6. Her görsel için KAYNAKLAR.md'ye bir satır ekle (araç: ChatGPT, tarih).
 
 ## Ortak tarz bloğu (ilk mesajda bir kez)
