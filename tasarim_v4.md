@@ -55,7 +55,7 @@ Serbest öğle günleri: 3, 4, 5, 7, 9. Serbest akşamlar: 1-8.
 ### Öğle eylemleri (serbest öğlelerde biri seçilir)
 | Eylem | Etki | Sınır |
 |---|---|---|
-| Komşuya su götür | Komşuyla karşılaşma; ertesi günün payından 2 damla düşer (metinle söylenir) | En fazla 2 kez |
+| Komşuya su götür | Komşuyla karşılaşma; ertesi günün payından 2 damla düşer (metinle söylenir). Gün 9'da ertesi gün olmadığı için bedelsizdir | En fazla 2 kez |
 | Bahçede ek iş | Bahçe +1 | — |
 | Evde yardım | Ev +1 | — |
 | Babayı ara (tepe) | Ev +1 | 1 kez, gün 3'ten sonra |
@@ -139,13 +139,13 @@ Tüm sayılar kodda tek dosyada (config.js) durur.
 Simülasyon hedefi: dikkatli profil iyi sona rahat, pasif profil kötü sona ulaşır.
 
 ## 8. İkna sistemi
-- **Karşılaşmalar:** akşam ziyareti (1 kez), öğle "komşuya su götür" (en fazla 2), gün 7 sabah zorunlu, gün 8 öğle zorunlu (obruk).
+- **Karşılaşmalar:** akşam ziyareti (1 kez), öğle "komşuya su götür" (en fazla 2, gün 9 öğlesi dahil), gün 7 sabah zorunlu, gün 8 öğle zorunlu (obruk).
 - **3 argüman ve kaynakları:**
   - A1, dere/söğüt anısı: gün 2 yaşlı çift olayı ya da sonraki yaşlı çift ziyareti
   - A2, obruk uyarısı: gün 3 ölçüm olayı ya da öğretmen ziyareti
   - A3, eski dostluk anısı: muhtar ziyareti (gün 3'ten) ya da gün 6 plan olayı. Anı yalnızca dostluğu anlatır, küslüğün sebebini değil.
 - Bir karşılaşmada o ana kadar öğrenilmiş tüm argümanlar iletilebilir.
-- **2 argüman iletilince komşu ikna olur:** toplantıda evet der, motoru gün 9 sabahı durur.
+- **2 argüman iletilince komşu ikna olur:** toplantıda evet der, motoru gün 9 sabahı durur. Gün 9 öğlesinde ikna edilirse toplantıda yine evet der ama motor o gün çalışmış olur (kuyu −3).
 - **Kabalık:** Kaba seçim ilgili argümanı kilitler (görünür geri bildirim). Sonraki karşılaşmada özür seçeneği kilidi açar. Gün 8'de kaba seçim yapılırsa aynı konuşmada geri alınabilir ("Dur, öyle demek istemedim").
 - İpuçları: annenin akşam cümleleri, baba telefonu, doğal diyaloglar.
 

@@ -12,7 +12,8 @@ KS.ui = KS.ui || {};
       var yer = OGLE_YERLERI[s.id];
       yerler[yer] = yerler[yer] || [];
       var degerler = s.id === 'komsuyaSu' ? { n: KS.config.KOMSUYA_SU.maliyet } : null;
-      yerler[yer].push({ id: s.id, ad: KS.t('eylem_' + s.id, degerler) });
+      var anahtar = s.id === 'komsuyaSu' && d.gun === KS.config.GUN_SAYISI ? 'eylem_komsuyaSonSu' : 'eylem_' + s.id;
+      yerler[yer].push({ id: s.id, ad: KS.t(anahtar, degerler) });
     });
     return yerler;
   }

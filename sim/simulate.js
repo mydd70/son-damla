@@ -85,6 +85,23 @@ function dikkatliProfil(ad, ayar) {
   };
 }
 
+// Komşuyu gün 9 öğlesine kadar ikna edemeyen, son şansı kullanan oyuncu.
+function sonSansProfili(ad, ayar) {
+  var p = dikkatliProfil(ad, ayar);
+  var eskiOgle = p.ogle;
+  var eskiAksam = p.aksam;
+  p.ogle = function (d) { return d.gun === C.GUN_SAYISI ? 'komsuyaSu' : eskiOgle.call(p, d); };
+  p.aksam = function (d) {
+    var sec = eskiAksam.call(p, d);
+    return sec === 'komsu' ? 'aileVakti' : sec;
+  };
+  p.karsilasma = function (d) {
+    var r = KS.karsilasmaBaslat(d);
+    if (d.gun === C.GUN_SAYISI) r.iletilebilir.forEach(function (a) { KS.argumanIlet(d, a); });
+  };
+  return p;
+}
+
 var pasifProfil = {
   ad: 'Pasif',
   fazlaCek: function () { return false; },
@@ -191,7 +208,9 @@ var profiller = [
   dikkatliProfil('Gecikmeli plan + 1 fazla çekme', { olcumTeslim: false, fazlaGunleri: [1] }),
   dikkatliProfil('Dikkatli + 1 kabalık', { kaba: 1 }),
   dikkatliProfil('Açgözlü (her gün fazla çekme)', { fazlaGunleri: [1, 2, 3, 4, 5, 6, 7, 8, 9] }),
-  pasifProfil
+  pasifProfil,
+  sonSansProfili('Son şans (gün 9 ikna, güçlü plan)'),
+  sonSansProfili('Son şans (gün 9 ikna, gecikmeli plan)', { olcumTeslim: false })
 ];
 
 var ayrinti = process.argv.indexOf('--ayrinti') >= 0;
