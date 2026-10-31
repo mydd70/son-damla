@@ -15,8 +15,15 @@ Son güncelleme: 31 Ekim 2026, Aşama 6 bitti.
 | Aşama 4: tüm olaylar, ikna, defter, toplantı, iki son | Bitti, etiket `asama-4` |
 | Aşama 5: kayıt, öğretici, atlama, ses altyapısı, tam ekran, yön uyarısı, dil seçimi | Bitti, etiket `asama-5` |
 | Aşama 6: sahneler oyun durumuna bağlandı, harita ve yağmur ışığı | Bitti, etiket `asama-6` |
+| Aşama 8 (devam ediyor): yükleme kodu ve 9 arka plan | Bağlandı |
 
 Sıradaki: Aşama 7 (son metinler, ardından İngilizce çeviri), kullanıcının okumasıyla.
+
+## Görsel durumu
+- Bekleyen arka planlar: `sarnic`, `sarnic_onarildi` (güneşsiz), `koy_yolu` (eksik). Gelene kadar SVG.
+- Yeniden üretilecekler: `yasli_cift_evi` (üzümsüz), isteğe bağlı `koy_cikisi` (piksel tarzı).
+- Portreler bekleniyor. Yeni görsel eklemek: WebP'ye çevir, `assets/img/` ya da `assets/portraits/` altına koy, `config.js`'te `GORSEL.dosyalar` / `PORTRE.dosyalar` listesine ekle, `KAYNAKLAR.md`'ye yaz.
+- Kaynak PNG'ler `gptgörselleri/` altında, depoya girmez.
 
 ## Ses dosyaları
 `assets/audio/<ad>.mp3` olarak konur; eksik olan sessiz geçer.

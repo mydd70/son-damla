@@ -3,8 +3,6 @@ var KS = globalThis.KS = globalThis.KS || {};
 KS.ui = KS.ui || {};
 
 (function () {
-  var sonMekan = 'avlu', sonSecenek = {}, sonZaman = null;
-
   // Boşluk ve Enter sonraki satıra geçer; basılı tutmak diyaloğu hızlandırır, seçeneklerde durur.
   document.addEventListener('keydown', function (e) {
     if (e.key !== ' ' && e.key !== 'Enter') return;
@@ -13,24 +11,6 @@ KS.ui = KS.ui || {};
     e.preventDefault();
     kutu.onclick();
   });
-
-  // zaman verilmezse günün dilimi kullanılır. Akşam pencereler yanar, sulanan bahçe yeşerir.
-  KS.ui.sahneGoster = function (mekan, secenek, zaman) {
-    sonMekan = mekan;
-    sonSecenek = secenek || {};
-    sonZaman = zaman || null;
-    var d = KS.state;
-    var ciz = Object.assign({
-      isik: d.dilim === 'aksam' && !zaman,
-      yesil: d.gosterge.bahce >= KS.config.BAHCE.sebzeEsigi
-    }, sonSecenek);
-    document.getElementById('arkaplan').innerHTML = KS.sahne(mekan, zaman || d.dilim, ciz);
-  };
-
-  // Dilim değişince aynı mekânı yeni ışıkla çizer.
-  KS.ui.sahneYenile = function () {
-    KS.ui.sahneGoster(sonMekan, sonSecenek, sonZaman);
-  };
 
   function metinHazirla(oge) {
     var k = KS.config;
@@ -49,17 +29,28 @@ KS.ui = KS.ui || {};
     (satir.sesSoner || []).forEach(KS.ses.calSonerek);
   }
 
-  function portreCiz(kim) {
+  function portreCiz(kim, ifade) {
     var k = KS.KARAKTERLER[kim] || {};
     var kutu = KS.ui.el('div', 'portre' + (k.siluet ? ' siluet' : ''));
-    kutu.appendChild(KS.ui.el('span', '', KS.karakterAdi(kim).charAt(0)));
+    var yerTutucu = KS.ui.el('span', '', KS.karakterAdi(kim).charAt(0));
+    var dosya = KS.ui.portreYolu(kim, ifade);
+    if (!dosya) { kutu.appendChild(yerTutucu); return kutu; }
+    var img = document.createElement('img');
+    img.alt = '';
+    img.onerror = function () {
+      KS.ui.portreBozuk(dosya.ad);
+      img.remove();
+      kutu.appendChild(yerTutucu);
+    };
+    img.src = dosya.yol;
+    kutu.appendChild(img);
     return kutu;
   }
 
   function satirCiz(kutu, satir) {
     kutu.textContent = '';
     var ekran = satir.kim === 'ekran';
-    if (!ekran) kutu.appendChild(portreCiz(satir.kim));
+    if (!ekran) kutu.appendChild(portreCiz(satir.kim, satir.ifade));
     var govde = KS.ui.el('div', 'diyalog-govde');
     if (!ekran) govde.appendChild(KS.ui.el('div', 'konusan', KS.karakterAdi(satir.kim)));
     govde.appendChild(KS.ui.el('div', 'satir' + (ekran ? ' ekran' : '') + (satir.kim === 'ic' ? ' ic' : ''), metinHazirla(satir)));

@@ -169,6 +169,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     KS.ses.tercihYukle();
     if (p.get('dil') && KS.METIN[p.get('dil')]) KS.dil = p.get('dil');
     ui.dilYenile();
+    ui.gorselleriHazirla();
     KS.state = KS.yeniDurum();
     if (p.get('debug') === '1') ui.debugBaslat();
     if (p.get('gun')) {

@@ -86,6 +86,13 @@ KS.config = {
   KAYIT: { anahtar: 'koyumun-suyu-kayit', surum: 2 },   // durum yapısı değişince artırılır
   DIL_ANAHTAR: 'koyumun-suyu-dil',
 
+  // --- Görseller: listede olmayan mekân SVG ile, olmayan portre yer tutucuyla çizilir ---
+  GORSEL: {
+    klasor: 'assets/img/', uzanti: '.webp',
+    dosyalar: ['avlu', 'kuyu_basi', 'yasli_cift_evi', 'tepe', 'komsu_tarlasi', 'komsu_tarlasi_obruk', 'muhtarlik', 'koy_cikisi', 'harita']
+  },
+  PORTRE: { klasor: 'assets/portraits/', uzanti: '.webp', dosyalar: [] },
+
   // --- Ses: dosyalar assets/audio/<id>.mp3; yoksa sessiz geçilir ---
   SES: {
     anahtar: 'koyumun-suyu-ses',

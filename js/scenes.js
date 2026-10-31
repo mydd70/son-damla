@@ -452,6 +452,10 @@ var KS = globalThis.KS = globalThis.KS || {};
   // Günün saati ışık katmanı: YZ görsellerinin üstüne de aynı katman konur (arayüzde CSS ile).
   KS.ZAMAN_KATMANI = ZAMAN;
 
+  KS.yagmurKatmani = function () {
+    return '<svg class="sahne-isik" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + G + ' ' + Y + '" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' + yagmurCizgileri() + '</svg>';
+  };
+
   KS.sahne = function (id, zaman, secenek) {
     zaman = ZAMAN[zaman] ? zaman : 'ogle';
     secenek = secenek || {};

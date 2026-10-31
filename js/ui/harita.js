@@ -60,7 +60,7 @@ KS.ui = KS.ui || {};
 
     katman.textContent = '';
     var zemin = el('div', 'harita-zemin');
-    zemin.innerHTML = KS.sahne('harita', d.dilim);
+    KS.ui.sahneCiz(zemin, 'harita', d.dilim);
     katman.appendChild(zemin);
     KS.HARITA_YERLERI.forEach(function (yer) {
       var b = el('button', 'yer', KS.yerAdi(yer));
