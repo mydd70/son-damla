@@ -145,7 +145,7 @@ Okurken düzeltmen için yazıldı; kod değil. Aşama 4'te story.js'e aynı id'
 **{A3} seçilirse:**
 - **Muhtar:** *(uzun süre susar)* Biz Rıza'yla askere beraber gittik. Döndüğümüzde o sarnıcın oluğunu beraber çaktık.
 - **Muhtar:** Kuraklık yılıydı, seksen dokuz. Gece gündüz taş taşıdık. Yağmur yağınca sarnıcın başında sevinçten ağladı, Rıza.
-- **Muhtar:** Sonra... sonra olan oldu. Neyse.
+- **Muhtar:** Sonra motorlar geldi, laflar uzadı. Sonra... olan oldu. Neyse.
 - **Ekran:** Defter: "Muhtarla Rıza Amca'nın sarnıcı" (komşuya söylenebilir).
 
 ### g7_komsu – Gün 7 sabah [sahne: kuyu_basi]
@@ -324,9 +324,13 @@ Okurken düzeltmen için yazıldı; kod değil. Aşama 4'te story.js'e aynı id'
 - [ses: yağmur]
 - **Mehmet (iç ses):** Sarnıcın oluğundan su akıyor. Muhtarla Rıza Amca yan yana duruyor, ikisi de ıslak, ikisi de susuyor.
 - **Muhtar:** Seksen dokuzda da böyle durmuştuk, hatırlıyor musun?
-- **Rıza Amca:** Hatırlıyorum. Sonra sen benim kuyuma şikâyet yazdın.
-- **Muhtar:** Yazdım. Haklıydım da. Ama seni kaybetmeye değmezdi.
-- **Rıza Amca:** *(güler)* Değmezdi.
+- **Rıza Amca:** Hatırlıyorum. Sonra motoru aldım, sen de peşime düştün.
+- **Muhtar:** Kaç kere geldim kapına. "Rıza, saati kıs." "Rıza, gece çalıştırma, kuyu iniyor."
+- **Rıza Amca:** Ben de her seferinde "belgem var" dedim. Kapıyı yüzüne kapattım.
+- **Muhtar:** Bir yıl böyle gitti. Sonunda dayanamadım, şikâyet yazdım.
+- **Rıza Amca:** Bütün köy duydu. Ona içerledim.
+- **Muhtar:** Haklıydım belki. Ama seni kaybetmeye değmezdi.
+- **Rıza Amca:** *(güler)* Benim inadım da değmezdi.
 - [sahne: avlu]
 - **Ekran:** Köy çeşmesinden ilk damla.
 - **Mehmet (iç ses):** Az. Ama akıyor.

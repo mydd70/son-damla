@@ -20,7 +20,7 @@ Kodlamaya hazır sürüm. v3'ten değişenler: gecikmeli plan, gün-dilim tablos
 ## 3. Karakterler
 - **Yaşlı çift:** Anılarla geçmiş-gelecek köprüsü. Dayanıklı tohum, eski usul bilgisi, unutulmuş sarnıç. Güvenlik ağı: en fazla 2 yardım; 2.'de "artık bize de zor yetiyor" derler. Kötü sonda geride kalırlar.
 - **İnatçı komşu:** Yalnız, inatçı, kötü değil. Belgeli ama sayaçsız motorlu kuyu. Obruk gün 8'de onun tarlasında açılır. Oyu sonucu belirler.
-- **Muhtar:** İnsanlar ve resmî yol. Komşuyla eski dost, küs; küslüğün sebebi (su paylaşımı) yalnızca iyi sonda açığa çıkar.
+- **Muhtar:** İnsanlar ve resmî yol. Komşuyla eski dost, küs. Küslüğün sebebi yalnızca iyi sonda açığa çıkar: komşu motorlu kuyuyu alınca muhtar defalarca kapısına gidip uyarmış, komşu dinlememiş, anlaşmazlık bir yıl sürmüş; sonunda muhtar dayanamayıp şikâyet yazmış ve bütün köy duymuş. Oyun içinde yalnızca ima edilir ("motorlar geldi, laflar uzadı").
 - **Öğretmen (kadın):** Ölçüm ve yöntem. Muhtarla eşit ağırlıkta; aralarında "cahil-okumuş" ayrımı kurulmaz.
 - Yaşlı çift ve öğretmenin ek ziyaretlerinde kısa, vaaz olmayan iklim sözleri.
 - Diğer köylüler siluet.
@@ -155,6 +155,7 @@ Görev listesi. Örnek maddeler: "Öğretmenin ölçümünü muhtara götür", "
 ## 10. Toplantı ve sonlar
 - Köylülerin oyları her zaman eşit çıkar (sayılar temsilî). Köyün ikiye bölündüğü, gözlerin komşuya döndüğü gösterilir.
 - **İyi son = komşu evet VE kuyu ≥ eşik.** Aksi halde kötü son.
+- **Zaman atlaması:** İki son da "Ekim. İlk yağmur." ile başlar. Gerçekçilik aranmaz; oyun havası için olağanüstü bir an kabul edilir.
 - **İyi:** Plan kabul, yağmur onarılmış sarnıca dolar, çeşmeden ilk damla, muhtar ve komşu barışır (küslüğün sebebi burada açılır), baba döner, son sabah bebeğin gülme sesi. Keçi satırı keçiye göre değişir (≥5: süt veriyor; <5: toparlanıyor).
 - **Kötü:** Keçi yol parası için satılır, kamyonla göç, yaşlı çiftin kapısının önünden geçilir, uzakta dumanlı şehir, bebeğin ağlaması kamyonla uzaklaşarak söner (ölüm çağrışımı olmamalı), boş avluya ve kırık sarnıca yağmur.
 - Ev ve kiler değerleri sonda birer satırı değiştirir.
