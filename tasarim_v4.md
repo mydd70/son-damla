@@ -67,7 +67,7 @@ Serbest öğle günleri: 3, 4, 5, 7, 9. Serbest akşamlar: 1-8.
 - **Görev ziyareti hak tüketmez:** defterdeki bir görev için yapılan ziyaret (ör. ölçümü muhtara götürmek) ziyaret hakkından sayılmaz.
 - **Kısa sohbet hak tüketmez:** kişiden öğrenilecek bir şey henüz açılmadıysa (yaşlı çift gün 2 olayından, öğretmen gün 3 ölçümünden, muhtar gün 3'ten önce; komşu ilk argüman öğrenilene kadar) ziyaret kısa bir sohbet olur. Akşamı harcar, hak tüketmez, argüman vermez, kişi başına bir kez. Herkes birbirini zaten tanır; sohbet tanışma gibi yazılmaz, sonunda Mehmet'in o kişi hakkındaki iç sesi gelir. Sohbeti yapılmış ve bilgisi hâlâ açılmamış kişi haritada soluk görünür.
 - Ya da aile vakti: ev +1.
-- Ertesi günün su payı duyurulur.
+- Akşamın ardından gece satırı gelir. Yeni günün su payı ve planı sabahki gün kartında yazar (komşuya gidiyorsa kesintisiyle).
 
 ### Zorunlu ev işi
 - Ev 3'ün altına düşerse ertesi sabah mini oyunun yerine kısa bir "annene yardım" sahnesi gelir: ev +2, mini oyunun bonusu alınmaz.
@@ -111,10 +111,10 @@ Tüm sayılar kodda tek dosyada (config.js) durur.
 ### Göstergeler
 | Gösterge | Kural |
 |---|---|
-| Su etkisi (her gösterge) | Yeterli: +1 · 1 damla eksik: −1 · daha fazla eksik: −2 |
+| Su etkisi (her gösterge) | Yeterli: +1 · 1 damla eksik: −1 · 2 eksik: −2 · 3 ve üstü eksik: −3 |
 | Keçi | Yeterli = 4 damla; bakım mini oyunu +1 |
 | Bahçe (başlangıç 3) | Yeterli = ihtiyaç (gri su dahil); ot yolma +1, bahçede ek iş +1 |
-| Kiler (başlangıç 3, en fazla 6) | Akşam −1 · keçi ≥5: +1 · bahçe ≥6: +1 |
+| Kiler (başlangıç 3, en fazla 6) | Akşam −2 · keçi ≥5: +1 · bahçe ≥8: +1 · yetmezse o gece: ev −2, kuyu −3 (aile gizlice çeker) |
 | Ev (başlangıç 4) | Yeterli = 6 damla; aile vakti +1 · kiler boşsa −2 · baba araması (gün 5) +1 · çiçek +1 |
 
 ### Kuyu (başlangıç 100; günlük düşüş gün sonunda, gün 9'da toplantıdan önce uygulanır)
@@ -132,12 +132,11 @@ Tüm sayılar kodda tek dosyada (config.js) durur.
 ### Kontrol hesabı (komşu ikna edilmiş)
 | Profil | Gün 9 sonu kuyu | Sonuç |
 |---|---|---|
-| Güçlü plan, hiç fazla çekme yok | 45 | İyi |
-| Güçlü plan, 2 fazla çekme | 35 | İyi (sınırda) |
-| Güçlü plan, 3 fazla çekme | 30 | Kötü |
-| Gecikmeli plan, hiç fazla çekme yok | 37 | İyi (sınırda) |
-| Gecikmeli plan, 1 fazla çekme | 32 | Kötü |
-| Pasif (gecikmeli plan, komşu ikna edilmemiş) | 34 | Kötü |
+| Güçlü plan, kileri gözeten dağıtım | 42 | İyi |
+| Güçlü plan, kileri gözeten, 1 fazla çekme | 37 | İyi |
+| Güçlü plan, kileri gözeten, 2 fazla çekme | 32 | Kötü |
+| Gecikmeli plan, kileri gözeten dağıtım | 37 | İyi (sınırda) |
+| Pasif (gecikmeli plan, komşu ikna edilmemiş) | 13 | Kötü |
 
 Simülasyon hedefi: dikkatli profil iyi sona rahat, pasif profil kötü sona ulaşır.
 
@@ -193,11 +192,11 @@ Görev listesi. Örnek maddeler: "Öğretmenin ölçümünü muhtara götür", "
   8. Defter
   9. Toplantı
   10. Son ve final
-- **Dilim geçişi:** Her dilim sonunda oyun durur, oyuncu "Öğleye geç / Akşama geç / Eve dön / Günü bitir" düğmesiyle geçer. Serbest öğle ve akşam, haritadaki "bir şey yapma" düğmesiyle etkisiz geçilebilir. Gün kartı ve üst çubuk günün planını gösterir (serbest dilimler ayrı renkte). Akşamın sonunda oyuncu eve döner, gece satırı ve yarınki pay gelir.
+- **Dilim geçişi:** Her dilim sonunda oyun durur, oyuncu "Öğleye geç / Akşama geç / Eve dön / Günü bitir" düğmesiyle geçer. Serbest öğle ve akşam, haritadaki "bir şey yapma" düğmesiyle etkisiz geçilebilir. Gün kartı ve üst çubuk günün planını gösterir (serbest dilimler ayrı renkte); gün kartı o günün su payını da yazar. Akşamın sonunda oyuncu eve döner, gece satırı gelir.
 - **Öğretici penceresi:** Tüm öğreticiler ampullü tek pencerede, gerekirse başlıkla (Gri su, Kiler, Defter...). Tekrar oynayışta çıkmaz.
 - **Köy haritası:** Kuşbakışı. Yerler: ev, yaşlı çiftin evi, muhtarlık, okul, komşunun evi ve tarlası, köy kuyusu, sarnıç, tepe. Adlar her zaman görünür, kullanılamayan yerler soluk; soluk yere tıklanınca Mehmet kısa bir düşünce söyler, zaman geçmez. Tıklama noktaları yüzdeyle tanımlanır.
 - **Yer kartı:** Sahne değişince "Öğle · Kuyu başı" gibi kısa kart. Zorunlu sahnelerde sebebini de yazar ve tıklanana kadar bekler; diğerleri kendiliğinden kapanır.
-- **Dağıtım paneli:** Ev, keçi, bahçe satırları; ihtiyaç kadar damla yuvası (fazlası verilemez; bahçede gri su yuvayı doldurur) ve yeterli / biraz eksik / çok eksik yazısı; +/− düğmeleri; "Kalan: N damla"; "Kuyudan fazladan çek (+4)" düğmesi; "Tamam". Gri su açıldıktan sonra ev ile bahçe arasında ayrı "Gri su" satırı. Gri su birikmez, o sabahki dağıtıma aittir.
+- **Dağıtım paneli:** Ev, keçi, bahçe satırları; ihtiyaç kadar damla yuvası (fazlası verilemez; bahçede gri su yuvayı doldurur) ve yeterli / biraz eksik / eksik / çok eksik yazısı; +/− düğmeleri; "Kalan: N damla"; "Kuyudan fazladan çek (+4)" düğmesi; "Tamam". Gri su açıldıktan sonra ev ile bahçe arasında ayrı "Gri su" satırı. Gri su birikmez, o sabahki dağıtıma aittir.
 - **Mini oyunlar (10-15 sn):**
   - Ot yolma: 8-10 ot, 10 sn.
   - Keçi bakımı: tara (sürterek çubuk doldur), su kabı, yem.

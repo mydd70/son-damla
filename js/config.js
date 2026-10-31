@@ -12,16 +12,16 @@ KS.config = {
   FAZLA_CEKME: { damla: 4, kuyuKaybi: 5, gunlukSinir: 1 },
   GRI_SU: { bolen: 3, ilkGun: 2 },                    // her 3 ev damlasına 1 bahçe damlası
   KOMSUYA_SU: { maliyet: 2, sinir: 2, ilkGun: 7 },    // ertesi günün payından düşer; kuyu başı sahnesinden sonra açılır
-  // Dağıtımın göstergelere etkisi: yeterli / biraz eksik (1 damla) / çok eksik
-  SU_ETKISI: { iyi: 1, orta: -1, kotu: -2 },
+  // Dağıtımın göstergelere etkisi, eksik damla sayısına göre: 0, 1, 2, 3 ve üstü
+  SU_ETKISI: [1, -1, -2, -3],
 
   // --- Göstergeler (0-10) ---
   GOSTERGE: { min: 0, max: 10 },
-  KECI: { baslangic: 2, min: 1, sutEsigi: 5, iyiSu: 4, ortaSu: 3, bakim: 1, cokDusuk: 2, saglikliEsik: 8, varsayilanAd: 'Pamuk', adUzunluk: 14 },
-  BAHCE: { baslangic: 3, otYolma: 1, ekIs: 1, sebzeEsigi: 6 },
-  KILER: { baslangic: 3, max: 6, tuketim: 1, sut: 1, sebze: 1 },
+  KECI: { baslangic: 2, min: 1, sutEsigi: 5, bakim: 1, cokDusuk: 2, saglikliEsik: 8, varsayilanAd: 'Pamuk', adUzunluk: 14 },
+  BAHCE: { baslangic: 3, otYolma: 1, ekIs: 1, sebzeEsigi: 8 },
+  KILER: { baslangic: 3, max: 6, tuketim: 2, sut: 1, sebze: 1, bosKuyuKaybi: 3 },   // boş kilerde aile gece kuyudan gizlice çeker
   EV: {
-    baslangic: 4, iyiSu: 6, ortaSu: 5, enAzSu: 2,   // enAzSu: içme suyu, dağıtımda bunun altına inilmez
+    baslangic: 4, enAzSu: 2,   // enAzSu: içme suyu, dağıtımda bunun altına inilmez
     aileVakti: 1, kilerBos: -2, evdeYardim: 1, camur: 1, babayiAra: 1,
     zorunluEsik: 3,        // altına inerse ertesi sabah zorunlu ev işi
     zorunluBonus: 2,
@@ -60,6 +60,7 @@ KS.config = {
   ZIYARET_HAKKI: { yasliCift: 2, muhtar: 1, ogretmen: 2, komsu: 1 },
   BABAYI_ARA_ILK_GUN: 3,
   CAMUR_ILK_GUN: 4,
+  BABA_ARAMA_GUNU: 5,   // babanın kendisinin aradığı gün; "bir tek muhtar" sözü burada geçer
 
   // Mekanik etkisi olan sabit olaylar (metinleri story.js'te, aynı id ile)
   SABIT_OLAYLAR: [
@@ -83,7 +84,7 @@ KS.config = {
     bahce: [[2, 'Kurumuş'], [4, 'Susuz'],  [7, 'İdare eder'],   [10, 'Yeşil']]
   },
 
-  KAYIT: { anahtar: 'koyumun-suyu-kayit', surum: 4 },   // durum yapısı değişince artırılır
+  KAYIT: { anahtar: 'koyumun-suyu-kayit', surum: 6 },   // durum yapısı değişince artırılır
   DIL_ANAHTAR: 'koyumun-suyu-dil',
 
   // --- Görseller: listede olmayan mekân SVG ile, olmayan portre yer tutucuyla çizilir ---

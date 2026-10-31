@@ -12,7 +12,15 @@ KS.ui = KS.ui || {};
     var enAzEv = KS.config.EV.enAzSu;
     var verilen = { ev: enAzEv, keci: 0, bahce: 0 };
     var fazla = false;
+    var bosaUyarildi = false;   // boşa gidecek damla varsa "Tamam" önce uyarır
     var katman = document.getElementById('katman');
+
+    function degisti() { bosaUyarildi = false; ciz(); }
+
+    // Kalan damla bir satıra hâlâ sığıyorsa oyuncu onu unutmuş olabilir.
+    function bosaGidiyor() {
+      return kalan() > 0 && SATIRLAR.some(function (ad) { return verilen[ad] < KS.dagitimUstSinir(d, ad, verilen); });
+    }
 
     function enAz(ad) { return ad === 'ev' ? enAzEv : 0; }
     function toplam() { return d.su.pay + (fazla ? ek : 0); }
@@ -36,7 +44,7 @@ KS.ui = KS.ui || {};
       satir.appendChild(el('div', 'su-durum ' + durum, KS.t('suDurum_' + durum)));
       var eksi = el('button', '', '−');
       eksi.disabled = verilen[ad] <= enAz(ad);
-      eksi.onclick = function () { verilen[ad] -= 1; ciz(); };
+      eksi.onclick = function () { verilen[ad] -= 1; degisti(); };
       satir.appendChild(eksi);
 
       // İhtiyaç kadar damla yuvası: dolu olanlar verilen, gri olanlar evden dönen su.
@@ -50,7 +58,7 @@ KS.ui = KS.ui || {};
 
       var arti = el('button', '', '+');
       arti.disabled = kalan() <= 0 || verilen[ad] >= KS.dagitimUstSinir(d, ad, verilen);
-      arti.onclick = function () { verilen[ad] += 1; ciz(); };
+      arti.onclick = function () { verilen[ad] += 1; degisti(); };
       satir.appendChild(arti);
       return satir;
     }
@@ -85,12 +93,17 @@ KS.ui = KS.ui || {};
       var alt = el('div', 'dagitim-alt');
       alt.appendChild(el('div', 'kalan', KS.t('kalan', { n: kalan() })));
       var fazlaBtn = el('button', fazla ? 'fazla-acik' : '', KS.t(fazla ? 'fazlaGeriAl' : 'fazlaCek', { n: ek }));
-      fazlaBtn.onclick = function () { fazla = !fazla; ciz(); };
+      fazlaBtn.onclick = function () { fazla = !fazla; degisti(); };
       alt.appendChild(fazlaBtn);
-      var tamam = el('button', '', KS.t('tamam'));
-      tamam.onclick = function () { katman.textContent = ''; bitince(verilen, fazla); };
+      var tamam = el('button', '', KS.t(bosaUyarildi ? 'tamamBosa' : 'tamam'));
+      tamam.onclick = function () {
+        if (bosaGidiyor() && !bosaUyarildi) { bosaUyarildi = true; ciz(); return; }
+        katman.textContent = '';
+        bitince(verilen, fazla);
+      };
       alt.appendChild(tamam);
       panel.appendChild(alt);
+      if (bosaUyarildi) panel.appendChild(el('div', 'gri-not', KS.t('bosaGider', { n: kalan() })));
       katman.appendChild(panel);
     }
 

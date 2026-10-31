@@ -118,8 +118,12 @@ var KS = globalThis.KS = globalThis.KS || {};
       return;
     }
     var olaylar = KS.olaylariGetir(d.gun, 'aksam', d);
-    if (d.gosterge.ev >= KS.config.EV.yuksekAlt) olaylar.push(KS.olayGetir('anne_ipucu'));
-    ui.olaylariOynat(olaylar, null, function () {
+    var ipucu = null;
+    if (d.gosterge.ev >= KS.config.EV.yuksekAlt) {
+      ipucu = KS.anneIpucuAl(d);
+      if (ipucu.ipucu) olaylar.push(KS.olayGetir('anne_ipucu'));
+    }
+    ui.olaylariOynat(olaylar, ipucu, function () {
       ilkGunOgretici('ogretici_harita', function () { ui.haritaAc(aksamSecimi); });
     });
   }
@@ -146,14 +150,15 @@ var KS = globalThis.KS = globalThis.KS || {};
     });
   }
 
-  // Gece evde biter: değişimler görünür, tek satır düşünce, yarınki pay, sonra yeni gün.
+  // Gece evde biter: değişimler görünür, tek satır düşünce, sonra yeni günün kartı.
   function gunSonu() {
     var r = KS.gunBitir(KS.state);
     ui.sahneGoster('avlu');
     ui.degisimGoster(r.degisimler);
     ui.diyalogOynat(KS.olayGetir('gece'), r, function () {
       ilkGunOgretici('ogretici_kiler', function () {
-        ui.duyuru(ui.yarinMetni(), gunBasla);
+        if (r.ilkKilerKuyu) ui.diyalogOynat(KS.olayGetir('ipucu_kiler_kuyu'), null, gunBasla);
+        else gunBasla();
       });
     });
   }

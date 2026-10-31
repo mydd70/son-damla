@@ -130,7 +130,8 @@ KS.ui = KS.ui || {};
       var liste = KS.ui.el('div', 'secenekler');
       secenekler.forEach(function (sc) {
         var b = KS.ui.el('button', '', metinHazirla(sc));
-        b.onclick = function () {
+        b.onclick = function (e) {
+          e.stopPropagation();   // tıklama kutuya ulaşırsa sonraki diyaloğun ilk satırı atlanır
           kutu.style.cursor = '';
           var sonuc = KS.secimUygula(KS.state, sc);
           KS.ui.degisimGoster(sonuc.degisimler);
@@ -197,7 +198,8 @@ KS.ui = KS.ui || {};
     var liste = KS.ui.el('div', 'secenekler');
     dugmeler.forEach(function (d) {
       var b = KS.ui.el('button', '', metinHazirla(d.oge));
-      b.onclick = function () {
+      b.onclick = function (e) {
+        e.stopPropagation();   // tıklama kutuya ulaşırsa sonraki diyaloğun ilk satırı atlanır
         kutu.style.cursor = '';
         kutu.hidden = true;
         d.tikla();
@@ -205,10 +207,5 @@ KS.ui = KS.ui || {};
       liste.appendChild(b);
     });
     govde.appendChild(liste);
-  };
-
-  // Tek satırlık duyuru (ertesi günün payı gibi).
-  KS.ui.duyuru = function (metin, bitince) {
-    KS.ui.diyalogOynat({ satirlar: [{ kim: 'ekran', metin: metin }] }, null, bitince);
   };
 })();

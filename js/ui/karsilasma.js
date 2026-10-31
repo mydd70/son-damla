@@ -57,7 +57,12 @@ KS.ui = KS.ui || {};
 
     function adim() {
       var liste = kalanlar();
-      if (!liste.length) { bitir(); return; }
+      if (!liste.length) {
+        // Oyuncu hiçbirini açmadıysa konuşma sessizce kesilmesin.
+        if (buSeferIletilen > 0) bitir();
+        else oyna('kars_vazgec', bitince);
+        return;
+      }
       var a = liste[0];
       var uygun = KS.IKNA_SECENEK[a].filter(function (sc) { return !sc.kosul || sc.kosul(d); });
       var dugmeler = uygun.map(function (sc) {

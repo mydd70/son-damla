@@ -22,7 +22,8 @@ Her aşama sonunda kısa özet ver, bir sonrakine geçmeden onay al.
 
 ## Alınmış kararlar (kullanıcı onayladı, yeniden tartışma)
 **Mekanik**
-- Eve en az 2 damla (içme suyu). Her satıra en fazla ihtiyaç kadar damla; fazlası verilemez, kalan damla boşa gider.
+- Kiler sona bağlı: akşam −2, keçi ≥5 ve bahçe ≥8 birer sepet; yetmeyen gece ev −2, kuyu −3. Böylece dağıtım sonu etkiler.
+- Su etkisi kademeli: yeterli +1, 1 eksik −1, 2 eksik −2, 3 ve üstü −3 (üç satırda da). Eve en az 2 damla (içme suyu). Her satıra en fazla ihtiyaç kadar damla; fazlası verilemez, kalan damla boşa gider.
 - Gri su birikmez, panelde Ev ile Bahçe arasında ayrı satırdır, gün 2'de vurguludur.
 - Komşuya su: gün 7 sahnesinden sonra açılır (gün 7 ve 9 öğlesi), en fazla 2, gün 9'da bedelsiz, ikna olunca kapanır.
 - İkna: 3 argümandan 2'si; **konuşmada en fazla 1 argüman**; **A2 gün 8'den önce sayılmaz, kilitlenmez**, o konuşmayı harcar; yanlış seçenek konuyu kilitler ve konuşmayı bitirir, özür açar, gün 8'de aynı konuşmada geri alınır.
@@ -31,7 +32,7 @@ Her aşama sonunda kısa özet ver, bir sonrakine geçmeden onay al.
 - Serbest öğle ve akşam "bir şey yapma" ile etkisiz geçilebilir.
 
 **Akış ve arayüz**
-- Her dilim sonunda düğme: Öğleye geç / Akşama geç / Eve dön / Günü bitir. Ziyaretten sonra "Hava karardı. Eve dönmeliyim.", avlu, gece satırı, sonra yarınki pay ve yarının planı.
+- Her dilim sonunda düğme: Öğleye geç / Akşama geç / Eve dön / Günü bitir. Ziyaretten sonra "Hava karardı. Eve dönmeliyim.", avlu, gece satırı, sonra yeni günün kartı (plan ve su payı burada; gece duyurusu kaldırıldı).
 - Gün kartında ve üst çubukta günün planı, serbest dilimler yeşil. Gün 8 öğlesi "?" (obruk sezdirilmez). Gün 4 gecesi ölçüm hatırlatması.
 - Zorunlu sahnede yer kartı sebebiyle birlikte tıklanana kadar bekler, diğerleri yaklaşık 1 saniyede kapanır.
 - Tüm öğreticiler ampullü pencerede, tekrar oynayışta çıkmaz. Şimdilik 💡; kullanıcı görsel üretecek.

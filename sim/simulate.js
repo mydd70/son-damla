@@ -14,11 +14,10 @@ function dagitimPuani(d, ev, keci, bahce) {
   var ih = KS.ihtiyaclar(d);
   var gri = d.bayraklar.griSu ? Math.floor(ev / C.GRI_SU.bolen) : 0;
   var b = bahce + gri;
-  var e = C.SU_ETKISI;
   var p = 0;
-  p += 1.2 * (keci >= C.KECI.iyiSu ? e.iyi : (keci >= C.KECI.ortaSu ? e.orta : e.kotu));
-  p += b >= ih.bahce ? e.iyi : (b >= ih.bahce - 1 ? e.orta : e.kotu);
-  p += ev >= C.EV.iyiSu ? e.iyi : (ev >= C.EV.ortaSu ? e.orta : e.kotu);
+  p += 1.2 * KS.suEtkisi(keci, ih.keci);
+  p += KS.suEtkisi(b, ih.bahce);
+  p += KS.suEtkisi(ev, ih.ev);
   return p;
 }
 
@@ -201,6 +200,19 @@ function tohumluRastgele(tohum) {
   };
 }
 
+// Her şeyi doğru yapan ama suyu damla damla rastgele dağıtan oyuncu: dağıtım sonu etkiliyor mu?
+function rastgeleDagitim(d, toplam, rnd) {
+  var v = { ev: C.EV.enAzSu, keci: 0, bahce: 0 };
+  var kalan = toplam - v.ev;
+  while (kalan > 0) {
+    var uygun = ['ev', 'keci', 'bahce'].filter(function (ad) { return v[ad] < KS.dagitimUstSinir(d, ad, v); });
+    if (!uygun.length) break;
+    v[uygun[Math.floor(rnd() * uygun.length)]] += 1;
+    kalan -= 1;
+  }
+  return v;
+}
+
 // ---------- Çalıştır ve raporla ----------
 
 function tabloYaz(baslik, satirlar) {
@@ -260,3 +272,16 @@ console.log('- İyi son: %' + Math.round(100 * iyi / N));
 console.log('- Kötü son sebepleri: komşu %' + Math.round(100 * sebep.komsu / N) +
   ', kuyu %' + Math.round(100 * sebep.kuyu / N) + ', geç ölçüm %' + Math.round(100 * sebep.olcum / N));
 console.log('- Sonda ev < 3: %' + Math.round(100 * evDusuk / N) + ' · keçi ≥ 5: %' + Math.round(100 * keciIyi / N));
+
+var rd = { iyi: 0, kuyu: 0 };
+for (var j = 0; j < N; j++) {
+  (function (rnd) {
+    var p = dikkatliProfil('Rastgele dağıtım');
+    p.dagit = function (d, toplam) { return rastgeleDagitim(d, toplam, rnd); };
+    var s = oyna(p).d;
+    if (s.sonuc.iyi) rd.iyi++;
+    rd.kuyu += s.gosterge.kuyu;
+  })(tohumluRastgele(j + 1));
+}
+console.log('\n### ' + N + ' rastgele dağıtım (ölçüm ve ikna doğru, fazla çekme yok)');
+console.log('- İyi son: %' + Math.round(100 * rd.iyi / N) + ' · ortalama kuyu: ' + Math.round(rd.kuyu / N));

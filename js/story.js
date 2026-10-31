@@ -22,6 +22,8 @@ var KS = globalThis.KS = globalThis.KS || {};
   function kecidusuk(d) { return d.gosterge.keci < KS.config.KECI.sutEsigi; }
   function keciIyi(d) { return d.gosterge.keci >= KS.config.KECI.sutEsigi; }
   function kilerBos(d) { return d.gosterge.kiler === 0; }
+  function fazlaCekildi(d) { return d.su.fazlaCekildi; }
+  function sofraBos(d, r) { return r.kilerBos; }   // bu gece yiyecek yoktu (KS.gunBitir sonucu)
   function guclu(d) { return d.plan === 'guclu'; }
   function zayif(d) { return d.plan === 'zayif'; }
   // Tekrarlanan eylemlerde sürümler gün sırasıyla döner.
@@ -34,14 +36,12 @@ var KS = globalThis.KS = globalThis.KS || {};
   function sohbetDegil(d, r) { return !r.sohbet; }
   function gorevDegil(d, r) { return !r.gorev; }
 
-  // Anne o an işe yarayacak ipucunu verir: önce geciken ölçüm, sonra öğrenilmemiş anılar, sonunda kuyu.
-  function anneIpucu(d) {
-    if (d.bayraklar.olcumElde && KS.gorevZiyaretiMi(d, 'muhtar')) return 'olcum';
-    if (bilmiyor('A1')(d)) return 'nine';
-    if (bilmiyor('A3')(d)) return 'dostluk';
-    return 'kuyu';
-  }
-  function ipucu(ad) { return function (d) { return anneIpucu(d) === ad; }; }
+  // Anne ipucunu KS.anneIpucuAl seçer; aynısı iki kez söylenmez.
+  function ipucu(ad) { return function (d, r) { return r.ipucu === ad; }; }
+  function babaKonustu(d) { return d.gun >= KS.config.BABA_ARAMA_GUNU; }
+  function babaKonusmadi(d) { return !babaKonustu(d); }
+  // Ek ziyaretlerin metni tekrar etmesin: ziyaret hakkı düştükten sonra kalan sayıya göre.
+  function kalanHak(kim, n) { return function (d) { return d.ziyaretKalan[kim] === n; }; }
 
   // Ağlama sesi ve yazısı aynı karardan gelsin (KS.gunBaslat sonucu).
   function agliyor(d, r) { return r.aglama; }
@@ -56,16 +56,20 @@ var KS = globalThis.KS = globalThis.KS || {};
     { kim: 'ic', metin: 'Rıza Amca\'yı hiç gülerken görmedim. Bunu aklımda tutayım.' },
     { kim: 'ekran', metin: 'Deftere yazıldı: Rıza Amca\'nın söğüdü' }
   ];
-  var A2_SATIRLAR = [
-    { kim: 'ogretmen', metin: 'Yeraltı suyu çekildikçe toprağın altında boşluklar kalıyor. Bir gün tavan çöküyor.' },
-    { kim: 'ogretmen', metin: 'Ovada yüzlerce obruk var artık. Motorların en çok çalıştığı tarlalarda da...' },
-    { kim: 'mehmet', metin: 'Rıza Amca\'nın tarlası gibi mi?' },
-    { kim: 'ogretmen', metin: '(cevap vermez, ipi sarar)' },
-    { kim: 'ekran', metin: 'Deftere yazıldı: Obruk uyarısı' }
-  ];
+  // Son jest mekâna göre verilir: ip yalnızca kuyu başındaki ölçümde var.
+  function a2Satirlari(sonJest) {
+    return [
+      { kim: 'ogretmen', metin: 'Yeraltı suyu çekildikçe toprağın altında boşluklar kalıyor. Bir gün tavan çöküyor.' },
+      { kim: 'ogretmen', metin: 'Ovada yüzlerce obruk var artık. Motorların en çok çalıştığı tarlalarda da...' },
+      { kim: 'mehmet', metin: 'Rıza Amca\'nın tarlası gibi mi?' },
+      { kim: 'ogretmen', metin: sonJest },
+      { kim: 'ekran', metin: 'Deftere yazıldı: Obruk uyarısı' }
+    ];
+  }
   var A3_SATIRLAR = [
-    { kim: 'muhtar', metin: '(uzun süre susar) Biz Rıza\'yla askere beraber gittik. Döndüğümüzde o sarnıcın oluğunu beraber çaktık.' },
+    { kim: 'muhtar', metin: '(uzun süre susar) Biz Rıza\'yla askere beraber gittik. Döndüğümüzde köyün yukarısındaki sarnıcın oluğunu beraber çaktık.' },
     { kim: 'muhtar', metin: 'Kuraklık yılıydı, seksen dokuz. Gece gündüz taş taşıdık. Yağmur yağınca sarnıcın başında sevinçten ağladı, Rıza.' },
+    { kim: 'muhtar', metin: 'Baban da senin yaşındaydı. Yukarıya bidonla su taşırdı bize.' },
     { kim: 'muhtar', metin: 'Sonra motorlar geldi, laflar uzadı. Sonra... olan oldu. Neyse.' },
     { kim: 'ekran', metin: 'Deftere yazıldı: Muhtarla Rıza Amca\'nın sarnıcı' }
   ];
@@ -143,7 +147,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'ogretmen', metin: 'Suya kaç metrede ulaşıyoruz, ona bakıyorum. Geçen ay da ölçmüştüm.' },
       { kim: 'ogretmen', metin: '(ipi işaretler) Bir ayda neredeyse bir buçuk metre inmiş.' },
       { kim: 'mehmet', metin: 'Bu çok mu?' },
-      { kim: 'ogretmen', metin: 'Bu yıl ülke altmış beş yılın en kurak yıllarından birini yaşıyor. Bu hızla giderse sonbahara kuyu boşa döner.' },
+      { kim: 'ogretmen', metin: 'Altmış beş yılın en kurak yıllarından birindeyiz. Bu hızla giderse sonbahara kuyu boşa döner.' },
       { kim: 'mehmet', metin: 'Rıza Amca\'nın kuyusu da bu suyu mu çekiyor?' },
       { kim: 'ogretmen', metin: 'Hepimizin kuyusu aynı suya iniyor. Biri çekince hepimizin ipi uzuyor.' },
       { kim: 'ogretmen', metin: 'Bunu muhtar görmeli. Ben anlatınca "öğretmen hanım yine hesap yapmış" diyor. Kâğıt senin elinden gitsin, köyün çocuğu getirdi desin.' },
@@ -152,7 +156,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       { metin: 'Kuyu tamamen kurursa ne olur?', etkiler: { arguman: 'A2' }, sonraki: 'g3_a2' },
       { metin: 'Tamam, götürürüm.', sonraki: 'g3_defter' }
     ] },
-    { id: 'g3_a2', sonraki: 'g3_defter', satirlar: A2_SATIRLAR },
+    { id: 'g3_a2', sonraki: 'g3_defter', satirlar: a2Satirlari('(cevap vermez, ipi sarar)') },
     { id: 'g3_defter', satirlar: [
       { kim: 'ipucu', baslik: { metin: 'Defter' }, metin: 'Görevlerin üstteki Defter\'de yazar. Ölçümü gün {sonGun} akşamına kadar muhtara götür. Geç kalırsan plan zayıf kalır.' }
     ] },
@@ -161,19 +165,22 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'anne', kosul: olcumYok, metin: 'Öğretmen hanım kapı kapı dolaşıyor, suyu idareli kullanın diye. Muhtar da çağırmış köylüyü.' },
       { kim: 'ic', metin: 'Annemin pencere önündeki sardunyası. Kurumak üzere.' },
       { kim: 'anne', metin: 'Ona su verme, boş ver.' },
-      { kim: 'mehmet', metin: '(bardağın dibindeki suyu döker)' },
+      { kim: 'mehmet', metin: '(bardağının dibinde kalan suyu sardunyaya döker)' },
       { kim: 'anne', metin: '(gülümser, bir şey demez)' }
     ] },
     { id: 'g4_hatirlatma', gun: 4, dilim: 'aksam', kosul: olcumYok, mekan: 'avlu', satirlar: [
       { kim: 'anne', metin: 'Öğretmen hanım bir kâğıt vermiş sana, muhtara götürdün mü?' }
     ] },
     { id: 'g5_baba', gun: 5, dilim: 'sabah', mekan: 'tepe', giris: { metin: 'Babanın araması için tepeye çıktın.' }, satirlar: [
-      { kim: 'ic', metin: 'Annemin telefonu yalnızca tepede çekiyor. Babam bugün arayacağım demişti.' },
+      { kim: 'ic', metin: 'Annemin telefonu yalnızca tepede çekiyor. Babam muhtarlığa haber bırakmış, bu sabah arayacakmış.' },
       { kim: 'baba', ses: 'telefon', metin: 'Mehmet? Sesim geliyor mu?' },
       { kim: 'mehmet', metin: 'Geliyor baba! Ne zaman geleceksin?' },
-      { kim: 'baba', metin: 'İnşaatta bir iş var, belki... Annen nasıl? {keci} nasıl?' },
+      { kim: 'baba', metin: '(bir an susar) İnşaatta bir iş var, belki. Çağırdıkları gün gidiyorum, çağırmadıkları gün bekliyorum.' },
+      { kim: 'baba', metin: 'Annen nasıl? Uyuyor mu geceleri? {keci} nasıl?' },
       { kim: 'mehmet', kosul: kecidusuk, metin: '{keci} hâlâ iyi değil. Kuyu da iniyor, öğretmen ölçtü.' },
       { kim: 'mehmet', kosul: keciIyi, metin: '{keci} toparlanıyor. Ama kuyu iniyor, öğretmen ölçtü.' },
+      { kim: 'mehmet', metin: 'Bidonları artık ben taşıyorum.' },
+      { kim: 'baba', metin: 'Ben de senin yaşındayken taşırdım. O zaman bu kadar ağır değildi.' },
       { kim: 'mehmet', metin: 'Rıza Amca\'nın motoru da hiç durmuyor.' },
       { kim: 'baba', metin: 'Rıza mı? Sen muhtarla konuş. O adamı bir tek muhtar...' },
       { kim: 'ic', ses: 'hat_kesilir', metin: 'Kesildi. Bir tek muhtar ne?' }
@@ -199,9 +206,9 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'ogretmen', kosul: zayif, metin: 'Sarnıç, sayaç, sulama saatleri... Bu kadar kısa sürede elimizden geleni yazdık.' },
       { kim: 'muhtar', kosul: zayif, metin: 'Cuma akşamı köy toplantısında oylayacağız.' },
       { kim: 'ogretmen', metin: 'Sarnıcı Hasan Dede hatırlattı, toprağı otla örtmeyi Fatma Nine\'den öğrendik. Ben yalnız ölçtüm.' },
-      { kim: 'muhtar', metin: 'Rıza\'nın motoru durmazsa hiçbiri yetmez. Oylar da eşit çıkar, gözler ona döner. O da kimseyi dinlemez.' }
+      { kim: 'muhtar', metin: 'Rıza\'nın motoru durmazsa hiçbiri yetmez. Köy de ikiye bölünmüş, oylar eşit çıkarsa gözler ona döner. O da kimseyi dinlemez.' }
     ], secenekler: [
-      { metin: 'Rıza Amca\'yla neden konuşmuyorsunuz?', kosul: bilmiyor('A3'), etkiler: { arguman: 'A3' }, sonraki: 'g6_a3' },
+      { metin: 'Babam "o adamı bir tek muhtar" dedi, hat kesildi. Siz Rıza Amca\'yla neden konuşmuyorsunuz?', kosul: bilmiyor('A3'), etkiler: { arguman: 'A3' }, sonraki: 'g6_a3' },
       { metin: 'Ben konuşurum.', sonraki: 'g6_hedef' }
     ] },
     { id: 'g6_a3', sonraki: 'g6_hedef', satirlar: A3_SATIRLAR },
@@ -235,6 +242,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     ] },
     { id: 'g9_sabah', gun: 9, dilim: 'sabah', mekan: 'avlu', satirlar: [
       { kim: 'anne', metin: 'Bu akşam toplantı. Bütün köy orada olacak.' },
+      { kim: 'anne', metin: 'Baban dün muhtarlığı aramış, toplantıyı sormuş. "Mehmet de gitsin, görsün" demiş.' },
       { kim: 'ic', kosul: iknaDegil, metin: 'Rıza Amca\'ya söyleyecek son bir şansım var. Öğlen gitmeliyim.' },
       { kim: 'ic', kosul: ikna, metin: '"Bakarız" dedi. Gelir mi, gelmez mi, akşam göreceğiz.' }
     ] },
@@ -244,10 +252,10 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'koylu', metin: 'Sayaç masrafını kim ödeyecek?' },
       { kim: 'koylu', metin: 'Benim tarlam kurursa çocuklarıma ne yediririm?' },
       { kim: 'muhtar', metin: 'Oylayalım. Kabul edenler...' },
-      { kim: 'ekran', metin: '(eller kalkar) Yarısı evet. Yarısı hayır.' },
+      { kim: 'ekran', metin: 'Eller kalkıyor. Yarısı evet, yarısı hayır.' },
       { kim: 'ic', metin: 'Herkes dönüp Rıza Amca\'ya bakıyor.' },
       { kim: 'komsu', kosul: ikna, metin: '(bir an Mehmet\'e bakar, ağır ağır ayağa kalkar) Benim tarlam çöktü. Bir sonraki kimin tarlası? (elini kaldırır) Ben de varım. Motorum da sayaç taksın.' },
-      { kim: 'koylu', kosul: ikna, metin: 'Geçen hafta sırayı kapattık ona. Ayıp ettik.' },
+      { kim: 'koylu', kosul: ikna, metin: 'Daha iki gün önce sırayı kapattık ona. Ayıp ettik.' },
       { kim: 'muhtar', kosul: ikna, metin: '(bir an Rıza\'ya bakar, başını sallar) Kabul edilmiştir.' },
       { kim: 'komsu', kosul: iknaDegil, metin: 'Benim belgem var. Tarlam gitti, elimde bir motor kaldı. Sayaç takarsanız ona ne kalacak? (çıkıp gider)' },
       { kim: 'muhtar', kosul: iknaDegil, metin: 'Oylar eşit. Bu hâliyle plan geçmez.' }
@@ -256,7 +264,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     // ---------- Gün 1 öğreticileri ----------
     { id: 'ogretici_dagitim', satirlar: [
       { kim: 'ipucu', metin: 'Bugünkü payın {pay} damla. Her damla bir bidon su. Evin, keçinin ve bahçenin ihtiyacı daha fazla.' },
-      { kim: 'ipucu', metin: 'Kime ne kadar vereceğine sen karar ver. Yetmeyen göstergenin çubuğu düşer.' },
+      { kim: 'ipucu', metin: 'Kime ne kadar vereceğine sen karar ver. Tam su alan toparlanır, eksik kalan her damla çubuğu biraz daha düşürür.' },
       { kim: 'ipucu', metin: '"Kuyudan fazladan çek" {fazla} damla daha verir. Bunu kimse görmez, ama köyün kuyusu düşer.' }
     ] },
     { id: 'ogretici_keci', satirlar: [
@@ -267,17 +275,22 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'ipucu', metin: 'Haritada gitmek istediğin yere dokun. Soluk yerlerde şimdilik yapılacak bir şey yok.' }
     ] },
     { id: 'ogretici_kiler', satirlar: [
-      { kim: 'ipucu', baslik: { metin: 'Kiler' }, metin: 'Sepetler evin yiyeceği. Her akşam biri eksilir. Keçi süt verir, bahçe sebze verirse yenisi gelir. Kiler boşalırsa ev zorlanır.' }
+      { kim: 'ipucu', baslik: { metin: 'Kiler' }, metin: 'Sepetler evin yiyeceği. Her akşam iki sepet eksilir. Süt veren keçi bir, yeşeren bahçe bir sepet getirir: ikisi de ayakta olmalı. Kiler boşalırsa ev zorlanır.' }
+    ] },
+    { id: 'ipucu_kiler_kuyu', satirlar: [
+      { kim: 'ipucu', baslik: { metin: 'Boş kiler' }, metin: 'Kiler boş kaldığı her gece aile kuyudan gizlice su çeker, köyün kuyusu düşer. Keçi ve bahçe kileri doldurur.' }
     ] },
 
     // ---------- Sabah durum satırları (her sabah, gün 1 hariç) ----------
     { id: 'sabah_durum', mekan: 'avlu', satirlar: [
       { kim: 'ic', kosul: ve(evDusuk, aglamiyor), metin: 'Annem gece yine uyumadı, sesinden anlıyorum.' },
       { kim: 'ic', kosul: ve(evDusuk, agliyor), metin: 'Kardeşim ağlıyor, annemin sesi kısık.' },
-      { kim: 'ic', kosul: ve(evOrta, tekGun), metin: 'Güneş daha doğmadan sıcak. Bugün de uzun bir gün.' },
-      { kim: 'ic', kosul: ve(evOrta, ciftGun), metin: 'Kuyu başındaki sıraya erken gitmeliyim.' },
-      { kim: 'ic', kosul: ve(evYuksek, tekGun), metin: 'Annem mutfakta türkü mırıldanıyor. Ne zamandır duymamıştım.' },
-      { kim: 'ic', kosul: ve(evYuksek, ciftGun), metin: 'Kardeşim annemin kucağında uyuyor. Ev bu sabah sessiz, iyi sessiz.' },
+      { kim: 'ic', kosul: ve(evOrta, surum(0)), metin: 'Güneş daha doğmadan sıcak. Bugün de uzun bir gün.' },
+      { kim: 'ic', kosul: ve(evOrta, surum(1)), metin: 'Kuyu başındaki sıraya erken gitmeliyim.' },
+      { kim: 'ic', kosul: ve(evOrta, surum(2)), metin: 'Horozlar bile geç öttü. Sıcak herkesi susturuyor.' },
+      { kim: 'ic', kosul: ve(evYuksek, surum(0)), metin: 'Annem mutfakta türkü mırıldanıyor. Ne zamandır duymamıştım.' },
+      { kim: 'ic', kosul: ve(evYuksek, surum(1)), metin: 'Kardeşim annemin kucağında uyuyor. Ev bu sabah sessiz, iyi sessiz.' },
+      { kim: 'ic', kosul: ve(evYuksek, surum(2)), metin: 'Annem babamın gömleğini yamıyor. "Gelince giyer" diyor.' },
       { kim: 'anne', kosul: function (d, r) { return r.ilkSut; }, metin: '{keci} bu sabah süt verdi! Az ama verdi.' },
       { kim: 'ic', kosul: function (d, r) { return r.ilkSaglik; }, metin: '{keci} sabah beni görünce ayağa kalktı. Sırtını sürttü.' },
       { kim: 'ic', kosul: function (d) { return d.gosterge.keci <= KS.config.KECI.cokDusuk; }, metin: '{keci} bugün de yemine bakmadı bile.' }
@@ -285,8 +298,10 @@ var KS = globalThis.KS = globalThis.KS || {};
 
     // ---------- Akşam başı: anne ipucu (ev yüksekse) ----------
     { id: 'anne_ipucu', mekan: 'avlu', satirlar: [
-      { kim: 'anne', kosul: ipucu('dostluk'), metin: 'Rıza Amca\'yla muhtar eskiden can ciğerdi. Ne oldu bilmiyorum.' },
-      { kim: 'anne', kosul: ipucu('nine'), metin: 'Fatma Nine\'yi ziyaret et. Yaşlılar konuşacak birini arıyor.' },
+      { kim: 'anne', kosul: ipucu('dostluk'), metin: 'Rıza Amca\'yla muhtar eskiden can ciğerdi. Aralarına ne girdi, kimse açıp sormuyor.' },
+      { kim: 'anne', kosul: ipucu('nine'), metin: 'Fatma Nine\'ye bir akşam uğra. Yaşlılar konuşacak birini arıyor.' },
+      { kim: 'anne', kosul: ipucu('ogretmen'), metin: 'Öğretmen hanım ölçümden beri bir şeye takılmış, yüzünden belli. Bir akşam sor bakalım.' },
+      { kim: 'anne', kosul: ipucu('su'), metin: 'Rıza\'nın kapısı eli boş çalınmaz, oğlum. Bu sıcakta bir bidon su, bin selamdan iyidir.' },
       { kim: 'anne', kosul: ipucu('olcum'), metin: 'Öğretmen hanım akıllı kadın. Ama muhtar laftan çok kâğıda inanır.' },
       { kim: 'anne', kosul: ipucu('kuyu'), metin: 'Kuyudan fazla çekmek kolay. Yarın yine çekersin, öbür gün yine. Sonra?' }
     ] },
@@ -297,11 +312,12 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'komsu', kosul: sonGunDegil, metin: 'Benim kuyum var. Suyu tarlaya yarar, içilmez.' },
       { kim: 'mehmet', kosul: sonGunDegil, metin: 'Biliyorum.' },
       { kim: 'komsu', kosul: sonGunDegil, metin: '(bir süre bakar, bidonları alır) Otur, bir çay iç.' },
-      { kim: 'komsu', kosul: sonGun, metin: 'Bu köyde bana su getiren bir sen kaldın. (bir bardak uzatır) Otur.' },
+      { kim: 'mehmet', kosul: sonGun, metin: 'Size su getirdim, Rıza Amca.' },
+      { kim: 'komsu', kosul: sonGun, metin: 'Bu köyde bana su getiren bir sen çıktın. (bir bardak uzatır) Otur.' },
       { kim: 'ekran', kosul: sonGunDegil, metin: 'Yarınki paydan {maliyet} damla eksilecek.' }
     ] },
     { id: 'ogle_bahceEkIs', mekan: 'avlu', satirlar: [
-      { kim: 'ic', kosul: surum(0), metin: 'Toprağın üstünü kuru otla örttüm. Hasan Dede öyle derdi, su buharlaşmasın diye.' },
+      { kim: 'ic', kosul: surum(0), metin: 'Toprağın üstünü kuru otla örttüm. Fatma Nine öyle derdi, su buharlaşmasın diye.' },
       { kim: 'ic', kosul: surum(1), metin: 'Otları ayıkladım, kuruyanları kopardım. Çapa elimi soydu.' },
       { kim: 'ic', kosul: surum(2), metin: 'Fatma Nine\'nin tohumları çıkmış. Küçücük, ama yeşil.' }
     ] },
@@ -312,14 +328,21 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'mehmet', kosul: surum(2), metin: '(cevap vermez, çamaşırı asmaya devam eder)' }
     ] },
     { id: 'ogle_babayiAra', mekan: 'tepe', satirlar: [
-      { kim: 'baba', metin: 'Mehmet! Ben iyiyim, iş arıyorum. Anneni öp benim yerime.' },
-      { kim: 'ic', metin: 'Sesi yorgun. Sormadım.' }
+      { kim: 'baba', kosul: babaKonusmadi, metin: 'Mehmet! Ben iyiyim, iş arıyorum. Annene söyle, bu hafta biraz para yollamaya çalışacağım.' },
+      { kim: 'mehmet', kosul: babaKonusmadi, metin: 'Tamam baba.' },
+      { kim: 'ic', kosul: babaKonusmadi, metin: 'Sesi yorgun. "Çalışacağım" dedi, "yollayacağım" demedi.' },
+      { kim: 'baba', kosul: babaKonustu, metin: 'Hat kesilmişti. Rıza\'yı bir tek muhtar yumuşatır diyecektim. Kardeş gibiydiler.' },
+      { kim: 'mehmet', kosul: babaKonustu, metin: 'Ne oldu onlara?' },
+      { kim: 'baba', kosul: babaKonustu, metin: 'O ikisinin bileceği iş. Sen anneni öp benim yerime.' },
+      { kim: 'ic', kosul: babaKonustu, metin: 'Sesi yorgun. Sormadım.' }
     ] },
     { id: 'ogle_camur', mekan: 'avlu', satirlar: [
       { kim: 'ic', metin: 'Leğenin dibindeki çamura ayaklarımı soktum. Kardeşim görüp kahkaha attı. Annem kızmadı.' }
     ] },
     { id: 'ogle_gec', mekan: 'avlu', satirlar: [
-      { kim: 'ic', metin: 'Gölgede oturdum. Sıcak, kimseye bir şey yaptırmıyor.' }
+      { kim: 'ic', kosul: surum(0), metin: 'Gölgede oturdum. Sıcak, kimseye bir şey yaptırmıyor.' },
+      { kim: 'ic', kosul: surum(1), metin: 'Ağılın gölgesine oturdum. {keci} ile birbirimize baktık. O da bir şey yapmadı.' },
+      { kim: 'ic', kosul: surum(2), metin: 'Bir süre yolu seyrettim. Geçen yok. Sıcak herkesi içeri almış.' }
     ] },
 
     // ---------- Akşam ziyaretleri (ziyaret: kim). Koşulu tutanlar sırayla oynar. ----------
@@ -355,11 +378,14 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'nine', metin: 'Bu son, oğlum. Artık bize de zor yetiyor. Bir daha getiremeyiz, gücenme.' }
     ] },
     { id: 'ziyaret_yasliCift_a1', ziyaret: 'yasliCift', kosul: ve(sohbetDegil, bilmiyor('A1')), mekan: 'yasli_cift_evi', etkiler: { arguman: 'A1' }, satirlar: [
-      { kim: 'nine', metin: 'Otur, sana bir şey anlatayım. Bu köyde bir dere vardı, bilir misin?' }
+      { kim: 'nine', metin: 'Otur, sana bir şey anlatayım. Bu köyde bir dere vardı, bilir misin?' },
+      { kim: 'mehmet', metin: 'Dere mi? Burada mı?' }
     ].concat(A1_SATIRLAR) },
     { id: 'ziyaret_yasliCift_iklim', ziyaret: 'yasliCift', kosul: ve(sohbetDegil, biliyor('A1'), function (d, r) { return !r.yardim; }), mekan: 'yasli_cift_evi', satirlar: [
-      { kim: 'dede', metin: 'Bizim zamanımızda kar yerde kırk gün kalırdı. Şimdi düştüğü gibi eriyor.' },
-      { kim: 'nine', metin: 'Kuyudaki su, bizim çocukluğumuzda yağan kar, yağmur. Biz çok içtik, hiç düşünmemiştik.' }
+      { kim: 'dede', kosul: kalanHak('yasliCift', 1), metin: 'Bizim zamanımızda kar yerde kırk gün kalırdı. Şimdi düştüğü gibi eriyor.' },
+      { kim: 'nine', kosul: kalanHak('yasliCift', 1), metin: 'Kuyudaki su, bizim çocukluğumuzda yağan kar, yağmur. Biz çok içtik, hiç düşünmemiştik.' },
+      { kim: 'dede', kosul: kalanHak('yasliCift', 0), metin: 'Eskiden kışın toprak doyardı. Yazın ne çekersen çek, ertesi yıl yerine gelirdi.' },
+      { kim: 'nine', kosul: kalanHak('yasliCift', 0), metin: 'Şimdi gelmiyor. Biz gideceğiz, sizin kuyunuz kalacak. Asıl ona üzülüyorum, oğlum.' }
     ] },
 
     { id: 'ziyaret_muhtar_olcum', ziyaret: 'muhtar', kosul: function (d, r) { return r.gorev; }, mekan: 'muhtarlik', satirlar: [
@@ -371,29 +397,37 @@ var KS = globalThis.KS = globalThis.KS || {};
     ] },
     { id: 'ziyaret_muhtar_a3', ziyaret: 'muhtar', kosul: ve(sohbetDegil, gorevDegil, bilmiyor('A3')), mekan: 'muhtarlik', etkiler: { arguman: 'A3' }, satirlar: [
       { kim: 'muhtar', metin: 'Otur Mehmet. Babandan haber var mı?' },
-      { kim: 'mehmet', metin: 'Yok. Muhtar amca, siz Rıza Amca\'yla neden konuşmuyorsunuz?' }
+      { kim: 'mehmet', kosul: babaKonusmadi, metin: 'Yok. Muhtar amca, siz Rıza Amca\'yla neden konuşmuyorsunuz?' },
+      { kim: 'mehmet', kosul: babaKonustu, metin: 'Aradı. "O adamı bir tek muhtar" dedi, hat kesildi. Siz Rıza Amca\'yla neden konuşmuyorsunuz?' }
     ].concat(A3_SATIRLAR) },
     { id: 'ziyaret_muhtar_genel', ziyaret: 'muhtar', kosul: ve(sohbetDegil, gorevDegil, biliyor('A3')), mekan: 'muhtarlik', satirlar: [
+      { kim: 'muhtar', metin: 'Baban aradı dün, seni sordu. "Sözünü dinliyor mu?" dedi. Köyü dinliyor, dedim.' },
       { kim: 'muhtar', metin: 'Köy dediğin, bir kuyunun etrafına toplanmış birkaç ev. Kuyu giderse köy de gider.' }
     ] },
 
     { id: 'ziyaret_ogretmen_a2', ziyaret: 'ogretmen', kosul: ve(sohbetDegil, bilmiyor('A2')), mekan: 'koy_yolu', etkiler: { arguman: 'A2' }, satirlar: [
       { kim: 'ogretmen', metin: 'Ölçümü düşünüyordum da. Asıl korktuğum kuyunun kuruması değil.' }
-    ].concat(A2_SATIRLAR) },
+    ].concat(a2Satirlari('(cevap vermez, önündeki defteri kapatır)')) },
     { id: 'ziyaret_ogretmen_iklim', ziyaret: 'ogretmen', kosul: ve(sohbetDegil, biliyor('A2')), mekan: 'koy_yolu', satirlar: [
-      { kim: 'ogretmen', metin: 'Bu kuraklık yalnız bizim köyde değil. Dünyanın her yerinde aynı dert konuşuluyor.' },
-      { kim: 'ogretmen', metin: 'Bunu büyük toplantılarda da konuşuyorlar. Ama kuyudan kaç kova çekeceğimiz bizim elimizde.' }
+      { kim: 'ogretmen', kosul: kalanHak('ogretmen', 1), metin: 'Bu kuraklık yalnız bizim köyde değil. Dünyanın her yerinde aynı dert konuşuluyor.' },
+      { kim: 'ogretmen', kosul: kalanHak('ogretmen', 1), metin: 'Bunu büyük toplantılarda da konuşuyorlar. Ama kuyudan kaç kova çekeceğimiz bizim elimizde.' },
+      { kim: 'ogretmen', kosul: kalanHak('ogretmen', 0), metin: 'Ölçmek kolay, Mehmet. Zor olan, ölçtüğünü insanlara kırmadan söylemek.' }
     ] },
 
     { id: 'ziyaret_komsu', ziyaret: 'komsu', kosul: sohbetDegil, mekan: 'komsu_tarlasi', mekanSecenek: function (d) { return { obruk: d.gun >= KS.config.OBRUK_GUNU }; }, satirlar: [
-      { kim: 'komsu', metin: 'Bu saatte kapı çalınmaz, evlat. Gir bakalım, madem geldin.' }
+      { kim: 'komsu', metin: 'Bu saatte tarlada ne arıyorsun, evlat? Otur bakalım, madem geldin.' }
     ] },
 
     { id: 'aile_vakti', mekan: 'avlu', satirlar: [
-      { kim: 'anne', kosul: evDusuk, metin: 'Otur yanıma. Bir şey yapmasak da olur. (bebeği kucağına verir)' },
-      { kim: 'anne', kosul: ve(evOrta, tekGun), metin: 'Kardeşin bugün sana baktı baktı güldü, biliyor musun?' },
-      { kim: 'anne', kosul: ve(evOrta, ciftGun), metin: 'Baban küçükken bu avluda uyurmuş, yazın. Gel, biz de çıkalım.' },
-      { kim: 'anne', kosul: evYuksek, metin: 'Baban gelince bu evi görsün. Zor günde dağılmadık.' }
+      { kim: 'anne', kosul: ve(evDusuk, surum(0)), metin: 'Otur yanıma. Bir şey yapmasak da olur. (bebeği kucağına verir)' },
+      { kim: 'anne', kosul: ve(evDusuk, surum(1)), metin: 'Yoruldum, oğlum. Sana söylemiyorum, kendime söylüyorum. Otur biraz.' },
+      { kim: 'anne', kosul: ve(evDusuk, surum(2)), metin: 'Baban olsa "bu da geçer" derdi. Ben demeyeyim, sen otur yeter.' },
+      { kim: 'anne', kosul: ve(evOrta, surum(0)), metin: 'Kardeşin bugün sana baktı baktı güldü, biliyor musun?' },
+      { kim: 'anne', kosul: ve(evOrta, surum(1)), metin: 'Baban küçükken bu avluda uyurmuş, yazın. Gel, biz de çıkalım.' },
+      { kim: 'anne', kosul: ve(evOrta, surum(2)), metin: 'Baban gitmeden kapıyı onaracaktı. Döner dönmez sana da tutturacak, görürsün.' },
+      { kim: 'anne', kosul: ve(evYuksek, surum(0)), metin: 'Baban gelince bu evi görsün. Zor günde dağılmadık.' },
+      { kim: 'anne', kosul: ve(evYuksek, surum(1)), metin: 'Bugün sana hiç "hadi" demedim, fark ettin mi? Her işe kendin yetiştin.' },
+      { kim: 'anne', kosul: ve(evYuksek, surum(2)), metin: 'Babana anlatacağım, bu yaz kimin sayesinde ayakta kaldık.' }
     ] },
     { id: 'aksam_bitis', satirlar: [
       { kim: 'ic', metin: 'Hava karardı. Eve dönmeliyim.' }
@@ -401,8 +435,13 @@ var KS = globalThis.KS = globalThis.KS || {};
 
     // ---------- Gece: ilk tutan tek satır ----------
     { id: 'gece', tekSatir: true, satirlar: [
-      { kim: 'ic', kosul: function (d) { return d.su.fazlaCekildi; }, metin: 'Bugün kuyudan fazla çektik. Kimse bir şey demedi. Ben yine de kuyuya bakamadım.' },
-      { kim: 'ic', kosul: kilerBos, metin: 'Akşam sofrada yalnız ekmek vardı. Annem "tokum" dedi. Tok değildi.' },
+      { kim: 'ic', kosul: ve(sofraBos, surum(0)), metin: 'Akşam sofrada yalnız ekmek vardı. Gece annem bidonla kuyuya indi. Görmedim sandı.' },
+      { kim: 'ic', kosul: ve(sofraBos, surum(1)), metin: 'Annem kendi payını önüme itti. Sonra bidonu alıp karanlıkta kuyuya yürüdü.' },
+      { kim: 'ic', kosul: ve(sofraBos, surum(2)), metin: 'Kiler boş. Annem yine gece kuyuya indi. Kimseye söylemiyor, ben de söylemiyorum.' },
+      { kim: 'ic', kosul: ve(fazlaCekildi, surum(0)), metin: 'Bugün kuyudan fazla çektik. Kimse bir şey demedi. Ben yine de kuyuya bakamadım.' },
+      { kim: 'ic', kosul: ve(fazlaCekildi, surum(1)), metin: 'Bir kez daha fazla çektik. Alışıyorum, en kötüsü de bu.' },
+      { kim: 'ic', kosul: ve(fazlaCekildi, surum(2)), metin: 'Kuyunun önünden geçerken başımı çevirdim. Bir bidon daha, diye diye.' },
+      { kim: 'ic', kosul: kilerBos, metin: 'Son sepet de bitti. Annem "tokum" dedi. Tok değildi.' },
       { kim: 'ic', kosul: function (d) { return d.su.ertesiGunKesinti > 0; }, metin: 'İki bidon eksildi. Annem sordu, "Rıza Amca\'ya" dedim. Bir şey demedi, başını salladı.' },
       { kim: 'ic', kosul: function (d) { return d.gosterge.keci <= KS.config.KECI.cokDusuk; }, metin: 'Gece ağıla baktım. {keci} başını kaldırmadı.' },
       { kim: 'ic', kosul: gunu(1), metin: 'İlk günü atlattık. Yarın pay yine aynı, ihtiyaç yine fazla.' },
@@ -426,7 +465,11 @@ var KS = globalThis.KS = globalThis.KS || {};
     ] },
     { id: 'kars_bos', satirlar: [
       { kim: 'ic', metin: 'Ne desem bilemedim. Önce köydekilerle konuşmalıyım.' },
-      { kim: 'komsu', metin: 'Söyleyecek bir şeyin yoksa git işine.' }
+      { kim: 'komsu', kosul: aksam, metin: 'Söyleyecek bir şeyin yoksa git işine.' },
+      { kim: 'komsu', kosul: ogle, metin: 'Çayını iç de git, evlat. Annen merak eder.' }
+    ] },
+    { id: 'kars_vazgec', satirlar: [
+      { kim: 'ic', metin: 'Bugün ağzımı açamadım. Belki başka zaman.' }
     ] },
     { id: 'kars_bos_obruk', satirlar: [
       { kim: 'ic', metin: 'Şimdi ne desem boş.' },
@@ -434,7 +477,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     ] },
     { id: 'kars_ikna_sonrasi', satirlar: [{ kim: 'komsu', metin: 'Bakarız dedim ya, evlat. Git şimdi.' }] },
     { id: 'kars_ikna_sonrasi_obruk', satirlar: [
-      { kim: 'komsu', metin: '(başını kaldırmadan) Bakarız demiştim. Bakacak bir şey kalmadı. Cuma geliyorum.' }
+      { kim: 'komsu', metin: '(başını kaldırmadan) Bakarız demiştim. Bakacak tarla da kalmadı. Git evlat.' }
     ] },
     { id: 'kars_ozur', satirlar: [
       { kim: 'komsu', metin: '(homurdanır) Bizim zamanımızda büyüğe öyle konuşulmazdı. Neyse. Ne diyecektin?' }
@@ -449,8 +492,9 @@ var KS = globalThis.KS = globalThis.KS || {};
     { id: 'kars_ikna', satirlar: [
       { kim: 'komsu', metin: '(uzun süre susar) Muhtar mı gönderdi seni, doğru söyle.' },
       { kim: 'mehmet', metin: 'Muhtar amca dinletebilirsen dinlet dedi. Ama gelmek benim fikrimdi.' },
-      { kim: 'komsu', kosul: sonGunDegil, metin: 'Toplantı cuma mı?' },
-      { kim: 'mehmet', kosul: sonGunDegil, metin: 'Cuma akşamı, muhtarlıkta.' },
+      { kim: 'komsu', kosul: sonGunDegil, metin: 'Toplantı ne zaman?' },
+      { kim: 'mehmet', kosul: gunu(KS.config.OBRUK_GUNU - 1), metin: 'Cuma akşamı, muhtarlıkta.' },
+      { kim: 'mehmet', kosul: gunu(KS.config.OBRUK_GUNU), metin: 'Yarın akşam, muhtarlıkta.' },
       { kim: 'komsu', kosul: sonGun, metin: 'Toplantı bu akşam mı?' },
       { kim: 'mehmet', kosul: sonGun, metin: 'Bu akşam, muhtarlıkta.' },
       { kim: 'komsu', metin: 'Bakarız. (arkasını döner, sonra durur) Bakarız dedim, git şimdi.' },
@@ -467,7 +511,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     { id: 'ikna_A2_nazik', satirlar: [
       { kim: 'komsu', kosul: obrukOncesi, metin: 'Obruk ovanın öbür ucunda olur. Bizim burada olmaz. (ama gözünü tarlasından ayırmaz)' },
       { kim: 'ekran', kosul: obrukOncesi, metin: 'Rıza Amca buna şimdilik inanmıyor.' },
-      { kim: 'komsu', kosul: obrukSonrasi, metin: '(çukura doğru bakar) Söylemişti, değil mi? Ben dinlemedim.' }
+      { kim: 'komsu', kosul: obrukSonrasi, metin: '(çukura doğru bakar) Öğretmen söylemişti, değil mi? Ben dinlemedim.' }
     ] },
     { id: 'ikna_A2_kaba', satirlar: [
       { kim: 'komsu', kosul: obrukOncesi, metin: 'Öyle mi? Başka emrin var mı, evlat?' },
@@ -479,13 +523,15 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'komsu', metin: 'O sarnıç yıkıldı. Biz de... neyse.' }
     ] },
     { id: 'ikna_A3_kaba', satirlar: [
-      { kim: 'komsu', metin: 'Benimle muhtarın arasına girme. Kimse bilmiyor ne olduğunu.' },
+      { kim: 'komsu', metin: 'Benimle muhtarın arasına girme. Sen bilmezsin ne olduğunu.' },
       { kim: 'ekran', metin: 'Rıza Amca bu konuyu artık dinlemiyor.' }
     ] },
 
     // ---------- Ortak ----------
     { id: 'ev_isi', mekan: 'avlu', satirlar: [
-      { kim: 'anne', metin: 'Mehmet, bugün bana yardım et. Tek başıma yetişemiyorum.' },
+      { kim: 'anne', kosul: surum(0), metin: 'Mehmet, bugün bana yardım et. Tek başıma yetişemiyorum.' },
+      { kim: 'anne', kosul: surum(1), metin: 'Bu sabah da sana kaldı, oğlum. Elim ayağım tutmuyor.' },
+      { kim: 'anne', kosul: surum(2), metin: 'Önce eve bak bugün, Mehmet. Gerisi bekler.' },
       { kim: 'ic', kosul: tekGun, metin: 'Çamaşır, bulaşık, bebeğin bezi. {keci} bugün bakımsız kaldı.' },
       { kim: 'ic', kosul: ciftGun, metin: 'Çamaşır, bulaşık, bebeğin bezi. Bahçeye bugün bakamadım.' }
     ] },
@@ -506,7 +552,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'komsu', metin: 'Bütün köy duydu. Ona içerledim.' },
       { kim: 'muhtar', metin: 'Haklıydım belki. Ama seni kaybetmeye değmezdi.' },
       { kim: 'komsu', metin: '(güler) Benim inadım da değmezdi.' },
-      { kim: 'komsu', kosul: function (d) { return d.komsu.suGoturme > 0; }, metin: '(Mehmet\'i gösterir) Sırayı önümde kapattıkları gün bana bir bidon getiren bu çocuk oldu.' },
+      { kim: 'komsu', kosul: function (d) { return d.komsu.suGoturme > 0; }, metin: '(Mehmet\'i gösterir) Sırayı önümde kapattılar, bana bidon getiren bu çocuk oldu. Babası da böyle taşırdı.' },
       { kim: 'ogretmen', metin: 'Bir yağmurla dolmaz. Yıllarca çektik, yıllarca bekleyeceğiz.' }
     ] },
     { id: 'son_iyi_ev', mekan: 'avlu', zaman: 'sabah', mekanSecenek: function () { return { yesil: true }; }, satirlar: [
@@ -518,7 +564,10 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'ic', kosul: evDusuk, metin: 'Annem hâlâ yorgun. Ama bu sabah ilk kez gülümsedi.' },
       { kim: 'ic', kosul: kilerBos, metin: 'Sofra hâlâ yoksul. Ama artık köyce paylaşıyoruz.' },
       { kim: 'baba', ses: 'kapi', metin: 'Ben geldim.' },
-      { kim: 'mehmet', metin: '(koşar, bir şey diyemez; annem kardeşimi babama uzatır)' },
+      { kim: 'ic', metin: 'Koştum. Bir şey diyemedim. Annem kardeşimi ona uzattı.' },
+      { kim: 'baba', metin: 'Muhtar anlattı. Rıza\'nın kapısına gitmişsin.' },
+      { kim: 'mehmet', metin: 'Biri gitmeliydi.' },
+      { kim: 'baba', metin: 'Ben gidemedim. Yıllarca duvar duvara oturduk, gidemedim.' },
       { kim: 'ic', metin: 'Şehirde iş bulamamış. Ama köyde iş var artık: borular, sayaçlar.' },
       { kim: 'ekran', ses: 'bebek_gul', metin: 'Zor ama birlikte kaldık.' }
     ] },
@@ -534,7 +583,8 @@ var KS = globalThis.KS = globalThis.KS || {};
     { id: 'son_kotu_yol', mekan: 'koy_cikisi', zaman: 'ogle', satirlar: [
       { kim: 'ic', sesSoner: ['kamyon', 'bebek_agla'], metin: 'Fatma Nine\'yle Hasan Dede kapının önündeydi. El salladılar. Onlar gitmiyor. Nereye gitsinler?' },
       { kim: 'ic', metin: 'Kardeşim ağlamaktan yoruldu; kamyon sallandıkça annemin kucağında uyudu.' },
-      { kim: 'ic', metin: 'Uzakta şehir. Dumanın altında.' }
+      { kim: 'ic', metin: 'Uzakta şehir. Dumanın altında.' },
+      { kim: 'ic', metin: 'Babam otogarda bekleyecekmiş. "Her şey yoluna girecek" dedi telefonda. Sesi yine yorgundu.' }
     ] },
     { id: 'son_kotu_sarnic', mekan: 'sarnic', zaman: 'yagmur', satirlar: [
       { kim: 'ekran', ortam: 'yagmur', metin: 'İlk yağmur.' },
@@ -570,8 +620,8 @@ var KS = globalThis.KS = globalThis.KS || {};
     { yer: 'sarnic', kosul: aksam, metin: 'Karanlıkta oraya çıkılmaz.' },
     { yer: 'sarnic', metin: 'Yukarıdaki eski sarnıç. Bu sıcakta oraya kadar çıkmaya değmez.' },
     { yer: 'tepe', kosul: aksam, metin: 'Hava kararırken tepeye çıkılmaz.' },
-    { yer: 'tepe', kosul: function (d) { return d.bayraklar.babaArandi; }, metin: 'Babamla yeni konuştum. Şimdi işindedir.' },
-    { yer: 'tepe', metin: 'Telefon burada çeker ama babam bu saatte işte olur. Birkaç gün sonra denerim.' },
+    { yer: 'tepe', kosul: function (d) { return d.bayraklar.babaArandi; }, metin: 'Babamla konuştum. Bir daha aramaya kontör de yok.' },
+    { yer: 'tepe', metin: 'Telefon burada çeker ama babam bu saatte iş peşindedir. Sonra denerim.' },
     { yer: '*', metin: 'Burada şimdilik işim yok.' }
   ];
 

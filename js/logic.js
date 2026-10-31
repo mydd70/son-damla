@@ -100,12 +100,18 @@ var KS = globalThis.KS = globalThis.KS || {};
     return ad === 'bahce' ? Math.max(0, ihtiyac - KS.griSuMiktari(d, verilen.ev)) : ihtiyac;
   };
 
-  // Panelde gösterilen durum: 'iyi' yeterli, 'orta' 1 damla eksik, 'kotu' daha çok eksik.
+  // Her eksik damla bir kademe: verilen her damla göstergeye yarar (config.SU_ETKISI).
+  KS.suEtkisi = function (su, ihtiyac) {
+    var tablo = c().SU_ETKISI;
+    return tablo[Math.min(tablo.length - 1, Math.max(0, ihtiyac - su))];
+  };
+
+  // Panelde gösterilen durum, eksik damla sayısına göre.
   KS.dagitimDurumu = function (d, ad, verilen) {
     var ihtiyac = KS.ihtiyaclar(d)[ad];
     var su = verilen[ad] + (ad === 'bahce' ? KS.griSuMiktari(d, verilen.ev) : 0);
-    if (su >= ihtiyac) return 'iyi';
-    return su >= ihtiyac - 1 ? 'orta' : 'kotu';
+    var durumlar = ['iyi', 'orta', 'eksik', 'kotu'];
+    return durumlar[Math.min(durumlar.length - 1, Math.max(0, ihtiyac - su))];
   };
 
   // ---------- Oyun başı ve dilim ----------
@@ -128,11 +134,9 @@ var KS = globalThis.KS = globalThis.KS || {};
     return sonuc(true);
   };
 
-  // Akşam duyurulan yarınki pay (komşuya götürülen su düşülmüş).
-  KS.ertesiGunPayi = function (d) {
-    var k = c();
-    if (d.gun >= k.GUN_SAYISI) return 0;
-    return Math.max(0, k.SU_PAYI[d.gun] - d.su.ertesiGunKesinti);
+  // Bugünkü paydan komşuya giden su (gün kartında söylenir).
+  KS.payKesintisi = function (d) {
+    return c().SU_PAYI[d.gun - 1] - d.su.pay;
   };
 
   // Diyalogdaki seçeneğin etkisi (story.js: etkiler, bayraklar).
@@ -209,11 +213,9 @@ var KS = globalThis.KS = globalThis.KS || {};
     var bahceSu = bahce + gri;
     var ihtiyac = KS.ihtiyaclar(d);
 
-    // Her gösterge için: yeterli su → iyi, biraz eksik → orta, çok eksik → kötü (config.SU_ETKISI)
-    var etki = k.SU_ETKISI;
-    degistir(d, 'keci', keci >= k.KECI.iyiSu ? etki.iyi : (keci >= k.KECI.ortaSu ? etki.orta : etki.kotu), r.degisimler);
-    degistir(d, 'bahce', bahceSu >= ihtiyac.bahce ? etki.iyi : (bahceSu >= ihtiyac.bahce - 1 ? etki.orta : etki.kotu), r.degisimler);
-    degistir(d, 'ev', ev >= k.EV.iyiSu ? etki.iyi : (ev >= k.EV.ortaSu ? etki.orta : etki.kotu), r.degisimler);
+    degistir(d, 'keci', KS.suEtkisi(keci, ihtiyac.keci), r.degisimler);
+    degistir(d, 'bahce', KS.suEtkisi(bahceSu, ihtiyac.bahce), r.degisimler);
+    degistir(d, 'ev', KS.suEtkisi(ev, ihtiyac.ev), r.degisimler);
 
     d.su.dagitildi = true;
     r.kuyuUyari = kuyuUyariKontrol(d);
@@ -394,6 +396,25 @@ var KS = globalThis.KS = globalThis.KS || {};
     return r;
   };
 
+  // Ev yüksekken anne o an işe yarayan, daha önce söylemediği ipucunu verir; kalmadıysa susar.
+  KS.anneIpucuAl = function (d) {
+    var k = c();
+    function bilmiyor(a) { return d.komsu.ogrenilen.indexOf(a) < 0; }
+    var adaylar = [
+      { id: 'olcum', uygun: KS.gorevZiyaretiMi(d, 'muhtar') },
+      { id: 'nine', uygun: bilmiyor('A1') },
+      { id: 'ogretmen', uygun: d.bayraklar.olcumElde && bilmiyor('A2') },
+      { id: 'dostluk', uygun: bilmiyor('A3') },
+      { id: 'su', uygun: d.gun >= k.KOMSUYA_SU.ilkGun && !d.komsu.ikna },
+      { id: 'kuyu', uygun: true }
+    ];
+    var secilen = adaylar.filter(function (a) { return a.uygun && d.anneIpuclari.indexOf(a.id) < 0; })[0];
+    if (!secilen) return sonuc(true, { ipucu: null });
+    d.anneIpuclari.push(secilen.id);
+    gunlukYaz(d, 'anne ipucu ' + secilen.id);
+    return sonuc(true, { ipucu: secilen.id });
+  };
+
   // ---------- İkna ----------
 
   KS.argumanOgren = function (d, id) {
@@ -476,7 +497,10 @@ var KS = globalThis.KS = globalThis.KS || {};
       gorevler.push({ id: 'komsu', tamam: d.komsu.ikna, sayi: d.komsu.iletilen.length, gereken: k.IKNA.gerekenArguman });
     }
     var argumanlar = d.komsu.ogrenilen.map(function (a) {
-      var durum = d.komsu.iletilen.indexOf(a) >= 0 ? 'iletildi' : (d.komsu.kilitli.indexOf(a) >= 0 ? 'kilitli' : 'hazir');
+      var durum = 'hazir';
+      if (d.komsu.iletilen.indexOf(a) >= 0) durum = 'iletildi';
+      else if (d.komsu.kilitli.indexOf(a) >= 0) durum = 'kilitli';
+      else if (!KS.argumanSayilirMi(d, a)) durum = 'inanmaz';
       return { id: a, durum: durum };
     });
     return { gorevler: gorevler, argumanlar: argumanlar };
@@ -502,14 +526,19 @@ var KS = globalThis.KS = globalThis.KS || {};
   KS.gunBitir = function (d) {
     var k = c();
     if (d.gun >= k.GUN_SAYISI) return hata('Son gün toplantıyla biter.');
-    var r = sonuc(true, { kilerBos: false });
+    var r = sonuc(true, { kilerBos: false, ilkKilerKuyu: false });
     if (d.gosterge.keci >= k.KECI.sutEsigi) degistir(d, 'kiler', k.KILER.sut, r.degisimler);
     if (d.gosterge.bahce >= k.BAHCE.sebzeEsigi) degistir(d, 'kiler', k.KILER.sebze, r.degisimler);
     if (d.gosterge.kiler >= k.KILER.tuketim) {
       degistir(d, 'kiler', -k.KILER.tuketim, r.degisimler);
     } else {
       r.kilerBos = true;
+      degistir(d, 'kiler', -d.gosterge.kiler, r.degisimler);   // yetmeyen son sepet de yenir
       degistir(d, 'ev', k.EV.kilerBos, r.degisimler);
+      // Sofrayı çıkaramayan aile gece kuyudan gizlice çeker: dağıtımın ihmali kuyuya, kuyu sona yansır.
+      degistir(d, 'kuyu', -k.KILER.bosKuyuKaybi, r.degisimler);
+      r.ilkKilerKuyu = !d.bayraklar.kilerKuyuGoruldu;
+      d.bayraklar.kilerKuyuGoruldu = true;
     }
     kuyuGunSonu(d, r.degisimler);
     if (kuyuUyariKontrol(d)) d.bayraklar.kuyuUyariBekliyor = true;

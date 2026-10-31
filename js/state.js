@@ -35,6 +35,7 @@ KS.yeniDurum = function () {
       babaArandi: false,
       ilkSut: false,
       ilkSaglik: false,
+      kilerKuyuGoruldu: false,    // boş kilerin kuyuya etkisi bir kez ipucuyla anlatılır
       miniOyunYapildi: false,
       ogleKullanildi: false,
       aksamKullanildi: false
@@ -53,6 +54,7 @@ KS.yeniDurum = function () {
       suGoturme: 0
     },
     yasliCiftYardim: 0,
+    anneIpuclari: [],          // annenin söylediği ipuçları; aynısı tekrar edilmez
     tekrarOyun: false,         // "Hızlı geç" yalnızca tekrar oynayışta
     sonuc: null,               // toplantıdan sonra { iyi, eksikler }
     gunluk: []                 // hata ayıklama: son olaylar
