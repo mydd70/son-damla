@@ -173,11 +173,12 @@ Görev listesi. Örnek maddeler: "Öğretmenin ölçümünü muhtara götür", "
 - Bebek ağlaması: gün 1-2 her sabah, sonra yalnızca ev <4 iken. Düşük ses.
 - Ses düğmesi her zaman erişilebilir.
 - Başla'ya basınca destekleyen cihazlarda tam ekran istenir.
+- **Dil:** Türkçe (ana dil) ve İngilizce. Başlangıç ekranında seçilir, tercih hatırlanır. İngilizce metin Türkçe metin kesinleştikten sonra çevrilir; çevirisi olmayan satır Türkçe görünür.
 
 ## 12. Ekranlar ve arayüz
 - **Yön:** Yatay, PC öncelikli. Telefon dikey tutulursa "Cihazını yatay çevir" uyarısı.
 - **Ekranlar:**
-  1. Başlangıç
+  1. Başlangıç (dil seçimi dahil)
   2. Keçiye isim
   3. Ana sahne: arka plan, altta portreli diyalog kutusu, üstte göstergeler, gün/dilim, defter ve ses düğmeleri
   4. Dağıtım paneli
@@ -220,6 +221,7 @@ css/style.css
 js/config.js       # tüm sabitler (sayı başka yerde yazılmaz)
 js/state.js        # durum oluşturma, kayıt/yükleme
 js/logic.js        # kurallar; DOM'a dokunmaz
+js/dil.js          # arayüz metinleri (tr/en), karakter adları, KS.t
 js/story.js        # olaylar ve diyaloglar (veri)
 js/scenes.js       # SVG sahneler
 js/audio.js        # ses
@@ -232,9 +234,12 @@ KAYNAKLAR.md
 
 ### Olay veri formatı (story.js)
 ```
-{ id, gun, dilim, kosul, mekan, satirlar: [{ kim, ifade?, metin }],
-  secenekler: [{ metin, etkiler, bayraklar, sonraki }] }
+{ id, gun, dilim, kosul, mekan, mekanSecenek?, satirlar: [{ kim, ifade?, kosul?, metin, en? }],
+  secenekler: [{ metin, en?, etkiler, bayraklar, sonraki }] }
 ```
+`en` İngilizce metindir; yoksa `metin` gösterilir. Satır düzeyindeki `kosul`, aynı olayın farklı durumlardaki varyantları içindir (güçlü/gecikmeli plan, keçi satırı gibi).
+
+Arayüzde yazılan her metin `KS.t` ile `js/dil.js` tablosundan gelir; kodun içine metin yazılmaz.
 
 ## 16. Kod kuralları
 Amaç: geri döndürülebilir, karışıklıktan uzak, kolay hata ayıklanan kod.
@@ -281,18 +286,18 @@ Her aşama sonunda çalışan sürüm, commit ve etiket.
 |---|---|---|
 | 0 | Kurulum | Klasör yapısı, git, boş sayfa açılıyor. GitHub deposu ve Pages yayını **onayla** |
 | 1 | Mantık + sabitler + simülasyon | config, state, logic, sim. 3 profilin sonuç tablosu kullanıcıya sunulur. Arayüz yok |
-| 2 | Ana iskelet | Ana sahne, diyalog kutusu, göstergeler, gün döngüsü, dağıtım paneli, harita (SVG yer tutucu). Taslak metinlerle 9 gün baştan sona oynanır. **İlk yayın (onayla)** |
+| 2 | Ana iskelet | Ana sahne, diyalog kutusu, göstergeler, gün döngüsü, dağıtım paneli, harita (SVG yer tutucu). Taslak metinlerle 9 gün baştan sona oynanır. Dil altyapısı (`KS.t`, arayüz metinleri tr/en). **İlk yayın (onayla)** |
 | 3 | Mini oyunlar | Ot yolma, keçi bakımı, zorunlu ev işi sahnesi |
 | 4 | Hikaye ve ikna | story.js'te tüm olaylar (taslak metin), ikna, defter, toplantı, iki son, final |
-| 5 | Kolaylıklar | Kayıt, öğretici, atlama/hızlandırma, ses altyapısı, tam ekran, yön uyarısı |
+| 5 | Kolaylıklar | Kayıt, öğretici, atlama/hızlandırma, ses altyapısı, tam ekran, yön uyarısı, dil seçimi |
 | 6 | SVG sahneler | Tüm mekânlar ve harita; günün saatine göre renk filtresi |
-| 7 | Diyaloglar | Son metinler (kullanıcı okur, düzeltir) |
+| 7 | Diyaloglar | Son metinler (kullanıcı okur, düzeltir), ardından İngilizce çeviri (Claude çevirir, kullanıcı göz atar) |
 | 8 | Asset entegrasyonu | Kullanıcının portre, arka plan ve sesleri; KAYNAKLAR.md |
-| 9 | Test ve yayın | 3 tam oynanış, hata düzeltme, son yayın |
+| 9 | Test ve yayın | 3 tam oynanış (biri İngilizce), hata düzeltme, son yayın |
 
 **Özellik dondurma: Pazar 14:00.** Sonrasında yalnızca hata düzeltme.
 
-Geride kalınırsa kesme sırası (her biri onayla): çamur sahnesi, annenin çiçeği, ek ziyaret hakları, isteğe bağlı baba araması, müzik, ikinci mini oyun, yetişmeyen sahnelerin metin kartına çevrilmesi.
+Geride kalınırsa kesme sırası (her biri onayla): İngilizce çeviri (altyapı kalır, oyun yalnız Türkçe çıkar), çamur sahnesi, annenin çiçeği, ek ziyaret hakları, isteğe bağlı baba araması, müzik, ikinci mini oyun, yetişmeyen sahnelerin metin kartına çevrilmesi.
 
 ## 19. Zaman planı (yaklaşık)
 | Zaman | İş |
