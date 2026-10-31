@@ -168,12 +168,15 @@ var KS = globalThis.KS = globalThis.KS || {};
 
     var ilkSut = !d.bayraklar.ilkSut && d.gosterge.keci >= k.KECI.sutEsigi;
     if (ilkSut) d.bayraklar.ilkSut = true;
+    var ilkSaglik = !d.bayraklar.ilkSaglik && d.gosterge.keci >= k.KECI.saglikliEsik;
+    if (ilkSaglik) d.bayraklar.ilkSaglik = true;
 
     var kuyuUyari = d.bayraklar.kuyuUyariBekliyor;
     d.bayraklar.kuyuUyariBekliyor = false;
 
     var r = sonuc(true, {
       ilkSut: ilkSut,
+      ilkSaglik: ilkSaglik,
       kuyuUyari: kuyuUyari,
       zorunluEvIsi: d.bayraklar.zorunluEvIsi,
       aglama: d.gun <= k.EV.aglamaHerSabahSonGun || d.gosterge.ev < k.EV.aglamaEsigi,
@@ -285,6 +288,21 @@ var KS = globalThis.KS = globalThis.KS || {};
     d.bayraklar.ogleKullanildi = true;
     gunlukYaz(d, 'öğle ' + id);
     return r;
+  };
+
+  // Oyuncu serbest öğleyi ya da akşamı hiçbir şey yapmadan geçebilir; etkisi yok.
+  KS.ogleGec = function (d) {
+    if (d.bayraklar.ogleKullanildi) return hata('Öğle zaten geçti.');
+    d.bayraklar.ogleKullanildi = true;
+    gunlukYaz(d, 'öğle geçildi');
+    return sonuc(true);
+  };
+
+  KS.aksamGec = function (d) {
+    if (d.bayraklar.aksamKullanildi) return hata('Akşam zaten geçti.');
+    d.bayraklar.aksamKullanildi = true;
+    gunlukYaz(d, 'akşam geçildi');
+    return sonuc(true);
   };
 
   // Öğle olayı (yaşlı çift, plan, obruk...). Mekanik etkiyi uygular.
@@ -441,7 +459,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       var gecti = !d.bayraklar.olcumTeslim && d.gun > k.OLCUM.teslimSonGun;
       gorevler.push({ id: gecti ? 'olcumGec' : 'olcum', tamam: d.bayraklar.olcumTeslim });
     }
-    if (d.plan || d.komsu.ogrenilen.length) {
+    if (d.plan) {   // hedefi muhtar ve öğretmen plan günü verir
       gorevler.push({ id: 'komsu', tamam: d.komsu.ikna, sayi: d.komsu.iletilen.length, gereken: k.IKNA.gerekenArguman });
     }
     var argumanlar = d.komsu.ogrenilen.map(function (a) {

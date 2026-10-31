@@ -95,7 +95,29 @@ button:disabled { opacity: 0.4; cursor: default; }
     background: var(--koyu);
   }
 }
-.gun-etiketi { font-weight: 600; white-space: nowrap; margin-right: auto; }
+.gun-etiketi { white-space: nowrap; margin-right: auto; }
+.gun-no { font-weight: 700; }
+.dilimler { display: flex; gap: 0.5em; margin-top: 0.15em; font-size: 0.8em; }
+.dilim-adi { opacity: 0.55; border-bottom: 0.12em solid transparent; }
+.dilim-adi.serbest { color: #a8d08d; }
+.dilim-adi.simdi { opacity: 1; font-weight: 700; border-bottom-color: var(--sari); }
+.gun-plani { display: flex; gap: 0.6em; }
+.plan-hucre { min-width: 8em; padding: 0.4em 0.7em; background: var(--toprak-koyu); border-radius: 0.3em; }
+.plan-hucre.serbest { background: transparent; border: 0.1em solid #a8d08d; color: #a8d08d; }
+.plan-dilim { font-size: 0.75em; opacity: 0.8; }
+.plan-yer { font-weight: 600; }
+#ilerle { position: absolute; z-index: 2; right: 1em; bottom: 1em; padding: 0.6em 1.3em; font-weight: 600; }
+#diyalog.ipucu-penceresi {
+  left: 50%; right: auto; bottom: auto; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  min-height: 0;
+  border-color: var(--sari);
+}
+.ipucu-ikon { flex: none; font-size: 2.2em; line-height: 1.2; }
+.yer-dusunce { font-style: italic; margin: 0.2em 0 0.4em; line-height: 1.4; }
+.harita-pas { position: absolute; right: 1em; bottom: 0.8em; padding: 0.3em 0.9em; font-size: 0.85em; background: var(--panel); border: 0.1em solid var(--bos); }
+.yer.soluk { background: rgba(43, 25, 19, 0.75); color: rgba(246, 231, 208, 0.75); }
 .gosterge { position: relative; }
 .gosterge-ad { display: flex; justify-content: space-between; gap: 1em; white-space: nowrap; }
 .gosterge-durum { opacity: 0.75; }
@@ -248,6 +270,9 @@ button:disabled { opacity: 0.4; cursor: default; }
 }
 .damla.dolu { background: var(--su); }
 .damla.gri { background: var(--gri-su); border-color: var(--gri-su); }
+.dagitim-satir.gri-satir { grid-template-columns: 4.5em 8em 1fr; padding: 0.25em 0.4em; background: rgba(169, 164, 143, 0.15); border-radius: 0.2em; }
+.gri-aciklama { font-size: 0.8em; opacity: 0.9; }
+.gri-satir.vurgu { outline: 0.12em solid var(--sari); }
 .gri-not { font-size: 0.8em; opacity: 0.8; min-height: 1.2em; text-align: right; }
 .dagitim-alt { display: flex; align-items: center; gap: 1em; margin-top: 0.7em; }
 .kalan { margin-right: auto; font-weight: 600; }
@@ -304,7 +329,6 @@ body.mini-acik .defter-dugme { visibility: hidden; }   /* mini oyun sayacı arka
   font-size: 0.85em;
   white-space: nowrap;
 }
-.yer:disabled { background: rgba(43, 25, 19, 0.75); opacity: 0.6; }
 .harita-soru {
   position: absolute;
   left: 50%; bottom: 0.8em;

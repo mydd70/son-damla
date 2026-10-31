@@ -190,9 +190,11 @@ Görev listesi. Örnek maddeler: "Öğretmenin ölçümünü muhtara götür", "
   8. Defter
   9. Toplantı
   10. Son ve final
-- **Köy haritası:** Kuşbakışı. Yerler: ev, yaşlı çiftin evi, muhtarlık, okul, komşunun evi ve tarlası, köy kuyusu, sarnıç, tepe. Adlar her zaman görünür, kullanılamayan yerler soluk. Tıklama noktaları yüzdeyle tanımlanır.
+- **Dilim geçişi:** Her dilim sonunda oyun durur, oyuncu "Öğleye geç / Akşama geç / Eve dön / Günü bitir" düğmesiyle geçer. Serbest öğle ve akşam, haritadaki "bir şey yapma" düğmesiyle etkisiz geçilebilir. Gün kartı ve üst çubuk günün planını gösterir (serbest dilimler ayrı renkte). Akşamın sonunda oyuncu eve döner, gece satırı ve yarınki pay gelir.
+- **Öğretici penceresi:** Tüm öğreticiler ampullü tek pencerede, gerekirse başlıkla (Gri su, Kiler, Defter...). Tekrar oynayışta çıkmaz.
+- **Köy haritası:** Kuşbakışı. Yerler: ev, yaşlı çiftin evi, muhtarlık, okul, komşunun evi ve tarlası, köy kuyusu, sarnıç, tepe. Adlar her zaman görünür, kullanılamayan yerler soluk; soluk yere tıklanınca Mehmet kısa bir düşünce söyler, zaman geçmez. Tıklama noktaları yüzdeyle tanımlanır.
 - **Yer kartı:** Sahne değişince "Öğle · Kuyu başı" gibi kısa kart. Zorunlu sahnelerde sebebini de yazar ve tıklanana kadar bekler; diğerleri kendiliğinden kapanır.
-- **Dağıtım paneli:** Ev, keçi, bahçe satırları; ihtiyaç kadar damla yuvası (fazlası verilemez; bahçede gri su yuvayı doldurur) ve yeterli / biraz eksik / çok eksik yazısı; +/− düğmeleri; "Kalan: N damla"; "Kuyudan fazladan çek (+4)" düğmesi; "Tamam".
+- **Dağıtım paneli:** Ev, keçi, bahçe satırları; ihtiyaç kadar damla yuvası (fazlası verilemez; bahçede gri su yuvayı doldurur) ve yeterli / biraz eksik / çok eksik yazısı; +/− düğmeleri; "Kalan: N damla"; "Kuyudan fazladan çek (+4)" düğmesi; "Tamam". Gri su açıldıktan sonra ev ile bahçe arasında ayrı "Gri su" satırı. Gri su birikmez, o sabahki dağıtıma aittir.
 - **Mini oyunlar (10-15 sn):**
   - Ot yolma: 8-10 ot, 10 sn.
   - Keçi bakımı: tara (sürterek çubuk doldur), su kabı, yem.

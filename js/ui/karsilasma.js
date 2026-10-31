@@ -15,9 +15,8 @@ KS.ui = KS.ui || {};
     function oyna(id, sonra) { ui.diyalogOynat(KS.olayGetir(id), null, sonra); }
 
     function acilis() {
-      if (d.komsu.karsilasma === 1 && (tur === 'zorunlu' || tur === 'aksam')) return ['kars_ilk'];
-      if (tur === 'zorunlu') return ['kars_sonraki'];
-      return [];
+      if (tur !== 'zorunlu') return [];
+      return [d.komsu.karsilasma === 1 ? 'kars_ilk' : 'kars_sonraki'];
     }
 
     function bitir() {
@@ -59,7 +58,8 @@ KS.ui = KS.ui || {};
       var liste = kalanlar();
       if (!liste.length) { bitir(); return; }
       var a = liste[0];
-      var dugmeler = KS.IKNA_SECENEK[a].map(function (sc) {
+      var uygun = KS.IKNA_SECENEK[a].filter(function (sc) { return !sc.kosul || sc.kosul(d); });
+      var dugmeler = uygun.map(function (sc) {
         return { oge: sc, tikla: function () { if (sc.ton === 'nazik') nazik(a); else kaba(a); } };
       });
       dugmeler.push({ oge: M.gec, tikla: function () { gecilen.push(a); adim(); } });
@@ -67,7 +67,7 @@ KS.ui = KS.ui || {};
     }
 
     function basla() {
-      if (d.komsu.ikna) { oyna('kars_ikna_sonrasi', bitince); return; }
+      if (d.komsu.ikna) { oyna(tur === 'obruk' ? 'kars_ikna_sonrasi_obruk' : 'kars_ikna_sonrasi', bitince); return; }
       if (bas.ozurSecenegi) {
         ui.secimGoster(M.ozurSoru, [
           { oge: M.ozur, tikla: function () {
@@ -78,7 +78,7 @@ KS.ui = KS.ui || {};
         ]);
         return;
       }
-      if (!bas.iletilebilir.length) { oyna('kars_bos', bitince); return; }
+      if (!bas.iletilebilir.length) { oyna(tur === 'obruk' ? 'kars_bos_obruk' : 'kars_bos', bitince); return; }
       adim();
     }
 

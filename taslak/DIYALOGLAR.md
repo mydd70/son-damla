@@ -1,6 +1,6 @@
 # Köyümün Suyu – Diyalog taslağı (v2, oynanışa göre baştan yazıldı)
 
-Bu dosyayı sen düzenleyeceksin; oyuna ancak sen bitirince aktarılacak. Şu an oyunda hâlâ v1 var.
+Bu sürüm oyuna aktarıldı, oynayarak düzenleyebilirsin. Değişikliklerini buraya yaz; "metin hazır" deyince tekrar aktarılır.
 
 **Yazım kuralları**
 - `{keci}` = oyuncunun verdiği keçi adı. Ad hep yalın yazılır, ek almaz ("Benek'nin" gibi bozuk çıkar).
@@ -392,7 +392,30 @@ Tek cümleli olanlar tekrar edince tuhaf kalıyordu, her birine birkaç sürüm 
   3. **Anne:** Ne zaman büyüdün sen? **Mehmet:** *(cevap vermez, çamaşırı asmaya devam eder)*
 - **Babayı ara (tepe):** **Baba:** Mehmet! Ben iyiyim, iş arıyorum. Anneni öp benim yerime. **Mehmet (iç ses):** Sesi yorgun. Sormadım.
 - **Çamurda serinle (tek sefer):** **Mehmet (iç ses):** Leğenin dibindeki çamura ayaklarımı soktum. Kardeşim görüp kahkaha attı. Annem kızmadı.
-- **Hiçbir şey yapmadan geçerse (onayına bağlı):** **Mehmet (iç ses):** Gölgede oturdum. Sıcak, kimseye bir şey yaptırmıyor.
+- **Hiçbir şey yapmadan geçerse:** **Mehmet (iç ses):** Gölgede oturdum. Sıcak, kimseye bir şey yaptırmıyor.
+
+## Haritadaki düşünceler (yapılacak bir şey olmayan yere tıklanınca; zaman geçmez, ilk tutan görünür)
+| Yer | Durum | Mehmet (iç ses) |
+|---|---|---|
+| Yaşlı çift | Öğle | Öğlen sıcağında Hasan Dede uyur. Rahatsız etmeyeyim. |
+| Yaşlı çift | Akşam | Işıkları sönmüş, uyumuşlar sanırım. Rahatsız etmeyeyim. |
+| Muhtarlık | Öğle | Muhtarlığın kapısı kapalı. Muhtar akşamları burada olur. |
+| Muhtarlık | Akşam | Muhtar içeride, başı kâğıtlarda. Şimdilik söyleyecek bir şeyim yok. |
+| Okul | Öğle | Okul kilitli. Öğretmen sabahları kuyuda, akşamları burada olur. |
+| Okul | Akşam | Okulun ışığı yanıyor ama defterlerine gömülmüştür. Şimdi bölmeyeyim. |
+| Komşunun evi | İkna olduysa | Rıza Amca "bakarız" dedi. Şimdi üstüne gitmeyeyim. |
+| Komşunun evi | Öğle | Rıza Amca'nın kapısı kapalı. Bugün yeniden gitmenin anlamı yok. |
+| Komşunun evi | Akşam | Motorun sesinden başka ses yok. Kapısını çalacak bir sözüm yok şimdi. |
+| Komşunun tarlası | Gün 8'den | Çukurun çevresine ip çekmişler. Yaklaşmayayım. |
+| Komşunun tarlası | Diğer | Motor gürül gürül çalışıyor. Başkasının tarlasında işim yok. |
+| Köy kuyusu | Öğle | Bugünkü payımızı aldık. Sırayı boşuna uzatmayayım. |
+| Köy kuyusu | Akşam | Kuyu başı boşaldı. Bu saatte su çekene iyi gözle bakmazlar. |
+| Sarnıç | Plan kurulduysa | Sarnıcın önüne taş yığmışlar. Büyükler çalışıyor, ayak altında dolaşmayayım. |
+| Sarnıç | Akşam | Karanlıkta oraya çıkılmaz. |
+| Sarnıç | Öğle | Yukarıdaki eski sarnıç. Bu sıcakta oraya kadar çıkmaya değmez. |
+| Tepe | Akşam | Hava kararırken tepeye çıkılmaz. |
+| Tepe | Baba arandıysa | Babamla yeni konuştum. Şimdi işindedir. |
+| Tepe | Öğle | Telefon burada çeker ama babam bu saatte işte olur. Birkaç gün sonra denerim. |
 
 ## Zorunlu ev işi (ev 3'ün altına düşerse ertesi sabah)
 - **Anne:** Mehmet, bugün bana yardım et. Tek başıma yetişemiyorum.

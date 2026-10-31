@@ -34,6 +34,7 @@ KS.yeniDurum = function () {
       camur: false,
       babaArandi: false,
       ilkSut: false,
+      ilkSaglik: false,
       miniOyunYapildi: false,
       ogleKullanildi: false,
       aksamKullanildi: false

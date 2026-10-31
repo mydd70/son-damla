@@ -33,12 +33,26 @@ KS.ui = KS.ui || {};
     return kutu;
   }
 
+  // Gün ve dilim: Sabah · Öğle · Akşam, şu anki vurgulu, serbest olanlar farklı.
+  function gunGosterge(d) {
+    var kutu = el('div', 'gun-etiketi');
+    kutu.appendChild(el('div', 'gun-no', KS.t('gun', { n: d.gun })));
+    var plan = KS.GUN_PLANLARI[d.gun - 1] || {};
+    var dilimler = el('div', 'dilimler');
+    KS.config.DILIMLER.forEach(function (dilim) {
+      var sinif = 'dilim-adi' + (dilim === d.dilim ? ' simdi' : '') + (plan[dilim] === 'serbest' ? ' serbest' : '');
+      dilimler.appendChild(el('span', sinif, KS.t('dilim_' + dilim)));
+    });
+    kutu.appendChild(dilimler);
+    return kutu;
+  }
+
   KS.ui.gostergeCiz = function () {
     var d = KS.state;
     var ust = document.getElementById('ust');
     ust.hidden = false;
     ust.textContent = '';
-    ust.appendChild(el('div', 'gun-etiketi', KS.t('gun', { n: d.gun }) + ' · ' + KS.t('dilim_' + d.dilim)));
+    ust.appendChild(gunGosterge(d));
     ['keci', 'ev', 'bahce'].forEach(function (ad) { ust.appendChild(cubukGosterge(ad, d.gosterge[ad])); });
     ust.appendChild(kilerGosterge(d.gosterge.kiler));
     var defter = el('button', 'defter-dugme', KS.t('defter'));

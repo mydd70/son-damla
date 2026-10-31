@@ -47,12 +47,17 @@ KS.ui = KS.ui || {};
       if (eski) eski.remove();
       var menu = el('div', 'panel yer-menu');
       menu.appendChild(el('h2', '', KS.yerAdi(yer)));
-      secimler[yer.id].forEach(function (s) {
-        var b = el('button', '', s.ad);
-        b.onclick = function () { sec(s.id); };
-        menu.appendChild(b);
-      });
-      var vazgec = el('button', 'vazgec', KS.t('vazgec'));
+      if (secimler[yer.id]) {
+        secimler[yer.id].forEach(function (s) {
+          var b = el('button', '', s.ad);
+          b.onclick = function () { sec(s.id); };
+          menu.appendChild(b);
+        });
+      } else {
+        // Burada yapılacak bir şey yok: kısa düşünce, zaman geçmez.
+        menu.appendChild(el('p', 'yer-dusunce', KS.yerDusuncesi(yer.id, d)));
+      }
+      var vazgec = el('button', 'vazgec', KS.t(secimler[yer.id] ? 'vazgec' : 'geriDon'));
       vazgec.onclick = function () { menu.remove(); };
       menu.appendChild(vazgec);
       katman.appendChild(menu);
@@ -63,14 +68,16 @@ KS.ui = KS.ui || {};
     KS.ui.sahneCiz(zemin, 'harita', d.dilim);
     katman.appendChild(zemin);
     KS.HARITA_YERLERI.forEach(function (yer) {
-      var b = el('button', 'yer', KS.yerAdi(yer));
+      var b = el('button', 'yer' + (secimler[yer.id] ? '' : ' soluk'), KS.yerAdi(yer));
       b.style.left = yer.x + '%';
       b.style.top = yer.y + '%';
       b.dataset.yer = yer.id;
-      b.disabled = !secimler[yer.id];
       b.onclick = function () { menuAc(yer); };
       katman.appendChild(b);
     });
     katman.appendChild(el('div', 'harita-soru', KS.t(d.dilim === 'ogle' ? 'haritaOgle' : 'haritaAksam')));
+    var pas = el('button', 'harita-pas', KS.t('pas_' + d.dilim));
+    pas.onclick = function () { sec('gec'); };
+    katman.appendChild(pas);
   };
 })();

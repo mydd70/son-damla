@@ -10,14 +10,14 @@ KS.config = {
   IHTIYAC: { ev: 6, keci: 4, bahce: 4 },
   TOHUM: { bahceIhtiyaci: 3, etkiGunu: 3 },          // dayanıklı tohum, gün 3'ten
   FAZLA_CEKME: { damla: 4, kuyuKaybi: 5, gunlukSinir: 1 },
-  GRI_SU: { bolen: 3 },                               // her 3 ev damlasına 1 bahçe damlası
+  GRI_SU: { bolen: 3, ilkGun: 2 },                    // her 3 ev damlasına 1 bahçe damlası
   KOMSUYA_SU: { maliyet: 2, sinir: 2 },               // ertesi günün payından düşer
   // Dağıtımın göstergelere etkisi: yeterli / biraz eksik (1 damla) / çok eksik
   SU_ETKISI: { iyi: 1, orta: -1, kotu: -2 },
 
   // --- Göstergeler (0-10) ---
   GOSTERGE: { min: 0, max: 10 },
-  KECI: { baslangic: 2, min: 1, sutEsigi: 5, iyiSu: 4, ortaSu: 3, bakim: 1, cokDusuk: 2, varsayilanAd: 'Pamuk', adUzunluk: 14 },
+  KECI: { baslangic: 2, min: 1, sutEsigi: 5, iyiSu: 4, ortaSu: 3, bakim: 1, cokDusuk: 2, saglikliEsik: 8, varsayilanAd: 'Pamuk', adUzunluk: 14 },
   BAHCE: { baslangic: 3, otYolma: 1, ekIs: 1, sebzeEsigi: 6 },
   KILER: { baslangic: 3, max: 6, tuketim: 1, sut: 1, sebze: 1 },
   EV: {
@@ -83,7 +83,7 @@ KS.config = {
     bahce: [[2, 'Kurumuş'], [4, 'Susuz'],  [7, 'İdare eder'],   [10, 'Yeşil']]
   },
 
-  KAYIT: { anahtar: 'koyumun-suyu-kayit', surum: 2 },   // durum yapısı değişince artırılır
+  KAYIT: { anahtar: 'koyumun-suyu-kayit', surum: 3 },   // durum yapısı değişince artırılır
   DIL_ANAHTAR: 'koyumun-suyu-dil',
 
   // --- Görseller: listede olmayan mekân SVG ile, olmayan portre yer tutucuyla çizilir ---

@@ -67,7 +67,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     function tamamla() {
       var r = KS.miniOyunTamamla(KS.state);
       ui.degisimGoster(r.degisimler);
-      ogle();
+      ui.ilerleGoster('gecis_ogle', ogle);
     }
     if (KS.miniOyunTuru(KS.state) === 'evIsi') ui.diyalogOynat(KS.olayGetir('ev_isi'), null, tamamla);
     else ilkGunOgretici('ogretici_keci', function () { ui.miniOyunAc(tamamla); });
@@ -80,21 +80,27 @@ var KS = globalThis.KS = globalThis.KS || {};
     ui.gostergeCiz();
     ui.sahneYenile();
     ortamSesi();
+    function ogleSonu() { ui.ilerleGoster('gecis_aksam', aksam); }
     if (KS.olayBul(KS.state.gun, 'ogle')) {
       var r = KS.ogleOlayi(KS.state);
       ui.degisimGoster(r.degisimler);
       ui.olaylariOynat(KS.olaylariGetir(KS.state.gun, 'ogle', KS.state), r, function () {
-        if (r.karsilasma) ui.karsilasmaOynat('obruk', aksam);
-        else aksam();
+        if (r.karsilasma) ui.karsilasmaOynat('obruk', ogleSonu);
+        else ogleSonu();
       });
       return;
     }
     ui.haritaAc(function (id) {
+      if (id === 'gec') {
+        KS.ogleGec(KS.state);
+        ui.diyalogOynat(KS.olayGetir('ogle_gec'), null, ogleSonu);
+        return;
+      }
       var r = KS.ogleEylemi(KS.state, id);
       ui.degisimGoster(r.degisimler);
       ui.diyalogOynat(KS.olayGetir('ogle_' + id), r, function () {
-        if (r.karsilasma) ui.karsilasmaOynat('su', aksam);
-        else aksam();
+        if (r.karsilasma) ui.karsilasmaOynat('su', ogleSonu);
+        else ogleSonu();
       });
     });
   }
@@ -119,21 +125,37 @@ var KS = globalThis.KS = globalThis.KS || {};
   }
 
   function aksamSecimi(id) {
+    if (id === 'gec') {
+      KS.aksamGec(KS.state);
+      ui.ilerleGoster('gecis_gunuBitir', gunSonu);
+      return;
+    }
     var aile = id === 'aileVakti';
     var r = aile ? KS.aileVakti(KS.state) : KS.aksamZiyaret(KS.state, id);
     ui.degisimGoster(r.degisimler);
     var olaylar = aile ? [KS.olayGetir('aile_vakti')] : KS.ziyaretOlaylari(id, KS.state, r);
+    function ziyaretSonu() {
+      if (aile) { ui.ilerleGoster('gecis_gunuBitir', gunSonu); return; }
+      ui.diyalogOynat(KS.olayGetir('aksam_bitis'), null, function () {
+        ui.ilerleGoster('gecis_eveDon', gunSonu);
+      });
+    }
     ui.olaylariOynat(olaylar, r, function () {
-      if (r.karsilasma) ui.karsilasmaOynat('aksam', gunSonu);
-      else gunSonu();
+      if (r.karsilasma) ui.karsilasmaOynat('aksam', ziyaretSonu);
+      else ziyaretSonu();
     });
   }
 
+  // Gece evde biter: değişimler görünür, tek satır düşünce, yarınki pay, sonra yeni gün.
   function gunSonu() {
-    // Gün sonu değişimleri (kiler, kuyu) gün kartından önce görünsün diye duyurudan önce uygulanır.
     var r = KS.gunBitir(KS.state);
+    ui.sahneGoster('avlu');
     ui.degisimGoster(r.degisimler);
-    ui.duyuru(KS.t('ertesiPay', { n: KS.ertesiGunPayi(KS.state) }), gunBasla);
+    ui.diyalogOynat(KS.olayGetir('gece'), r, function () {
+      ilkGunOgretici('ogretici_kiler', function () {
+        ui.duyuru(KS.t('ertesiPay', { n: KS.ertesiGunPayi(KS.state) }), gunBasla);
+      });
+    });
   }
 
   // ---------- Son ----------

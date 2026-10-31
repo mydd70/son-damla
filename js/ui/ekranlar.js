@@ -85,6 +85,34 @@ KS.ui = KS.ui || {};
   KS.ui.gunKartiAc = function (gun, bitince) {
     var e = ekran();
     e.appendChild(KS.ui.el('div', 'kart-metin', KS.metinSec(KS.GUN_KARTLARI[gun - 1])));
+    e.appendChild(KS.ui.gunPlaniCiz(gun));
     e.appendChild(dugme(KS.t('devam'), bitince));
+  };
+
+  // Sabah · Öğle · Akşam: o dilimde nereye gidileceği ya da serbest olduğu.
+  KS.ui.gunPlaniCiz = function (gun) {
+    var plan = KS.GUN_PLANLARI[gun - 1];
+    var kutu = KS.ui.el('div', 'gun-plani');
+    KS.config.DILIMLER.forEach(function (dilim) {
+      var deger = plan[dilim];
+      var serbest = deger === 'serbest';
+      var hucre = KS.ui.el('div', 'plan-hucre' + (serbest ? ' serbest' : ''));
+      hucre.appendChild(KS.ui.el('div', 'plan-dilim', KS.t('dilim_' + dilim)));
+      hucre.appendChild(KS.ui.el('div', 'plan-yer', KS.t(serbest || deger === 'belirsiz' ? 'plan_' + deger : 'yer_' + deger)));
+      kutu.appendChild(hucre);
+    });
+    return kutu;
+  };
+
+  // Dilim sonunda oyuncu sahneye bakar, hazır olunca düğmeyle geçer.
+  KS.ui.ilerleGoster = function (anahtar, sonra) {
+    var b = document.getElementById('ilerle');
+    b.textContent = KS.t(anahtar);
+    b.hidden = false;
+    b.onclick = function () {
+      b.hidden = true;
+      b.onclick = null;
+      sonra();
+    };
   };
 })();

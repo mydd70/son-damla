@@ -3,7 +3,7 @@ var KS = globalThis.KS = globalThis.KS || {};
 KS.ui = KS.ui || {};
 
 (function () {
-  var SATIRLAR = ['ev', 'keci', 'bahce'];
+  var SATIRLAR = ['keci', 'ev', 'bahce'];   // gri su satırı ev ile bahçe arasına girer
 
   // bitince(dagitim, fazlaCek)
   KS.ui.dagitimAc = function (bitince) {
@@ -55,6 +55,20 @@ KS.ui = KS.ui || {};
       return satir;
     }
 
+    // Gri su ayrı bir su kaynağı gibi görünür: evden dönen damlalar ve bahçeye gittiği.
+    function griSatiri() {
+      var el = KS.ui.el;
+      var satir = el('div', 'dagitim-satir gri-satir' + (d.gun === KS.config.GRI_SU.ilkGun ? ' vurgu' : ''));
+      var gri = KS.griSuMiktari(d, verilen.ev);
+      satir.appendChild(el('div', '', KS.t('griSatir')));
+      var damlalar = el('div', 'damlalar');
+      for (var i = 0; i < gri; i++) damlalar.appendChild(el('div', 'damla gri'));
+      satir.appendChild(damlalar);
+      var eksik = KS.config.GRI_SU.bolen - (verilen.ev % KS.config.GRI_SU.bolen);
+      satir.appendChild(el('div', 'gri-aciklama', gri ? KS.t('griVar', { n: gri }) : KS.t('griYok', { n: eksik })));
+      return satir;
+    }
+
     function ciz() {
       var el = KS.ui.el;
       sigdir();
@@ -62,9 +76,10 @@ KS.ui = KS.ui || {};
       var panel = el('div', 'panel');
       panel.appendChild(el('h2', '', KS.t('dagitimBaslik')));
       var ihtiyaclar = KS.ihtiyaclar(d);
-      SATIRLAR.forEach(function (ad) { panel.appendChild(satirCiz(ad, ihtiyaclar)); });
-      var gri = KS.griSuMiktari(d, verilen.ev);
-      panel.appendChild(el('div', 'gri-not', gri ? KS.t('griSu', { n: gri }) : ''));
+      SATIRLAR.forEach(function (ad) {
+        if (ad === 'bahce' && d.bayraklar.griSu) panel.appendChild(griSatiri());
+        panel.appendChild(satirCiz(ad, ihtiyaclar));
+      });
       panel.appendChild(el('div', 'gri-not', KS.t('icmeSuyu', { n: enAzEv })));
 
       var alt = el('div', 'dagitim-alt');

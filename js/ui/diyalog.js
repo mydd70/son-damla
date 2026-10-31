@@ -9,6 +9,8 @@ KS.ui = KS.ui || {};
     if (!document.getElementById('defter').hidden) return;
     var gecis = document.getElementById('gecis');
     if (!gecis.hidden) { e.preventDefault(); if (!e.repeat) gecis.onclick(); return; }
+    var ilerle = document.getElementById('ilerle');
+    if (!ilerle.hidden) { e.preventDefault(); if (!e.repeat) ilerle.click(); return; }
     var kutu = document.getElementById('diyalog');
     if (kutu.hidden || !kutu.onclick) return;
     e.preventDefault();
@@ -46,6 +48,7 @@ KS.ui = KS.ui || {};
       .replace(/\{fazla\}/g, k.FAZLA_CEKME.damla)
       .replace(/\{maliyet\}/g, k.KOMSUYA_SU.maliyet)
       .replace(/\{sonGun\}/g, k.OLCUM.teslimSonGun)
+      .replace(/\{griBolen\}/g, k.GRI_SU.bolen)
       .replace(/\{gereken\}/g, k.IKNA.gerekenArguman);
   }
 
@@ -75,6 +78,15 @@ KS.ui = KS.ui || {};
 
   function satirCiz(kutu, satir) {
     kutu.textContent = '';
+    kutu.classList.toggle('ipucu-penceresi', satir.kim === 'ipucu');
+    if (satir.kim === 'ipucu') {
+      kutu.appendChild(KS.ui.el('div', 'ipucu-ikon', '💡'));
+      var ipucuGovde = KS.ui.el('div', 'diyalog-govde');
+      ipucuGovde.appendChild(KS.ui.el('div', 'konusan', satir.baslik ? KS.metinSec(satir.baslik) : KS.t('ipucu')));
+      ipucuGovde.appendChild(KS.ui.el('div', 'satir', metinHazirla(satir)));
+      kutu.appendChild(ipucuGovde);
+      return ipucuGovde;
+    }
     var ekran = satir.kim === 'ekran';
     if (!ekran) kutu.appendChild(portreCiz(satir.kim, satir.ifade));
     var govde = KS.ui.el('div', 'diyalog-govde');
@@ -87,7 +99,11 @@ KS.ui = KS.ui || {};
   // olay: story.js biçimi. r: satır koşullarına verilen eylem sonucu. bitince: diyalog kapanınca çağrılır.
   KS.ui.diyalogOynat = function (olay, r, bitince) {
     var d = KS.state;
-    var satirlar = olay.satirlar.filter(function (s) { return !s.kosul || s.kosul(d, r || {}); });
+    // Öğreticiler tekrar oynayışta çıkmaz.
+    var satirlar = olay.satirlar.filter(function (s) {
+      return (!s.kosul || s.kosul(d, r || {})) && !(s.kim === 'ipucu' && d.tekrarOyun);
+    });
+    if (olay.tekSatir) satirlar = satirlar.slice(0, 1);
     if (!satirlar.length) { bitince(); return; }
 
     // Yer değişince ya da olayın sebebi yazılıysa önce yer kartı. Sonlarda kart yok, kendi metinleri var.
@@ -102,8 +118,10 @@ KS.ui = KS.ui || {};
     function kapat() {
       kutu.hidden = true;
       kutu.onclick = null;
+      kutu.classList.remove('ipucu-penceresi');
       if (olay.etkiler) KS.ui.degisimGoster(KS.secimUygula(KS.state, olay).degisimler);
-      bitince();
+      if (olay.sonraki) KS.ui.diyalogOynat(KS.olayGetir(olay.sonraki), r, bitince);
+      else bitince();
     }
 
     function seceneklerCiz(govde) {
