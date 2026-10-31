@@ -237,7 +237,8 @@ var KS = globalThis.KS = globalThis.KS || {};
     var k = c();
     if (KS.olayBul(d.gun, 'ogle')) return [];
     return [
-      { id: 'komsuyaSu', acik: d.komsu.suGoturme < k.KOMSUYA_SU.sinir },   // gün 9'da da açık: son şans, bedelsiz
+      // Gün 9'da da açık: son şans, bedelsiz. Komşu ikna olduysa gerek kalmaz.
+      { id: 'komsuyaSu', acik: d.komsu.suGoturme < k.KOMSUYA_SU.sinir && !d.komsu.ikna },
       { id: 'bahceEkIs', acik: true },
       { id: 'evdeYardim', acik: true },
       { id: 'babayiAra', acik: !d.bayraklar.babaArandi && d.gun >= k.BABAYI_ARA_ILK_GUN },

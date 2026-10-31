@@ -55,7 +55,7 @@ Serbest öğle günleri: 3, 4, 5, 7, 9. Serbest akşamlar: 1-8.
 ### Öğle eylemleri (serbest öğlelerde biri seçilir)
 | Eylem | Etki | Sınır |
 |---|---|---|
-| Komşuya su götür | Komşuyla karşılaşma; ertesi günün payından 2 damla düşer (metinle söylenir). Gün 9'da ertesi gün olmadığı için bedelsizdir | En fazla 2 kez |
+| Komşuya su götür | Komşuyla karşılaşma; ertesi günün payından 2 damla düşer (metinle söylenir). Gün 9'da ertesi gün olmadığı için bedelsizdir | En fazla 2 kez; komşu ikna olunca kapanır |
 | Bahçede ek iş | Bahçe +1 | — |
 | Evde yardım | Ev +1 | — |
 | Babayı ara (tepe) | Ev +1 | 1 kez, gün 3'ten sonra |
