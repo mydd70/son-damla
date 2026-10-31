@@ -48,6 +48,7 @@ KS.yeniDurum = function () {
       kilitli: [],             // kabalık yüzünden kilitlenenler
       ozurBekliyor: false,
       ikna: false,
+      buKonusmadaIletildi: false,   // bir konuşmada en fazla bir argüman
       karsilasma: 0,
       suGoturme: 0
     },

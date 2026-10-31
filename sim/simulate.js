@@ -43,18 +43,23 @@ function esitDagitim(toplam) {
 // ---------- Profiller ----------
 // Her profil: fazlaCek(d), dagit(d, toplam), argumanOgrenir, olcumTeslim, ogle(d), aksam(d), karsilasma(d)
 
+// Bir konuşmada bir argüman; akıllı oyuncu inanılmayacak olanı o gün söylemez.
+function sayilanlar(d) {
+  return KS.iletilebilirArgumanlar(d).filter(function (a) { return KS.argumanSayilirMi(d, a); });
+}
+
 function standartKarsilasma(d, kabaOlacak) {
   var r = KS.karsilasmaBaslat(d);
   if (r.ozurSecenegi) KS.ozurDile(d);
-  var liste = KS.iletilebilirArgumanlar(d);
+  var liste = sayilanlar(d);
   if (kabaOlacak && kabaOlacak.kalan > 0 && liste.length) {
     kabaOlacak.kalan -= 1;
     KS.kabaSecim(d, liste[0]);
     if (d.gun !== C.OBRUK_GUNU) return;   // kaba söz konuşmayı bitirir; gün 8'de geri alınabilir
     KS.kabaligiGeriAl(d, liste[0]);
-    liste = KS.iletilebilirArgumanlar(d);
+    liste = sayilanlar(d);
   }
-  liste.forEach(function (a) { KS.argumanIlet(d, a); });
+  if (liste.length) KS.argumanIlet(d, liste[0]);
 }
 
 function dikkatliProfil(ad, ayar) {
@@ -68,6 +73,7 @@ function dikkatliProfil(ad, ayar) {
     olcumTeslim: ayar.olcumTeslim !== false,
     ogle: function (d) {
       var acik = KS.ogleSecenekleri(d).filter(function (s) { return s.acik; }).map(function (s) { return s.id; });
+      if (acik.indexOf('komsuyaSu') >= 0 && sayilanlar(d).length) return 'komsuyaSu';
       if (acik.indexOf('babayiAra') >= 0 && d.gosterge.ev < 6) return 'babayiAra';
       if (d.gosterge.ev < 5) return 'evdeYardim';
       if (d.gosterge.bahce < 6) return 'bahceEkIs';
@@ -79,26 +85,31 @@ function dikkatliProfil(ad, ayar) {
       if (d.gosterge.ev < 5) return 'aileVakti';
       var muhtarUygun = this.olcumTeslim || !KS.gorevZiyaretiMi(d, 'muhtar');
       if (muhtarUygun && d.komsu.ogrenilen.indexOf('A3') < 0 && d.gun >= 3 && d.ziyaretKalan.muhtar > 0) return 'muhtar';
-      if (!d.komsu.ikna && KS.iletilebilirArgumanlar(d).length && d.ziyaretKalan.komsu > 0) return 'komsu';
+      if (!d.komsu.ikna && sayilanlar(d).length && d.ziyaretKalan.komsu > 0) return 'komsu';
       return 'aileVakti';
     },
     karsilasma: function (d) { standartKarsilasma(d, kaba); }
   };
 }
 
-// Komşuyu gün 9 öğlesine kadar ikna edemeyen, son şansı kullanan oyuncu.
+// Komşuya ilk argümanı obruk günü, ikincisini gün 9 öğlesinde söyleyen oyuncu.
 function sonSansProfili(ad, ayar) {
   var p = dikkatliProfil(ad, ayar);
   var eskiOgle = p.ogle;
   var eskiAksam = p.aksam;
-  p.ogle = function (d) { return d.gun === C.GUN_SAYISI ? 'komsuyaSu' : eskiOgle.call(p, d); };
+  p.ogle = function (d) {
+    if (d.gun === C.GUN_SAYISI) return 'komsuyaSu';
+    var sec = eskiOgle.call(p, d);
+    return sec === 'komsuyaSu' ? 'evdeYardim' : sec;
+  };
   p.aksam = function (d) {
     var sec = eskiAksam.call(p, d);
     return sec === 'komsu' ? 'aileVakti' : sec;
   };
   p.karsilasma = function (d) {
-    var r = KS.karsilasmaBaslat(d);
-    if (d.gun === C.GUN_SAYISI) r.iletilebilir.forEach(function (a) { KS.argumanIlet(d, a); });
+    KS.karsilasmaBaslat(d);
+    var liste = sayilanlar(d);
+    if (d.gun >= C.OBRUK_GUNU && liste.length) KS.argumanIlet(d, liste[0]);
   };
   return p;
 }

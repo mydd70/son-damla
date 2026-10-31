@@ -256,7 +256,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     if (KS.olayBul(d.gun, 'ogle')) return [];
     return [
       // Gün 9'da da açık: son şans, bedelsiz. Komşu ikna olduysa gerek kalmaz.
-      { id: 'komsuyaSu', acik: d.komsu.suGoturme < k.KOMSUYA_SU.sinir && !d.komsu.ikna },
+      { id: 'komsuyaSu', acik: d.gun >= k.KOMSUYA_SU.ilkGun && d.komsu.suGoturme < k.KOMSUYA_SU.sinir && !d.komsu.ikna },
       { id: 'bahceEkIs', acik: true },
       { id: 'evdeYardim', acik: true },
       { id: 'babayiAra', acik: !d.bayraklar.babaArandi && d.gun >= k.BABAYI_ARA_ILK_GUN },
@@ -409,14 +409,27 @@ var KS = globalThis.KS = globalThis.KS || {};
     });
   };
 
+  // Obruk uyarısı gün 8'den önce sayılmaz ve kilitlenmez: Rıza henüz inanmıyor.
+  KS.argumanSayilirMi = function (d, id) {
+    var k = c();
+    return id !== k.IKNA.obruktenSonraSayilan || d.gun >= k.OBRUK_GUNU;
+  };
+
   KS.karsilasmaBaslat = function (d) {
     d.komsu.karsilasma += 1;
+    d.komsu.buKonusmadaIletildi = false;
     gunlukYaz(d, 'komşuyla karşılaşma #' + d.komsu.karsilasma);
     return sonuc(true, { ozurSecenegi: d.komsu.ozurBekliyor, iletilebilir: KS.iletilebilirArgumanlar(d) });
   };
 
   KS.argumanIlet = function (d, id) {
     if (KS.iletilebilirArgumanlar(d).indexOf(id) < 0) return hata('Bu argüman iletilemez: ' + id);
+    if (d.komsu.buKonusmadaIletildi) return hata('Bu konuşmada bir şey söylendi.');
+    d.komsu.buKonusmadaIletildi = true;
+    if (!KS.argumanSayilirMi(d, id)) {
+      gunlukYaz(d, 'argüman sayılmadı ' + id);
+      return sonuc(true, { inanmadi: true, ikna: d.komsu.ikna, yeniIkna: false });
+    }
     d.komsu.iletilen.push(id);
     var ikna = d.komsu.iletilen.length >= c().IKNA.gerekenArguman;
     var yeniIkna = ikna && !d.komsu.ikna;

@@ -153,7 +153,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     ui.degisimGoster(r.degisimler);
     ui.diyalogOynat(KS.olayGetir('gece'), r, function () {
       ilkGunOgretici('ogretici_kiler', function () {
-        ui.duyuru(KS.t('ertesiPay', { n: KS.ertesiGunPayi(KS.state) }), gunBasla);
+        ui.duyuru(ui.yarinMetni(), gunBasla);
       });
     });
   }

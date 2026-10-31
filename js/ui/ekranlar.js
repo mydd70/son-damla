@@ -104,6 +104,22 @@ KS.ui = KS.ui || {};
     return kutu;
   };
 
+  // Gece duyurusu: yarınki pay, yarının planı ve varsa son gün hatırlatması.
+  KS.ui.yarinMetni = function () {
+    var d = KS.state;
+    var plan = KS.GUN_PLANLARI[d.gun];
+    var parcalar = KS.config.DILIMLER.map(function (dilim) {
+      var deger = plan[dilim];
+      var ad = KS.t(deger === 'serbest' || deger === 'belirsiz' ? 'plan_' + deger : 'yer_' + deger);
+      return KS.t('dilim_' + dilim) + ': ' + ad;
+    });
+    var metin = KS.t('ertesiPay', { n: KS.ertesiGunPayi(d) }) + '\n' + KS.t('yarinPlan', { plan: parcalar.join(' · ') });
+    if (d.bayraklar.olcumElde && !d.bayraklar.olcumTeslim && d.gun === KS.config.OLCUM.teslimSonGun - 1) {
+      metin += '\n' + KS.t('yarinOlcum');
+    }
+    return metin;
+  };
+
   // Dilim sonunda oyuncu sahneye bakar, hazır olunca düğmeyle geçer.
   KS.ui.ilerleGoster = function (anahtar, sonra) {
     var b = document.getElementById('ilerle');

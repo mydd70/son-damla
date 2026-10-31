@@ -11,7 +11,7 @@ KS.config = {
   TOHUM: { bahceIhtiyaci: 3, etkiGunu: 3 },          // dayanıklı tohum, gün 3'ten
   FAZLA_CEKME: { damla: 4, kuyuKaybi: 5, gunlukSinir: 1 },
   GRI_SU: { bolen: 3, ilkGun: 2 },                    // her 3 ev damlasına 1 bahçe damlası
-  KOMSUYA_SU: { maliyet: 2, sinir: 2 },               // ertesi günün payından düşer
+  KOMSUYA_SU: { maliyet: 2, sinir: 2, ilkGun: 7 },    // ertesi günün payından düşer; kuyu başı sahnesinden sonra açılır
   // Dağıtımın göstergelere etkisi: yeterli / biraz eksik (1 damla) / çok eksik
   SU_ETKISI: { iyi: 1, orta: -1, kotu: -2 },
 
@@ -54,7 +54,7 @@ KS.config = {
   PLAN_GUNU: 6,
   OBRUK_GUNU: 8,
   MUHTAR_ARGUMAN_ILK_GUN: 3,
-  IKNA: { gerekenArguman: 2 },
+  IKNA: { gerekenArguman: 2, obruktenSonraSayilan: 'A2' },   // obruk uyarısına obruğu görmeden inanmaz
   ARGUMANLAR: ['A1', 'A2', 'A3'],
   YASLI_CIFT: { yardim: 2, sinir: 2 },
   ZIYARET_HAKKI: { yasliCift: 2, muhtar: 1, ogretmen: 2, komsu: 1 },
@@ -71,7 +71,7 @@ KS.config = {
     { id: 'g4_cicek',      gun: 4, dilim: 'sabah', etkiler: { ev: 1 } },
     { id: 'g5_baba',       gun: 5, dilim: 'sabah', etkiler: { ev: 1 } },
     { id: 'g6_plan',       gun: 6, dilim: 'ogle',  etkiler: {}, plan: true, arguman: 'A3' },
-    { id: 'g7_komsu',      gun: 7, dilim: 'sabah', etkiler: {}, karsilasma: true },
+    { id: 'g7_komsu',      gun: 7, dilim: 'sabah', etkiler: {} },
     { id: 'g8_obruk',      gun: 8, dilim: 'ogle',  etkiler: {}, karsilasma: true },
     { id: 'g9_toplanti',   gun: 9, dilim: 'aksam', etkiler: {}, toplanti: true }
   ],
@@ -83,7 +83,7 @@ KS.config = {
     bahce: [[2, 'Kurumuş'], [4, 'Susuz'],  [7, 'İdare eder'],   [10, 'Yeşil']]
   },
 
-  KAYIT: { anahtar: 'koyumun-suyu-kayit', surum: 3 },   // durum yapısı değişince artırılır
+  KAYIT: { anahtar: 'koyumun-suyu-kayit', surum: 4 },   // durum yapısı değişince artırılır
   DIL_ANAHTAR: 'koyumun-suyu-dil',
 
   // --- Görseller: listede olmayan mekân SVG ile, olmayan portre yer tutucuyla çizilir ---

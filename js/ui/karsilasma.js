@@ -29,12 +29,13 @@ KS.ui = KS.ui || {};
     }
 
     function nazik(a) {
+      // Bir konuşmada bir argüman: söyledikten sonra konuşma biter.
       var r = KS.argumanIlet(d, a);
-      buSeferIletilen += 1;
+      if (!r.inanmadi) buSeferIletilen += 1;
       oyna('ikna_' + a + '_nazik', function () {
         ui.gostergeCiz();
         if (r.yeniIkna) oyna('kars_ikna', bitince);
-        else adim();
+        else bitir();
       });
     }
 

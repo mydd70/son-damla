@@ -204,7 +204,7 @@ button:disabled { opacity: 0.4; cursor: default; }
 .portre.siluet { background: #120a07; }
 .diyalog-govde { flex: 1; display: flex; flex-direction: column; }
 .konusan { font-weight: 700; color: var(--sari); margin-bottom: 0.25em; }
-.satir { line-height: 1.4; }
+.satir { line-height: 1.4; white-space: pre-line; }
 .satir.ic { font-style: italic; }
 .satir.ekran { text-align: center; font-weight: 600; margin: auto 0; }
 .sonraki-isaret { margin-top: auto; align-self: flex-end; opacity: 0.6; font-size: 0.8em; }
