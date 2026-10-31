@@ -39,7 +39,7 @@ KS.ui = KS.ui || {};
     kutu.appendChild(img);
 
     var t = KS.ZAMAN_KATMANI[zaman];
-    if (t && t.saydam > 0) {
+    if (t && t.saydam > 0 && KS.config.GORSEL.kendiHavasi.indexOf(ad) < 0) {
       var isik = document.createElement('div');
       isik.className = 'sahne-isik';
       isik.style.background = t.renk;
@@ -62,6 +62,8 @@ KS.ui = KS.ui || {};
     }, sonSecenek);
     KS.ui.sahneCiz(document.getElementById('arkaplan'), mekan, zaman || d.dilim, ciz);
   };
+
+  KS.ui.sonMekan = function () { return sonMekan; };
 
   // Dilim değişince aynı mekânı yeni ışıkla çizer.
   KS.ui.sahneYenile = function () {

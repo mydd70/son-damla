@@ -191,7 +191,8 @@ Görev listesi. Örnek maddeler: "Öğretmenin ölçümünü muhtara götür", "
   9. Toplantı
   10. Son ve final
 - **Köy haritası:** Kuşbakışı. Yerler: ev, yaşlı çiftin evi, muhtarlık, okul, komşunun evi ve tarlası, köy kuyusu, sarnıç, tepe. Adlar her zaman görünür, kullanılamayan yerler soluk. Tıklama noktaları yüzdeyle tanımlanır.
-- **Dağıtım paneli:** Ev, keçi, bahçe satırları; ihtiyaç ve verilen damla ikonları; +/− düğmeleri; "Kalan: N damla"; "Kuyudan fazladan çek (+4)" düğmesi; "Tamam".
+- **Yer kartı:** Sahne değişince "Öğle · Kuyu başı" gibi kısa kart. Zorunlu sahnelerde sebebini de yazar ve tıklanana kadar bekler; diğerleri kendiliğinden kapanır.
+- **Dağıtım paneli:** Ev, keçi, bahçe satırları; ihtiyaç kadar damla yuvası (fazlası verilemez; bahçede gri su yuvayı doldurur) ve yeterli / biraz eksik / çok eksik yazısı; +/− düğmeleri; "Kalan: N damla"; "Kuyudan fazladan çek (+4)" düğmesi; "Tamam".
 - **Mini oyunlar (10-15 sn):**
   - Ot yolma: 8-10 ot, 10 sn.
   - Keçi bakımı: tara (sürterek çubuk doldur), su kabı, yem.

@@ -93,6 +93,21 @@ var KS = globalThis.KS = globalThis.KS || {};
     return d.bayraklar.griSu ? Math.floor(ev / c().GRI_SU.bolen) : 0;
   };
 
+  // Dağıtım panelinde bir satıra verilebilecek en çok damla: ihtiyaçtan fazlası boşa gider.
+  // Bahçenin ihtiyacının bir kısmını gri su karşılar.
+  KS.dagitimUstSinir = function (d, ad, verilen) {
+    var ihtiyac = KS.ihtiyaclar(d)[ad];
+    return ad === 'bahce' ? Math.max(0, ihtiyac - KS.griSuMiktari(d, verilen.ev)) : ihtiyac;
+  };
+
+  // Panelde gösterilen durum: 'iyi' yeterli, 'orta' 1 damla eksik, 'kotu' daha çok eksik.
+  KS.dagitimDurumu = function (d, ad, verilen) {
+    var ihtiyac = KS.ihtiyaclar(d)[ad];
+    var su = verilen[ad] + (ad === 'bahce' ? KS.griSuMiktari(d, verilen.ev) : 0);
+    if (su >= ihtiyac) return 'iyi';
+    return su >= ihtiyac - 1 ? 'orta' : 'kotu';
+  };
+
   // ---------- Oyun başı ve dilim ----------
 
   KS.keciAdiVer = function (d, ad) {

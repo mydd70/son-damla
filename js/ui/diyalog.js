@@ -6,11 +6,37 @@ KS.ui = KS.ui || {};
   // Boşluk ve Enter sonraki satıra geçer; basılı tutmak diyaloğu hızlandırır, seçeneklerde durur.
   document.addEventListener('keydown', function (e) {
     if (e.key !== ' ' && e.key !== 'Enter') return;
+    if (!document.getElementById('defter').hidden) return;
+    var gecis = document.getElementById('gecis');
+    if (!gecis.hidden) { e.preventDefault(); if (!e.repeat) gecis.onclick(); return; }
     var kutu = document.getElementById('diyalog');
-    if (kutu.hidden || !kutu.onclick || !document.getElementById('defter').hidden) return;
+    if (kutu.hidden || !kutu.onclick) return;
     e.preventDefault();
     kutu.onclick();
   });
+
+  // Yer kartı: oyuncu nereye geldiğini görsün. Sebep (giris) yazılıysa tıklanana kadar bekler, basılı tuşla geçilmez.
+  function gecisKarti(olay, sonra) {
+    var el = KS.ui.el;
+    var kart = document.getElementById('gecis');
+    var zaman = null;
+    kart.textContent = '';
+    kart.hidden = false;
+    var bant = el('div', 'gecis-bant');
+    bant.appendChild(el('div', 'gecis-baslik', KS.t('dilim_' + KS.state.dilim) + ' · ' + KS.t('yer_' + olay.mekan)));
+    if (olay.giris) {
+      bant.appendChild(el('div', 'gecis-giris', metinHazirla(olay.giris)));
+      bant.appendChild(el('div', 'sonraki-isaret', '▼'));
+    }
+    kart.appendChild(bant);
+    kart.onclick = function () {
+      clearTimeout(zaman);
+      kart.hidden = true;
+      kart.onclick = null;
+      sonra();
+    };
+    if (!olay.giris) zaman = setTimeout(kart.onclick, KS.config.GECIS.otomatikSure);
+  }
 
   function metinHazirla(oge) {
     var k = KS.config;
@@ -61,10 +87,15 @@ KS.ui = KS.ui || {};
   // olay: story.js biçimi. r: satır koşullarına verilen eylem sonucu. bitince: diyalog kapanınca çağrılır.
   KS.ui.diyalogOynat = function (olay, r, bitince) {
     var d = KS.state;
-    if (olay.mekan) KS.ui.sahneGoster(olay.mekan, olay.mekanSecenek ? olay.mekanSecenek(d) : {}, olay.zaman);
     var satirlar = olay.satirlar.filter(function (s) { return !s.kosul || s.kosul(d, r || {}); });
+    if (!satirlar.length) { bitince(); return; }
+
+    // Yer değişince ya da olayın sebebi yazılıysa önce yer kartı. Sonlarda kart yok, kendi metinleri var.
+    var kartGerekli = olay.mekan && !olay.zaman && (olay.giris || olay.mekan !== KS.ui.sonMekan());
+    if (olay.mekan) KS.ui.sahneGoster(olay.mekan, olay.mekanSecenek ? olay.mekanSecenek(d) : {}, olay.zaman);
+
     var kutu = document.getElementById('diyalog');
-    var i = 0;
+    var i;
 
     var secenekler = (olay.secenekler || []).filter(function (sc) { return !sc.kosul || sc.kosul(d, r || {}); });
 
@@ -114,14 +145,19 @@ KS.ui = KS.ui || {};
       return b;
     }
 
-    if (!satirlar.length) { bitince(); return; }
-    kutu.hidden = false;
-    kutu.onclick = function () {
-      if (i >= satirlar.length - 1) { kapat(); return; }
-      i += 1;
+    function baslat() {
+      i = 0;
+      kutu.hidden = false;
+      kutu.onclick = function () {
+        if (i >= satirlar.length - 1) { kapat(); return; }
+        i += 1;
+        goster();
+      };
       goster();
-    };
-    goster();
+    }
+
+    if (kartGerekli) gecisKarti(olay, baslat);
+    else baslat();
   };
 
   // Olay listesini sırayla oynatır.

@@ -20,8 +20,7 @@ Son güncelleme: 31 Ekim 2026, Aşama 6 bitti.
 Sıradaki: Aşama 7 (son metinler, ardından İngilizce çeviri), kullanıcının okumasıyla.
 
 ## Görsel durumu
-- Bekleyen arka planlar: `sarnic`, `sarnic_onarildi` (güneşsiz), `koy_yolu` (eksik). Gelene kadar SVG.
-- Yeniden üretilecekler: `yasli_cift_evi` (üzümsüz), isteğe bağlı `koy_cikisi` (piksel tarzı).
+- 12 arka plan da oyunda; `sarnic` ve `sarnic_onarildi` kapalı havalı çizildi, üstüne renk katmanı konmaz.
 - Portreler bekleniyor. Yeni görsel eklemek: WebP'ye çevir, `assets/img/` ya da `assets/portraits/` altına koy, `config.js`'te `GORSEL.dosyalar` / `PORTRE.dosyalar` listesine ekle, `KAYNAKLAR.md`'ye yaz.
 - Kaynak PNG'ler `gptgörselleri/` altında, depoya girmez.
 

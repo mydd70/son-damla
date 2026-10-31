@@ -49,6 +49,18 @@ Okurken düzeltmen için yazıldı; kod değil. Aşama 4'te story.js'e aynı id'
 
 ---
 
+## Yer kartları (zorunlu sahneden önce, tıklanınca geçer)
+| Olay | Kart metni |
+|---|---|
+| g1_tanima | Annen seni bidonlarla kuyu başına yolladı. |
+| g2_yaslicift | Fatma Nine seni çağırtmış. |
+| g3_olcum | Su almaya indin. Öğretmen elinde iple kuyunun başında. |
+| g5_baba | Babanın araması için tepeye çıktın. |
+| g6_plan | Muhtar seni de muhtarlığa çağırdı. |
+| g7_komsu | Su almaya indin. Bu sabah kuyu başında beklemediğin biri var. |
+| g8_obruk | Derinden bir gürültü geldi. Köylüler Rıza Amca'nın tarlasına koşuyor. |
+| g9_toplanti | Bütün köy muhtarlığın önünde toplandı. Bugün oylama var. |
+
 ## Gün olayları
 
 ### g2_grisu – Gün 2 sabah [sahne: avlu]

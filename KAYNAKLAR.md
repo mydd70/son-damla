@@ -24,6 +24,9 @@ Hepsi ChatGPT ile üretildi (31 Ekim 2026), `assets/img/` altında WebP olarak s
 | `komsu_tarlasi_obruk.webp` | ChatGPT, `referans/sahneler/komsu_tarlasi_obruk.png` düzeninden | OpenAI kullanım koşulları |
 | `muhtarlik.webp` | ChatGPT, `referans/sahneler/muhtarlik.png` düzeninden | OpenAI kullanım koşulları |
 | `koy_cikisi.webp` | ChatGPT, `referans/sahneler/koy_cikisi.png` düzeninden | OpenAI kullanım koşulları |
+| `koy_yolu.webp` | ChatGPT, `referans/sahneler/koy_yolu.png` düzeninden | OpenAI kullanım koşulları |
+| `sarnic.webp` | ChatGPT, `referans/sahneler/sarnic.png` düzeninden | OpenAI kullanım koşulları |
+| `sarnic_onarildi.webp` | ChatGPT, `referans/sahneler/sarnic_onarildi.png` düzeninden | OpenAI kullanım koşulları |
 | `harita.webp` | ChatGPT, `referans/sahneler/harita_etiketli.png` düzeninden | OpenAI kullanım koşulları |
 
 ## Sesler

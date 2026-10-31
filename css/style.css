@@ -66,7 +66,7 @@ button:disabled { opacity: 0.4; cursor: default; }
   gap: 1.4em;
   padding: 0.5em 3.6em 0.5em 1em;
   background: var(--panel);
-  font-size: 0.85em;
+  font-size: 0.95em;
 }
 #sesDugme {
   position: absolute;
@@ -132,8 +132,8 @@ button:disabled { opacity: 0.4; cursor: default; }
   align-items: center;
   gap: 0.25em;
   font-size: 0.85em;
-  text-shadow: 0 0 0.3em #000;
 }
+#kuyu > div:first-child { padding: 0 0.4em; background: var(--panel); border-radius: 0.2em; }
 .kuyu-kap {
   position: relative;
   flex: 1;
@@ -188,6 +188,32 @@ button:disabled { opacity: 0.4; cursor: default; }
 .sonraki-isaret { margin-top: auto; align-self: flex-end; opacity: 0.6; font-size: 0.8em; }
 .secenekler { display: flex; flex-direction: column; align-items: flex-start; gap: 0.35em; margin-top: 0.6em; }
 
+/* ---------- Yer kartı ---------- */
+#gecis {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(18, 10, 7, 0.35);
+  cursor: pointer;
+}
+.gecis-bant {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+  max-width: 70%;
+  padding: 0.9em 1.8em;
+  text-align: center;
+  background: var(--panel);
+  border: 0.1em solid var(--toprak);
+  border-radius: 0.4em;
+}
+.gecis-baslik { font-size: 1.3em; font-weight: 700; color: var(--sari); }
+.gecis-giris { line-height: 1.4; }
+.gecis-bant .sonraki-isaret { align-self: center; }
+
 /* ---------- Dağıtım ---------- */
 .panel {
   position: absolute;
@@ -203,13 +229,16 @@ button:disabled { opacity: 0.4; cursor: default; }
 .panel h2 { margin: 0 0 0.6em; font-size: 1.15em; }
 .dagitim-satir {
   display: grid;
-  grid-template-columns: 4.5em 5.5em 2.2em 1fr 2.2em;
+  grid-template-columns: 4.5em 6.5em 2.2em 1fr 2.2em;
   align-items: center;
   gap: 0.5em;
   padding: 0.35em 0;
 }
 .dagitim-satir button { padding: 0.15em 0; }
-.ihtiyac { font-size: 0.8em; opacity: 0.8; }
+.su-durum { font-size: 0.8em; font-weight: 600; }
+.su-durum.iyi { color: #a8d08d; }
+.su-durum.orta { color: var(--sari); }
+.su-durum.kotu { color: #ff9d8a; }
 .damlalar { display: flex; flex-wrap: wrap; gap: 0.3em; min-height: 1em; }
 .damla {
   width: 0.8em; height: 0.8em;

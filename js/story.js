@@ -79,7 +79,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'anne', metin: '(bir süre susar) Bu böyle gitmez, Mehmet. Herkes kendi kovasını dolduruyor, kuyu kimsenin değilmiş gibi.' },
       { kim: 'ic', metin: 'Bir yolu olmalı. Köyün hepsi birden bir şey yapsa?' }
     ] },
-    { id: 'g1_tanima', gun: 1, dilim: 'ogle', mekan: 'kuyu_basi', satirlar: [
+    { id: 'g1_tanima', gun: 1, dilim: 'ogle', mekan: 'kuyu_basi', giris: { metin: 'Annen seni bidonlarla kuyu başına yolladı.' }, satirlar: [
       { kim: 'ic', metin: 'Kuyu başı yine kalabalık. Bidonlar sıra sıra.' },
       { kim: 'koylu', metin: 'Eskiden bir kovada yeterdi. Şimdi ip uzadıkça uzuyor.' },
       { kim: 'ic', metin: 'Kuyudaki suyun ne kadar kaldığını kimse bilmiyor. Bilse de söylemiyor.' },
@@ -91,7 +91,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'anne', metin: 'Domatesler kirli mirli bakmaz. Ninen de böyle yapardı.' },
       { kim: 'ekran', metin: 'Artık evde kullanılan suyun bir kısmı bahçeye dönüyor.' }
     ] },
-    { id: 'g2_yaslicift', gun: 2, dilim: 'ogle', mekan: 'yasli_cift_evi', satirlar: [
+    { id: 'g2_yaslicift', gun: 2, dilim: 'ogle', mekan: 'yasli_cift_evi', giris: { metin: 'Fatma Nine seni çağırtmış.' }, satirlar: [
       { kim: 'nine', metin: 'Gel bakalım, Mehmet. Gölgeye otur. Gölge dediysem, çardağın gölgesi de kurudu ya.' },
       { kim: 'dede', metin: 'Bu asma kırk yıl üzüm verdi. İki yazdır yaprak bile zor tutuyor.' },
       { kim: 'mehmet', metin: 'Dede, eskiden de böyle kurak olur muydu?' },
@@ -104,7 +104,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       { metin: 'Teşekkürler, Nine. Annem bekler.' }
     ] },
     { id: 'g2_a1', satirlar: A1_SATIRLAR },
-    { id: 'g3_olcum', gun: 3, dilim: 'sabah', mekan: 'kuyu_basi', satirlar: [
+    { id: 'g3_olcum', gun: 3, dilim: 'sabah', mekan: 'kuyu_basi', giris: { metin: 'Su almaya indin. Öğretmen elinde iple kuyunun başında.' }, satirlar: [
       { kim: 'ogretmen', metin: 'Mehmet, tut şu ipin ucunu. Bırakma ama.' },
       { kim: 'mehmet', metin: 'Ne yapıyorsunuz?' },
       { kim: 'ogretmen', metin: 'Suya kaç metrede ulaşıyoruz, ona bakıyorum. Geçen ay da ölçmüştüm.' },
@@ -129,7 +129,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     { id: 'g4_hatirlatma', gun: 4, dilim: 'aksam', kosul: olcumYok, mekan: 'avlu', satirlar: [
       { kim: 'anne', metin: 'Öğretmen hanım bir kâğıt vermiş sana, muhtara götürdün mü?' }
     ] },
-    { id: 'g5_baba', gun: 5, dilim: 'sabah', mekan: 'tepe', satirlar: [
+    { id: 'g5_baba', gun: 5, dilim: 'sabah', mekan: 'tepe', giris: { metin: 'Babanın araması için tepeye çıktın.' }, satirlar: [
       { kim: 'ic', metin: 'Telefon yalnızca tepede çekiyor. Babam bugün arayacağım demişti.' },
       { kim: 'baba', ses: 'telefon', metin: 'Mehmet? Sesin geliyor mu?' },
       { kim: 'mehmet', metin: 'Geliyor baba! Ne zaman geleceksin?' },
@@ -141,7 +141,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     { id: 'g5_hatirlatma', gun: 5, dilim: 'sabah', kosul: olcumYok, mekan: 'avlu', satirlar: [
       { kim: 'anne', metin: 'O kâğıt hâlâ cebinde mi? Muhtar akşamları muhtarlıkta olur.' }
     ] },
-    { id: 'g6_plan', gun: 6, dilim: 'ogle', mekan: 'muhtarlik', satirlar: [
+    { id: 'g6_plan', gun: 6, dilim: 'ogle', mekan: 'muhtarlik', giris: { metin: 'Muhtar seni de muhtarlığa çağırdı.' }, satirlar: [
       { kim: 'muhtar', kosul: function (d) { return d.plan === 'guclu'; }, metin: 'Öğretmen hanımla oturduk, bir yol çizdik. Sen de dinle, senin sayende.' },
       { kim: 'ogretmen', kosul: function (d) { return d.plan === 'guclu'; }, metin: 'Eski sarnıcı onarıyoruz, yağmur gelince boşa akmasın.' },
       { kim: 'muhtar', kosul: function (d) { return d.plan === 'guclu'; }, metin: 'Kuyulara sayaç, motorlara saat. Herkes ne çektiğini bilecek.' },
@@ -158,7 +158,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       { metin: 'Ben de yardım ederim.' }
     ] },
     { id: 'g6_a3', satirlar: A3_SATIRLAR },
-    { id: 'g7_komsu', gun: 7, dilim: 'sabah', mekan: 'kuyu_basi', satirlar: [
+    { id: 'g7_komsu', gun: 7, dilim: 'sabah', mekan: 'kuyu_basi', giris: { metin: 'Su almaya indin. Bu sabah kuyu başında beklemediğin biri var.' }, satirlar: [
       { kim: 'ic', metin: 'Rıza Amca kuyu başında. Kendi kuyusu varken buraya ne işi var?' },
       { kim: 'komsu', metin: 'Ne bakıyorsun? Motor arıza yaptı, bir kova alıp gideceğim.' }
     ] },
@@ -166,14 +166,14 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'ekran', metin: 'Sıcak dalgası. Gölgede kırk derece.' },
       { kim: 'anne', metin: 'Bugün dışarıda fazla kalma.' }
     ] },
-    { id: 'g8_obruk', gun: 8, dilim: 'ogle', mekan: 'komsu_tarlasi', mekanSecenek: function () { return { obruk: true }; }, satirlar: [
+    { id: 'g8_obruk', gun: 8, dilim: 'ogle', mekan: 'komsu_tarlasi', mekanSecenek: function () { return { obruk: true }; }, giris: { metin: 'Derinden bir gürültü geldi. Köylüler Rıza Amca\'nın tarlasına koşuyor.' }, satirlar: [
       { kim: 'ic', ses: 'gurultu', metin: 'Rıza Amca\'nın tarlası... Toprak yarılmış. Kocaman bir çukur.' },
       { kim: 'komsu', metin: '(çukurun kenarında, eli titreyerek) Dün burada pancar vardı.' },
       { kim: 'komsu', metin: 'Kırk yıldır bu toprağı sürüyorum. Kırk yıl!' },
       { kim: 'mehmet', metin: 'Rıza Amca, uzak durun, kenarı çöküyor.' },
       { kim: 'komsu', metin: '(geri çekilir, oturur) Motor şuradaydı. Bir metre öteye düşseydi...' }
     ] },
-    { id: 'g9_toplanti', gun: 9, dilim: 'aksam', mekan: 'muhtarlik', mekanSecenek: function () { return { toplanti: true }; }, satirlar: [
+    { id: 'g9_toplanti', gun: 9, dilim: 'aksam', mekan: 'muhtarlik', mekanSecenek: function () { return { toplanti: true }; }, giris: { metin: 'Bütün köy muhtarlığın önünde toplandı. Bugün oylama var.' }, satirlar: [
       { kim: 'muhtar', metin: 'Hepiniz biliyorsunuz neden toplandığımızı. Kuyu iniyor. Öğretmen hanım ölçtü, ben de gördüm.' },
       { kim: 'ogretmen', metin: 'Sarnıç onarılacak, kuyulara sayaç takılacak, sulama sabah erken ve gece yapılacak.' },
       { kim: 'koylu', metin: 'Sayaç masrafını kim ödeyecek?' },

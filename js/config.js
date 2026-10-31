@@ -89,8 +89,10 @@ KS.config = {
   // --- Görseller: listede olmayan mekân SVG ile, olmayan portre yer tutucuyla çizilir ---
   GORSEL: {
     klasor: 'assets/img/', uzanti: '.webp',
-    dosyalar: ['avlu', 'kuyu_basi', 'yasli_cift_evi', 'tepe', 'komsu_tarlasi', 'komsu_tarlasi_obruk', 'muhtarlik', 'koy_cikisi', 'harita']
+    dosyalar: ['avlu', 'koy_yolu', 'kuyu_basi', 'yasli_cift_evi', 'tepe', 'komsu_tarlasi', 'komsu_tarlasi_obruk', 'muhtarlik', 'sarnic', 'sarnic_onarildi', 'koy_cikisi', 'harita'],
+    kendiHavasi: ['sarnic', 'sarnic_onarildi']   // kapalı hava çizili: üstüne renk katmanı konmaz
   },
+  GECIS: { otomatikSure: 1200 },   // milisaniye: sebebi yazmayan yer kartı kendiliğinden kapanır
   PORTRE: { klasor: 'assets/portraits/', uzanti: '.webp', dosyalar: [] },
 
   // --- Ses: dosyalar assets/audio/<id>.mp3; yoksa sessiz geçilir ---

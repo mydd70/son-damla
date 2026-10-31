@@ -15,12 +15,13 @@ KS.ui = KS.ui || {};
     var katman = document.getElementById('katman');
 
     function enAz(ad) { return ad === 'ev' ? enAzEv : 0; }
-
     function toplam() { return d.su.pay + (fazla ? ek : 0); }
     function kalan() { return toplam() - verilen.ev - verilen.keci - verilen.bahce; }
 
-    // Fazla çekme geri alınınca sığmayan damlalar sondan geri alınır.
+    // Fazla çekme geri alınınca sığmayan damlalar sondan geri alınır;
+    // eve su artınca gri su bahçenin ihtiyacını düşürür, fazlası kalana döner.
     function sigdir() {
+      verilen.bahce = Math.min(verilen.bahce, KS.dagitimUstSinir(d, 'bahce', verilen));
       for (var i = SATIRLAR.length - 1; i >= 0 && kalan() < 0; i--) {
         var ad = SATIRLAR[i];
         verilen[ad] = Math.max(enAz(ad), verilen[ad] + kalan());
@@ -31,22 +32,24 @@ KS.ui = KS.ui || {};
       var el = KS.ui.el;
       var satir = el('div', 'dagitim-satir');
       satir.appendChild(el('div', '', KS.t('gosterge_' + ad)));
-      satir.appendChild(el('div', 'ihtiyac', KS.t('ihtiyac', { n: ihtiyaclar[ad] })));
+      var durum = KS.dagitimDurumu(d, ad, verilen);
+      satir.appendChild(el('div', 'su-durum ' + durum, KS.t('suDurum_' + durum)));
       var eksi = el('button', '', '−');
       eksi.disabled = verilen[ad] <= enAz(ad);
       eksi.onclick = function () { verilen[ad] -= 1; ciz(); };
       satir.appendChild(eksi);
 
+      // İhtiyaç kadar damla yuvası: dolu olanlar verilen, gri olanlar evden dönen su.
       var damlalar = el('div', 'damlalar');
       var gri = ad === 'bahce' ? KS.griSuMiktari(d, verilen.ev) : 0;
       var dolu = verilen[ad] + gri;
-      for (var i = 0; i < Math.max(ihtiyaclar[ad], dolu); i++) {
+      for (var i = 0; i < ihtiyaclar[ad]; i++) {
         damlalar.appendChild(el('div', 'damla' + (i < gri ? ' gri' : (i < dolu ? ' dolu' : ''))));
       }
       satir.appendChild(damlalar);
 
       var arti = el('button', '', '+');
-      arti.disabled = kalan() <= 0;
+      arti.disabled = kalan() <= 0 || verilen[ad] >= KS.dagitimUstSinir(d, ad, verilen);
       arti.onclick = function () { verilen[ad] += 1; ciz(); };
       satir.appendChild(arti);
       return satir;
@@ -54,6 +57,7 @@ KS.ui = KS.ui || {};
 
     function ciz() {
       var el = KS.ui.el;
+      sigdir();
       katman.textContent = '';
       var panel = el('div', 'panel');
       panel.appendChild(el('h2', '', KS.t('dagitimBaslik')));
@@ -66,7 +70,7 @@ KS.ui = KS.ui || {};
       var alt = el('div', 'dagitim-alt');
       alt.appendChild(el('div', 'kalan', KS.t('kalan', { n: kalan() })));
       var fazlaBtn = el('button', fazla ? 'fazla-acik' : '', KS.t(fazla ? 'fazlaGeriAl' : 'fazlaCek', { n: ek }));
-      fazlaBtn.onclick = function () { fazla = !fazla; sigdir(); ciz(); };
+      fazlaBtn.onclick = function () { fazla = !fazla; ciz(); };
       alt.appendChild(fazlaBtn);
       var tamam = el('button', '', KS.t('tamam'));
       tamam.onclick = function () { katman.textContent = ''; bitince(verilen, fazla); };
