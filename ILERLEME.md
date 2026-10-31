@@ -24,7 +24,6 @@ Sıradaki: Aşama 7 (son metinler, ardından İngilizce çeviri), kullanıcını
 - Taslaktaki ek ipuçları: `telefon`, `hat_kesilir`, `gurultu`, `kapi`
 
 ## Kullanıcının karar vereceği konular
-- Kötü sonda "Ekim. İlk yağmur." başta değil sonda (taslak böyle); belge bölüm 10 "ikisi de bununla başlar" diyor.
 - Metin hacmi yaklaşık 1.900 kelime, hedef 4-5 bindi: uzatılsın mı?
 
 ## Bilinen küçük konular

@@ -400,6 +400,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     ] },
     { id: 'son_kotu_avlu', mekan: 'avlu', zaman: 'sabah', mekanSecenek: function () { return { yesil: false }; }, satirlar: [
       { kim: 'ekran', kosul: function (d) { return d.komsu.ikna; }, metin: 'Plan kabul edildi. Ama kuyuya yetişemedi.' },
+      { kim: 'ekran', metin: 'Ekim.' },
       { kim: 'anne', metin: 'Kamyon gelmiş. Eşyalar hazır mı?' },
       { kim: 'ic', metin: 'Keçimiz {keci} pazarda satıldı. Yol parası lazımdı.' },
       { kim: 'ic', kosul: evDusuk, metin: 'Annem günlerdir konuşmuyor.' },

@@ -157,7 +157,7 @@ Görev listesi. Örnek maddeler: "Öğretmenin ölçümünü muhtara götür", "
 ## 10. Toplantı ve sonlar
 - Köylülerin oyları her zaman eşit çıkar (sayılar temsilî). Köyün ikiye bölündüğü, gözlerin komşuya döndüğü gösterilir.
 - **İyi son = komşu evet VE kuyu ≥ eşik.** Aksi halde kötü son.
-- **Zaman atlaması:** İki son da "Ekim. İlk yağmur." ile başlar. Gerçekçilik aranmaz; oyun havası için olağanüstü bir an kabul edilir.
+- **Zaman atlaması:** İyi son "Ekim. İlk yağmur." ile başlar. Kötü son "Ekim." ile başlar, "Ekim. İlk yağmur." en sonda boş köye yağan yağmurla gelir. Gerçekçilik aranmaz; oyun havası için olağanüstü bir an kabul edilir.
 - **İyi:** Plan kabul, yağmur onarılmış sarnıca dolar, çeşmeden ilk damla, muhtar ve komşu barışır (küslüğün sebebi burada açılır), baba döner, son sabah bebeğin gülme sesi. Keçi satırı keçiye göre değişir (≥5: süt veriyor; <5: toparlanıyor).
 - **Kötü:** Keçi yol parası için satılır, kamyonla göç, yaşlı çiftin kapısının önünden geçilir, uzakta dumanlı şehir, bebeğin ağlaması kamyonla uzaklaşarak söner (ölüm çağrışımı olmamalı), boş avluya ve kırık sarnıca yağmur.
 - Ev ve kiler değerleri sonda birer satırı değiştirir.

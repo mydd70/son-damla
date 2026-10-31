@@ -384,6 +384,7 @@ Okurken düzeltmen için yazıldı; kod değil. Aşama 4'te story.js'e aynı id'
 ## Kötü son
 - [sahne: avlu]
 - *(komşu ikna edildiyse)* **Ekran:** Plan kabul edildi. Ama kuyuya yetişemedi.
+- **Ekran:** Ekim.
 - **Anne:** Kamyon gelmiş. Eşyalar hazır mı?
 - **Mehmet (iç ses):** Keçimiz {keci} pazarda satıldı. Yol parası lazımdı.
 - *(ev düşükse)* **Mehmet (iç ses):** Annem günlerdir konuşmuyor.
