@@ -88,6 +88,44 @@ var KS = globalThis.KS = globalThis.KS || {};
     gunlukYaz(d, 'olay ' + olay.id);
   }
 
+  // Evde kullanılan suyun bahçeye dönen kısmı (dağıtım paneli de bunu gösterir).
+  KS.griSuMiktari = function (d, ev) {
+    return d.bayraklar.griSu ? Math.floor(ev / c().GRI_SU.bolen) : 0;
+  };
+
+  // ---------- Oyun başı ve dilim ----------
+
+  KS.keciAdiVer = function (d, ad) {
+    d.keciAdi = (ad || '').trim() || c().KECI.varsayilanAd;
+    gunlukYaz(d, 'keçi adı ' + d.keciAdi);
+    return sonuc(true);
+  };
+
+  KS.dilimGec = function (d, dilim) {
+    if (c().DILIMLER.indexOf(dilim) < 0) return hata('Bilinmeyen dilim: ' + dilim);
+    d.dilim = dilim;
+    return sonuc(true);
+  };
+
+  // Akşam duyurulan yarınki pay (komşuya götürülen su düşülmüş).
+  KS.ertesiGunPayi = function (d) {
+    var k = c();
+    if (d.gun >= k.GUN_SAYISI) return 0;
+    return Math.max(0, k.SU_PAYI[d.gun] - d.su.ertesiGunKesinti);
+  };
+
+  // Diyalogdaki seçeneğin etkisi (story.js: etkiler, bayraklar).
+  KS.secimUygula = function (d, secenek) {
+    var r = sonuc(true);
+    var e = secenek.etkiler || {};
+    ['ev', 'keci', 'bahce', 'kiler', 'kuyu'].forEach(function (ad) {
+      if (e[ad]) degistir(d, ad, e[ad], r.degisimler);
+    });
+    if (e.arguman) KS.argumanOgren(d, e.arguman);
+    if (secenek.bayraklar) for (var b in secenek.bayraklar) d.bayraklar[b] = secenek.bayraklar[b];
+    return r;
+  };
+
   // ---------- Gün akışı ----------
 
   // Yeni günü başlatır: su payı, motor, sabah olayı, zorunlu ev işi, ağlama.
@@ -134,7 +172,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     }
 
     // Gri su: evde kullanılan suyun bir kısmı bahçeye döner.
-    var gri = d.bayraklar.griSu ? Math.floor(ev / k.GRI_SU.bolen) : 0;
+    var gri = KS.griSuMiktari(d, ev);
     r.griSu = gri;
     var bahceSu = bahce + gri;
     var ihtiyac = KS.ihtiyaclar(d);
@@ -400,7 +438,7 @@ var KS = globalThis.KS = globalThis.KS || {};
   KS.gunIcinDurum = function (n) {
     var k = c();
     var d = KS.yeniDurum();
-    d.keciAdi = 'Pamuk';
+    d.keciAdi = k.KECI.varsayilanAd;
     n = Math.max(1, Math.min(k.GUN_SAYISI, n | 0));
     for (var g = 1; g < n; g++) {
       d.gun = g;

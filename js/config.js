@@ -17,7 +17,7 @@ KS.config = {
 
   // --- Göstergeler (0-10) ---
   GOSTERGE: { min: 0, max: 10 },
-  KECI: { baslangic: 2, min: 1, sutEsigi: 5, iyiSu: 4, ortaSu: 3, bakim: 1 },
+  KECI: { baslangic: 2, min: 1, sutEsigi: 5, iyiSu: 4, ortaSu: 3, bakim: 1, varsayilanAd: 'Pamuk', adUzunluk: 14 },
   BAHCE: { baslangic: 3, otYolma: 1, ekIs: 1, sebzeEsigi: 6 },
   KILER: { baslangic: 3, max: 6, tuketim: 1, sut: 1, sebze: 1 },
   EV: {
@@ -43,6 +43,7 @@ KS.config = {
   // --- Olaylar ve sistemler ---
   OLCUM: { teslimIlkGun: 3, teslimSonGun: 5 },
   PLAN_GUNU: 6,
+  OBRUK_GUNU: 8,
   IKNA: { gerekenArguman: 2 },
   ARGUMANLAR: ['A1', 'A2', 'A3'],
   YASLI_CIFT: { yardim: 2, sinir: 2 },

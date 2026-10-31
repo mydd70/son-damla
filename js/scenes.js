@@ -48,7 +48,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     for (var i = 0; i < n; i++) {
       var x = 60 + (i * 211) % 860, yy = y + 30 + (i * 67) % (Y - y - 40);
       s += '<polyline points="' + x + ',' + yy + ' ' + (x + 18) + ',' + (yy + 6) + ' ' + (x + 30) + ',' + (yy - 3) + ' ' + (x + 48) + ',' + (yy + 4) +
-        ' M' + (x + 18) + ',' + (yy + 6) + '" fill="none" stroke="' + P.catlak + '" stroke-width="2" stroke-linecap="round"/>';
+        '" fill="none" stroke="' + P.catlak + '" stroke-width="2" stroke-linecap="round"/>';
       s += '<line x1="' + (x + 30) + '" y1="' + (yy - 3) + '" x2="' + (x + 34) + '" y2="' + (yy + 12) + '" stroke="' + P.catlak + '" stroke-width="1.5"/>';
     }
     return s;
