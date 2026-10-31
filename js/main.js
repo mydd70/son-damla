@@ -118,6 +118,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       return;
     }
     var olaylar = KS.olaylariGetir(d.gun, 'aksam', d);
+    if (d.gun < KS.config.GUN_SAYISI && KS.kilerYardimIpucuAl(d)) olaylar.push(KS.olayGetir('kiler_yardim'));
     var ipucu = null;
     if (d.gosterge.ev >= KS.config.EV.yuksekAlt) {
       ipucu = KS.anneIpucuAl(d);
@@ -140,7 +141,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     var olaylar = aile ? [KS.olayGetir('aile_vakti')] : KS.ziyaretOlaylari(id, KS.state, r);
     function ziyaretSonu() {
       if (aile) { ui.ilerleGoster('gecis_gunuBitir', gunSonu); return; }
-      ui.diyalogOynat(KS.olayGetir('aksam_bitis'), null, function () {
+      ui.olaylariOynat([KS.olayGetir('veda_' + id), KS.olayGetir('aksam_bitis')], null, function () {
         ui.ilerleGoster('gecis_eveDon', gunSonu);
       });
     }
@@ -156,9 +157,12 @@ var KS = globalThis.KS = globalThis.KS || {};
     ui.sahneGoster('avlu');
     ui.degisimGoster(r.degisimler);
     ui.diyalogOynat(KS.olayGetir('gece'), r, function () {
-      ilkGunOgretici('ogretici_kiler', function () {
-        if (r.ilkKilerKuyu) ui.diyalogOynat(KS.olayGetir('ipucu_kiler_kuyu'), null, gunBasla);
-        else gunBasla();
+      // Kilere ne geldiği her gece yazılır: üstteki sepetlerden tek başına anlaşılmıyor.
+      ui.diyalogOynat({ satirlar: [{ kim: 'ekran', metin: ui.kilerOzetMetni(r.kilerOzet) }] }, null, function () {
+        ilkGunOgretici('ogretici_kiler', function () {
+          if (r.ilkKilerKuyu) ui.diyalogOynat(KS.olayGetir('ipucu_kiler_kuyu'), null, gunBasla);
+          else gunBasla();
+        });
       });
     });
   }

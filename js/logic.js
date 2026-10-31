@@ -415,6 +415,15 @@ var KS = globalThis.KS = globalThis.KS || {};
     return sonuc(true, { ipucu: secilen.id });
   };
 
+  // Kiler bir gece boş kaldıysa ve yaşlı çift hâlâ yardım edebilecekse akşam bir kez söylenir.
+  KS.kilerYardimIpucuAl = function (d) {
+    var k = c();
+    var uygun = d.bayraklar.kilerKuyuGoruldu && !d.bayraklar.kilerYardimIpucu && d.gosterge.kiler === 0 &&
+      d.yasliCiftYardim < k.YASLI_CIFT.sinir && d.ziyaretKalan.yasliCift > 0;
+    if (uygun) d.bayraklar.kilerYardimIpucu = true;
+    return uygun;
+  };
+
   // ---------- İkna ----------
 
   KS.argumanOgren = function (d, id) {
@@ -526,13 +535,16 @@ var KS = globalThis.KS = globalThis.KS || {};
   KS.gunBitir = function (d) {
     var k = c();
     if (d.gun >= k.GUN_SAYISI) return hata('Son gün toplantıyla biter.');
-    var r = sonuc(true, { kilerBos: false, ilkKilerKuyu: false });
-    if (d.gosterge.keci >= k.KECI.sutEsigi) degistir(d, 'kiler', k.KILER.sut, r.degisimler);
-    if (d.gosterge.bahce >= k.BAHCE.sebzeEsigi) degistir(d, 'kiler', k.KILER.sebze, r.degisimler);
+    var sut = d.gosterge.keci >= k.KECI.sutEsigi;
+    var sebze = d.gosterge.bahce >= k.BAHCE.sebzeEsigi;
+    var r = sonuc(true, { kilerBos: false, ilkKilerKuyu: false, kilerOzet: { sut: sut, sebze: sebze, sofra: k.KILER.tuketim } });
+    if (sut) degistir(d, 'kiler', k.KILER.sut, r.degisimler);
+    if (sebze) degistir(d, 'kiler', k.KILER.sebze, r.degisimler);
     if (d.gosterge.kiler >= k.KILER.tuketim) {
       degistir(d, 'kiler', -k.KILER.tuketim, r.degisimler);
     } else {
       r.kilerBos = true;
+      r.kilerOzet.yetmedi = true;
       degistir(d, 'kiler', -d.gosterge.kiler, r.degisimler);   // yetmeyen son sepet de yenir
       degistir(d, 'ev', k.EV.kilerBos, r.degisimler);
       // Sofrayı çıkaramayan aile gece kuyudan gizlice çeker: dağıtımın ihmali kuyuya, kuyu sona yansır.

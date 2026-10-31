@@ -29,8 +29,27 @@ KS.ui = KS.ui || {};
     kutu.appendChild(el('div', 'gosterge-ad', KS.t('gosterge_kiler')));
     var sepet = '';
     for (var i = 0; i < deger; i++) sepet += '🧺';
-    kutu.appendChild(el('div', 'sepetler', sepet));
+    kutu.appendChild(el('div', 'sepetler', sepet || KS.t('kilerBos')));
     return kutu;
+  }
+
+  KS.ui.kilerOzetMetni = function (ozet) {
+    return KS.t('kilerOzet', { parcalar: [
+      KS.t(ozet.sut ? 'kiler_sut' : 'kiler_sutYok'),
+      KS.t(ozet.sebze ? 'kiler_sebze' : 'kiler_sebzeYok'),
+      ozet.yetmedi ? KS.t('kiler_sofraYok') : KS.t('kiler_sofra', { n: ozet.sofra })
+    ].join(' · ') });
+  };
+
+  // Aynı göstergedeki değişimler tek farka toplanır; yoksa yazılar üst üste biner.
+  function netDegisimler(liste) {
+    var net = [];
+    (liste || []).forEach(function (dg) {
+      var var_ = net.filter(function (n) { return n.ad === dg.ad; })[0];
+      if (var_) var_.fark += dg.fark;
+      else net.push({ ad: dg.ad, fark: dg.fark });
+    });
+    return net.filter(function (n) { return n.fark !== 0; });
   }
 
   // Gün ve dilim: Sabah · Öğle · Akşam, şu anki vurgulu, serbest olanlar farklı.
@@ -77,7 +96,7 @@ KS.ui = KS.ui || {};
   // Mantığın döndürdüğü değişimleri gösterir: "+2 / −1"; kuyuda sayı yok, düşünce titrer.
   KS.ui.degisimGoster = function (degisimler) {
     KS.ui.gostergeCiz();
-    (degisimler || []).forEach(function (dg) {
+    netDegisimler(degisimler).forEach(function (dg) {
       if (dg.ad === 'kuyu') {
         if (dg.fark < 0) titret();
         return;

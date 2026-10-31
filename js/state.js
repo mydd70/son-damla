@@ -36,6 +36,7 @@ KS.yeniDurum = function () {
       ilkSut: false,
       ilkSaglik: false,
       kilerKuyuGoruldu: false,    // boş kilerin kuyuya etkisi bir kez ipucuyla anlatılır
+      kilerYardimIpucu: false,    // kiler boşken yaşlı çifte gidilebileceği bir kez söylenir
       miniOyunYapildi: false,
       ogleKullanildi: false,
       aksamKullanildi: false
