@@ -1,0 +1,10 @@
+/* Köyümün Suyu – stiller. Aşama 2'de doldurulacak. */
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #2b1913;
+  color: #f6e7d0;
+}
+#oyun {
+  padding: 2rem;
+}
