@@ -114,6 +114,20 @@ var KS = globalThis.KS = globalThis.KS || {};
     return durumlar[Math.min(durumlar.length - 1, Math.max(0, ihtiyac - su))];
   };
 
+  // Panelde verilen suya ve sabah işine göre bu akşamın sofrası (öğle işi henüz sayılmaz).
+  // Mehmet'in tahmini: durumu değiştirmez. Annenin ilk kuyuya inişinden sonra, son gün hariç gösterilir.
+  KS.sofraOnizleme = function (d, verilen) {
+    var k = c();
+    if (!d.bayraklar.kilerKuyuGoruldu || d.gun >= k.GUN_SAYISI) return null;
+    var ihtiyac = KS.ihtiyaclar(d);
+    var tur = KS.miniOyunTuru(d);
+    var keci = d.gosterge.keci + KS.suEtkisi(verilen.keci, ihtiyac.keci) + (tur === 'keciBakimi' ? k.KECI.bakim : 0);
+    var bahce = d.gosterge.bahce + KS.suEtkisi(verilen.bahce + KS.griSuMiktari(d, verilen.ev), ihtiyac.bahce) + (tur === 'otYolma' ? k.BAHCE.otYolma : 0);
+    var sut = keci >= k.KECI.sutEsigi, sebze = bahce >= k.BAHCE.sebzeEsigi;
+    var toplam = d.gosterge.kiler + (sut ? k.KILER.sut : 0) + (sebze ? k.KILER.sebze : 0);
+    return { kiler: d.gosterge.kiler, sut: sut, sebze: sebze, yeter: toplam >= k.KILER.tuketim };
+  };
+
   // ---------- Oyun başı ve dilim ----------
 
   KS.keciAdiVer = function (d, ad) {

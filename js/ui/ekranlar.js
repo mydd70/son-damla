@@ -85,9 +85,26 @@ KS.ui = KS.ui || {};
   KS.ui.gunKartiAc = function (gun, bitince) {
     var e = ekran();
     e.appendChild(KS.ui.el('div', 'kart-metin', KS.metinSec(KS.GUN_KARTLARI[gun - 1])));
+    e.appendChild(KS.ui.el('div', 'plan-baslik', KS.t('planBaslik')));
     e.appendChild(KS.ui.gunPlaniCiz(gun));
     var kesinti = KS.payKesintisi(KS.state);
     e.appendChild(KS.ui.el('div', 'gun-payi', KS.t('gunPayi', { n: KS.state.su.pay }) + (kesinti > 0 ? ' ' + KS.t('gunPayiKesinti', { n: kesinti }) : '')));
+    e.appendChild(dugme(KS.t('devam'), bitince));
+  };
+
+  // İlk girişte hikâyeyi ve oyunun kapsamını anlatan metin.
+  KS.ui.girisAc = function (bitince) {
+    var e = ekran();
+    var kutu = KS.ui.el('div', 'giris-metni');
+    KS.GIRIS_METNI.forEach(function (p) { kutu.appendChild(KS.ui.el('p', '', KS.metinSec(p))); });
+    e.appendChild(kutu);
+    e.appendChild(dugme(KS.t('devam'), bitince));
+  };
+
+  // Sonlara geçerken zaman atlaması: diyalog kutusunda değil, kendi kartında.
+  KS.ui.zamanKartiAc = function (oge, bitince) {
+    var e = ekran();
+    e.appendChild(KS.ui.el('div', 'kart-metin', KS.metinSec(oge)));
     e.appendChild(dugme(KS.t('devam'), bitince));
   };
 

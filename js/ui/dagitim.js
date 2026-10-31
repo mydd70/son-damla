@@ -103,6 +103,13 @@ KS.ui = KS.ui || {};
       };
       alt.appendChild(tamam);
       panel.appendChild(alt);
+      var sofra = KS.sofraOnizleme(d, verilen);
+      if (sofra) panel.appendChild(el('div', 'sofra-onizleme ' + (sofra.yeter ? 'iyi' : 'kotu'), KS.t('sofraOnizleme', {
+        k: sofra.kiler,
+        sut: KS.t(sofra.sut ? 'kiler_sut' : 'kiler_sutYok'),
+        sebze: KS.t(sofra.sebze ? 'kiler_sebze' : 'kiler_sebzeYok'),
+        sonuc: KS.t(sofra.yeter ? 'sofraYeter' : 'sofraYetmez')
+      })));
       if (bosaUyarildi) panel.appendChild(el('div', 'gri-not', KS.t('bosaGider', { n: kalan() })));
       katman.appendChild(panel);
     }

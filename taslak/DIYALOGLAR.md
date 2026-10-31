@@ -15,6 +15,12 @@ Bu sürüm oyuna aktarıldı, oynayarak düzenleyebilirsin. Değişikliklerini b
 
 ## Başlangıç
 
+### Giriş metni (ilk oyunda gün kartından önce; geçici)
+- Konya Ovası'nda küçük bir köy. Son altmış beş yılın en kurak günleri.
+- Sen Mehmet'sin, on iki yaşındasın. Baban şehirde iş arıyor. Evde annen, bebek kardeşin ve hasta keçiniz var.
+- Köy, önündeki dokuz günün sonunda kuyunun geleceğini oylayacak. Her sabah evin suyunu sen bölüştüreceksin. Öğlen ve akşam ne yapacağına, kime gideceğine de sen karar vereceksin.
+- Kuyu hepinizin. Bakalım köy ayakta kalabilecek mi?
+
 ### Keçiye isim
 - **Ekran:** Keçimizin adı ne?
 - *(boş bırakılırsa: Pamuk)*
@@ -77,7 +83,10 @@ Kartta planın altında bugünkü su payı yazar; komşuya su götürüldüyse k
 - **[ipucu]** Sepetler evin yiyeceği. Her akşam iki sepet eksilir. Keçi "Toparlanıyor" olunca süt, bahçe "Yeşil" olunca sebze getirir, ikisi birer sepet. Gece ne geldiğini görürsün. Kiler boşalırsa ev zorlanır.
 
 ### Kiler özeti (her gece, gece satırından sonra)
-- **Ekran:** Kiler: keçiden süt +1 / keçi süt vermedi · bahçeden sebze +1 / bahçe sebze vermedi · sofra −2
+- **Ekran:** Kiler: keçiden süt +1 / keçi süt vermedi · bahçeden sebze +1 / bahçe sebze vermedi · sofra −2 (yetmezse: sofraya yetmedi, annen kuyuya indi)
+
+### Sofra önizlemesi (dağıtım panelinde, annenin ilk kuyuya inişinden sonra, son gün hariç)
+- **Ekran:** Bu akşamki sofra (şimdilik): kilerde N · keçiden süt +1 / keçi süt vermedi · bahçeden sebze +1 / bahçe sebze vermedi → yeter / yetmez, annen kuyuya iner
 
 ### Öğretici: komşuluk (kiler bir gece boş kaldıktan sonraki akşam, bir kez)
 - **Mehmet (iç ses):** Kiler yine boş. Birinden istesem verirler mi? Fatma Teyze annemi hep sorar.
@@ -166,7 +175,10 @@ Kartta planın altında bugünkü su payı yazar; komşuya su götürüldüyse k
 - **Baba:** Mehmet? Sesim geliyor mu?
 - **Mehmet:** Geliyor baba! Ne zaman geleceksin?
 - **Baba:** *(bir an susar)* İnşaatta bir iş var, belki. Çağırdıkları gün gidiyorum, çağırmadıkları gün bekliyorum.
-- **Baba:** Annen nasıl? Uyuyor mu geceleri? {keci} nasıl?
+- **Baba:** Annen nasıl? Uyuyor mu geceleri?
+- > Yorgun ama iyi, baba. → **Baba:** Yorgundur. Söyle ona, ben de burada pek uyumuyorum.
+- > Sen nasılsın asıl? → **Baba:** Ben mi? İyiyim. Burada su musluktan akıyor, içerken utanıyorum.
+- **Baba:** {keci} nasıl?
 - *(keçi <5)* **Mehmet:** {keci} hâlâ iyi değil. Kuyu da iniyor, öğretmen ölçtü.
 - *(keçi ≥5)* **Mehmet:** {keci} toparlanıyor. Ama kuyu iniyor, öğretmen ölçtü.
 - **Mehmet:** Bidonları artık ben taşıyorum.
@@ -432,18 +444,29 @@ Bir konuşmada en fazla bir şey söylenir, sonra konuşma biter. Obruk uyarıs�
 
 ### Aile vakti
 Her durumda üç sürüm, gün sırasıyla döner.
-- **Ev düşükken – Anne:**
-  1. Otur yanıma. Bir şey yapmasak da olur. *(bebeği kucağına verir)*
-  2. Yoruldum, oğlum. Sana söylemiyorum, kendime söylüyorum. Otur biraz.
-  3. Baban olsa "bu da geçer" derdi. Ben demeyeyim, sen otur yeter.
-- **Ev ortadayken – Anne:**
-  1. Kardeşin bugün sana baktı baktı güldü, biliyor musun?
-  2. Baban küçükken bu avluda uyurmuş, yazın. Gel, biz de çıkalım.
-  3. Baban gitmeden kapıyı onaracaktı. Döner dönmez sana da tutturacak, görürsün.
-- **Ev yüksekken – Anne:**
-  1. Baban gelince bu evi görsün. Zor günde dağılmadık.
-  2. Bugün sana hiç "hadi" demedim, fark ettin mi? Her işe kendin yetiştin.
-  3. Babana anlatacağım, bu yaz kimin sayesinde ayakta kaldık.
+- **Ev düşükken:**
+  1. **Anne:** Otur yanıma. Bir şey yapmasak da olur. (bebeği kucağına verir) **Mehmet:** (kardeşini sallar, bir süre konuşmazlar)
+  2. **Anne:** Yoruldum, oğlum. Sana söylemiyorum, kendime söylüyorum. Otur biraz. **Mehmet:** Uzan biraz anne, kardeşime ben bakarım.
+  3. **Anne:** Baban olsa "bu da geçer" derdi. Ben demeyeyim, sen otur yeter. **Mehmet:** Geçer anne.
+- **Ev ortadayken:**
+  1. **Anne:** Kardeşin bugün sana baktı baktı güldü, biliyor musun? **Mehmet:** Bana mı güldü? Ben ne yaptım ki?
+  2. **Anne:** Baban küçükken bu avluda uyurmuş, yazın. Gel, biz de çıkalım. **Mehmet:** Yıldızlar da görünür buradan.
+  3. **Anne:** Baban gitmeden kapıyı onaracaktı. Döner dönmez sana da tutturacak, görürsün. **Mehmet:** Ben onarırım anne, çivi versen yeter.
+- **Ev yüksekken:**
+  1. **Anne:** Baban gelince bu evi görsün. Zor günde dağılmadık. **Mehmet:** Görür anne.
+  2. **Anne:** Bugün sana hiç "hadi" demedim, fark ettin mi? Her işe kendin yetiştin. **Mehmet:** Fark ettim. Yine de deme, alışırım.
+  3. **Anne:** Babana anlatacağım, bu yaz kimin sayesinde ayakta kaldık. **Mehmet:** {keci} sayesinde de.
+- **Ardından küçük sohbet (mekanik etkisi yok, gün sırasıyla):**
+  - **Anne:** Bugün dışarıda kimleri gördün bakalım?
+    - > Herkes kuyu başında, bidon sayıyor. → Saysınlar. Sayılacak su kaldıkça iyi.
+    - > Kimseyle konuşmadım. → Konuş, oğlum. Bu köyde herkes susarsa iş daha da zorlaşır.
+  - **Anne:** Baban aradığında ona ne anlatacaksın?
+    - > {keci} iyi derim. → De, sevinsin. Soracağı ilk şey de odur zaten.
+    - > Hiçbir şey, üzülmesin. → Üzülmez. Sesini duymak ister, ne desen olur.
+  - **Anne:** Kardeşin büyüyünce seni ona nasıl anlatayım?
+    - > Su taşıyan abisi de. → (güler) Bir de inatçı diyeyim, eksik kalmasın.
+    - > Anlatma, kendi görür. → Görür tabii. Sen yanında ol, yeter.
+- **Kapanış:** *(tek gün)* **Mehmet:** İyi geceler anne. **Anne:** İyi geceler, oğlum. Kardeşini uyandırma. *(çift gün)* **Mehmet:** Hayırlı geceler anne. **Anne:** Sana da, yavrum. Yarın erken kalkacağız.
 
 ### Akşam bitişi (ziyaretten sonra, eve dönüş)
 - **Mehmet (iç ses):** Hava karardı. Eve dönmeliyim.
@@ -479,8 +502,15 @@ Tek cümleli olanlar tekrar edince tuhaf kalıyordu, her birine birkaç sürüm 
   2. **Mehmet (iç ses):** Bulaşığı yıkadım, suyunu leğende biriktirdim.
   3. **Anne:** Ne zaman büyüdün sen? **Mehmet:** *(cevap vermez, çamaşırı asmaya devam eder)*
 - **Babayı ara (tepe):**
-  - *(gün 5'ten önce)* **Baba:** Mehmet! Ben iyiyim, iş arıyorum. Annene söyle, bu hafta biraz para yollamaya çalışacağım. **Mehmet:** Tamam baba. **Mehmet (iç ses):** Sesi yorgun. "Çalışacağım" dedi, "yollayacağım" demedi.
-  - *(gün 5'ten sonra)* **Baba:** Hat kesilmişti. Rıza'yı bir tek muhtar yumuşatır diyecektim. Kardeş gibiydiler. **Mehmet:** Ne oldu onlara? **Baba:** O ikisinin bileceği iş. Sen anneni öp benim yerime. **Mehmet (iç ses):** Sesi yorgun. Sormadım.
+  - **Mehmet (iç ses):** Tepeye çıktım. Telefon çekiyor, aradım. **Baba:** Efendim? Mehmet, sen misin? **Mehmet:** Benim baba. Nasılsın?
+  - *(gün 5'ten önce)* **Baba:** İyiyim oğlum, iş arıyorum. Bu saatte tepede ne işin var?
+    - > Sesini duyayım dedim. → İyi ettin. Ben de seninkini duymak istiyordum.
+    - > Annem soruyor, ne zaman geleceksin? → *(bir an susar)* Bilmiyorum oğlum. İş çıksın, bir yol bulacağım.
+    - **Baba:** Annene söyle, bu hafta biraz para yollamaya çalışacağım. **Mehmet:** Tamam baba. Allah'a emanet ol. **Baba:** Sen de oğlum. Anneni öp benim yerime. **Mehmet (iç ses):** Sesi yorgun. "Çalışacağım" dedi, "yollayacağım" demedi.
+  - *(gün 5'ten sonra)* **Baba:** İyiyim oğlum, şükür. Karnınız doyuyor mu orada?
+    - > Doyuyor baba, merak etme. → *(güler)* Yalan söylemeyi benden öğrenme. İyi, inandım.
+    - > Zor gidiyor. → Biliyorum oğlum. Bu hafta biraz para yollamaya çalışacağım.
+    - **Mehmet:** Hat kesilmişti. "O adamı bir tek muhtar" diyordun. **Baba:** Ha, Rıza. Onu bir tek muhtar yumuşatır diyecektim. Kardeş gibiydiler. **Mehmet:** Ne oldu onlara? **Baba:** O ikisinin bileceği iş. Kontör bitiyor, sen anneni öp benim yerime. **Mehmet:** Tamam baba. Allah'a emanet ol. **Baba:** Sen de oğlum. **Mehmet (iç ses):** Sesi yorgun. Sormadım.
 - **Çamurda serinle (tek sefer):** **Mehmet (iç ses):** Leğenin dibindeki çamura ayaklarımı soktum. Kardeşim görüp kahkaha attı. Annem kızmadı.
 - **Hiçbir şey yapmadan geçerse:**
   1. **Mehmet (iç ses):** Gölgede oturdum. Sıcak, kimseye bir şey yaptırmıyor.
@@ -570,7 +600,7 @@ Tek cümleli olanlar tekrar edince tuhaf kalıyordu, her birine birkaç sürüm 
 
 ## İyi son
 - [sahne: sarnic_onarildi]
-- **Ekran:** Ekim. İlk yağmur.
+- **Kart:** Ekim. İlk yağmur.
 - [ses: yağmur]
 - **Mehmet (iç ses):** Sarnıcın oluğundan su akıyor. Muhtarla Rıza Amca yan yana duruyor, ikisi de ıslak, ikisi de susuyor.
 - **Muhtar:** Seksen dokuzda da böyle durmuştuk, hatırlıyor musun?
@@ -602,9 +632,10 @@ Tek cümleli olanlar tekrar edince tuhaf kalıyordu, her birine birkaç sürüm 
 - **Ekran:** Zor ama birlikte kaldık.
 
 ## Kötü son
+- **Kart:** Aylar geçti. Ekim.
 - [sahne: avlu]
 - *(komşu ikna edildiyse)* **Ekran:** Plan kabul edildi. Ama kuyu çok inmişti.
-- **Ekran:** Eylülde köy kuyusu dibini gösterdi. Ekim.
+- **Ekran:** Eylülde köy kuyusu dibini gösterdi.
 - **Anne:** Kamyon gelmiş. Eşyalar hazır mı?
 - **Mehmet (iç ses):** Babam şehirde bir oda bulmuş. Hepimiz oraya.
 - **Mehmet (iç ses):** Yol parası lazımdı. İpi pazarcıya kendim uzattım. {keci} dönüp baktı. Ben bakamadım.

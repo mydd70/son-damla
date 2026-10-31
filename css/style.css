@@ -102,6 +102,9 @@ button:disabled { opacity: 0.4; cursor: default; }
 .dilim-adi.serbest { color: #a8d08d; }
 .dilim-adi.simdi { opacity: 1; font-weight: 700; border-bottom-color: var(--sari); }
 .gun-plani { display: flex; gap: 0.6em; }
+.plan-baslik { font-size: 0.85em; font-weight: 600; opacity: 0.85; }
+.giris-metni { max-width: 34em; text-align: left; line-height: 1.5; }
+.giris-metni p { margin: 0 0 0.7em; }
 .gun-payi { font-size: 1.05em; }
 .plan-hucre { min-width: 8em; padding: 0.4em 0.7em; background: var(--toprak-koyu); border-radius: 0.3em; }
 .plan-hucre.serbest { background: transparent; border: 0.1em solid #a8d08d; color: #a8d08d; }
@@ -259,6 +262,9 @@ button:disabled { opacity: 0.4; cursor: default; }
 }
 .dagitim-satir button { padding: 0.15em 0; }
 .su-durum { font-size: 0.8em; font-weight: 600; }
+.sofra-onizleme { font-size: 0.8em; font-weight: 600; margin-top: 0.4em; }
+.sofra-onizleme.iyi { color: #a8d08d; }
+.sofra-onizleme.kotu { color: #ff9d8a; }
 .su-durum.iyi { color: #a8d08d; }
 .su-durum.orta { color: var(--sari); }
 .su-durum.eksik { color: #f0b070; }

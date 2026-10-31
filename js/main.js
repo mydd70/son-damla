@@ -32,7 +32,8 @@ var KS = globalThis.KS = globalThis.KS || {};
     var r = KS.gunBaslat(KS.state);
     ui.gostergeCiz();
     ui.sahneGoster('avlu');
-    ui.gunKartiAc(KS.state.gun, function () {
+    var ilkGiris = KS.state.gun === 1 && !KS.state.tekrarOyun;
+    (ilkGiris ? ui.girisAc : function (sonra) { sonra(); })(function () { ui.gunKartiAc(KS.state.gun, function () {
       ui.degisimGoster(r.degisimler);
       ortamSesi();
       if (r.aglama) KS.ses.cal('bebek_agla');
@@ -43,7 +44,7 @@ var KS = globalThis.KS = globalThis.KS || {};
         if (r.olay && r.olay.karsilasma) ui.karsilasmaOynat('zorunlu', dagitim);
         else dagitim();
       });
-    });
+    }); });
   }
 
   function ilkGunOgretici(id, sonraki) {
@@ -138,7 +139,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     var aile = id === 'aileVakti';
     var r = aile ? KS.aileVakti(KS.state) : KS.aksamZiyaret(KS.state, id);
     ui.degisimGoster(r.degisimler);
-    var olaylar = aile ? [KS.olayGetir('aile_vakti')] : KS.ziyaretOlaylari(id, KS.state, r);
+    var olaylar = aile ? [KS.olayGetir('aile_vakti'), KS.olayGetir('aile_sohbet'), KS.olayGetir('aile_gece')] : KS.ziyaretOlaylari(id, KS.state, r);
     function ziyaretSonu() {
       if (aile) { ui.ilerleGoster('gecis_gunuBitir', gunSonu); return; }
       ui.olaylariOynat([KS.olayGetir('veda_' + id), KS.olayGetir('aksam_bitis')], null, function () {
@@ -176,10 +177,12 @@ var KS = globalThis.KS = globalThis.KS || {};
     ui.degisimGoster(r.degisimler);
     ui.olaylariOynat(KS.olaylariGetir(KS.state.gun, 'aksam', KS.state), r, function () {
       KS.ses.ortamCal(null);
-      ui.olaylariOynat(KS.sonOlaylari(r.sonuc.iyi), r, function () {
-        ui.sonAc(r.sonuc, function () {
-          KS.ses.ortamCal(null);
-          yeniOyun(true);
+      ui.zamanKartiAc(KS.SON_KARTLARI[r.sonuc.iyi ? 'iyi' : 'kotu'], function () {
+        ui.olaylariOynat(KS.sonOlaylari(r.sonuc.iyi), r, function () {
+          ui.sonAc(r.sonuc, function () {
+            KS.ses.ortamCal(null);
+            yeniOyun(true);
+          });
         });
       });
     });
