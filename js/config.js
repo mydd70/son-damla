@@ -40,6 +40,14 @@ KS.config = {
     uyari: 50
   },
 
+  // --- Mini oyunlar ---
+  MINI_OYUN: {
+    otAdet: 9, otSure: 10,               // saniye
+    otSutun: 5, otSatir: 3, otSarsinti: 0.3,   // otların dağılımı: ızgara ve hücre içi kayma oranı
+    taramaTur: 4,                        // keçinin genişliği kadar kaç kez sürtülecek
+    bitisBekleme: 600                    // milisaniye: son hamle görünsün diye
+  },
+
   // --- Olaylar ve sistemler ---
   OLCUM: { teslimIlkGun: 3, teslimSonGun: 5 },
   PLAN_GUNU: 6,

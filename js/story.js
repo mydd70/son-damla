@@ -144,6 +144,11 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'ic', metin: 'Ne desem bilemedim. Önce köydekilerle konuşmalıyım.' },
       { kim: 'komsu', metin: 'Söyleyecek bir şeyin yoksa git işine.' }
     ] },
+    { id: 'ev_isi', mekan: 'avlu', satirlar: [
+      { kim: 'anne', metin: 'Mehmet, bugün bana yardım et. Tek başıma yetişemiyorum.' },
+      { kim: 'ic', kosul: function (d) { return d.gun % 2 === 1; }, metin: 'Çamaşır, bulaşık, bebeğin bezi. {keci}\'ye bugün bakamadım.' },
+      { kim: 'ic', kosul: function (d) { return d.gun % 2 === 0; }, metin: 'Çamaşır, bulaşık, bebeğin bezi. Bahçeye bugün bakamadım.' }
+    ] },
     { id: 'kuyu_uyari', satirlar: [
       { kim: 'ogretmen', metin: 'Bu sabah ip yine uzadı. Böyle giderse cumaya kuyu dibi görecek.' }
     ] },

@@ -101,6 +101,12 @@ var KS = globalThis.KS = globalThis.KS || {};
     return sonuc(true);
   };
 
+  // "Tekrar oyna" ile başlayan oyunda mini oyunlarda "Hızlı geç" açılır.
+  KS.tekrarOyunIsaretle = function (d) {
+    d.tekrarOyun = true;
+    return sonuc(true);
+  };
+
   KS.dilimGec = function (d, dilim) {
     if (c().DILIMLER.indexOf(dilim) < 0) return hata('Bilinmeyen dilim: ' + dilim);
     d.dilim = dilim;

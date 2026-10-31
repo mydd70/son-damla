@@ -4,8 +4,9 @@ var KS = globalThis.KS = globalThis.KS || {};
 (function () {
   var ui = KS.ui;
 
-  function yeniOyun() {
+  function yeniOyun(tekrar) {
     KS.state = KS.yeniDurum();
+    if (tekrar) KS.tekrarOyunIsaretle(KS.state);
     ui.baslangicAc(function () {
       ui.keciIsmiAc(function (ad) {
         KS.keciAdiVer(KS.state, ad);
@@ -39,11 +40,13 @@ var KS = globalThis.KS = globalThis.KS || {};
   }
 
   function sabahIsi() {
-    ui.miniOyunAc(function () {
+    function tamamla() {
       var r = KS.miniOyunTamamla(KS.state);
       ui.degisimGoster(r.degisimler);
       ogle();
-    });
+    }
+    if (KS.miniOyunTuru(KS.state) === 'evIsi') ui.diyalogOynat(KS.olayGetir('ev_isi'), null, tamamla);
+    else ui.miniOyunAc(tamamla);
   }
 
   // ---------- Öğle ----------
@@ -108,7 +111,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     var r = KS.toplanti(KS.state);
     ui.degisimGoster(r.degisimler);
     ui.diyalogOynat(KS.olayGetir(r.sonuc.iyi ? 'son_iyi' : 'son_kotu'), r, function () {
-      ui.sonAc(r.sonuc, yeniOyun);
+      ui.sonAc(r.sonuc, function () { yeniOyun(true); });
     });
   }
 

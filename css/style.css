@@ -193,6 +193,39 @@ button:disabled { opacity: 0.4; cursor: default; }
 .kalan { margin-right: auto; font-weight: 600; }
 button.fazla-acik { background: var(--kirmizi); }
 
+/* ---------- Mini oyunlar ---------- */
+.mini { height: 68%; display: flex; flex-direction: column; }
+.hizli-gec { position: absolute; top: 0.8em; right: 1em; padding: 0.2em 0.7em; font-size: 0.85em; }
+.mini-icerik { flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; gap: 0.5em; }
+.mini-yonerge { margin: 0; text-align: center; }
+.mini-basla { margin: auto; }
+.mini-sure { flex: none; width: 100%; height: 0.6em; background: var(--bos); border-radius: 0.3em; overflow: hidden; }
+.mini-sure div { width: 100%; height: 100%; background: var(--sari); }
+.tarla { position: relative; flex: 1; width: 100%; background: #8a6a42; border-radius: 0.3em; }
+.ot {
+  position: absolute;
+  width: 3em; height: 3em;
+  padding: 0.3em;
+  transform: translate(-50%, -50%);
+  color: #a8b45a;
+  background: transparent;
+}
+.ot:hover:not(:disabled) { background: transparent; color: #d6dd8a; }
+.bakim { flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; gap: 2em; }
+.keci-siluet {
+  height: 100%;
+  aspect-ratio: 10 / 7;
+  color: #120a07;
+  background: #d6b47e;
+  border-radius: 0.3em;
+  padding: 0.4em;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+.keci-siluet svg { display: block; width: 100%; height: 100%; pointer-events: none; }
+.bakim-esya { display: flex; flex-direction: column; gap: 0.6em; }
+
 /* ---------- Harita ---------- */
 .harita-zemin { position: absolute; inset: 0; }
 .yer {

@@ -1,6 +1,6 @@
 # İlerleme
 
-Son güncelleme: 31 Ekim 2026, Aşama 2 bitti.
+Son güncelleme: 31 Ekim 2026, Aşama 3 bitti.
 
 | İş | Durum |
 |---|---|
@@ -9,9 +9,11 @@ Son güncelleme: 31 Ekim 2026, Aşama 2 bitti.
 | SVG referans sahneleri + PNG + promptlar | Bitti: `js/scenes.js`, `referans/sahneler/`, `referans/PROMPTLAR.md` |
 | Veri doğrulama | Bitti: `referans/VERILER.md` |
 | Diyalog taslağı | Bitti: `taslak/DIYALOGLAR.md` |
-| Aşama 2: ana iskelet, dil altyapısı | Bitti, etiket `asama-2`. İlk yayın kullanıcı onayını bekliyor |
+| Aşama 2: ana iskelet, dil altyapısı | Bitti, etiket `asama-2` |
+| Aşama 3: ot yolma, keçi bakımı, zorunlu ev işi, Hızlı geç | Bitti, etiket `asama-3` |
+| İlk yayın | Onaylandı; depo açma ve ilk push kullanıcının GitHub girişini bekliyor |
 
-Sıradaki: Aşama 3 (mini oyunlar), kullanıcının onayıyla.
+Sıradaki: Aşama 4 (hikaye ve ikna), kullanıcının onayıyla.
 
 ## Aşama 4'ten önce sorulacak tasarım konuları
 1. Gün 9 "son şans": o gün komşuyla karşılaşmanın yolu yok. Kod komşuya su götürmeyi kapatıyor, akşam da toplantı var.
