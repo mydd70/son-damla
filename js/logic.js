@@ -151,7 +151,11 @@ var KS = globalThis.KS = globalThis.KS || {};
     // İkna edilen komşu motorunu son gün sabahı durdurur.
     if (d.gun === k.GUN_SAYISI && d.komsu.ikna) d.bayraklar.motorKapali = true;
 
+    var ilkSut = !d.bayraklar.ilkSut && d.gosterge.keci >= k.KECI.sutEsigi;
+    if (ilkSut) d.bayraklar.ilkSut = true;
+
     var r = sonuc(true, {
+      ilkSut: ilkSut,
       zorunluEvIsi: d.bayraklar.zorunluEvIsi,
       aglama: d.gun <= k.EV.aglamaHerSabahSonGun || d.gosterge.ev < k.EV.aglamaEsigi,
       olay: KS.olayBul(d.gun, 'sabah')
@@ -288,10 +292,27 @@ var KS = globalThis.KS = globalThis.KS || {};
       d.gun >= k.OLCUM.teslimIlkGun && d.gun <= k.OLCUM.teslimSonGun;
   };
 
+  // Kişiden öğrenilecek bir şey henüz açılmadıysa ziyaret hakkı işlemez: kısa sohbet, kişi başına 1 kez.
+  function bilgisiAcikMi(d, kim) {
+    if (kim === 'yasliCift') return d.bayraklar.dayanikliTohum;
+    if (kim === 'ogretmen') return d.bayraklar.olcumElde;
+    if (kim === 'muhtar') return d.gun >= c().MUHTAR_ARGUMAN_ILK_GUN;
+    return d.komsu.ogrenilen.length > 0;
+  }
+
+  KS.sohbetZiyaretiMi = function (d, kim) {
+    return !bilgisiAcikMi(d, kim) && !d.sohbetEdildi[kim];
+  };
+
+  function ziyaretAcikMi(d, kim) {
+    if (KS.gorevZiyaretiMi(d, kim) || KS.sohbetZiyaretiMi(d, kim)) return true;
+    return bilgisiAcikMi(d, kim) && d.ziyaretKalan[kim] > 0;
+  }
+
   KS.aksamSecenekleri = function (d) {
     if (KS.olayBul(d.gun, 'aksam')) return [];
     var liste = ['yasliCift', 'muhtar', 'ogretmen', 'komsu'].map(function (kim) {
-      return { id: kim, acik: d.ziyaretKalan[kim] > 0 || KS.gorevZiyaretiMi(d, kim), gorev: KS.gorevZiyaretiMi(d, kim) };
+      return { id: kim, acik: ziyaretAcikMi(d, kim), gorev: KS.gorevZiyaretiMi(d, kim) };
     });
     liste.push({ id: 'aileVakti', acik: true, gorev: false });
     return liste;
@@ -300,10 +321,17 @@ var KS = globalThis.KS = globalThis.KS || {};
   KS.aksamZiyaret = function (d, kim) {
     var k = c();
     if (d.bayraklar.aksamKullanildi) return hata('Akşam zaten geçti.');
+    if (!ziyaretAcikMi(d, kim)) return hata('Bu eve ziyaret hakkı kalmadı: ' + kim);
     var gorev = KS.gorevZiyaretiMi(d, kim);
-    if (!gorev && !(d.ziyaretKalan[kim] > 0)) return hata('Bu eve ziyaret hakkı kalmadı: ' + kim);
-    var r = sonuc(true, { gorev: gorev, yardim: false, karsilasma: false });
+    var sohbet = !gorev && KS.sohbetZiyaretiMi(d, kim);
+    var r = sonuc(true, { gorev: gorev, sohbet: sohbet, yardim: false, karsilasma: false });
 
+    d.bayraklar.aksamKullanildi = true;
+    if (sohbet) {
+      d.sohbetEdildi[kim] = true;
+      gunlukYaz(d, 'akşam sohbet ' + kim);
+      return r;
+    }
     if (gorev) {
       d.bayraklar.olcumTeslim = true;
     } else {
@@ -315,7 +343,6 @@ var KS = globalThis.KS = globalThis.KS || {};
       r.yardim = d.yasliCiftYardim;   // 1 ya da 2 (2'de "bir daha getiremeyiz")
     }
     if (kim === 'komsu') r.karsilasma = true;
-    d.bayraklar.aksamKullanildi = true;
     gunlukYaz(d, 'akşam ziyaret ' + kim + (gorev ? ' (görev)' : ''));
     return r;
   };
@@ -382,6 +409,26 @@ var KS = globalThis.KS = globalThis.KS || {};
     d.komsu.ozurBekliyor = d.komsu.kilitli.length > 0;
     gunlukYaz(d, 'kabalık geri alındı ' + id);
     return sonuc(true);
+  };
+
+  // ---------- Defter ----------
+
+  // Defterde görünenler. Metinleri dil.js'te, durumu buradan.
+  KS.defter = function (d) {
+    var k = c();
+    var gorevler = [];
+    if (d.bayraklar.olcumElde) {
+      var gecti = !d.bayraklar.olcumTeslim && d.gun > k.OLCUM.teslimSonGun;
+      gorevler.push({ id: gecti ? 'olcumGec' : 'olcum', tamam: d.bayraklar.olcumTeslim });
+    }
+    if (d.plan || d.komsu.ogrenilen.length) {
+      gorevler.push({ id: 'komsu', tamam: d.komsu.ikna, sayi: d.komsu.iletilen.length, gereken: k.IKNA.gerekenArguman });
+    }
+    var argumanlar = d.komsu.ogrenilen.map(function (a) {
+      var durum = d.komsu.iletilen.indexOf(a) >= 0 ? 'iletildi' : (d.komsu.kilitli.indexOf(a) >= 0 ? 'kilitli' : 'hazir');
+      return { id: a, durum: durum };
+    });
+    return { gorevler: gorevler, argumanlar: argumanlar };
   };
 
   // ---------- Gün sonu ve toplantı ----------

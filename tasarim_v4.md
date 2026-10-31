@@ -64,6 +64,7 @@ Serbest öğle günleri: 3, 4, 5, 7, 9. Serbest akşamlar: 1-8.
 ### Akşam
 - Ziyaret: yaşlı çift, muhtar, öğretmen, komşu. Her eve bir kez; yaşlı çift ve öğretmene birer ek hak.
 - **Görev ziyareti hak tüketmez:** defterdeki bir görev için yapılan ziyaret (ör. ölçümü muhtara götürmek) ziyaret hakkından sayılmaz.
+- **Kısa sohbet hak tüketmez:** kişiden öğrenilecek bir şey henüz açılmadıysa (yaşlı çift gün 2 olayından, öğretmen gün 3 ölçümünden, muhtar gün 3'ten önce; komşu ilk argüman öğrenilene kadar) ziyaret kısa bir sohbet olur. Akşamı harcar, hak tüketmez, argüman vermez, kişi başına bir kez. Herkes birbirini zaten tanır; sohbet tanışma gibi yazılmaz, sonunda Mehmet'in o kişi hakkındaki iç sesi gelir. Sohbeti yapılmış ve bilgisi hâlâ açılmamış kişi haritada soluk görünür.
 - Ya da aile vakti: ev +1.
 - Ertesi günün su payı duyurulur.
 
@@ -147,7 +148,7 @@ Simülasyon hedefi: dikkatli profil iyi sona rahat, pasif profil kötü sona ula
   - A3, eski dostluk anısı: muhtar ziyareti (gün 3'ten) ya da gün 6 plan olayı. Anı yalnızca dostluğu anlatır, küslüğün sebebini değil.
 - Bir karşılaşmada o ana kadar öğrenilmiş tüm argümanlar iletilebilir.
 - **2 argüman iletilince komşu ikna olur:** toplantıda evet der, motoru gün 9 sabahı durur. Gün 9 öğlesinde ikna edilirse toplantıda yine evet der ama motor o gün çalışmış olur (kuyu −3).
-- **Kabalık:** Kaba seçim ilgili argümanı kilitler (görünür geri bildirim). Sonraki karşılaşmada özür seçeneği kilidi açar. Gün 8'de kaba seçim yapılırsa aynı konuşmada geri alınabilir ("Dur, öyle demek istemedim").
+- **Kabalık:** Kaba seçim ilgili argümanı kilitler (görünür geri bildirim) ve o konuşmayı bitirir. Sonraki karşılaşmada özür seçeneği kilidi açar. Gün 8'de kaba seçim yapılırsa aynı konuşmada geri alınabilir ("Dur, öyle demek istemedim").
 - İpuçları: annenin akşam cümleleri, baba telefonu, doğal diyaloglar.
 
 ## 9. Mehmet'in Defteri

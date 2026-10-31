@@ -23,9 +23,11 @@ var KS = globalThis.KS = globalThis.KS || {};
     ui.sahneGoster('avlu');
     ui.gunKartiAc(KS.state.gun, function () {
       ui.degisimGoster(r.degisimler);
-      var olaylar = KS.olaylariGetir(KS.state.gun, 'sabah', KS.state);
+      var olaylar = KS.state.gun > 1 ? [KS.olayGetir('sabah_durum')] : [];
+      olaylar = olaylar.concat(KS.olaylariGetir(KS.state.gun, 'sabah', KS.state));
       ui.olaylariOynat(olaylar, r, function () {
-        karsilasmaVarsa(r.olay && r.olay.karsilasma, dagitim);
+        if (r.olay && r.olay.karsilasma) ui.karsilasmaOynat('zorunlu', dagitim);
+        else dagitim();
       });
     });
   }
@@ -59,7 +61,8 @@ var KS = globalThis.KS = globalThis.KS || {};
       var r = KS.ogleOlayi(KS.state);
       ui.degisimGoster(r.degisimler);
       ui.olaylariOynat(KS.olaylariGetir(KS.state.gun, 'ogle', KS.state), r, function () {
-        karsilasmaVarsa(r.karsilasma, aksam);
+        if (r.karsilasma) ui.karsilasmaOynat('obruk', aksam);
+        else aksam();
       });
       return;
     }
@@ -67,7 +70,8 @@ var KS = globalThis.KS = globalThis.KS || {};
       var r = KS.ogleEylemi(KS.state, id);
       ui.degisimGoster(r.degisimler);
       ui.diyalogOynat(KS.olayGetir('ogle_' + id), r, function () {
-        karsilasmaVarsa(r.karsilasma, aksam);
+        if (r.karsilasma) ui.karsilasmaOynat('su', aksam);
+        else aksam();
       });
     });
   }
@@ -83,7 +87,9 @@ var KS = globalThis.KS = globalThis.KS || {};
       ui.olaylariOynat(KS.olaylariGetir(d.gun, 'aksam', d), null, toplanti);
       return;
     }
-    ui.olaylariOynat(KS.olaylariGetir(d.gun, 'aksam', d), null, function () {
+    var olaylar = KS.olaylariGetir(d.gun, 'aksam', d);
+    if (d.gosterge.ev >= KS.config.EV.yuksekAlt) olaylar.push(KS.olayGetir('anne_ipucu'));
+    ui.olaylariOynat(olaylar, null, function () {
       ui.haritaAc(aksamSecimi);
     });
   }
@@ -92,8 +98,10 @@ var KS = globalThis.KS = globalThis.KS || {};
     var aile = id === 'aileVakti';
     var r = aile ? KS.aileVakti(KS.state) : KS.aksamZiyaret(KS.state, id);
     ui.degisimGoster(r.degisimler);
-    ui.diyalogOynat(KS.olayGetir(aile ? 'aile_vakti' : 'ziyaret_' + id), r, function () {
-      karsilasmaVarsa(r.karsilasma, gunSonu);
+    var olaylar = aile ? [KS.olayGetir('aile_vakti')] : KS.ziyaretOlaylari(id, KS.state, r);
+    ui.olaylariOynat(olaylar, r, function () {
+      if (r.karsilasma) ui.karsilasmaOynat('aksam', gunSonu);
+      else gunSonu();
     });
   }
 
@@ -110,19 +118,12 @@ var KS = globalThis.KS = globalThis.KS || {};
   function toplanti() {
     var r = KS.toplanti(KS.state);
     ui.degisimGoster(r.degisimler);
-    ui.diyalogOynat(KS.olayGetir(r.sonuc.iyi ? 'son_iyi' : 'son_kotu'), r, function () {
+    ui.olaylariOynat(KS.sonOlaylari(r.sonuc.iyi), r, function () {
       ui.sonAc(r.sonuc, function () { yeniOyun(true); });
     });
   }
 
   // ---------- Ortak adımlar ----------
-
-  // Aşama 2: karşılaşma sayılır ama argüman iletilemez; ikna Aşama 4'te.
-  function karsilasmaVarsa(gerekli, sonraki) {
-    if (!gerekli) { sonraki(); return; }
-    KS.karsilasmaBaslat(KS.state);
-    ui.diyalogOynat(KS.olayGetir('karsilasma'), null, sonraki);
-  }
 
   function kuyuUyarisiVarsa(gerekli, sonraki) {
     if (!gerekli) { sonraki(); return; }

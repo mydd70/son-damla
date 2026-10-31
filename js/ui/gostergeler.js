@@ -41,6 +41,9 @@ KS.ui = KS.ui || {};
     ust.appendChild(el('div', 'gun-etiketi', KS.t('gun', { n: d.gun }) + ' · ' + KS.t('dilim_' + d.dilim)));
     ['keci', 'ev', 'bahce'].forEach(function (ad) { ust.appendChild(cubukGosterge(ad, d.gosterge[ad])); });
     ust.appendChild(kilerGosterge(d.gosterge.kiler));
+    var defter = el('button', 'defter-dugme', KS.t('defter'));
+    defter.onclick = KS.ui.defterAc;
+    ust.appendChild(defter);
 
     var kuyu = document.getElementById('kuyu');
     kuyu.hidden = false;

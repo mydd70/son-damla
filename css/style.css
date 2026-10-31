@@ -226,6 +226,14 @@ button.fazla-acik { background: var(--kirmizi); }
 .keci-siluet svg { display: block; width: 100%; height: 100%; pointer-events: none; }
 .bakim-esya { display: flex; flex-direction: column; gap: 0.6em; }
 
+/* ---------- Defter ---------- */
+.defter-dugme { padding: 0.3em 0.8em; }
+#defter { position: absolute; inset: 0; z-index: 5; background: rgba(18, 10, 7, 0.6); }
+.defter-panel { top: 50%; width: 60%; }
+.defter-panel h3 { margin: 0.6em 0 0.2em; font-size: 0.95em; color: var(--sari); }
+.defter-liste { margin: 0 0 0.6em; padding-left: 1.2em; }
+.defter-liste .tamam { opacity: 0.65; list-style: none; margin-left: -1.2em; }
+
 /* ---------- Harita ---------- */
 .harita-zemin { position: absolute; inset: 0; }
 .yer {

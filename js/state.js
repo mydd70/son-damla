@@ -32,12 +32,14 @@ KS.yeniDurum = function () {
       motorKapali: false,
       camur: false,
       babaArandi: false,
+      ilkSut: false,
       miniOyunYapildi: false,
       ogleKullanildi: false,
       aksamKullanildi: false
     },
     plan: null,                // null | 'guclu' | 'zayif'
     ziyaretKalan: Object.assign({}, c.ZIYARET_HAKKI),
+    sohbetEdildi: {},          // bilgisi henüz açılmamış kişilerle yapılan kısa sohbet (kişi başına 1)
     komsu: {
       ogrenilen: [],           // Mehmet'in öğrendiği argümanlar
       iletilen: [],            // komşuya iletilenler

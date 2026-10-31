@@ -105,6 +105,7 @@ Okurken düzeltmen için yazıldı; kod değil. Aşama 4'te story.js'e aynı id'
 - **Gün 5 sabah (teslim edilmediyse) – Anne:** O kâğıt hâlâ cebinde mi? Muhtar akşamları muhtarlıkta olur.
 
 ### g4_cicek – Gün 4 sabah [sahne: avlu]
+- **Anne:** Muhtar kapı kapı dolaşıyor, suyu idareli kullanın diye. Öğretmen hanım da anlatıp duruyormuş.
 - **Mehmet (iç ses):** Annemin pencere önündeki sardunyası. Kurumak üzere.
 - **Anne:** Ona su verme, boş ver.
 - **Mehmet:** *(bardağın dibindeki suyu döker)*
@@ -214,7 +215,17 @@ Okurken düzeltmen için yazıldı; kod değil. Aşama 4'te story.js'e aynı id'
 - > Dur, öyle demek istemedim. Özür dilerim, Rıza Amca.
 - **Rıza Amca:** *(derin nefes alır)* Bugün kimseyle kavga edecek hâlim yok. Söyle.
 
+### Zaten ikna olduysa
+- **Rıza Amca:** Bakarız dedim ya, evlat. Git şimdi.
+
+### Araya giren iç sesler ve seçenekler
+- Argüman sorulurken **Mehmet (iç ses):** Ne diyeyim?
+- Her argümanda ek seçenek: > (Bunu açmayayım.)
+- Özür sorulurken **Mehmet (iç ses):** Geçen sefer ağzımdan çıkanı düzeltmeliyim. Vazgeçme seçeneği: > (Bir şey demeyeyim.)
+- Gün 8 geri alma sorulurken **Mehmet (iç ses):** Bugün olmaz. Onca şeyden sonra bugün olmaz. Vazgeçme seçeneği: > (Sus.)
+
 ### İkna (iki argüman iletilince)
+- *(gün 9'da "Toplantı bu akşam mı?" / "Bu akşam, muhtarlıkta.")*
 - **Rıza Amca:** *(uzun süre susar)*
 - **Rıza Amca:** Toplantı cuma mı?
 - **Mehmet:** Cuma akşamı, muhtarlıkta.
@@ -228,6 +239,31 @@ Okurken düzeltmen için yazıldı; kod değil. Aşama 4'te story.js'e aynı id'
 ---
 
 ## Akşam ziyaretleri
+
+### Kısa sohbetler (bilgisi henüz açılmamış kişi; herkes birbirini zaten tanır)
+**Yaşlı çift (gün 1):**
+- **Fatma Nine:** Mehmet! Gel oğlum, annen nasıl? Bebek uyuyor mu geceleri?
+- **Mehmet:** Uyuyor Nine, biraz.
+- **Hasan Dede:** Sıcağa dayanamaz o yaşta. Sen de dayanma, otur bir su iç. Az iç ama.
+- **Mehmet (iç ses):** Kaç yaşındalar bilmiyorum. Bu köyde en çok zaman geçiren onlar. Çocukları artık ziyarete gelmiyor, şehrin kalabalığındalar.
+
+**Muhtar (gün 1-2):**
+- **Muhtar:** Hayırdır Mehmet? Annen bir şey mi istedi?
+- **Mehmet:** Yok muhtar amca, öyle uğradım.
+- **Muhtar:** İyi etmişsin. Selam söyle eve.
+- **Mehmet (iç ses):** Köyde bir kâğıt işi mi var, önce bu kapı çalınır. Kimseye sesini yükseltmez, kimse de ona kolay kolay hayır demez. Rıza Amca hariç.
+
+**Öğretmen (gün 1-2):**
+- **Zeynep Öğretmen:** Mehmet, tatilde okulun yolunu unutmamışsın.
+- **Mehmet:** Geçiyordum öğretmenim.
+- **Zeynep Öğretmen:** Geçerken bir kitap da al o zaman. Geri getirmeyi unutma.
+- **Mehmet (iç ses):** Şehirden geldi, gidenler gibi gitmedi. Yazın bile okulda. Cebindeki deftere her şeyi yazıyor, kuyuyu bile.
+
+**Rıza Amca (argüman öğrenilmeden):**
+- **Rıza Amca:** Ne var evlat? Annen mi gönderdi?
+- **Mehmet:** Yok Rıza Amca, geçiyordum.
+- **Rıza Amca:** Geç o zaman.
+- **Mehmet (iç ses):** Yalnız yaşıyor. Akşamları evinden motorun sesinden başka ses gelmez. Eskiden bize ceviz verirdi, şimdi selamı bile kısa.
 
 ### Yaşlı çift
 - **1. ziyaret, A1 öğrenilmediyse:** Gün 2 öğle olayındaki {A1} diyaloğu, "Fatma Nine: Otur, sana bir şey anlatayım" girişiyle.
@@ -344,6 +380,7 @@ Okurken düzeltmen için yazıldı; kod değil. Aşama 4'te story.js'e aynı id'
 
 ## Kötü son
 - [sahne: avlu]
+- *(komşu ikna edildiyse)* **Ekran:** Plan kabul edildi. Ama kuyuya yetişemedi.
 - **Anne:** Kamyon gelmiş. Eşyalar hazır mı?
 - **Mehmet (iç ses):** {keci}'yi pazarda sattık. Yol parası lazımdı.
 - *(ev düşükse)* **Mehmet (iç ses):** Annem günlerdir konuşmuyor.

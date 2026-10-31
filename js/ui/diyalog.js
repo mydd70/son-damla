@@ -46,9 +46,12 @@ KS.ui = KS.ui || {};
     var kutu = document.getElementById('diyalog');
     var i = 0;
 
+    var secenekler = (olay.secenekler || []).filter(function (sc) { return !sc.kosul || sc.kosul(d, r || {}); });
+
     function kapat() {
       kutu.hidden = true;
       kutu.onclick = null;
+      if (olay.etkiler) KS.ui.degisimGoster(KS.secimUygula(KS.state, olay).degisimler);
       bitince();
     }
 
@@ -56,7 +59,7 @@ KS.ui = KS.ui || {};
       kutu.onclick = null;
       kutu.style.cursor = 'default';
       var liste = KS.ui.el('div', 'secenekler');
-      olay.secenekler.forEach(function (sc) {
+      secenekler.forEach(function (sc) {
         var b = KS.ui.el('button', '', metinHazirla(sc));
         b.onclick = function () {
           kutu.style.cursor = '';
@@ -73,7 +76,7 @@ KS.ui = KS.ui || {};
     function goster() {
       var son = i === satirlar.length - 1;
       var govde = satirCiz(kutu, satirlar[i]);
-      if (son && olay.secenekler) seceneklerCiz(govde);
+      if (son && secenekler.length) seceneklerCiz(govde);
       else govde.appendChild(KS.ui.el('div', 'sonraki-isaret', '▼'));
     }
 
@@ -94,6 +97,26 @@ KS.ui = KS.ui || {};
       if (i >= liste.length) { bitince(); return; }
       KS.ui.diyalogOynat(liste[i++], r, sonraki);
     })();
+  };
+
+  // Tek satır ve düğmeler; seçim hemen karşılaşma akışına döner. dugmeler: [{ oge, tikla }]
+  KS.ui.secimGoster = function (satir, dugmeler) {
+    var kutu = document.getElementById('diyalog');
+    kutu.hidden = false;
+    kutu.onclick = null;
+    kutu.style.cursor = 'default';
+    var govde = satirCiz(kutu, satir);
+    var liste = KS.ui.el('div', 'secenekler');
+    dugmeler.forEach(function (d) {
+      var b = KS.ui.el('button', '', metinHazirla(d.oge));
+      b.onclick = function () {
+        kutu.style.cursor = '';
+        kutu.hidden = true;
+        d.tikla();
+      };
+      liste.appendChild(b);
+    });
+    govde.appendChild(liste);
   };
 
   // Tek satırlık duyuru (ertesi günün payı gibi).

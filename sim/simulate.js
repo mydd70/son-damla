@@ -50,7 +50,8 @@ function standartKarsilasma(d, kabaOlacak) {
   if (kabaOlacak && kabaOlacak.kalan > 0 && liste.length) {
     kabaOlacak.kalan -= 1;
     KS.kabaSecim(d, liste[0]);
-    if (d.gun === 8) KS.kabaligiGeriAl(d, liste[0]);
+    if (d.gun !== C.OBRUK_GUNU) return;   // kaba söz konuşmayı bitirir; gün 8'de geri alınabilir
+    KS.kabaligiGeriAl(d, liste[0]);
     liste = KS.iletilebilirArgumanlar(d);
   }
   liste.forEach(function (a) { KS.argumanIlet(d, a); });
