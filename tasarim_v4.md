@@ -70,7 +70,7 @@ Serbest öğle günleri: 3, 4, 5, 7, 9. Serbest akşamlar: 1-8.
 - Akşamın ardından gece satırı gelir. Yeni günün su payı ve planı sabahki gün kartında yazar (komşuya gidiyorsa kesintisiyle).
 
 ### Zorunlu ev işi
-- Ev 3'ün altına düşerse ertesi sabah mini oyunun yerine kısa bir "annene yardım" sahnesi gelir: ev +2, mini oyunun bonusu alınmaz.
+- Ev 3'ün altına düşerse ertesi sabah mini oyundan önce kısa bir "annene yardım" sahnesi gelir: ev +2. Mini oyun her gün oynanır.
 - Hiçbir dilimi harcamaz, hikaye olaylarıyla çakışmaz.
 
 ### Yaşlı çiftin yardımı

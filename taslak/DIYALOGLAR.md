@@ -543,8 +543,8 @@ Tek cümleli olanlar tekrar edince tuhaf kalıyordu, her birine birkaç sürüm 
 
 ## Zorunlu ev işi (ev 3'ün altına düşerse ertesi sabah)
 - **Anne (üç sürüm, gün sırasıyla):** Mehmet, bugün bana yardım et. Tek başıma yetişemiyorum. / Bu sabah da sana kaldı, oğlum. Elim ayağım tutmuyor. / Önce eve bak bugün, Mehmet. Gerisi bekler.
-- *(tek gün)* **Mehmet (iç ses):** Çamaşır, bulaşık, bebeğin bezi. {keci} bugün bakımsız kaldı.
-- *(çift gün)* **Mehmet (iç ses):** Çamaşır, bulaşık, bebeğin bezi. Bahçeye bugün bakamadım.
+- *(tek gün)* **Mehmet (iç ses):** Çamaşır, bulaşık, bebeğin bezi. Sonra sıra {keci} bakımında.
+- *(çift gün)* **Mehmet (iç ses):** Çamaşır, bulaşık, bebeğin bezi. Sonra bahçeye koşarım.
 
 ## Sabah iç sesi (gün 1 hariç, her sabah; ev göstergesine göre)
 - **Ev düşük:**

@@ -718,8 +718,8 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'anne', kosul: surum(0), metin: 'Mehmet, bugün bana yardım et. Tek başıma yetişemiyorum.' },
       { kim: 'anne', kosul: surum(1), metin: 'Bu sabah da sana kaldı, oğlum. Elim ayağım tutmuyor.' },
       { kim: 'anne', kosul: surum(2), metin: 'Önce eve bak bugün, Mehmet. Gerisi bekler.' },
-      { kim: 'ic', kosul: tekGun, metin: 'Çamaşır, bulaşık, bebeğin bezi. {keci} bugün bakımsız kaldı.' },
-      { kim: 'ic', kosul: ciftGun, metin: 'Çamaşır, bulaşık, bebeğin bezi. Bahçeye bugün bakamadım.' }
+      { kim: 'ic', kosul: tekGun, metin: 'Çamaşır, bulaşık, bebeğin bezi. Sonra sıra {keci} bakımında.' },
+      { kim: 'ic', kosul: ciftGun, metin: 'Çamaşır, bulaşık, bebeğin bezi. Sonra bahçeye koşarım.' }
     ] },
     { id: 'kuyu_uyari', mekan: 'kuyu_basi', satirlar: [
       { kim: 'ogretmen', kosul: sonGunDegil, metin: 'Bu sabah ip yine uzadı. Böyle giderse eylüle kuyu dibi görünür.' },

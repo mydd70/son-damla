@@ -238,16 +238,16 @@ var KS = globalThis.KS = globalThis.KS || {};
   };
 
   // Mini oyun her zaman tamamlanır (başarısız olan tekrar dener).
-  // Zorunlu ev işi varsa mini oyunun yerine geçer.
+  // Zorunlu ev işi varsa mini oyuna ek olarak evi toparlar.
   KS.miniOyunTamamla = function (d) {
     var k = c();
     if (d.bayraklar.miniOyunYapildi) return hata('Bugünün sabah işi yapıldı.');
     var r = sonuc(true, { tur: null });
     if (d.bayraklar.zorunluEvIsi) {
-      r.tur = 'evIsi';
       degistir(d, 'ev', k.EV.zorunluBonus, r.degisimler);
       d.bayraklar.zorunluEvIsi = false;
-    } else if (d.gun % 2 === 1) {
+    }
+    if (d.gun % 2 === 1) {
       r.tur = 'keciBakimi';
       degistir(d, 'keci', k.KECI.bakim, r.degisimler);
     } else {
@@ -260,7 +260,6 @@ var KS = globalThis.KS = globalThis.KS || {};
   };
 
   KS.miniOyunTuru = function (d) {
-    if (d.bayraklar.zorunluEvIsi) return 'evIsi';
     return d.gun % 2 === 1 ? 'keciBakimi' : 'otYolma';
   };
 

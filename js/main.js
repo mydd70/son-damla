@@ -70,8 +70,11 @@ var KS = globalThis.KS = globalThis.KS || {};
       ui.degisimGoster(r.degisimler);
       ui.ilerleGoster('gecis_ogle', ogle);
     }
-    if (KS.miniOyunTuru(KS.state) === 'evIsi') ui.diyalogOynat(KS.olayGetir('ev_isi'), null, tamamla);
-    else ilkGunOgretici('ogretici_keci', function () { ui.miniOyunAc(tamamla); });
+    function miniOyun() {
+      ilkGunOgretici('ogretici_keci', function () { ui.miniOyunAc(tamamla); });
+    }
+    if (KS.state.bayraklar.zorunluEvIsi) ui.diyalogOynat(KS.olayGetir('ev_isi'), null, miniOyun);
+    else miniOyun();
   }
 
   // ---------- Öğle ----------
