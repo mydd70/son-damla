@@ -1,6 +1,6 @@
 # Gece çalışması – ilerleme
 
-Son güncelleme: veri doğrulama bitti.
+Son güncelleme: diyalog taslağı bitti.
 
 | İş | Durum |
 |---|---|
@@ -8,7 +8,7 @@ Son güncelleme: veri doğrulama bitti.
 | Aşama 1: sabitler, mantık, simülasyon | Bitti, etiket `asama-1`, sonuçlar `sim/SONUC.md` |
 | SVG referans sahneleri + PNG + promptlar | Bitti: `js/scenes.js`, `referans/sahneler/`, `referans/PROMPTLAR.md` |
 | Veri doğrulama | Bitti: `referans/VERILER.md` |
-| Diyalog taslağı | Sırada |
-| Teslim: zip, başlangıç notu, sabah raporu | Bekliyor |
+| Diyalog taslağı | Bitti: `taslak/DIYALOGLAR.md` |
+| Teslim: zip, başlangıç notu, sabah raporu | Sırada |
 
 Yarım kalırsa: bu dosyadaki ilk "Sırada" satırından devam edilir.
