@@ -1,6 +1,6 @@
 # Gece çalışması – ilerleme
 
-Son güncelleme: diyalog taslağı bitti.
+Son güncelleme: gece işlerinin hepsi bitti (31 Ekim, sabaha karşı).
 
 | İş | Durum |
 |---|---|
@@ -9,6 +9,6 @@ Son güncelleme: diyalog taslağı bitti.
 | SVG referans sahneleri + PNG + promptlar | Bitti: `js/scenes.js`, `referans/sahneler/`, `referans/PROMPTLAR.md` |
 | Veri doğrulama | Bitti: `referans/VERILER.md` |
 | Diyalog taslağı | Bitti: `taslak/DIYALOGLAR.md` |
-| Teslim: zip, başlangıç notu, sabah raporu | Sırada |
+| Teslim: zip, başlangıç notu, sabah raporu | Bitti: `SABAH_RAPORU.md`, `YENI_OTURUM_BASLANGIC.md` |
 
-Yarım kalırsa: bu dosyadaki ilk "Sırada" satırından devam edilir.
+Sıradaki: Aşama 2 (ana iskelet), kullanıcının onayıyla.

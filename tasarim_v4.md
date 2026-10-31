@@ -64,7 +64,7 @@ Serbest öğle günleri: 3, 4, 5, 7, 9. Serbest akşamlar: 1-8.
 ### Akşam
 - Ziyaret: yaşlı çift, muhtar, öğretmen, komşu. Her eve bir kez; yaşlı çift ve öğretmene birer ek hak.
 - **Görev ziyareti hak tüketmez:** defterdeki bir görev için yapılan ziyaret (ör. ölçümü muhtara götürmek) ziyaret hakkından sayılmaz.
-- Ya da aile vakti: ev +2.
+- Ya da aile vakti: ev +1.
 - Ertesi günün su payı duyurulur.
 
 ### Zorunlu ev işi
@@ -90,30 +90,31 @@ Serbest öğle günleri: 3, 4, 5, 7, 9. Serbest akşamlar: 1-8.
 - Kiler: adet kadar sepet ikonu.
 - Değişim geri bildirimi: "+2" / "−1" belirip kaybolur; kuyu düşünce kısa titreme.
 
-## 7. Sabitler tablosu (taslak, simülasyonla ayarlanır)
+## 7. Sabitler tablosu (Aşama 1 simülasyonuyla ayarlandı; güncel değerler js/config.js'te)
 
 Tüm sayılar kodda tek dosyada (config.js) durur.
 
 ### Su
 | Sabit | Değer |
 |---|---|
-| Günlük pay (gün 1-9) | 12, 12, 11, 11, 10, 10, 9, 9, 8 |
+| Günlük pay (gün 1-9) | 11, 11, 10, 10, 9, 9, 8, 8, 7 |
 | İhtiyaç: ev / keçi / bahçe | 6 / 4 / 4 (dayanıklı tohumla bahçe 3, gün 3'ten) |
 | Fazla çekme | +4 damla, kuyu −5, günde en fazla 1 |
 | Gri su | Her 3 ev damlasına 1 bahçe damlası (gün 2'den) |
 | Komşuya su | Ertesi gün payı −2 |
 
-İlke: **Fazla çekmeden hiçbir gün her ihtiyaç karşılanamaz.** Fazla çekme gün 1'de her şeyi karşılatır (12 + 4 = 16 ≥ 14); cazipliği buradan gelir. Son günlerde fazla çekme de yetmez.
+İlke: **Fazla çekmeden hiçbir gün her ihtiyaç karşılanamaz.** Fazla çekme gün 1'de her şeyi karşılatır (11 + 4 = 15 ≥ 14); cazipliği buradan gelir.
 
 ### Göstergeler
 | Gösterge | Kural |
 |---|---|
-| Keçi | Verilen ≥4: +1 · 2-3: 0 · <2: −1 · bakım mini oyunu: +1 |
-| Bahçe (başlangıç 3) | Verilen (gri su dahil) ≥ ihtiyaç: +1 · ihtiyaç−1: 0 · daha az: −1 · ot yolma: +1 |
+| Su etkisi (her gösterge) | Yeterli: +1 · 1 damla eksik: −1 · daha fazla eksik: −2 |
+| Keçi | Yeterli = 4 damla; bakım mini oyunu +1 |
+| Bahçe (başlangıç 3) | Yeterli = ihtiyaç (gri su dahil); ot yolma +1, bahçede ek iş +1 |
 | Kiler (başlangıç 3, en fazla 6) | Akşam −1 · keçi ≥5: +1 · bahçe ≥6: +1 |
-| Ev (başlangıç 4) | Ev suyu ≥6: +1 · 4-5: 0 · <4: −1 · aile vakti +2 · kiler boşsa −2 · baba araması (gün 5) +1 · çiçek +1 |
+| Ev (başlangıç 4) | Yeterli = 6 damla; aile vakti +1 · kiler boşsa −2 · baba araması (gün 5) +1 · çiçek +1 |
 
-### Kuyu (başlangıç 100, düşüş her sabah uygulanır)
+### Kuyu (başlangıç 100; günlük düşüş gün sonunda, gün 9'da toplantıdan önce uygulanır)
 | Etki | Değer |
 |---|---|
 | Doğal düşüş | −6 / gün |
