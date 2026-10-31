@@ -9,9 +9,12 @@ KS.ui = KS.ui || {};
   KS.ui.dagitimAc = function (bitince) {
     var d = KS.state;
     var ek = KS.config.FAZLA_CEKME.damla;
-    var verilen = { ev: 0, keci: 0, bahce: 0 };
+    var enAzEv = KS.config.EV.enAzSu;
+    var verilen = { ev: enAzEv, keci: 0, bahce: 0 };
     var fazla = false;
     var katman = document.getElementById('katman');
+
+    function enAz(ad) { return ad === 'ev' ? enAzEv : 0; }
 
     function toplam() { return d.su.pay + (fazla ? ek : 0); }
     function kalan() { return toplam() - verilen.ev - verilen.keci - verilen.bahce; }
@@ -20,7 +23,7 @@ KS.ui = KS.ui || {};
     function sigdir() {
       for (var i = SATIRLAR.length - 1; i >= 0 && kalan() < 0; i--) {
         var ad = SATIRLAR[i];
-        verilen[ad] = Math.max(0, verilen[ad] + kalan());
+        verilen[ad] = Math.max(enAz(ad), verilen[ad] + kalan());
       }
     }
 
@@ -30,7 +33,7 @@ KS.ui = KS.ui || {};
       satir.appendChild(el('div', '', KS.t('gosterge_' + ad)));
       satir.appendChild(el('div', 'ihtiyac', KS.t('ihtiyac', { n: ihtiyaclar[ad] })));
       var eksi = el('button', '', '−');
-      eksi.disabled = verilen[ad] === 0;
+      eksi.disabled = verilen[ad] <= enAz(ad);
       eksi.onclick = function () { verilen[ad] -= 1; ciz(); };
       satir.appendChild(eksi);
 
@@ -58,6 +61,7 @@ KS.ui = KS.ui || {};
       SATIRLAR.forEach(function (ad) { panel.appendChild(satirCiz(ad, ihtiyaclar)); });
       var gri = KS.griSuMiktari(d, verilen.ev);
       panel.appendChild(el('div', 'gri-not', gri ? KS.t('griSu', { n: gri }) : ''));
+      panel.appendChild(el('div', 'gri-not', KS.t('icmeSuyu', { n: enAzEv })));
 
       var alt = el('div', 'dagitim-alt');
       alt.appendChild(el('div', 'kalan', KS.t('kalan', { n: kalan() })));

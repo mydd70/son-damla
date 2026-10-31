@@ -16,5 +16,4 @@ Son güncelleme: 31 Ekim 2026, Aşama 3 bitti.
 Sıradaki: Aşama 4 (hikaye ve ikna), kullanıcının onayıyla.
 
 ## Aşama 4'ten önce sorulacak tasarım konuları
-1. Eve sıfır damla: ceza 2 damla eksikten sonra artmıyor, 0 damla da 4 damla da −2.
-2. Gün 1-2 ziyaretleri: öğretmen ve yaşlı çift, olayları olmadan önce ziyaret edilirse ne der, argüman verir mi?
+1. Gün 1-2 ziyaretleri: öğretmen ve yaşlı çift, olayları olmadan önce ziyaret edilirse ne der, argüman verir mi?

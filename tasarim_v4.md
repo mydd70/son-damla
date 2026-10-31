@@ -101,6 +101,7 @@ Tüm sayılar kodda tek dosyada (config.js) durur.
 | İhtiyaç: ev / keçi / bahçe | 6 / 4 / 4 (dayanıklı tohumla bahçe 3, gün 3'ten) |
 | Fazla çekme | +4 damla, kuyu −5, günde en fazla 1 |
 | Gri su | Her 3 ev damlasına 1 bahçe damlası (gün 2'den) |
+| Eve en az | 2 damla (içme suyu; panelde bunun altına inilmez) |
 | Komşuya su | Ertesi gün payı −2 |
 
 İlke: **Fazla çekmeden hiçbir gün her ihtiyaç karşılanamaz.** Fazla çekme gün 1'de her şeyi karşılatır (11 + 4 = 15 ≥ 14); cazipliği buradan gelir.

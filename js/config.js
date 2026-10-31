@@ -21,7 +21,7 @@ KS.config = {
   BAHCE: { baslangic: 3, otYolma: 1, ekIs: 1, sebzeEsigi: 6 },
   KILER: { baslangic: 3, max: 6, tuketim: 1, sut: 1, sebze: 1 },
   EV: {
-    baslangic: 4, iyiSu: 6, ortaSu: 5,
+    baslangic: 4, iyiSu: 6, ortaSu: 5, enAzSu: 2,   // enAzSu: içme suyu, dağıtımda bunun altına inilmez
     aileVakti: 1, kilerBos: -2, evdeYardim: 1, camur: 1, babayiAra: 1,
     zorunluEsik: 3,        // altına inerse ertesi sabah zorunlu ev işi
     zorunluBonus: 2,

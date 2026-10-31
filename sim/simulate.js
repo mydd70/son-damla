@@ -25,7 +25,7 @@ function dagitimPuani(d, ev, keci, bahce) {
 // En iyi puanlı dağıtımı dener (dikkatli oyuncu yaklaşımı).
 function akilliDagitim(d, toplam) {
   var en = null;
-  for (var ev = 0; ev <= toplam; ev++) {
+  for (var ev = C.EV.enAzSu; ev <= toplam; ev++) {
     for (var keci = 0; keci <= toplam - ev; keci++) {
       var bahce = toplam - ev - keci;
       var p = dagitimPuani(d, ev, keci, bahce);

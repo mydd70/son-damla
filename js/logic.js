@@ -166,7 +166,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     var k = c();
     if (d.su.dagitildi) return hata('Bugünün suyu zaten dağıtıldı.');
     var ev = dagitim.ev | 0, keci = dagitim.keci | 0, bahce = dagitim.bahce | 0;
-    if (ev < 0 || keci < 0 || bahce < 0) return hata('Damla sayısı eksi olamaz.');
+    if (ev < k.EV.enAzSu || keci < 0 || bahce < 0) return hata('Geçersiz dağıtım: eve en az ' + k.EV.enAzSu + ' damla.');
     var toplamPay = d.su.pay + (fazlaCek ? k.FAZLA_CEKME.damla : 0);
     if (ev + keci + bahce > toplamPay) return hata('Bu kadar su yok.');
 
