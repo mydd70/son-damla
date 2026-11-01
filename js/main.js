@@ -178,6 +178,14 @@ var KS = globalThis.KS = globalThis.KS || {};
 
   // ---------- Son ----------
 
+  // "Birkaç hafta sonra", ardından müzikle "Ekim" kartı.
+  function sonKartlari(iyi, sonra) {
+    ui.zamanKartiAc(KS.SON_KARTLARI.sonra, function () {
+      KS.ses.muzikCal(KS.config.SES.muzik[iyi ? 'iyi' : 'kotu']);
+      ui.zamanKartiAc(KS.SON_KARTLARI[iyi ? 'iyi' : 'kotu'], sonra);
+    });
+  }
+
   function toplanti() {
     // Kuyunun son düşüşü toplantıdan önce uygulanır (belge bölüm 7).
     var r = KS.toplanti(KS.state);
@@ -185,7 +193,8 @@ var KS = globalThis.KS = globalThis.KS || {};
     ui.degisimGoster(r.degisimler);
     ui.olaylariOynat(KS.olaylariGetir(KS.state.gun, 'aksam', KS.state), r, function () {
       KS.ses.ortamCal(null);
-      ui.zamanKartiAc(KS.SON_KARTLARI[r.sonuc.iyi ? 'iyi' : 'kotu'], function () {
+      KS.ses.toplantiSesiBitir();
+      sonKartlari(r.sonuc.iyi, function () {
         function sonEkran() {
           KS.ses.muzikCal(KS.config.SES.muzik[r.sonuc.iyi ? 'iyi' : 'kotu']);
           KS.ses.muzikKis();

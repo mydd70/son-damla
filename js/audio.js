@@ -3,7 +3,7 @@ var KS = globalThis.KS = globalThis.KS || {};
 
 (function () {
   var onbellek = {}, eksik = {};
-  var kanal = { ortam: null, muzik: null };   // sürekli çalan sesler
+  var kanal = { ortam: null, muzik: null, arka: null };   // sürekli çalan sesler
   var acik = true;
 
   function ayar() { return KS.config.SES; }
@@ -65,7 +65,7 @@ var KS = globalThis.KS = globalThis.KS || {};
 
   // Sekme arka plana geçince sürekli sesler durur, dönünce sürer (telefonda uygulama değiştirme).
   document.addEventListener('visibilitychange', function () {
-    ['ortam', 'muzik'].forEach(function (ad) {
+    ['ortam', 'muzik', 'arka'].forEach(function (ad) {
       var a = kanal[ad] && onbellek[kanal[ad]];
       if (!a) return;
       if (document.hidden) a.pause();
@@ -84,13 +84,28 @@ var KS = globalThis.KS = globalThis.KS || {};
     cal: function (id) { baslat(id); },
 
     // Uzaklaşarak söner (kötü sonda kamyon ve bebek).
+    // Kısa dosya sönene kadar döner, yoksa ses erken kesilir.
     calSonerek: function (id) {
       var a = baslat(id);
-      if (a) gecis(a, 0, ayar().sonmeSure);
+      if (!a) return;
+      a.loop = true;
+      gecis(a, 0, ayar().sonmeSure);
+      setTimeout(function () { a.loop = !!ayar().liste[id].dongu; }, ayar().sonmeSure);
     },
 
     ortamCal: function (id) { kanalCal('ortam', id); },
     muzikCal: function (id) { kanalCal('muzik', id); },
+
+    // Toplantı: kalabalık ayrı kanalda kısık, o anki akşam sesi altında daha da kısık sürer.
+    toplantiSesi: function () {
+      var t = ayar().toplanti;
+      kanalCal('arka', t.kalabalik);
+      var a = onbellek[t.kalabalik];
+      if (a) gecis(a, ayar().liste[t.kalabalik].seviye * t.kalabalikOran, ayar().gecisSure);
+      var o = kanal.ortam;
+      if (o && onbellek[o]) gecis(onbellek[o], ayar().liste[o].seviye * t.ortamOran, ayar().gecisSure);
+    },
+    toplantiSesiBitir: function () { kanalCal('arka', null); },
 
     // Son ekranda müzik kesilmez, kısılarak sürer.
     muzikKis: function () {

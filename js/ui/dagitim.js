@@ -53,7 +53,7 @@ KS.ui = KS.ui || {};
       var dolu = verilen[ad] + gri;
       for (var i = 0; i < ihtiyaclar[ad]; i++) {
         var damla = el('div', 'damla' + (i < gri ? ' gri' : (i < dolu ? ' dolu' : '')));
-        if (i >= gri && i < dolu) KS.ui.arayuzGorseli(damla, 'damla', '');
+        KS.ui.arayuzGorseli(damla, i < gri ? 'damla_gri' : (i < dolu ? 'damla' : 'damla_bos'), '');
         damlalar.appendChild(damla);
       }
       satir.appendChild(damlalar);
@@ -72,7 +72,11 @@ KS.ui = KS.ui || {};
       var gri = KS.griSuMiktari(d, verilen.ev);
       satir.appendChild(el('div', '', KS.t('griSatir')));
       var damlalar = el('div', 'damlalar');
-      for (var i = 0; i < gri; i++) damlalar.appendChild(el('div', 'damla gri'));
+      for (var i = 0; i < gri; i++) {
+        var griDamla = el('div', 'damla gri');
+        KS.ui.arayuzGorseli(griDamla, 'damla_gri', '');
+        damlalar.appendChild(griDamla);
+      }
       satir.appendChild(damlalar);
       var eksik = KS.config.GRI_SU.bolen - (verilen.ev % KS.config.GRI_SU.bolen);
       satir.appendChild(el('div', 'gri-aciklama', gri ? KS.t('griVar', { n: gri }) : KS.t('griYok', { n: eksik })));

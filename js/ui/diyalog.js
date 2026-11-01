@@ -63,6 +63,7 @@ KS.ui = KS.ui || {};
 
   function satirSesi(satir) {
     if ('ortam' in satir) KS.ses.ortamCal(satir.ortam);
+    if (satir.toplantiSesi) KS.ses.toplantiSesi();
     if (satir.kim === 'ipucu') KS.ses.cal('ipucu');
     if (satir.muzik) KS.ses.muzikCal(KS.config.SES.muzik[satir.muzik]);
     if (satir.ses) KS.ses.cal(satir.ses);
@@ -160,6 +161,7 @@ KS.ui = KS.ui || {};
       var son = i === satirlar.length - 1;
       var govde = satirCiz(kutu, satirlar[i]);
       satirSesi(satirlar[i]);
+      if (satirlar[i].kuyuAc) KS.ui.kuyuAc();
       if (son && secenekler.length) { seceneklerCiz(govde); return; }
       govde.appendChild(KS.ui.el('div', 'sonraki-isaret', '▼'));
       if (!son) kutu.appendChild(atlaDugmesi());

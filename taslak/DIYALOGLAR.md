@@ -206,7 +206,7 @@ Kartta planın altında bugünkü su payı yazar; komşuya su götürüldüyse k
 **Güçlü plan (ölçüm zamanında ulaştıysa):**
 - **Muhtar:** Öğretmen hanımla oturduk, bir yol çizdik. Kâğıdı sen getirdin, sen de dinle.
 - **Zeynep Öğretmen:** Eski sarnıcı onarıyoruz. Yağmur gelince boşa akmasın, köy çeşmesine insin.
-- **Muhtar:** Kuyulara sayaç, motorlara saat taktıracağız. Yasada var zaten ama bizde kimse takmamış. Herkes ne çektiğini bilecek.
+- **Muhtar:** Kuyulara sayaç, motorlara saat taktıracağız. Yasada var zaten ama bizde kimse takmamış. Herkes ne kadar su çektiğini bilecek.
 - **Zeynep Öğretmen:** Yetkililer geldiğinde bir de yer altı kaynaklarımıza baksalar iyi olur, ama sıra bize gelene kadar çok köy var daha...
 - **Zeynep Öğretmen:** Sulama sabah erken ya da akşam serinde, ne kadar olacağını sayaç söyleyecek. Toprağın üstü uygun zamanda saman ya da otla örtülecek, buharlaşmasın.
 - **Muhtar:** Gerekirse tarlalara az ekin ekeceğiz. Bir de damla sulama borusu var, ilçeden istedik. Sırayla kullanacağız.
@@ -635,7 +635,8 @@ Tek cümleli olanlar tekrar edince tuhaf kalıyordu, her birine birkaç sürüm 
 
 ## İyi son
 - [sahne: sarnic_onarildi]
-- **Kart:** Ekim - İlk Yağmur
+- **Kart:** Oylamadan birkaç hafta sonra
+- **Kart:** Ekim - İlk Yağmur (müzik başlar)
 - [ses: yağmur]
 - **Mehmet (iç ses):** Sarnıcın oluğundan su akıyor. Muhtarla Rıza Amca yan yana duruyor, ikisi de ıslak ama önemsemiyor, ikisi de susuyor.
 - **Muhtar:** En son gençliğimizde böyle durmuştuk, hatırlıyor musun?
@@ -674,7 +675,8 @@ Tek cümleli olanlar tekrar edince tuhaf kalıyordu, her birine birkaç sürüm 
 - **Ekran:** Zor ama birlikte kaldık, geç kalsaydık ne biz kalacaktık ne de insanlığımız.
 
 ## Kötü son
-- **Kart:**  Ekim - Kolay Kararlar Zor Sonuçlar
+- **Kart:** Oylamadan birkaç hafta sonra
+- **Kart:** Ekim - Kolay Kararlar Zor Sonuçlar (müzik başlar)
 - [sahne: avlu]
 - *(komşu ikna edildiyse)* **Ekran:** Plan kabul edildi. Ama kuyu artık çok aşağılara inmişti.
 - **Ekran:** Eylülde köy kuyusu dibini gösterdi.
@@ -691,9 +693,9 @@ Tek cümleli olanlar tekrar edince tuhaf kalıyordu, her birine birkaç sürüm 
 - *(su götürüldüyse)* **Mehmet (iç ses):** Rıza Amca yol kenarındaydı, elinde bizim bidon. Kamyon geçerken başını eğdi.
 - **Mehmet (iç ses):** Kardeşim ağlamaktan yoruldu; kamyon sallandıkça annemin kucağında uyudu.
 - **Mehmet (iç ses):** Uzaktan şehir gözükmeye başladı. Dumanın altında karanlık ve gri.
-- **Mehmet (iç ses):** Radyoda duydum, 'sıcaklık giderek yükseliyor, katı önlemler uygulanacak'. Öğretmenim aylar öncesinden söylemişti, neden şimdi uygulanıyor? 
+- **Mehmet (iç ses):** Radyoda duydum, 'sıcaklık giderek yükseliyor, tüm dünyada katı önlemler alınacak'. Öğretmenim bize aylar önce söyledi ama dünyanın bile haberi yok muymuş anlaşılan. 
 - **Mehmet (iç ses):** Babam otogarda bekleyecekmiş. "Her şey yoluna girecek" dedi telefonda. Sesi yine yorgundu. Bu sefer yalan söylediğini anladım.
-- **Kart (büyük):** İlk yağmur.
+- **Kart (büyük):** İlk yağmur
 - [sahne: sarnic]
 - *(komşu ikna edilmediyse)* **Ekran:** Kırık sarnıca ve boş avluya yağmur yağdı.
 - *(komşu ikna edilmediyse)* **Ekran:** Yağmuru tutacak sarnıç kalmamıştı. Artık her şey için çok geç.
@@ -706,5 +708,5 @@ Tek cümleli olanlar tekrar edince tuhaf kalıyordu, her birine birkaç sürüm 
 - **Geç ölçüm:** Öğretmenin ölçümü muhtara geç ulaştı; plan geç ve zayıf kuruldu.
 
 ## Final metni
-Metin js/dil.js'te (finalMetni, finalVeri, finalOdak1-3, finalKaynak).
+Metin js/dil.js'te (finalBaslik, finalVeri, finalAna, finalDunya, finalMetni, finalKaynak).
 - **Düğme:** Tekrar oyna

@@ -70,6 +70,16 @@ KS.ui = KS.ui || {};
     return kutu;
   }
 
+  // Kuyu barı gün 1'de öğreticiyle açılır; tekrar oyunda öğretici yok, baştan görünür.
+  var kuyuAcildi = false;
+  function kuyuGorunur(d) {
+    return kuyuAcildi || d.gun > 1 || d.dilim === 'aksam' || d.tekrarOyun;
+  }
+  KS.ui.kuyuAc = function () {
+    kuyuAcildi = true;
+    KS.ui.gostergeCiz();
+  };
+
   KS.ui.gostergeCiz = function () {
     var d = KS.state;
     var ust = document.getElementById('ust');
@@ -84,7 +94,7 @@ KS.ui = KS.ui || {};
     ust.appendChild(defter);
 
     var kuyu = document.getElementById('kuyu');
-    kuyu.hidden = false;
+    kuyu.hidden = !kuyuGorunur(d);
     var su = kuyu.querySelector('.kuyu-su');
     if (!su) {
       var kuyuAd = el('div', 'kuyu-ad', KS.t('gosterge_kuyu'));

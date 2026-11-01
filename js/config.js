@@ -94,16 +94,17 @@ KS.config = {
     kendiHavasi: ['sarnic', 'sarnic_onarildi']   // kapalı hava çizili: üstüne renk katmanı konmaz
   },
   GECIS: { otomatikSure: 1200 },   // milisaniye: sebebi yazmayan yer kartı kendiliğinden kapanır
-  // Arayüz görselleri: listede olmayan için bugünkü SVG ya da emoji kalır. Geçerli adlar: keci_hasta, keci_saglikli, ot1-3, ampul, kova, yem, sepet, damla, defter, kuyu, ses_acik, ses_kapali, baslangic, logo, final
-  ARAYUZ_GORSEL: { klasor: 'assets/ui/', uzanti: '.webp', dosyalar: ['keci_hasta', 'keci_saglikli', 'ot1', 'ot2', 'ot3', 'ampul', 'kova', 'yem', 'sepet', 'damla', 'defter', 'kuyu', 'ses_acik', 'ses_kapali', 'baslangic', 'logo', 'final'] },
+  // Arayüz görselleri: listede olmayan için bugünkü SVG ya da emoji kalır. Geçerli adlar: keci_hasta, keci_saglikli, ot1-3, ampul, kova, yem, sepet, damla, damla_gri, damla_bos, tarla_zemin, defter, kuyu, ses_acik, ses_kapali, baslangic, logo, final
+  ARAYUZ_GORSEL: { klasor: 'assets/ui/', uzanti: '.webp', dosyalar: ['keci_hasta', 'keci_saglikli', 'ot1', 'ot2', 'ot3', 'ampul', 'kova', 'yem', 'sepet', 'damla', 'damla_gri', 'damla_bos', 'tarla_zemin', 'defter', 'kuyu', 'ses_acik', 'ses_kapali', 'baslangic', 'logo', 'final'] },
   PORTRE: { klasor: 'assets/portraits/', uzanti: '.webp', dosyalar: ['anne', 'baba', 'dede', 'nine', 'komsu', 'mehmet', 'muhtar', 'ogretmen', 'koylu1', 'koylu2', 'koylu3'] },
 
   // --- Ses: dosyalar assets/audio/<id>.mp3; yoksa sessiz geçilir ---
   SES: {
     anahtar: 'koyumun-suyu-ses',
     klasor: 'assets/audio/', uzanti: '.mp3',
-    sonmeSure: 6000, sonmeAdim: 20,      // milisaniye, adım: uzaklaşarak sönme
-    gecisSure: 800, finalOran: 0.5,                      // milisaniye: ortam ve müzik yumuşak geçişi
+    sonmeSure: 14000, sonmeAdim: 40,      // milisaniye, adım: uzaklaşarak sönme
+    gecisSure: 800, finalOran: 0.5,
+    toplanti: { kalabalik: 'kalabalik', kalabalikOran: 0.6, ortamOran: 0.4 },   // kalabalık kısık, altında akşam sesi                      // milisaniye: ortam ve müzik yumuşak geçişi
     ortam: { sabah: 'gunduz', ogle: 'gunduz', aksam: 'cirkir' },
     mekanOrtam: { tepe: 'ruzgar', kuyu_basi: 'kalabalik', komsu_tarlasi: 'motor' },   // bu mekânlarda dilimin sesi yerine
     gunOrtam: { 8: 'sicak' },            // o günün sabah ve öğlesinde dilimin sesi yerine

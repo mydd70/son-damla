@@ -10,18 +10,17 @@ KS.ui.sonAc = function (sonuc, tekrar) {
     var arka = el('div', 'baslangic-gorsel son-gorsel');
     KS.ui.arayuzGorseli(arka, 'final', '');
     e.appendChild(arka);
-  } else {
+  }
+  e.appendChild(el('div', 'final-baslik', KS.t('finalBaslik')));
+  ['finalVeri', 'finalAna', 'finalDunya'].forEach(function (k) { e.appendChild(el('p', 'final-veri', KS.t(k))); });
+  e.appendChild(el('div', 'kart-metin', KS.t('finalMetni')));
+  e.appendChild(el('p', 'final-kaynak', KS.t('finalKaynak')));
+  e.appendChild(KS.ui.ekranDugmesi(KS.t('tekrarOyna'), tekrar));
+  if (!sonuc.iyi) {
     e.appendChild(el('h2', '', KS.t('eksikBaslik')));
     var liste = el('ul', 'eksikler');
     sonuc.eksikler.forEach(function (ad) { liste.appendChild(el('li', '', KS.t('eksik_' + ad))); });
     e.appendChild(liste);
   }
-  e.appendChild(el('div', 'kart-metin', KS.t('finalMetni')));
-  e.appendChild(el('p', 'final-veri', KS.t('finalVeri')));
-  var odak = el('ul', 'final-odak');
-  ['finalOdak1', 'finalOdak2', 'finalOdak3'].forEach(function (k) { odak.appendChild(el('li', '', KS.t(k))); });
-  e.appendChild(odak);
-  e.appendChild(el('p', 'final-kaynak', KS.t('finalKaynak')));
-  e.appendChild(KS.ui.ekranDugmesi(KS.t('tekrarOyna'), tekrar));
   e.appendChild(KS.ui.kaynakDugmesi());
 };

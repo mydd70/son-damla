@@ -58,8 +58,8 @@ var KS = globalThis.KS = globalThis.KS || {};
 
   // Argüman anlatımları hem gün olayında hem akşam ziyaretinde kullanılır.
   var A1_SATIRLAR = [
-    { kim: 'dede', metin: 'Vardı ya tabii. Muhtarlığın önünden akardı. Kıyısında koca bir söğüt vardı.', en: 'There was indeed. It ran past the headman\'s office. With a huge willow on its bank.' },
-    { kim: 'nine', metin: 'Çocuklar yazın hep oradaydı. Rıza\'yla muhtar en önde. Söğüdün dalından suya atlarlardı.', en: 'The children spent all summer there. Rıza and the headman at the front. They\'d jump into the water from the willow\'s branch.' },
+    { kim: 'dede', metin: 'Vardı ya tabii. Muhtarlığın önünden akardı. Kıyısında koca bir söğüt vardı.', en: 'There was indeed. It ran past the headman\'s office. A huge willow stood on its bank.' },
+    { kim: 'nine', metin: 'Çocuklar yazın hep oradaydı. Rıza\'yla muhtar en önde. Söğüdün dalından suya atlarlardı.', en: 'The children spent all summer there. Rıza and the headman were always at the front. They\'d jump into the water from the willow\'s branch.' },
     { kim: 'mehmet', metin: 'Rıza Amca mı? Suya mı atlardı?', en: 'Uncle Rıza? Jumping into water?' },
     { kim: 'dede', metin: '(güler) O da çocuktu bir zaman. Motorlar çoğaldı, dere çekildi, söğüt de kurudu. O ağacı çok severdi.', en: '(laughs) He was a child once too. The motors multiplied, the stream drew back, and the willow dried up. He loved that tree.' },
     { kim: 'ic', metin: 'Rıza Amca\'yı hiç gülerken görmedim. Suya atlarken nasıl gülüyordu acaba? Umarım büyüyünce ben de öyle olmam.', en: 'I\'ve never seen Uncle Rıza laugh. I wonder how he laughed when he jumped. I hope I don\'t end up like him when I grow up.' },
@@ -96,9 +96,10 @@ var KS = globalThis.KS = globalThis.KS || {};
   ];
 
   KS.SON_KARTLARI = {
+    sonra: { metin: 'Oylamadan birkaç hafta sonra', en: 'A few weeks after the vote' },
     iyi: { metin: 'Ekim - İlk Yağmur', en: 'October - The First Rain' },
     kotu: { metin: 'Ekim - Kolay Kararlar Zor Sonuçlar', en: 'October - Easy Choices, Hard Consequences' },
-    kotuYagmur: { metin: 'İlk yağmur.', en: 'The first rain.' }
+    kotuYagmur: { metin: 'İlk yağmur', en: 'The first rain' }
   };
 
   KS.GUN_KARTLARI = [
@@ -153,10 +154,10 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'koylu', ses: 'kova', metin: 'Eskiden kovayı salardın, suyu duyardın. Şimdi ip uzadıkça uzuyor.', en: 'You used to drop the bucket and hear the water. Now the rope just gets longer.' },
       { kim: 'koylu', metin: 'Biz burada bidon sayıyoruz, Rıza\'nın motoru bütün gece çalıştı.', en: 'Here we are counting jerrycans, and Rıza\'s motor ran all night.' },
       { kim: 'koylu', metin: 'Sus sus. Rıza duyar.', en: 'Hush, hush. Rıza will hear.' },
-      { kim: 'ic', metin: 'Rıza Amca bizim komşu. Motorunun sesi evimize kadar gelir. Kimse yüzüne bir şey demez, arkasından çok konuşur.', en: 'Uncle Rıza is our neighbor. You can hear his motor from our house. Nobody says a word to his face, and everyone talks behind his back.' },
+      { kim: 'ic', metin: 'Rıza Amca bizim komşu. Motorunun sesi evimize kadar gelir. Kimse yüzüne bir şey demez, arkasından çok konuşur.', en: 'Uncle Rıza is our neighbour. You can hear his motor from our house. Nobody says a word to his face, and everyone talks behind his back.' },
       { kim: 'ic', metin: 'Bize yakın olmasına rağmen pek görüşmeyiz, arada bir selam sabah o kadar... Zaten pek de görüşmek ister gibi hali yok.', en: 'He lives close by, but we hardly see each other, a hello now and then and that\'s all... Not that he looks keen to see anyone.' },
       { kim: 'ic', metin: 'Kuyuda ne kadar su kaldığını kimse bilmiyor. Endişelenenler de var, vurdumduymaz olanlar da.', en: 'Nobody knows how much water is left in the well. Some people are worried, others couldn\'t care less.' },
-      { kim: 'ipucu', metin: 'Ekranın sağ kenarındaki mavi gösterge köy kuyusunun seviyesi. Her gün biraz iner. Oyunun sonuna etki eden önemli bir faktör. Fazla düşmesine izin verme.', en: 'The blue gauge at the right edge of the screen is the village well\'s level. It drops a little every day. It matters a lot for how the game ends. Don\'t let it fall too far.' }
+      { kim: 'ipucu', kuyuAc: true, metin: 'Ekranın sağ kenarındaki mavi gösterge köy kuyusunun seviyesi. Her gün biraz iner. Oyunun sonuna etki eden önemli bir faktör. Fazla düşmesine izin verme.', en: 'The blue gauge at the right edge of the screen is the village well\'s level. It drops a little every day. It matters a lot for how the game ends. Don\'t let it fall too far.' }
     ] },
     { id: 'g2_grisu', gun: 2, dilim: 'sabah', mekan: 'avlu', satirlar: [
       { kim: 'anne', metin: 'Dur, leğendeki suyu dökme. Bulaşık suyunu da.', en: 'Wait, don\'t pour out the basin. Or the dishwater.' },
@@ -169,7 +170,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'nine', metin: 'Gel bakalım, Mehmet. Gölgeye otur. Gölge dediysem, asmada yaprak kalmadı ya.', en: 'Come here, Mehmet. Sit in the shade. Not that there\'s any shade, the vine has no leaves left.' },
       { kim: 'dede', metin: 'Bu asmayı babam dikti. İki yazdır yaprak bile zor tutuyor.', en: 'My father planted this vine. For two summers it has barely held a leaf.' },
       { kim: 'mehmet', metin: 'Hasan Amca, eskiden de böyle kurak olur muydu?', en: 'Uncle Hasan, was it ever this dry before?' },
-      { kim: 'dede', metin: 'Kurak yıl çok gördük. Ama yer altı dolardı, dere de akardı. Kuyuya on metre ip yeterdi.', en: 'We saw plenty of dry years. But the ground filled up again, and the stream ran. Ten meters of rope reached the water.' },
+      { kim: 'dede', metin: 'Kurak yıl çok gördük. Ama yer altı dolardı, dere de akardı. Kuyuya on metre ip yeterdi.', en: 'We saw plenty of dry years. But the ground filled up again, and the stream ran. Ten metres of rope reached the water.' },
       { kim: 'nine', metin: 'Seni bunun için çağırmadım, dinleme onu. Al şu tohumları. Bizim köyün eski tohumu bunlar, az suyla yetinir. Bahçenizin boş kalan yerine ek.', en: 'That\'s not why I called you, don\'t listen to him. Take these seeds. They\'re our village\'s old seeds, they get by on little water. Plant them in the empty part of your garden.' },
       { kim: 'ipucu', baslik: { metin: 'Dayanıklı tohum', en: 'Hardy seeds' }, metin: 'Yarından itibaren bahçe daha az su ister.', en: 'From tomorrow the garden needs less water.' },
       { kim: 'dede', metin: 'Haa, bir de köyün yukarısında eski bir sarnıç var. Yağmur suyunu orada toplardık. Motorlar gelince kimse bakmadı, yıkıldı gitti.', en: 'Oh, and there\'s an old cistern above the village. We used to collect rainwater there. When the motors came nobody looked after it, and it fell apart.' }
@@ -185,8 +186,8 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'mehmet', metin: 'Günaydın, öğretmenim.', en: 'Good morning, Miss.' },
       { kim: 'ogretmen', ses: 'ip', metin: 'Günaydın, Mehmet. İyi ki geldin. Tut şu ipin ucunu. Sıkı tut ve bırakma.', en: 'Good morning, Mehmet. Glad you came. Hold the end of this rope. Hold tight and don\'t let go.' },
       { kim: 'mehmet', metin: 'Ne yapıyorsunuz, öğretmenim?', en: 'What are you doing, Miss?' },
-      { kim: 'ogretmen', metin: 'Suya kaç metrede ulaşıyoruz, ona bakıyorum. Geçen ay da ölçmüştüm.', en: 'Checking how many meters down the water is. I measured last month too.' },
-      { kim: 'ogretmen', metin: '(ipi işaretler) Bir ayda neredeyse yarım metre inmiş.', en: '(marks the rope) Nearly half a meter lower in one month.' },
+      { kim: 'ogretmen', metin: 'Suya kaç metrede ulaşıyoruz, ona bakıyorum. Geçen ay da ölçmüştüm.', en: 'Checking how many metres down the water is. I measured last month too.' },
+      { kim: 'ogretmen', metin: '(ipi işaretler) Bir ayda neredeyse yarım metre inmiş.', en: '(marks the rope) Nearly half a metre lower in one month.' },
       { kim: 'mehmet', metin: 'Bu çok mu?', en: 'Is that a lot?' },
       { kim: 'ogretmen', metin: 'Çok. Eskiden bir yılda bu kadar inerdi. Yağmur yok ki yerine gelsin. Bu gidişle sonbahara kuyuda su kalmaz.', en: 'It is. It used to take a whole year to drop that much. There\'s no rain to replace it. At this rate there\'ll be no water in the well by autumn.' },
       { kim: 'mehmet', metin: 'Rıza Amca\'nın kuyusu da bu suyu mu çekiyor?', en: 'Does Uncle Rıza\'s well draw this water too?' },
@@ -205,7 +206,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'anne', kosul: olcumVar, metin: 'Muhtar kapı kapı dolaşıyor, suyu idareli kullanın diye. Öğretmen hanım da anlatıp duruyormuş.', en: 'The headman is going door to door, telling people to use water sparingly. The teacher keeps explaining too, they say.' },
       { kim: 'anne', kosul: olcumYok, metin: 'Öğretmen hanım kapı kapı dolaşıyor, suyu idareli kullanın diye. Muhtar da kendi bildiği gibi söylemiş köylüye.', en: 'The teacher is going door to door, telling people to use water sparingly. The headman has told people too, in his own way.' },
       { kim: 'ic', metin: 'Annemin pencere önünde çok sevdiği sardunyası. Yaprakları iyice kıvrılmış.', en: 'Mum\'s beloved geranium on the windowsill. Its leaves have curled up badly.' },
-      { kim: 'anne', metin: 'Ona su verme, boş ver.', en: 'Don\'t give it water, never mind.' },
+      { kim: 'anne', metin: 'Ona su verme, boş ver.', en: 'Don\'t bother watering it.' },
       { kim: 'mehmet', metin: '(Bardağının dibinde kalan suyu sardunyaya döker)', en: '(Pours the last of his glass onto the geranium)' },
       { kim: 'anne', metin: '(Buruk şekilde gülümser, bir şey demez)', en: '(Smiles sadly, says nothing)' }
     ] },
@@ -251,9 +252,9 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'muhtar', metin: 'Aleykümselam. Gel, otur şöyle.', en: 'And with you. Come, sit here.' },
       { kim: 'muhtar', kosul: guclu, metin: 'Öğretmen hanımla oturduk, bir yol çizdik. Kâğıdı sen getirdin, sen de dinle.', en: 'The teacher and I sat down and drew up a way forward. You brought the paper, so you listen too.' },
       { kim: 'ogretmen', kosul: guclu, metin: 'Eski sarnıcı onarıyoruz. Yağmur gelince boşa akmasın, köy çeşmesine insin.', en: 'We\'re repairing the old cistern. When the rain comes it won\'t run off, it\'ll go down to the village fountain.' },
-      { kim: 'muhtar', kosul: guclu, metin: 'Kuyulara sayaç, motorlara saat taktıracağız. Yasada var zaten ama bizde kimse takmamış. Herkes ne çektiğini bilecek.', en: 'We\'ll fit meters on the wells and timers on the motors. It\'s already the law, but nobody here ever fitted them. Everyone will know what they draw.' },
+      { kim: 'muhtar', kosul: guclu, metin: 'Kuyulara sayaç, motorlara saat taktıracağız. Yasada var zaten ama bizde kimse takmamış. Herkes ne kadar su çektiğini bilecek.', en: 'We\'ll fit meters on the wells and timers on the motors. It\'s already the law, but nobody here ever fitted them. Everyone will know how much water they draw.' },
       { kim: 'ogretmen', metin: 'Yetkililer geldiğinde bir de yer altı kaynaklarımıza baksalar iyi olur, ama sıra bize gelene kadar çok köy var daha...', en: 'When the officials come they should look at our groundwater too, but there are many villages ahead of us...' },
-      { kim: 'ogretmen', kosul: guclu, metin: 'Sulama sabah erken ya da akşam serinde, ne kadar olacağını sayaç söyleyecek. Toprağın üstü uygun zamanda saman ya da otla örtülecek, buharlaşmasın.', en: 'Watering early in the morning or in the cool of the evening, the meter will say how much. At the right time the soil gets covered with straw or grass so it doesn\'t evaporate.' },
+      { kim: 'ogretmen', kosul: guclu, metin: 'Sulama sabah erken ya da akşam serinde, ne kadar olacağını sayaç söyleyecek. Toprağın üstü uygun zamanda saman ya da otla örtülecek, buharlaşmasın.', en: 'Water early in the morning or in the cool of the evening; the meter will show how much. At the right time the soil gets covered with straw or grass so it doesn\'t evaporate.' },
       { kim: 'muhtar', kosul: guclu, metin: 'Gerekirse tarlalara az ekin ekeceğiz. Bir de damla sulama borusu var, ilçeden istedik. Sırayla kullanacağız.', en: 'We\'ll plant less in the fields if we have to. And there\'s drip irrigation pipe, we\'ve asked the district for it. We\'ll take turns.' },
       { kim: 'muhtar', kosul: guclu, metin: 'Hepsini cuma akşamı köy toplantısında oylayacağız.', en: 'We\'ll vote on all of it at the village meeting on Friday evening.' },
       { kim: 'muhtar', kosul: zayif, metin: 'Öğretmen hanım ölçümün bir örneğini getirdi sonunda. "Aslını Mehmet\'e vermiştim" dedi.', en: 'The teacher finally brought a copy of the measurement. "I gave the original to Mehmet," she said.' },
@@ -263,8 +264,8 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'muhtar', kosul: zayif, metin: 'Cuma akşamı köy toplantısında oylayacağız.', en: 'We\'ll vote at the village meeting on Friday evening.' },
       { kim: 'ogretmen', metin: 'Sarnıcı Hasan Amca hatırlattı, toprağı otla örtmeyi Fatma Teyze\'den öğrendik. Bazıları hâlâ umursamıyor, gözleriyle görseler de inanmıyorlar resmen.', en: 'Uncle Hasan reminded us of the cistern, and we learned covering the soil from Aunt Fatma. Some still don\'t care, they won\'t believe it even when they see it.' },
       { kim: 'muhtar', metin: 'Bazıları kendi kuyularını kullanıyor ama havalar böyle giderse onlar da tükenecek, farkında değiller.', en: 'Some use their own wells, but if the weather goes on like this those will run dry too, they don\'t realize.' },
-      { kim: 'ogretmen', metin: 'Kuyular derinleştikçe derinleşiyor, on belki yüz yıllarca biriken sular bilinçsiz kullanımla aylar içinde eriyor.', en: 'Wells go deeper and deeper. Water gathered over decades, maybe centuries, melts away in months with careless use.' },
-      { kim: 'muhtar', metin: 'Rıza\'nın motoru durmazsa ortak kuyudaki su hiçbirimize yetmez. Köy de ikiye bölündü, bazılarının tuzu kuru tabii. Oylar eşit çıkarsa herkes Rıza\'ya bakacak.', en: 'If Rıza\'s motor doesn\'t stop, the shared well won\'t be enough for any of us. The village is split in two, and some have nothing to lose, of course. If the vote ties, everyone will look at Rıza.' },
+      { kim: 'ogretmen', metin: 'Kuyular derinleştikçe derinleşiyor, on belki yüz yıllarca biriken sular bilinçsiz kullanımla aylar içinde eriyor.', en: 'Wells go deeper and deeper. Water gathered over decades, maybe centuries, drains away in months with careless use.' },
+      { kim: 'muhtar', metin: 'Rıza\'nın motoru durmazsa ortak kuyudaki su hiçbirimize yetmez. Köy de ikiye bölündü, bazılarının tuzu kuru tabii. Oylar eşit çıkarsa herkes Rıza\'ya bakacak.', en: 'If Rıza\'s motor doesn\'t stop, the shared well won\'t be enough for any of us. The village is split in two, and some are doing fine, of course. If the vote ties, everyone will look at Rıza.' },
       { kim: 'muhtar', metin: 'Rıza da kimseyi dinlemez. Biz de onu pek dinlemedik açıkçası...', en: 'And Rıza listens to no one. To be fair, we haven\'t listened much to him either...' }
     ], secenekler: [
       { metin: 'Babam "o adamı bir tek muhtar" dedi, hat kesildi. Siz Rıza Amca\'yla neden konuşmuyorsunuz?', en: 'Dad said "only the headman can" and the line cut off. Why don\'t you talk to Uncle Rıza?', kosul: bilmiyor('A3'), etkiler: { arguman: 'A3' }, sonraki: 'g6_a3' },
@@ -276,7 +277,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'ogretmen', kosul: konusmadi, metin: 'Seni bunun için de çağırdık. Bize kapısını açmaz. Sen çocuksun, sana bir şey demez belki.', en: 'That\'s partly why we called you. He won\'t open his door to us. You\'re a child, maybe he won\'t snap at you.' },
       { kim: 'ogretmen', kosul: konustu, metin: 'Demek sana kapısını açıyor. Bize açmaz.', en: 'So he opens his door to you. He doesn\'t to us.' },
       { kim: 'muhtar', metin: 'Zorla kabul ettiremeyiz, konuşmaya gideni de hep kaçırıyor bir şekilde. Dinletebilirsen kendini dinlet, Mehmet.', en: 'We can\'t force him to accept, and he drives off anyone who comes to talk. Get him to listen to you if you can, Mehmet.' },
-      { kim: 'ipucu', baslik: { metin: 'Komşuyu ikna et', en: 'Persuade the neighbor' }, metin: 'Rıza Amca\'ya köyde öğrendiğin {gereken} şeyi söylersen toplantıda planı destekler. Bir konuşmada yalnız bir şey dinler, her şeye de hemen inanmaz. Ne söylediğin kadar nasıl söylediğin de önemli. Defter\'de görebilirsin.', en: 'If you tell Uncle Rıza {gereken} things you\'ve learned in the village, he\'ll back the plan at the meeting. He\'ll hear only one thing per talk, and he doesn\'t believe everything right away. How you say it matters as much as what you say. You can check the Notebook.' }
+      { kim: 'ipucu', baslik: { metin: 'Komşuyu ikna et', en: 'Persuade the neighbour' }, metin: 'Rıza Amca\'ya köyde öğrendiğin {gereken} şeyi söylersen toplantıda planı destekler. Bir konuşmada yalnız bir şey dinler, her şeye de hemen inanmaz. Ne söylediğin kadar nasıl söylediğin de önemli. Defter\'de görebilirsin.', en: 'If you tell Uncle Rıza {gereken} things you\'ve learned in the village, he\'ll back the plan at the meeting. He\'ll hear only one thing per talk, and he doesn\'t believe everything right away. How you say it matters as much as what you say. You can check the Notebook.' }
     ] },
     { id: 'g7_komsu', gun: 7, dilim: 'sabah', mekan: 'kuyu_basi', giris: { metin: 'Yine su almaya indin. Bu sabah kuyu başında beklemediğin biri var.', en: 'You went down for water again. There\'s someone at the well this morning you didn\'t expect.' }, satirlar: [
       { kim: 'ic', metin: 'Rıza Amca kuyunun başında. Herkes onu görünce susmuş.', en: 'Uncle Rıza is at the well. Everyone fell silent when they saw him.' },
@@ -288,7 +289,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'komsu', metin: '(bir süre durur, boş bidonu alır, gider)', en: '(stands a moment, picks up the empty jerrycan, leaves)' },
       { kim: 'ic', metin: 'Haksız da değiller ama eli boş döndü.', en: 'They\'re not exactly wrong, but he left empty-handed.' },
       { kim: 'ic', metin: 'Bir şey diyemedim. Ama belki bidon taşıyabilirim.', en: 'I couldn\'t say anything. But maybe I can carry a jerrycan.' },
-      { kim: 'ipucu', baslik: { metin: 'Komşuya su', en: 'Water for the neighbor' }, metin: 'Artık öğlenleri haritadan Rıza Amca\'ya su götürebilirsin. Yarınki paydan {maliyet} damla gider ama onunla konuşma fırsatı olur.', en: 'You can now take water to Uncle Rıza at noon, from the map. It takes {maliyet} drops from tomorrow\'s share, but gives you a chance to talk to him.' }
+      { kim: 'ipucu', baslik: { metin: 'Komşuya su', en: 'Water for the neighbour' }, metin: 'Artık öğlenleri haritadan Rıza Amca\'ya su götürebilirsin. Yarınki paydan {maliyet} damla gider ama onunla konuşma fırsatı olur.', en: 'You can now take water to Uncle Rıza at noon, from the map. It takes {maliyet} drops from tomorrow\'s share, but gives you a chance to talk to him.' }
     ] },
     { id: 'g8_sabah', gun: 8, dilim: 'sabah', mekan: 'avlu', satirlar: [
       { kim: 'ekran', metin: 'Sıcak dalgası. Gölgede kırk derece.', en: 'Heat wave. Forty degrees in the shade.' },
@@ -301,7 +302,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'komsu', metin: 'Kırk yıldır bu toprağı sürüyorum. Kırk yıl!', en: 'Forty years I\'ve worked this land. Forty years!' },
       { kim: 'koylu', metin: '(alçak sesle) Benim tarla da iki tarla ötede.', en: '(quietly) My field is only two fields over too.' },
       { kim: 'mehmet', metin: 'Rıza Amca, orda durma, kenarı çöküyor!', en: 'Uncle Rıza, don\'t stand there, the edge is crumbling!' },
-      { kim: 'komsu', metin: '(geri çekilir, oturur) Motor da hemen şurada. Bir metre öteye açılsaydı...', en: '(steps back, sits down) The motor\'s right there too. One meter over, and...' }
+      { kim: 'komsu', metin: '(geri çekilir, oturur) Motor da hemen şurada. Bir metre öteye açılsaydı...', en: '(steps back, sits down) The motor\'s right there too. One metre over, and...' }
     ] },
     { id: 'g9_sabah', gun: 9, dilim: 'sabah', mekan: 'avlu', satirlar: [
       { kim: 'anne', metin: 'Bu akşam toplantı var, oğlum. Bütün köy orada olacak, sen de gelmeyi unutma.', en: 'There\'s a meeting this evening, son. The whole village will be there, don\'t forget to come.' },
@@ -310,14 +311,14 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'ic', kosul: ikna, metin: 'Bu sabah motorun sesi gelmiyor. Uzun zamandır ilk kez. "Bakarız" dedi ama gelir mi, gelmez mi, akşam göreceğiz.', en: 'No sound from the motor this morning. For the first time in ages. "We\'ll see," he said, but will he come or won\'t he? We\'ll know tonight.' }
     ] },
     { id: 'g9_toplanti', gun: 9, dilim: 'aksam', mekan: 'muhtarlik', mekanSecenek: function () { return { toplanti: true }; }, giris: { metin: 'Bütün köy muhtarlığın önünde toplandı. Bugün oylama var.', en: 'The whole village has gathered outside the headman\'s office. Today is the vote.' }, satirlar: [
-      { kim: 'muhtar', ortam: 'kalabalik', metin: 'Hepiniz biliyorsunuz neden toplandığımızı. Kuyu suyu iyice dibe iniyor. Öğretmen hanım ölçtü, ben de gördüm, birçoğunuz da biliyor.', en: 'You all know why we\'re here. The well is dropping toward the bottom. The teacher measured it, I saw it myself, and many of you know it too.' },
+      { kim: 'muhtar', toplantiSesi: true, metin: 'Hepiniz biliyorsunuz neden toplandığımızı. Kuyu suyu iyice dibe iniyor. Öğretmen hanım ölçtü, ben de gördüm, birçoğunuz da biliyor.', en: 'You all know why we\'re here. The well is dropping toward the bottom. The teacher measured it, I saw it myself, and many of you know it too.' },
       { kim: 'ogretmen', metin: 'Sarnıç onarılacak, kuyulara sayaç takılacak, sulama sabah erken ve akşam serinde yapılacak.', en: 'The cistern will be repaired, wells will get meters, watering will be early morning and cool evening.' },
       { kim: 'koylu', metin: 'Sayaç masrafını kim ödeyecek?', en: 'Who pays for the meters?' },
       { kim: 'koylu', metin: 'Benim tarlam kurursa çocuklarıma ne yediririm?', en: 'If my field dries up, what do I feed my children?' },
       { kim: 'koylu', metin: 'Rıza\'nın ve diğerlerinin motoru dönerken benim sayacım neye yarar?', en: 'What good is my meter while Rıza\'s motor and all the others are running?' },
-      { kim: 'ic', kosul: anneIndi, metin: 'Herkes Rıza Amca\'nın motorunu sayıyor. Annemin gece indiği bidonları kimse saymıyor. Belki kendileri de iniyor...', en: 'Everyone is counting Uncle Rıza\'s motor. Nobody counts the jerrycans Mum carried at night. Maybe they go down themselves...' },
+      { kim: 'ic', kosul: anneIndi, metin: 'Herkes Rıza Amca\'nın motorunu sayıyor. Annemin gece indiği bidonları kimse saymıyor. Belki kendileri de iniyor...', en: 'Everyone is counting Uncle Rıza\'s motor. Nobody counts the jerrycans Mum carried at night. Maybe they\'re drawing extra themselves too...' },
       { kim: 'ic', kosul: bizFazlaCektik, metin: 'Herkes Rıza Amca\'nın motorunu sayıyor. Bizim fazla çektiğimiz bidonları kimse saymıyor. Diğerleri de yapmıştır belki...', en: 'Everyone is counting Uncle Rıza\'s motor. Nobody counts the extra jerrycans we drew. Others have probably done it too...' },
-      { kim: 'muhtar', metin: 'Artık oylayalım. Kabul edenler...', en: 'Time to vote. All in favor...' },
+      { kim: 'muhtar', metin: 'Artık oylayalım. Kabul edenler...', en: 'Time to vote. All in favour...' },
       { kim: 'ekran', metin: 'Eller kalkıyor. Yarısı evet, yarısı hayır.', en: 'Hands go up. Half yes, half no.' },
       { kim: 'ic', ortam: null, metin: 'Herkes dönüp Rıza Amca\'ya bakıyor.', en: 'Everyone turns to look at Uncle Rıza.' },
       { kim: 'komsu', kosul: ikna, metin: '(bir an Mehmet\'e bakar, ağır ağır ayağa kalkar) Benim tarlam çöktü. Çökmez diyordum ama çöktü, bir sonraki kimin tarlası? (elini kaldırır) Ben de varım. Motoruma da sayaç takılsın. Belki hâlâ şansımız vardır. Herkes üstüne düşeni yapsın...', en: '(glances at Mehmet, slowly stands) My field caved in. I said it wouldn\'t, but it did. Whose field is next? (raises his hand) Count me in. Put a meter on my motor too. Maybe we still have a chance. Let everyone do their part...' },
@@ -528,7 +529,7 @@ var KS = globalThis.KS = globalThis.KS || {};
 
     { id: 'ziyaret_muhtar_olcum', ziyaret: 'muhtar', kosul: function (d, r) { return r.gorev; }, mekan: 'muhtarlik', satirlar: [
       { kim: 'mehmet', metin: 'Muhtar amca, öğretmenim bunu gönderdi. Kuyunun ölçümü.', en: 'Headman, my teacher sent this. The well\'s measurement.' },
-      { kim: 'muhtar', metin: '(kâğıda uzun uzun bakar) Yarım metre ha...', en: '(studies the paper for a long time) Half a meter, eh...' },
+      { kim: 'muhtar', metin: '(kâğıda uzun uzun bakar) Yarım metre ha...', en: '(studies the paper for a long time) Half a metre, eh...' },
       { kim: 'muhtar', metin: 'Ben de içten içe biliyordum. Ama somutlaşınca başka oluyor. Sorunları görmezden gelmek hep daha kolay, alışmışız...', en: 'I knew it deep down. But it\'s different once it\'s real. Ignoring problems is always easier, we\'ve got used to it...' },
       { kim: 'muhtar', metin: 'Öğretmen hanımla oturup konuşsam iyi olur o zaman. Köyün işini de köylüye sormak lazım illa. Senin de eline sağlık yeğenim.', en: 'Then I\'d better sit down and talk with the teacher. And the village\'s business has to be put to the villagers. Well done, my boy.' },
       { kim: 'ekran', metin: 'Defter: Ölçüm muhtara ulaştı ✓', en: 'Notebook: Measurement delivered to the headman ✓' }
@@ -557,6 +558,15 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'ogretmen', kosul: kalanHak('ogretmen', 0), metin: 'Ölçmek kolay, Mehmet. Zor olan, ölçtüğünü insanlara anlatabilmek.', en: 'Measuring is easy, Mehmet. The hard part is making people understand what you measured.' }
     ] },
 
+    // Selamdan sonra önce kısa laf, sonra açılış: iki açılış üst üste gelmesin.
+    { id: 'kucuk_komsu', ziyaret: 'komsu', kosul: ve(sohbetDegil, kalanHak('komsu', 0), obrukOncesi), satirlar: [
+      { kim: 'komsu', metin: 'Ne bakıyorsun öyle? Tarlamı mı merak ettin?', en: 'What are you staring at? Curious about my field?' }
+    ], secenekler: [
+      { metin: 'Yok, selam vermeye geldim.', en: 'No, I came to say hello.', sonraki: 'kucuk_komsu_a' },
+      { metin: 'Mısırlar güzel olmuş.', en: 'The corn looks good.', sonraki: 'kucuk_komsu_b' }
+    ] },
+    { id: 'kucuk_komsu_a', satirlar: [{ kim: 'komsu', metin: 'Selamı aldım.', en: 'Got your greeting.' }] },
+    { id: 'kucuk_komsu_b', satirlar: [{ kim: 'komsu', metin: 'Güzel tabii. Su çekince olur. Babamdan kalan toprak, kurutmam. Benim oğlanın okul masrafını çıkaracak inşallah.', en: 'Of course it does. That\'s what drawing water gets you. It\'s land my father left me, I won\'t let it dry. It\'ll pay for my boy\'s schooling, God willing.' }] },
     { id: 'ziyaret_komsu', ziyaret: 'komsu', kosul: sohbetDegil, mekan: 'komsu_tarlasi', mekanSecenek: function (d) { return { obruk: d.gun >= KS.config.OBRUK_GUNU }; }, satirlar: [
       { kim: 'komsu', kosul: obrukOncesi, metin: 'Bu saatte tarlada ne arıyorsun, evlat? Otur bakalım, madem geldin.', en: 'What are you doing in the field at this hour, lad? Sit, since you\'ve come.' },
       { kim: 'komsu', kosul: obrukSonrasi, metin: 'Bu saatte burada ne arıyorsun, evlat? Çukura yaklaşma. Otur şöyle, madem geldin.', en: 'What are you doing here at this hour, lad? Keep away from the pit. Sit here, since you\'ve come.' }
@@ -587,14 +597,6 @@ var KS = globalThis.KS = globalThis.KS || {};
     ] },
     { id: 'kucuk_ogretmen_a', satirlar: [{ kim: 'ogretmen', metin: 'Aferin. Bitince gel, başkasını veririm.', en: 'Good. When you finish, come and I\'ll give you another.' }] },
     { id: 'kucuk_ogretmen_b', satirlar: [{ kim: 'ogretmen', metin: 'Biliyorum. Kitap kaçmaz, ama yine de okumaya çalış boş zamanında.', en: 'I know. The book won\'t run away, but still, try to read when you have time.' }] },
-    { id: 'kucuk_komsu', ziyaret: 'komsu', kosul: ve(sohbetDegil, kalanHak('komsu', 0), obrukOncesi), satirlar: [
-      { kim: 'komsu', metin: 'Ne bakıyorsun öyle? Tarlamı mı merak ettin?', en: 'What are you staring at? Curious about my field?' }
-    ], secenekler: [
-      { metin: 'Yok, selam vermeye geldim.', en: 'No, I came to say hello.', sonraki: 'kucuk_komsu_a' },
-      { metin: 'Mısırlar güzel olmuş.', en: 'The corn looks good.', sonraki: 'kucuk_komsu_b' }
-    ] },
-    { id: 'kucuk_komsu_a', satirlar: [{ kim: 'komsu', metin: 'Selamı aldım.', en: 'Hello received.' }] },
-    { id: 'kucuk_komsu_b', satirlar: [{ kim: 'komsu', metin: 'Güzel tabii. Su çekince olur. Babamdan kalan toprak, kurutmam. Benim oğlanın okul masrafını çıkaracak inşallah.', en: 'Of course it does. That\'s what drawing water gets you. It\'s land my father left me, I won\'t let it dry. It\'ll pay for my boy\'s schooling, God willing.' }] },
     { id: 'veda_yasliCift', satirlar: [
       { kim: 'mehmet', kosul: tekGun, metin: 'Ben kalkayım, annem bekler. Sağlıcakla kalın.', en: 'I\'ll be going, Mum\'s waiting. Take care.' },
       { kim: 'dede', kosul: tekGun, metin: 'Sen de sağlıcakla, oğlum. Annene selam söyle.', en: 'You too, son. Say hello to your mother.' },
@@ -680,8 +682,8 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'ic', kosul: function (d) { return d.su.ertesiGunKesinti > 0; }, metin: 'Yarın iki bidon eksik olacak. Annem sordu. "Rıza Amca\'ya" dedim. Bir şey diyemedi, başını salladı.', en: 'Tomorrow we\'ll be two jerrycans short. Mum asked. "For Uncle Rıza," I said. She couldn\'t say anything, just nodded.' },
       { kim: 'ic', kosul: function (d) { return d.gosterge.keci <= KS.config.KECI.cokDusuk; }, metin: 'Gece ağıla baktım. {keci} başını kaldırmadı.', en: 'I checked the pen at night. {keci} didn\'t lift her head.' },
       { kim: 'ic', kosul: gunu(1), metin: 'İlk gün bitti. Yarın yine aynı pay. Yine yetmeyecek.', en: 'The first day is over. The same share tomorrow. It won\'t be enough again.' },
-      { kim: 'ic', kosul: gunu(3), metin: 'Yarım metre. Yatağıma uzandım, kuyunun dibini düşündüm.', en: 'Half a meter. I lay in bed and thought about the bottom of the well.' },
-      { kim: 'ic', kosul: gunu(4), metin: 'Sardunya hâlâ orada. Annem suyunu sormadı, ben de zaten söylemedim.', en: 'The geranium is still there. Mum didn\'t ask about the water, and I didn\'t say anyway.' },
+      { kim: 'ic', kosul: gunu(3), metin: 'Yarım metre. Yatağıma uzandım, kuyunun dibini düşündüm.', en: 'Half a metre. I lay in bed and thought about the bottom of the well.' },
+      { kim: 'ic', kosul: gunu(4), metin: 'Sardunya hâlâ orada. Annem suyunu sormadı, ben de zaten söylemedim.', en: 'The geranium is still there. Mum didn\'t ask about the water, and I hadn\'t said anything either.' },
       { kim: 'ic', kosul: ve(gunu(5), bilmiyor('A3')), metin: '"O adamı bir tek muhtar..." Muhtarla Rıza Amca\'nın arasında ne var?', en: '"Only the headman can..." What is there between the headman and Uncle Rıza?' },
       { kim: 'ic', kosul: gunu(5), metin: 'Babamın sesi kulağımda. Üç dakika konuştuk, tepeden inmesi bir saat sürdü.', en: 'Dad\'s voice is still in my ears. We talked three minutes, and it took an hour to get down the hill.' },
       { kim: 'ic', kosul: gunu(6), metin: 'Muhtar bana "dinletebilirsen dinlet" dedi. Bir çocuk Rıza Amca\'ya ne dinletir?', en: 'The headman told me "get him to listen if you can." What can a child get Uncle Rıza to listen to?' },
@@ -718,7 +720,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     ] },
     { id: 'kars_bir_arguman', satirlar: [
       { kim: 'komsu', metin: 'Laf çok, evlat. Bir laf ne değiştirir? Yeter bu kadar.', en: 'Words are cheap, lad. What does one word change? Enough.' },
-      { kim: 'ekran', kosul: planVar, metin: 'Defter: Komşuyu ikna et 1/{gereken}', en: 'Notebook: Persuade the neighbor 1/{gereken}' }
+      { kim: 'ekran', kosul: planVar, metin: 'Defter: Komşuyu ikna et 1/{gereken}', en: 'Notebook: Persuade the neighbour 1/{gereken}' }
     ] },
     { id: 'kars_ikna', satirlar: [
       { kim: 'komsu', metin: '(uzun süre susar) Muhtar mı gönderdi seni, doğru söyle.', en: '(silent for a long time) Did the headman send you, tell me straight.' },
@@ -729,7 +731,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'komsu', kosul: sonGun, metin: 'Toplantı bu akşam mı?', en: 'The meeting\'s this evening?' },
       { kim: 'mehmet', kosul: sonGun, metin: 'Bu akşam, muhtarlıkta.', en: 'This evening, at the headman\'s office.' },
       { kim: 'komsu', metin: 'Bakarız. (arkasını döner, sonra durur) Bakarız dedim, git şimdi.', en: 'We\'ll see. (turns away, then stops) I said we\'ll see, now go.' },
-      { kim: 'ekran', metin: 'Defter: Komşuyu ikna et ✓', en: 'Notebook: Persuade the neighbor ✓' }
+      { kim: 'ekran', metin: 'Defter: Komşuyu ikna et ✓', en: 'Notebook: Persuade the neighbour ✓' }
     ] },
     { id: 'ikna_A1_nazik', satirlar: [
       { kim: 'komsu', metin: '(bir an durur) Söğüt... Herkes "Rıza\'nın söğüdü" derdi. (yüzünü çevirir) O dere çoktan gitti.', en: '(pauses) The willow... Everyone called it "Rıza\'s willow." (turns his face away) That stream is long gone.' },
@@ -780,7 +782,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'muhtar', metin: 'Kaç kere geldim kapına. "Rıza, bu iş böyle olmaz." "Rıza, ölçüsüz, habersiz çalıştırma, başına bir iş açacaksın."', en: 'How many times I came to your door. "Rıza, this won\'t do." "Rıza, don\'t run it unmetered and unreported, you\'ll bring trouble on yourself."' },
       { kim: 'komsu', metin: 'Ben de her seferinde "belgem var" dedim. Kapıyı yüzüne kapattım. Evleneceğim için para lazımdı, başka türlü kazanamam sandım.', en: 'And every time I said "I have a permit." I shut the door in your face. I was getting married and needed money, I thought there was no other way.' },
       { kim: 'muhtar', metin: 'Bir yıl böyle gitti, aramız da iyice açıldı. Sonunda dayanamadım, şikâyet yazdım.', en: 'A year it went on, and the gap between us grew. In the end I couldn\'t take it, and I filed a complaint.' },
-      { kim: 'komsu', metin: 'Bütün köy duydu. Ona içerledim, kendi kendime yedirdim belki ama sonradan çok utandım, hata ettim.', en: 'The whole village heard. That stung, I swallowed it maybe, but later I was deeply ashamed. I was wrong.' },
+      { kim: 'komsu', metin: 'Bütün köy duydu. Ona içerledim, kendi kendime yedirdim belki ama sonradan çok utandım, hata ettim.', en: 'The whole village heard. That stung, I may have brushed it off, but later I was deeply ashamed. I was wrong.' },
       { kim: 'muhtar', metin: 'Haklıydım belki. Ama seni kaybetmeye değmezdi. Belki başka yol göstersem anlaşırdık.', en: 'Maybe I was right. But it wasn\'t worth losing you. Maybe if I\'d shown another way, we\'d have come to terms.' },
       { kim: 'komsu', metin: '(güler) Benim inadım da değmezdi. Çekindim anlatmaya, pek konuşkan değilim, bilirsin.', en: '(laughs) Nor was my stubbornness. I was too shy to explain, I\'m not much of a talker, you know.' },
       { kim: 'komsu', kosul: iletti('A3'), metin: '(Mehmet\'e bakar) Oluğu bana bu çocuk hatırlattı. Biraz da babasını anımsatıyor baksana...', en: '(glances at Mehmet) This boy reminded me of the gutter. He looks a bit like his father too, doesn\'t he...' },
@@ -788,7 +790,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'ogretmen', metin: 'Bir yağmurla bu sarnıç dolmaz. Yıllarca çektik, yıllarca bekleyeceğiz. Sorumsuz davrandık ama yetiştik, bir daha böyle şansımız olmayabilir.', en: 'One rain won\'t fill this cistern. We drew for years, we\'ll wait for years. We were irresponsible but we made it in time, we may not get another chance.' }
     ] },
     { id: 'son_iyi_ev', mekan: 'avlu', zaman: 'sabah', mekanSecenek: function () { return { yesil: true }; }, satirlar: [
-      { kim: 'ekran', ortam: 'damlama', muzik: 'iyi', metin: 'Köy çeşmesinden ilk damla.', en: 'The first drop from the village fountain.' },
+      { kim: 'ekran', ortam: 'damlama', metin: 'Köy çeşmesinden ilk damla.', en: 'The first drop from the village fountain.' },
       { kim: 'ic', metin: 'Az. Ama akıyor.', en: 'Not much. But it\'s flowing.' },
       { kim: 'ic', kosul: function (d) { return d.komsu.iletilen.indexOf('A1') >= 0; }, metin: 'Rıza Amca sarnıcın yanına bir söğüt dalı dikmiş.', en: 'Uncle Rıza has planted a willow cutting by the cistern.' },
       { kim: 'ic', kosul: iletti('A2'), metin: 'Öğretmen kuyuyu ölçerken ipi artık Rıza Amca tutuyor.', en: 'When the teacher measures the well now, Uncle Rıza holds the rope.' },
@@ -815,17 +817,17 @@ var KS = globalThis.KS = globalThis.KS || {};
       { kim: 'ic', kosul: iknaDegil, metin: 'Rıza Amca\'nın motoru da o hafta sustu. Çünkü çekecek su kalmamıştı.', en: 'Uncle Rıza\'s motor fell silent that same week. Because there was no water left to draw.' },
       { kim: 'anne', metin: 'Kamyon gelmiş. Eşyalar hazır mı?', en: 'The truck\'s here. Are the things ready?' },
       { kim: 'ic', metin: 'Babam zor da olsa gittiği şehirde bir oda bulmuş. Hepimiz oraya gideceğiz.', en: 'Dad has barely managed to find a room in the city. All of us are going there.' },
-      { kim: 'ic', metin: 'Yol parası lazımdı. En iyi arkadaşımın ipini pazarcıya kendim uzattım. {keci} dönüp baktı. Ben bakamadım.', en: 'We needed the fare. I handed my best friend\'s rope to the market trader myself. {keci} looked back. I couldn\'t look.' },
+      { kim: 'ic', metin: 'Yol parası lazımdı. En iyi arkadaşımın ipini pazarcıya kendim uzattım. {keci} dönüp baktı. Ben bakamadım.', en: 'We needed the fare. I handed my best friend\'s lead to the market trader myself. {keci} looked back. I couldn\'t look.' },
       { kim: 'ic', metin: 'Annem sardunyayı pencerede bıraktı. Bir şey demedi. Belki köydeki umutlarını o çiçeğe bağlamıştı, köyle beraber umutlarımız da geride kaldı.', en: 'Mum left the geranium on the windowsill. She said nothing. Maybe she had tied her hopes for the village to that flower. Our hopes stayed behind with the village.' },
       { kim: 'ic', kosul: evDusuk, metin: 'Annem günlerdir konuşmuyor. Bizim için endişeleniyor, kendisi de hiç iyi değil. Kardeşimin ağlamaları kesilmedi.', en: 'Mum hasn\'t spoken for days. She worries about us, and she isn\'t well herself. The baby won\'t stop crying.' },
       { kim: 'ic', kosul: kilerBos, metin: 'Son günlerde sofrada ekmekten başka bir şey yoktu. Ben alıştım ama kardeşim daha ekmek yiyemiyor. Annem de iyi beslenemiyor...', en: 'These last days there was nothing on the table but bread. I got used to it, but the baby can\'t eat bread yet. Mum isn\'t eating well either...' }
     ] },
     { id: 'son_kotu_yol', mekan: 'koy_cikisi', zaman: 'ogle', satirlar: [
-      { kim: 'ic', muzik: 'kotu', sesSoner: ['kamyon', 'bebek_agla'], metin: 'Fatma Teyze\'yle Hasan Amca kapının önündeydi. El salladılar bize. Onlar gitmiyor. Nereye gitsinler köyden başka bir evleri yok?', en: 'Aunt Fatma and Uncle Hasan were at their door. They waved to us. They aren\'t leaving. Where would they go, with no home but the village?' },
+      { kim: 'ic', sesSoner: ['kamyon', 'bebek_agla'], metin: 'Fatma Teyze\'yle Hasan Amca kapının önündeydi. El salladılar bize. Onlar gitmiyor. Nereye gitsinler köyden başka bir evleri yok?', en: 'Aunt Fatma and Uncle Hasan were at their door. They waved to us. They aren\'t leaving. Where would they go, with no home but the village?' },
       { kim: 'ic', kosul: suGoturdu, metin: 'Rıza Amca yol kenarındaydı, elinde bizim bidon. Kamyon geçerken başını eğdi.', en: 'Uncle Rıza was by the road with our jerrycan in his hand. He bowed his head as the truck passed.' },
       { kim: 'ic', metin: 'Kardeşim ağlamaktan yoruldu; kamyon sallandıkça annemin kucağında uyudu.', en: 'The baby cried until worn out, and fell asleep in Mum\'s arms as the truck swayed.' },
-      { kim: 'ic', metin: 'Uzaktan şehir gözükmeye başladı. Dumanın altında karanlık ve gri.', en: 'The city came into view in the distance. Dark and gray under the smoke.' },
-      { kim: 'ic', metin: 'Radyoda duydum, \'sıcaklık giderek yükseliyor, katı önlemler uygulanacak\'. Öğretmenim aylar öncesinden söylemişti, neden şimdi uygulanıyor?', en: 'I heard on the radio, "temperatures keep rising, strict measures will be taken." My teacher said so months ago, why are they doing it only now?' },
+      { kim: 'ic', metin: 'Uzaktan şehir gözükmeye başladı. Dumanın altında karanlık ve gri.', en: 'The city came into view in the distance. Dark and grey under the smoke.' },
+      { kim: 'ic', metin: 'Radyoda duydum, \'sıcaklık giderek yükseliyor, tüm dünyada katı önlemler alınacak\'. Öğretmenim bize aylar önce söyledi ama dünyanın bile haberi yok muymuş anlaşılan.', en: 'I heard on the radio, "temperatures keep rising, strict measures will be taken worldwide." My teacher told us months ago, but it seems even the world didn\'t know.' },
       { kim: 'ic', metin: 'Babam otogarda bekleyecekmiş. "Her şey yoluna girecek" dedi telefonda. Sesi yine yorgundu. Bu sefer yalan söylediğini anladım.', en: 'Dad will wait at the bus station. "Everything will work out," he said on the phone. He sounded tired again. This time I knew he was lying.' }
     ] },
     { id: 'son_kotu_sarnic', mekan: 'sarnic', zaman: 'yagmur', satirlar: [
@@ -885,7 +887,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     ],
     A2: [
       { ton: 'kaba', kosul: obrukOncesi, metin: 'En doğrusu şu motoru hemen kapatmanız.', en: 'The best thing is to shut that motor off right now.' },
-      { ton: 'nazik', kosul: obrukOncesi, metin: 'Zeynep Öğretmen ölçtü, kuyu bir ayda yarım metre inmiş. Toprağın altı boşalıyormuş, obruk açılabilirmiş.', en: 'Ms. Zeynep measured it, the well dropped half a meter in a month. The ground below is hollowing out, a sinkhole could open.' },
+      { ton: 'nazik', kosul: obrukOncesi, metin: 'Zeynep Öğretmen ölçtü, kuyu bir ayda yarım metre inmiş. Toprağın altı boşalıyormuş, obruk açılabilirmiş.', en: 'Ms. Zeynep measured it, the well dropped half a metre in a month. The ground below is hollowing out, a sinkhole could open.' },
       { ton: 'nazik', kosul: obrukSonrasi, metin: 'Öğretmen "Tek motorun işi değil" dedi. Hepimiz çektikçe sıra birinin tarlasına geliyormuş. İklim değişiyor, bir de bilinçsiz kaynak harcamasıyla dünya iyice kötüye gidiyormuş.', en: 'The teacher said "it\'s not one motor\'s doing." As we all draw, it comes to someone\'s field. The climate is changing, and careless use of resources is making the world much worse.' },
       { ton: 'kaba', kosul: obrukSonrasi, metin: 'Görüyorsunuz işte olanı. En doğrusu artık motoru kapatmanız.', en: 'See what happened? The best thing now is to shut the motor off.' }
     ],

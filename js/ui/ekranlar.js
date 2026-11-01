@@ -3,6 +3,8 @@ var KS = globalThis.KS = globalThis.KS || {};
 KS.ui = KS.ui || {};
 
 (function () {
+  var TAM_EKRAN_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.5" d="M3 9V3h6M15 3h6v6M21 15v6h-6M9 21H3v-6"/></svg>';
+
   function ekran() {
     var e = document.getElementById('tamEkran');
     e.textContent = '';
@@ -37,7 +39,19 @@ KS.ui = KS.ui || {};
     document.title = KS.t('oyunAdi');
     document.getElementById('yonUyari').textContent = KS.t('yonUyari');
     sesDugmesiCiz();
+    tamEkranDugmesiCiz();
   };
+
+  // Telefonda arka plandan dönünce tam ekran kapanır; tarayıcı dokunuş olmadan geri açmaya izin vermez.
+  function tamEkranDugmesiCiz() {
+    var b = document.getElementById('tamEkranDugme');
+    b.innerHTML = TAM_EKRAN_SVG;
+    b.title = KS.t('tamEkranDugmesi');
+    b.setAttribute('aria-label', KS.t('tamEkranDugmesi'));
+    b.onclick = tamEkranIste;
+    b.hidden = !document.documentElement.requestFullscreen || !!document.fullscreenElement;
+  }
+  document.addEventListener('fullscreenchange', tamEkranDugmesiCiz);
 
   function sesDugmesiCiz() {
     var b = document.getElementById('sesDugme');
@@ -88,7 +102,9 @@ KS.ui = KS.ui || {};
     girdi.maxLength = KS.config.KECI.adUzunluk;
     girdi.placeholder = KS.config.KECI.varsayilanAd;
     e.appendChild(girdi);
-    e.appendChild(dugme(KS.t('tamam'), function () { bitince(girdi.value); }));
+    var tamam = dugme(KS.t('tamam'), function () { bitince(girdi.value); });
+    girdi.onkeydown = function (ev) { if (ev.key === 'Enter') tamam.click(); };
+    e.appendChild(tamam);
     girdi.focus();
   };
 
@@ -136,6 +152,7 @@ KS.ui = KS.ui || {};
     bolum('kaynak_muzik', KS.KAYNAK_LISTESI.muzik);
     bolum('kaynak_gorsel', [KS.t('kaynakGorselSatir')]);
     bolum('kaynak_kod', [KS.t('kaynakKodSatir')]);
+    bolum('kaynak_veri', [KS.t('kaynakVeriSatir')]);
     var kapat = el('button', '', KS.t('kapat'));
     kapat.onclick = function () { kutu.hidden = true; };
     panel.appendChild(kapat);

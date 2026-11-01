@@ -64,7 +64,7 @@ button:disabled { opacity: 0.4; cursor: default; }
   display: flex;
   align-items: center;
   gap: 1.4em;
-  padding: 0.5em 3.6em 0.5em 1em;
+  padding: 0.5em 5.2em 0.5em 1em;
   background: var(--panel);
   font-size: 0.95em;
 }
@@ -75,7 +75,9 @@ button:disabled { opacity: 0.4; cursor: default; }
   padding: 0.2em 0.4em;
   background: transparent;
 }
-#sesDugme:hover { background: var(--toprak-koyu); }
+#sesDugme:hover, #tamEkranDugme:hover { background: var(--toprak-koyu); }
+#tamEkranDugme { position: absolute; z-index: 6; top: 0.35em; right: 2.7em; padding: 0.2em 0.35em; background: transparent; line-height: 0; }
+#tamEkranDugme svg { width: 1.2em; height: 1.2em; display: block; }
 .atla { position: absolute; top: 0.6em; right: 0.8em; padding: 0.15em 0.7em; font-size: 0.8em; background: transparent; border: 0.1em solid var(--bos); }
 .dil-secimi { display: flex; gap: 0.5em; font-size: 0.85em; }
 .dil-secimi button { background: transparent; border: 0.1em solid var(--bos); }
@@ -269,9 +271,9 @@ button:disabled { opacity: 0.4; cursor: default; }
 .su-durum.orta { color: var(--sari); }
 .su-durum.eksik { color: #f0b070; }
 .su-durum.kotu { color: #ff9d8a; }
-.damlalar { display: flex; flex-wrap: wrap; gap: 0.3em; min-height: 1em; }
+.damlalar { display: flex; flex-wrap: wrap; gap: 0.4em; min-height: 1.3em; }
 .damla {
-  width: 0.8em; height: 0.8em;
+  width: 1.3em; height: 1.3em;
   border-radius: 0 50% 50% 50%;
   transform: rotate(45deg);
   border: 0.1em solid var(--su);
@@ -318,11 +320,12 @@ button.fazla-acik { background: var(--kirmizi); }
 }
 .keci-siluet svg, .keci-siluet img { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
 .keci-siluet img, .ot img, .ikon img, .ipucu-ikon img, .damla img, #sesDugme img { image-rendering: pixelated; }
+.tarla-zemin, .tarla-zemin img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; pointer-events: none; }
 .ot img { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
 .ikon img { height: 1.2em; width: auto; vertical-align: -0.25em; margin-right: 0.2em; }
 .ipucu-ikon img { display: block; width: 1.4em; height: 1.4em; object-fit: contain; }
-.damla.resimli { background: transparent; border-color: transparent; }
-.damla img { display: block; width: 100%; height: 100%; object-fit: contain; transform: rotate(-45deg); }
+.damla.resimli { background: transparent; border: 0; border-radius: 0; transform: none; }
+.damla img { display: block; width: 100%; height: 100%; object-fit: contain; }
 #sesDugme img { display: block; width: 1.3em; height: 1.3em; object-fit: contain; }
 .baslangic-gorsel { position: absolute; inset: 0; z-index: -1; }
 .baslangic-gorsel img { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -384,11 +387,12 @@ button.kaynak-dugme { position: absolute; right: 1em; bottom: 0.8em; padding: 0.
 .son-gorsel img { opacity: 0.14; }
 .baslangic-gorsel.resimli ~ .dil-secimi button:not(.secili), .baslangic-gorsel.resimli ~ .kaynak-dugme { background: var(--panel); color: var(--krem, #f6e7d0); }
 #tamEkran.final { gap: 0.5em; padding: 1em 2em; }
-#tamEkran.final .kart-metin { font-size: 1.25em; font-weight: 600; }
-.final-veri { margin: 0; max-width: 46em; font-size: 0.85em; line-height: 1.35; }
-.final-odak { margin: 0; max-width: 46em; padding-left: 1.2em; font-size: 0.85em; line-height: 1.35; text-align: left; }
+#tamEkran.final .kart-metin { font-size: 1.25em; font-weight: 600; max-width: 30em; }
+.final-baslik { font-size: 2em; font-weight: 700; }
+.final-veri { margin: 0; max-width: 42em; font-size: 0.95em; line-height: 1.4; }
 .final-kaynak { margin: 0; font-size: 0.65em; opacity: 0.75; }
-#tamEkran.final .eksikler, #tamEkran.final h2 { margin: 0; font-size: 0.9em; }
+#tamEkran.final .eksikler, #tamEkran.final h2 { margin: 0; font-size: 0.72em; }
+#tamEkran.final .eksikler { max-width: 60em; }
 .kuyu-ad .ikon img { display: block; height: 2em; margin: 0 auto 0.1em; }
 #tamEkran input {
   font: inherit;

@@ -78,6 +78,9 @@ KS.ui = KS.ui || {};
       icerik.appendChild(sure);
       var tarla = el('div', 'tarla');
       icerik.appendChild(tarla);
+      var zemin = el('div', 'tarla-zemin');
+      KS.ui.arayuzGorseli(zemin, 'tarla_zemin', '');
+      tarla.appendChild(zemin);
 
       var kalan = m.otAdet;
       otKonumlari().forEach(function (k) {
