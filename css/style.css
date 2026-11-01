@@ -390,6 +390,7 @@ button.kaynak-dugme { position: absolute; right: 1em; bottom: 0.8em; padding: 0.
 #tamEkran.final .kart-metin { font-size: 1.25em; font-weight: 600; max-width: 30em; }
 .final-baslik { font-size: 2em; font-weight: 700; }
 .final-veri { margin: 0; max-width: 42em; font-size: 0.95em; line-height: 1.4; }
+.yapimci { position: absolute; left: 0.9em; bottom: 0.7em; font-size: 0.7em; line-height: 1.3; text-align: left; padding: 0.25em 0.5em; border-radius: 0.3em; background: var(--panel); }
 .final-kaynak { margin: 0; font-size: 0.65em; opacity: 0.75; }
 #tamEkran.final .eksikler, #tamEkran.final h2 { margin: 0; font-size: 0.72em; }
 #tamEkran.final .eksikler { max-width: 60em; }

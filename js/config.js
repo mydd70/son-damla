@@ -110,7 +110,7 @@ KS.config = {
     gunOrtam: { 8: 'sicak' },            // o günün sabah ve öğlesinde dilimin sesi yerine
     muzik: { giris: 'muzik_giris', iyi: 'muzik_iyi', kotu: 'muzik_kotu' },
     liste: {
-      gunduz:      { seviye: 0.5,  dongu: true },
+      gunduz:      { seviye: 0.35, dongu: true },
       ruzgar:      { seviye: 0.35, dongu: true, uzanti: '.wav' },   // kısa döngü: WAV boşluksuz döner
       cirkir:      { seviye: 0.35, dongu: true },
       kalabalik:   { seviye: 0.4,  dongu: true },

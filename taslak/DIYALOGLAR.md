@@ -693,7 +693,7 @@ Tek cümleli olanlar tekrar edince tuhaf kalıyordu, her birine birkaç sürüm 
 - *(su götürüldüyse)* **Mehmet (iç ses):** Rıza Amca yol kenarındaydı, elinde bizim bidon. Kamyon geçerken başını eğdi.
 - **Mehmet (iç ses):** Kardeşim ağlamaktan yoruldu; kamyon sallandıkça annemin kucağında uyudu.
 - **Mehmet (iç ses):** Uzaktan şehir gözükmeye başladı. Dumanın altında karanlık ve gri.
-- **Mehmet (iç ses):** Radyoda duydum, 'sıcaklık giderek yükseliyor, tüm dünyada katı önlemler alınacak'. Öğretmenim bize aylar önce söyledi ama dünyanın bile haberi yok muymuş anlaşılan. 
+- **Mehmet (iç ses):** Radyoda duydum, 'sıcaklık giderek yükseliyor, tüm dünyada katı önlemler alınacak'. Öğretmenim bize aylar önce söyledi ama dünyanın bile haberi yokmuş anlaşılan. 
 - **Mehmet (iç ses):** Babam otogarda bekleyecekmiş. "Her şey yoluna girecek" dedi telefonda. Sesi yine yorgundu. Bu sefer yalan söylediğini anladım.
 - **Kart (büyük):** İlk yağmur
 - [sahne: sarnic]

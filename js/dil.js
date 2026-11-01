@@ -92,10 +92,12 @@ KS.METIN = {
     argumanDurum_hazir: '',
     finalBaslik: 'Son damla bir günde düşmez.',
     finalVeri: 'Bu köy kurgu. Ama Konya Ovası\'nda 740\'tan fazla obruk var. 2026\'da altı ayda yağmur ortalamanın yarısı kadar fazla yağdı, yer altı suyu yine de düşmeye devam etti.',
+    finalKuresel: 'Yalnız burada da değil. Dünya Meteoroloji Örgütü\'ne göre 2025, dünyada nehirler için son 35 yılın en kurak yıllarından biriydi; su döngüsü de giderek düzensizleşiyor.',
     finalAna: 'Bir kuyunun dibi, bir ovanın sonu demek. Bir ovanın sonu, hepimizin sofrası.',
     finalDunya: 'Dünyanın neresinde olursa olsun, kuyular aynı suya iniyor. Ölçeni ve hatırlayanı dinlersek, son damla henüz düşmedi.',
     finalMetni: 'Tek bir yağmur kurtarmaz. Birlikte alınan kararlar kurtarır.',
-    finalKaynak: 'Kaynak: Prof. Dr. Fetullah Arık, Konya Teknik Üniversitesi (2026).',
+    finalKaynak: 'Kaynaklar: Prof. Dr. Fetullah Arık, Konya Teknik Üniversitesi (2026); Dünya Meteoroloji Örgütü (WMO), Küresel Su Kaynakları Durumu raporu.',
+    yapimciEtiket: 'Yapımcı',
     tekrarOyna: 'Tekrar oyna',
     kaynaklar: 'Kaynaklar',
     kaynaklarBaslik: 'Kaynaklar ve lisanslar',
@@ -104,7 +106,7 @@ KS.METIN = {
     kaynak_gorsel: 'Görseller',
     kaynak_kod: 'Kod ve metin',
     kaynak_veri: 'Son ekrandaki veriler',
-    kaynakVeriSatir: 'Konya Ovası obruk sayısı ve 2026 yağışı: Prof. Dr. Fetullah Arık, Konya Teknik Üniversitesi (NTV, 17 Ağustos 2026; Ensonhaber, 2026).',
+    kaynakVeriSatir: 'Konya Ovası obruk sayısı ve 2026 yağışı: Prof. Dr. Fetullah Arık, Konya Teknik Üniversitesi (NTV, 17 Ağustos 2026; Ensonhaber, 2026). Nehirler ve su döngüsü: Dünya Meteoroloji Örgütü, Küresel Su Kaynakları Durumu raporları (BM Haber, 17 Eylül 2026; WMO, 7 Ekim 2024).',
     kaynakGorselSatir: 'Portreler ve küçük görseller: Stable Diffusion, Pixel Art Diffusion XL (YamerOfficial, CreativeML Open RAIL++-M). Sahneler: Claude ile SVG siluet, ChatGPT ile görsele dönüştürme.',
     kaynakKodSatir: 'Claude (Anthropic) ile üretildi.',
     kaynakDegisiklik: 'Sesler kırpıldı, filtrelendi ya da seviyesi ayarlandı. Beautiful Piano değiştirilmedi.'
@@ -197,10 +199,12 @@ KS.METIN = {
     argumanDurum_hazir: '',
     finalBaslik: 'The last drop does not fall in a day.',
     finalVeri: 'This village is fiction. But the Konya Plain has more than 740 sinkholes. In 2026, six months brought half again as much rain as average, and groundwater still kept falling.',
+    finalKuresel: 'And not only here. According to the World Meteorological Organization, 2025 was one of the driest years for the world\'s rivers in 35 years, and the water cycle is growing ever more erratic.',
     finalAna: 'The bottom of a well means the end of a plain. The end of a plain means everyone\'s table.',
     finalDunya: 'Wherever you are in the world, wells reach down to the same water. If we listen to those who measure and those who remember, the last drop has not fallen yet.',
     finalMetni: 'No single rain will save us. Decisions made together will.',
-    finalKaynak: 'Source: Prof. Fetullah Arık, Konya Technical University (2026).',
+    finalKaynak: 'Sources: Prof. Fetullah Arık, Konya Technical University (2026); World Meteorological Organization (WMO), State of Global Water Resources report.',
+    yapimciEtiket: 'Created by',
     tekrarOyna: 'Play again',
     kaynaklar: 'Credits',
     kaynaklarBaslik: 'Credits and licenses',
@@ -209,7 +213,7 @@ KS.METIN = {
     kaynak_gorsel: 'Images',
     kaynak_kod: 'Code and text',
     kaynak_veri: 'Data on the final screen',
-    kaynakVeriSatir: 'Konya Plain sinkhole count and 2026 rainfall: Prof. Fetullah Arık, Konya Technical University (NTV, 17 August 2026; Ensonhaber, 2026).',
+    kaynakVeriSatir: 'Konya Plain sinkhole count and 2026 rainfall: Prof. Fetullah Arık, Konya Technical University (NTV, 17 August 2026; Ensonhaber, 2026). Rivers and the water cycle: World Meteorological Organization, State of Global Water Resources reports (UN News, 17 September 2026; WMO, 7 October 2024).',
     kaynakGorselSatir: 'Portraits and small images: Stable Diffusion, Pixel Art Diffusion XL (YamerOfficial, CreativeML Open RAIL++-M). Scenes: SVG silhouettes with Claude, converted with ChatGPT.',
     kaynakKodSatir: 'Made with Claude (Anthropic).',
     kaynakDegisiklik: 'Sounds were trimmed, filtered or leveled. Beautiful Piano is unmodified.'
@@ -231,6 +235,9 @@ KS.KARAKTERLER = {
   ogretmen: { tr: 'Zeynep Öğretmen', en: 'Ms. Zeynep', portre: 'ogretmen' },
   koylu:    { tr: 'Köylü', en: 'Villager', siluet: true, portreler: ['koylu1', 'koylu2', 'koylu3'] }
 };
+
+// Özel ad ve adres, çevrilmez.
+KS.YAPIMCI = { ad: 'Muhammet Yahya DOĞAN', eposta: 'muhammetyahya14@gmail.com' };
 
 // Oyun içi atıf: eser, sahibi, lisans (özel ad, çevrilmez). Ayrıntılı liste KAYNAKLAR.md'de.
 KS.KAYNAK_LISTESI = {

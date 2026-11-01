@@ -81,4 +81,5 @@ Kullanılmayanlar: turuncu damla (renk yanlış), saksılı `ot2` (ot yerine sak
 
 ## Final metnindeki veriler
 - 65 yıl: Kadıoğlu, MGM verisi. 740 obruk ve 2026 yağışı: Prof. Dr. F. Arık. Bağlantılar `referans/VERILER.md`'de.
+- Nehirler ve su döngüsü: Dünya Meteoroloji Örgütü, State of Global Water Resources. https://news.un.org/en/story/2026/09/1168350 (17 Eylül 2026), https://wmo.int/news/media-centre/wmo-report-highlights-growing-shortfalls-and-stress-global-water-resources (7 Ekim 2024).
 - Kuyu ölçümü (bir ayda yarım metre) kurgudur; ovada yıllık düşüş kabaca 0,5-2 metre aktarılıyor, sulama mevsiminin bir ayına uyarlandı.

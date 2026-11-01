@@ -69,7 +69,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       var a = kanal[ad] && onbellek[kanal[ad]];
       if (!a) return;
       if (document.hidden) a.pause();
-      else if (a.loop) { var p = a.play(); if (p) p.catch(function () { /* önemsiz */ }); }
+      else if (!a.ended) { var p = a.play(); if (p) p.catch(function () { /* önemsiz */ }); }
     });
   });
 

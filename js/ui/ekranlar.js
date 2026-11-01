@@ -91,6 +91,7 @@ KS.ui = KS.ui || {};
 
     if (devam) e.appendChild(dugme(KS.t('devamEt'), function () { tamEkranIste(); devam(); }));
     e.appendChild(dugme(KS.t(devam ? 'yeniOyun' : 'basla'), function () { tamEkranIste(); yeni(); }));
+    e.appendChild(KS.ui.yapimciYazisi());
     e.appendChild(KS.ui.kaynakDugmesi());
   };
 
@@ -125,6 +126,14 @@ KS.ui = KS.ui || {};
     KS.GIRIS_METNI.forEach(function (p) { kutu.appendChild(KS.ui.el('p', '', KS.metinSec(p))); });
     e.appendChild(kutu);
     e.appendChild(dugme(KS.t('devam'), bitince));
+  };
+
+  // Başlangıç ve son ekranının sol altında yapımcı bilgisi.
+  KS.ui.yapimciYazisi = function () {
+    var y = KS.ui.el('div', 'yapimci');
+    y.appendChild(KS.ui.el('div', '', KS.t('yapimciEtiket') + ': ' + KS.YAPIMCI.ad));
+    y.appendChild(KS.ui.el('div', '', KS.YAPIMCI.eposta));
+    return y;
   };
 
   // Başlangıç ve son ekranındaki küçük düğme: atıf listesi defterin katmanında açılır.
