@@ -68,6 +68,7 @@ KS.ui = KS.ui || {};
 
     if (devam) e.appendChild(dugme(KS.t('devamEt'), function () { tamEkranIste(); devam(); }));
     e.appendChild(dugme(KS.t(devam ? 'yeniOyun' : 'basla'), function () { tamEkranIste(); yeni(); }));
+    e.appendChild(KS.ui.kaynakDugmesi());
   };
 
   // bitince(ad): boş bırakılırsa varsayılanı logic.js verir.
@@ -100,6 +101,37 @@ KS.ui = KS.ui || {};
     e.appendChild(kutu);
     e.appendChild(dugme(KS.t('devam'), bitince));
   };
+
+  // Başlangıç ve son ekranındaki küçük düğme: atıf listesi defterin katmanında açılır.
+  KS.ui.kaynakDugmesi = function () {
+    var b = KS.ui.el('button', 'kaynak-dugme', KS.t('kaynaklar'));
+    b.onclick = kaynaklarAc;
+    return b;
+  };
+
+  function kaynaklarAc() {
+    var el = KS.ui.el;
+    var kutu = document.getElementById('defter');
+    kutu.textContent = '';
+    kutu.hidden = false;
+    var panel = el('div', 'panel kaynak-panel');
+    panel.appendChild(el('h2', '', KS.t('kaynaklarBaslik')));
+    function bolum(baslik, satirlar) {
+      panel.appendChild(el('h3', '', KS.t(baslik)));
+      var liste = el('ul', 'defter-liste');
+      satirlar.forEach(function (s) { liste.appendChild(el('li', '', s)); });
+      panel.appendChild(liste);
+    }
+    bolum('kaynak_ses', KS.KAYNAK_LISTESI.ses);
+    panel.appendChild(el('p', '', KS.t('kaynakDegisiklik')));
+    bolum('kaynak_muzik', KS.KAYNAK_LISTESI.muzik);
+    bolum('kaynak_gorsel', [KS.t('kaynakGorselSatir')]);
+    bolum('kaynak_kod', [KS.t('kaynakKodSatir')]);
+    var kapat = el('button', '', KS.t('kapat'));
+    kapat.onclick = function () { kutu.hidden = true; };
+    panel.appendChild(kapat);
+    kutu.appendChild(panel);
+  }
 
   // Sonlara geçerken zaman atlaması: diyalog kutusunda değil, kendi kartında.
   KS.ui.zamanKartiAc = function (oge, bitince) {

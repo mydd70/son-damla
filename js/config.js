@@ -94,24 +94,42 @@ KS.config = {
     kendiHavasi: ['sarnic', 'sarnic_onarildi']   // kapalı hava çizili: üstüne renk katmanı konmaz
   },
   GECIS: { otomatikSure: 1200 },   // milisaniye: sebebi yazmayan yer kartı kendiliğinden kapanır
-  PORTRE: { klasor: 'assets/portraits/', uzanti: '.webp', dosyalar: [] },
+  PORTRE: { klasor: 'assets/portraits/', uzanti: '.webp', dosyalar: ['anne', 'baba', 'dede', 'nine', 'komsu', 'mehmet', 'muhtar', 'ogretmen'] },
 
   // --- Ses: dosyalar assets/audio/<id>.mp3; yoksa sessiz geçilir ---
   SES: {
     anahtar: 'koyumun-suyu-ses',
     klasor: 'assets/audio/', uzanti: '.mp3',
-    sonmeSure: 4000, sonmeAdim: 20,      // milisaniye, adım: uzaklaşarak sönme
-    ortam: { sabah: 'ruzgar', ogle: 'ruzgar', aksam: 'cirkir' },
+    sonmeSure: 6000, sonmeAdim: 20,      // milisaniye, adım: uzaklaşarak sönme
+    gecisSure: 800,                      // milisaniye: ortam ve müzik yumuşak geçişi
+    ortam: { sabah: 'gunduz', ogle: 'gunduz', aksam: 'cirkir' },
+    mekanOrtam: { tepe: 'ruzgar', kuyu_basi: 'kalabalik', komsu_tarlasi: 'motor' },   // bu mekânlarda dilimin sesi yerine
+    gunOrtam: { 8: 'sicak' },            // o günün sabah ve öğlesinde dilimin sesi yerine
+    muzik: { giris: 'muzik_giris', iyi: 'muzik_iyi', kotu: 'muzik_kotu' },
     liste: {
-      ruzgar:      { seviye: 0.25, dongu: true },
-      cirkir:      { seviye: 0.25, dongu: true },
-      yagmur:      { seviye: 0.5,  dongu: true },
+      gunduz:      { seviye: 0.5,  dongu: true },
+      ruzgar:      { seviye: 0.35, dongu: true, uzanti: '.wav' },   // kısa döngü: WAV boşluksuz döner
+      cirkir:      { seviye: 0.35, dongu: true },
+      kalabalik:   { seviye: 0.4,  dongu: true },
+      motor:       { seviye: 0.3,  dongu: true, uzanti: '.wav' },
+      sicak:       { seviye: 0.6,  dongu: true },
+      damlama:     { seviye: 0.6,  dongu: true },
+      oluk:        { seviye: 0.5 },
+      kova:        { seviye: 0.6 },
+      ip:          { seviye: 0.6 },
+      tik:         { seviye: 0.25, uzanti: '.wav' },
+      ipucu:       { seviye: 0.4,  uzanti: '.wav' },
+      damla:       { seviye: 0.3,  uzanti: '.wav' },
+      muzik_giris: { seviye: 0.35 },
+      muzik_iyi:   { seviye: 0.44 },   // lisansı gereği dosyası düzenlenmedi, seviye burada eşitlenir
+      muzik_kotu:  { seviye: 0.35 },
+      su_dok:      { seviye: 0.5 },
+      ot_yol:      { seviye: 0.35 },
+      yagmur:      { seviye: 0.5,  dongu: true, uzanti: '.wav' },
       bebek_agla:  { seviye: 0.3 },
       bebek_gul:   { seviye: 0.5 },
       keci:        { seviye: 0.5 },
       kamyon:      { seviye: 0.6 },
-      telefon:     { seviye: 0.5 },
-      hat_kesilir: { seviye: 0.5 },
       gurultu:     { seviye: 0.7 },
       kapi:        { seviye: 0.5 }
     }

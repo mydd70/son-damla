@@ -90,7 +90,16 @@ KS.METIN = {
     argumanDurum_inanmaz: 'şimdilik inanmaz',
     argumanDurum_hazir: '',
     finalMetni: '[Final metni buraya gelecek.]',
-    tekrarOyna: 'Tekrar oyna'
+    tekrarOyna: 'Tekrar oyna',
+    kaynaklar: 'Kaynaklar',
+    kaynaklarBaslik: 'Kaynaklar ve lisanslar',
+    kaynak_ses: 'Sesler',
+    kaynak_muzik: 'Müzik',
+    kaynak_gorsel: 'Görseller',
+    kaynak_kod: 'Kod ve metin',
+    kaynakGorselSatir: 'Portreler: Stable Diffusion, Pixel Art Diffusion XL (YamerOfficial, CreativeML Open RAIL++-M). Sahneler: Claude ile SVG siluet, ChatGPT ile görsele dönüştürme.',
+    kaynakKodSatir: 'Claude (Anthropic) ile üretildi.',
+    kaynakDegisiklik: 'Sesler kırpıldı, filtrelendi ya da seviyesi ayarlandı. Beautiful Piano değiştirilmedi.'
   },
   en: {
     oyunAdi: 'Water of My Village',
@@ -178,7 +187,16 @@ KS.METIN = {
     argumanDurum_inanmaz: "won't believe it yet",
     argumanDurum_hazir: '',
     finalMetni: '[Final text will go here.]',
-    tekrarOyna: 'Play again'
+    tekrarOyna: 'Play again',
+    kaynaklar: 'Credits',
+    kaynaklarBaslik: 'Credits and licenses',
+    kaynak_ses: 'Sound',
+    kaynak_muzik: 'Music',
+    kaynak_gorsel: 'Images',
+    kaynak_kod: 'Code and text',
+    kaynakGorselSatir: 'Portraits: Stable Diffusion, Pixel Art Diffusion XL (YamerOfficial, CreativeML Open RAIL++-M). Scenes: SVG silhouettes with Claude, converted with ChatGPT.',
+    kaynakKodSatir: 'Made with Claude (Anthropic).',
+    kaynakDegisiklik: 'Sounds were trimmed, filtered or leveled. Beautiful Piano is unmodified.'
   }
 };
 
@@ -190,12 +208,25 @@ KS.KARAKTERLER = {
   ic:       { tr: 'Mehmet (iç ses)', en: 'Mehmet (thinking)', portre: 'mehmet' },
   anne:     { tr: 'Anne', en: 'Mother', portre: 'anne' },
   baba:     { tr: 'Baba', en: 'Dad', portre: 'baba' },
-  dede:     { tr: 'Hasan Amca', en: 'Uncle Hasan', portre: 'yasli_cift' },
-  nine:     { tr: 'Fatma Teyze', en: 'Aunt Fatma', portre: 'yasli_cift' },
+  dede:     { tr: 'Hasan Amca', en: 'Uncle Hasan', portre: 'dede' },
+  nine:     { tr: 'Fatma Teyze', en: 'Aunt Fatma', portre: 'nine' },
   komsu:    { tr: 'Rıza Amca', en: 'Uncle Rıza', portre: 'komsu' },
   muhtar:   { tr: 'Muhtar', en: 'Headman', portre: 'muhtar' },
   ogretmen: { tr: 'Zeynep Öğretmen', en: 'Ms. Zeynep', portre: 'ogretmen' },
   koylu:    { tr: 'Köylü', en: 'Villager', siluet: true }
+};
+
+// Oyun içi atıf: eser, sahibi, lisans (özel ad, çevrilmez). Ayrıntılı liste KAYNAKLAR.md'de.
+KS.KAYNAK_LISTESI = {
+  ses: [
+    'summer ambience, waweee, CC BY-NC 4.0', 'Ambience, Night Wildlife, A, InspectorJ, CC BY 4.0', 'babycry, jamesmbock, CC0',
+    'Istanbul Grand Bazaar, RTB45, CC BY 4.0', 'Water pump motor close recording, felix.blume, CC0', 'Small metal bucket being picked up, melle_teich, CC0',
+    'rope twist, Rinaldobowles56, CC0', 'Water Drips, Zwecker, CC0', 'Rain with drip sound, eaglechopper, CC0', 'rain.gutter, andriala, CC BY-NC 3.0',
+    'Button Click 1, Mellau, CC BY-NC 4.0', 'hint, dland, CC0', 'Desert Ambient LOOP, Imjeax, CC BY 4.0', 'drip, Nightflame, CC0',
+    'Large truck idling then driving away, TheFlyFishingFilmmaker, CC BY 4.0', 'smile 2 jo girl, klankbeeld, CC BY 4.0', 'Goat Sound 2, Erokia, CC0',
+    'Door, Front, Opening, A, InspectorJ, CC BY 4.0', 'Weather & Nature SFX Free, heyheythere, CC BY 4.0'
+  ],
+  muzik: ['Beautiful Piano, Lite Saturation, CC BY-ND 4.0', "El's Entrance (Classic Version), Mr Smith, CC BY 4.0", 'Angel Dream, Mr Smith, CC BY 4.0']
 };
 
 // Gösterge durum kelimelerinin ve harita yer adlarının İngilizcesi (Türkçeleri config.js ve scenes.js'te).
@@ -206,7 +237,7 @@ KS.DURUM_EN = {
 };
 KS.YER_EN = {
   ev: 'Home', yasliCift: 'Old couple', muhtar: "Headman's office", ogretmen: 'School',
-  komsu: "Neighbor's house", komsuTarlasi: "Neighbor's field", kuyu: 'Village well', sarnic: 'Cistern', tepe: 'Hill'
+  komsu: "Uncle Rıza's house", komsuTarlasi: "Uncle Rıza's field", kuyu: 'Village well', sarnic: 'Cistern', tepe: 'Hill'
 };
 
 // Dil tercihi: başlangıç ekranında seçilir, hatırlanır.
@@ -231,7 +262,7 @@ KS.t = function (anahtar, degerler) {
     m = KS.METIN.tr[anahtar];
     if (m === undefined) m = anahtar;
   }
-  if (degerler) for (var k in degerler) m = m.replace('{' + k + '}', degerler[k]);
+  if (degerler) for (var k in degerler) m = m.split('{' + k + '}').join(degerler[k]);
   return m;
 };
 

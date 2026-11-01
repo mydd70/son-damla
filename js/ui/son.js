@@ -13,4 +13,5 @@ KS.ui.sonAc = function (sonuc, tekrar) {
   }
   e.appendChild(el('div', 'kart-metin', KS.t('finalMetni')));
   e.appendChild(KS.ui.ekranDugmesi(KS.t('tekrarOyna'), tekrar));
+  e.appendChild(KS.ui.kaynakDugmesi());
 };

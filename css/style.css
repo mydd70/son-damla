@@ -297,8 +297,8 @@ button.fazla-acik { background: var(--kirmizi); }
 .tarla { position: relative; flex: 1; width: 100%; background: #8a6a42; border-radius: 0.3em; }
 .ot {
   position: absolute;
-  width: 3em; height: 3em;
-  padding: 0.3em;
+  width: 4em; height: 4em;
+  padding: 0.5em;
   transform: translate(-50%, -50%);
   color: #a8b45a;
   background: transparent;
@@ -327,6 +327,11 @@ body.mini-acik .defter-dugme { visibility: hidden; }   /* mini oyun sayacı arka
 .defter-panel h3 { margin: 0.6em 0 0.2em; font-size: 0.95em; color: var(--sari); }
 .defter-liste { margin: 0 0 0.6em; padding-left: 1.2em; }
 .defter-liste .tamam { opacity: 0.65; list-style: none; margin-left: -1.2em; }
+
+button.kaynak-dugme { position: absolute; right: 1em; bottom: 0.8em; padding: 0.25em 0.8em; font-size: 0.8em; background: transparent; border: 0.1em solid var(--bos); opacity: 0.8; }
+.kaynak-panel { top: 50%; width: 70%; max-height: 90%; overflow-y: auto; font-size: 0.8em; text-align: left; }
+.kaynak-panel h3 { margin: 0.5em 0 0.2em; color: var(--sari); }
+.kaynak-panel p { margin: 0 0 0.4em; opacity: 0.8; }
 
 /* ---------- Harita ---------- */
 .harita-zemin { position: absolute; inset: 0; }

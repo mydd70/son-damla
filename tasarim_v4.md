@@ -20,7 +20,7 @@ Kodlamaya hazır sürüm. v3'ten değişenler: gecikmeli plan, gün-dilim tablos
 
 ## 3. Karakterler
 - **Yaşlı çift:** Anılarla geçmiş-gelecek köprüsü. Dayanıklı tohum, eski usul bilgisi, unutulmuş sarnıç. Güvenlik ağı: en fazla 2 yardım; 2.'de "artık bize de zor yetiyor" derler. Kötü sonda geride kalırlar.
-- **İnatçı komşu:** Yalnız, inatçı, kötü değil. Belgeli ama sayaçsız motorlu kuyu. Obruk gün 8'de onun tarlasında açılır. Oyu sonucu belirler.
+- **İnatçı komşu:** Yalnız, inatçı, kötü değil. Mısır tarlası, belgeli ama sayaçsız motorlu kuyu. Obruk gün 8'de onun tarlasında açılır. Oyu sonucu belirler.
 - **Muhtar:** İnsanlar ve resmî yol. Komşuyla eski dost, küs. Küslüğün sebebi yalnızca iyi sonda açığa çıkar: komşu motorlu kuyuyu alınca muhtar defalarca kapısına gidip uyarmış, komşu dinlememiş, anlaşmazlık bir yıl sürmüş; sonunda muhtar dayanamayıp şikâyet yazmış ve bütün köy duymuş. Oyun içinde yalnızca ima edilir ("motorlar geldi, laflar uzadı").
 - **Öğretmen (kadın):** Ölçüm ve yöntem. Muhtarla eşit ağırlıkta; aralarında "cahil-okumuş" ayrımı kurulmaz.
 - Yaşlı çift ve öğretmenin ek ziyaretlerinde kısa, vaaz olmayan iklim sözleri.

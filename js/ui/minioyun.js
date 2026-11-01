@@ -86,6 +86,7 @@ KS.ui = KS.ui || {};
         ot.style.left = k.x + '%';
         ot.style.top = k.y + '%';
         ot.onclick = function () {
+          KS.ses.cal('ot_yol');
           ot.remove();
           kalan -= 1;
           if (kalan === 0) { cancelAnimationFrame(raf); kontrol.bekleyipBitir(); }
@@ -154,6 +155,7 @@ KS.ui = KS.ui || {};
     keci.onpointerup = keci.onpointercancel = function () { sonX = null; };
 
     su.onclick = function () {
+      KS.ses.cal('su_dok');
       su.disabled = true;
       yonerge.textContent = KS.t('keciYem');
       yem.disabled = false;

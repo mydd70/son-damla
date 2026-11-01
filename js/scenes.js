@@ -390,8 +390,8 @@ var KS = globalThis.KS = globalThis.KS || {};
     { id: 'yasliCift',     ad: 'Yaşlı çift',     x: 16, y: 34 },
     { id: 'muhtar',        ad: 'Muhtarlık',      x: 50, y: 38 },
     { id: 'ogretmen',      ad: 'Okul',           x: 68, y: 22 },
-    { id: 'komsu',         ad: 'Komşunun evi',   x: 74, y: 58 },
-    { id: 'komsuTarlasi',  ad: 'Komşunun tarlası', x: 88, y: 80 },
+    { id: 'komsu',         ad: 'Rıza Amca\'nın evi', x: 74, y: 58 },
+    { id: 'komsuTarlasi',  ad: 'Rıza Amca\'nın tarlası', x: 88, y: 80 },
     { id: 'kuyu',          ad: 'Köy kuyusu',     x: 47, y: 60 },
     { id: 'sarnic',        ad: 'Sarnıç',         x: 30, y: 16 },
     { id: 'tepe',          ad: 'Tepe',           x: 88, y: 14 }

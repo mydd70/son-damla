@@ -3,7 +3,7 @@ var KS = globalThis.KS = globalThis.KS || {};
 KS.ui = KS.ui || {};
 
 (function () {
-  // tur: 'zorunlu' (gün 7) | 'obruk' (gün 8) | 'su' (öğle) | 'aksam'. Açılış sözü ona göre seçilir.
+  // tur: 'obruk' (gün 8) | 'su' (öğle) | 'aksam'. Açılış sözü ona göre seçilir.
   KS.ui.karsilasmaOynat = function (tur, bitince) {
     var ui = KS.ui;
     var d = KS.state;
@@ -14,9 +14,10 @@ KS.ui = KS.ui || {};
 
     function oyna(id, sonra) { ui.diyalogOynat(KS.olayGetir(id), null, sonra); }
 
+    // İlk konuşmanın açılışı: söyleyecek bir şey varsa; obruk anında söz açılmaz.
     function acilis() {
-      if (tur !== 'zorunlu') return [];
-      return [d.komsu.karsilasma === 1 ? 'kars_ilk' : 'kars_sonraki'];
+      if (tur === 'obruk' || d.komsu.karsilasma !== 1 || d.komsu.ikna || !bas.iletilebilir.length) return [];
+      return ['kars_ilk'];
     }
 
     function bitir() {

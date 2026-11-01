@@ -6,14 +6,16 @@ var KS = globalThis.KS = globalThis.KS || {};
   var kayitAcik = true;   // ?gun=N denemeleri asıl kaydı ezmesin
 
   function ortamSesi() {
-    KS.ses.ortamCal(KS.config.SES.ortam[KS.state.dilim]);
+    KS.ses.ortamCal(KS.ui.ortamAdi(KS.ui.sonMekan()));
   }
 
   function yeniOyun(tekrar) {
     KS.state = KS.yeniDurum();
     if (tekrar) KS.tekrarOyunIsaretle(KS.state);
     var kayit = KS.yukle();
+    KS.ses.muzikCal(null);
     ui.baslangicAc(function () {
+      KS.ses.muzikCal(KS.config.SES.muzik.giris);
       ui.keciIsmiAc(function (ad) {
         KS.keciAdiVer(KS.state, ad);
         gunBasla();
@@ -34,6 +36,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     ui.sahneGoster('avlu');
     var ilkGiris = KS.state.gun === 1 && !KS.state.tekrarOyun;
     (ilkGiris ? ui.girisAc : function (sonra) { sonra(); })(function () { ui.gunKartiAc(KS.state.gun, function () {
+      KS.ses.muzikCal(null);
       ui.degisimGoster(r.degisimler);
       ortamSesi();
       if (r.aglama) KS.ses.cal('bebek_agla');
@@ -103,7 +106,9 @@ var KS = globalThis.KS = globalThis.KS || {};
       var r = KS.ogleEylemi(KS.state, id);
       ui.degisimGoster(r.degisimler);
       ui.diyalogOynat(KS.olayGetir('ogle_' + id), r, function () {
-        if (r.karsilasma) ui.karsilasmaOynat('su', ogleSonu);
+        if (r.karsilasma) ui.karsilasmaOynat('su', function () {
+          ui.diyalogOynat(KS.olayGetir('veda_su'), null, ogleSonu);
+        });
         else ogleSonu();
       });
     });
@@ -182,6 +187,8 @@ var KS = globalThis.KS = globalThis.KS || {};
       KS.ses.ortamCal(null);
       ui.zamanKartiAc(KS.SON_KARTLARI[r.sonuc.iyi ? 'iyi' : 'kotu'], function () {
         ui.olaylariOynat(KS.sonOlaylari(r.sonuc.iyi), r, function () {
+          KS.ses.muzikCal(KS.config.SES.muzik[r.sonuc.iyi ? 'iyi' : 'kotu']);
+          KS.ses.ortamCal(null);
           ui.sonAc(r.sonuc, function () {
             KS.ses.ortamCal(null);
             yeniOyun(true);
@@ -200,10 +207,18 @@ var KS = globalThis.KS = globalThis.KS || {};
 
   // ---------- Başlatma ----------
 
+  // Kendi sesi olmayan düğmeler tık sesi çıkarır. Yakalama aşamasında: seçenek düğmeleri tıklamayı yayılmadan keser.
+  function dugmeSesi(e) {
+    var b = e.target.closest && e.target.closest('button');
+    if (b && !b.matches('.ot, .damla-arti, .bakim-esya button')) KS.ses.cal('tik');
+  }
+
   function baslat() {
+    document.addEventListener('click', dugmeSesi, true);
     var p = new URLSearchParams(location.search);
     KS.dilYukle();
     KS.ses.tercihYukle();
+    KS.ses.hazirla();
     if (p.get('dil') && KS.METIN[p.get('dil')]) KS.dil = p.get('dil');
     ui.dilYenile();
     ui.gorselleriHazirla();

@@ -418,7 +418,7 @@ var KS = globalThis.KS = globalThis.KS || {};
       { id: 'nine', uygun: bilmiyor('A1') },
       { id: 'ogretmen', uygun: d.bayraklar.olcumElde && bilmiyor('A2') },
       { id: 'dostluk', uygun: bilmiyor('A3') },
-      { id: 'su', uygun: d.gun >= k.KOMSUYA_SU.ilkGun && !d.komsu.ikna },
+      { id: 'su', uygun: d.gun >= k.KOMSUYA_SU.ilkGun && !d.komsu.ikna && d.komsu.suGoturme === 0 },
       { id: 'kuyu', uygun: true }
     ];
     var secilen = adaylar.filter(function (a) { return a.uygun && d.anneIpuclari.indexOf(a.id) < 0; })[0];

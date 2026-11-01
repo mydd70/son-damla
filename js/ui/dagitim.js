@@ -56,9 +56,9 @@ KS.ui = KS.ui || {};
       }
       satir.appendChild(damlalar);
 
-      var arti = el('button', '', '+');
+      var arti = el('button', 'damla-arti', '+');
       arti.disabled = kalan() <= 0 || verilen[ad] >= KS.dagitimUstSinir(d, ad, verilen);
-      arti.onclick = function () { verilen[ad] += 1; degisti(); };
+      arti.onclick = function () { KS.ses.cal('damla'); verilen[ad] += 1; degisti(); };
       satir.appendChild(arti);
       return satir;
     }

@@ -61,6 +61,14 @@ KS.ui = KS.ui || {};
       yesil: d.gosterge.bahce >= KS.config.BAHCE.sebzeEsigi
     }, sonSecenek);
     KS.ui.sahneCiz(document.getElementById('arkaplan'), mekan, zaman || d.dilim, ciz);
+    if (!zaman) KS.ses.ortamCal(KS.ui.ortamAdi(mekan));   // sonların kendi ortam satırları var
+  };
+
+  // Mekânın kendi sesi varsa o, yoksa dilimin sesi.
+  KS.ui.ortamAdi = function (mekan) {
+    var s = KS.config.SES;
+    var d = KS.state;
+    return s.mekanOrtam[mekan] || (d.dilim !== 'aksam' && s.gunOrtam[d.gun]) || s.ortam[d.dilim];
   };
 
   KS.ui.sonMekan = function () { return sonMekan; };

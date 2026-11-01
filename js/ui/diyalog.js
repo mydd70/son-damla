@@ -43,7 +43,7 @@ KS.ui = KS.ui || {};
   function metinHazirla(oge) {
     var k = KS.config;
     return KS.metinSec(oge)
-      .replace(/\{keci\}/g, KS.state.keciAdi)
+      .replace(/\{keci\}/g, function () { return KS.state.keciAdi; })
       .replace(/\{pay\}/g, KS.state.su.pay)
       .replace(/\{fazla\}/g, k.FAZLA_CEKME.damla)
       .replace(/\{maliyet\}/g, k.KOMSUYA_SU.maliyet)
@@ -54,6 +54,8 @@ KS.ui = KS.ui || {};
 
   function satirSesi(satir) {
     if ('ortam' in satir) KS.ses.ortamCal(satir.ortam);
+    if (satir.kim === 'ipucu') KS.ses.cal('ipucu');
+    if (satir.muzik) KS.ses.muzikCal(KS.config.SES.muzik[satir.muzik]);
     if (satir.ses) KS.ses.cal(satir.ses);
     (satir.sesSoner || []).forEach(KS.ses.calSonerek);
   }

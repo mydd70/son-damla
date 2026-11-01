@@ -3,7 +3,7 @@ var KS = globalThis.KS = globalThis.KS || {};
 
 (function () {
   var onbellek = {}, eksik = {};
-  var ortamId = null;
+  var kanal = { ortam: null, muzik: null };   // sürekli çalan sesler
   var acik = true;
 
   function ayar() { return KS.config.SES; }
@@ -13,7 +13,7 @@ var KS = globalThis.KS = globalThis.KS || {};
     if (!c) { console.warn('Tanımsız ses:', id); return null; }
     if (eksik[id]) return null;
     if (!onbellek[id]) {
-      var a = new Audio(ayar().klasor + id + ayar().uzanti);
+      var a = new Audio(ayar().klasor + id + (c.uzanti || ayar().uzanti));
       a.loop = !!c.dongu;
       a.addEventListener('error', function () {
         eksik[id] = true;
@@ -27,6 +27,7 @@ var KS = globalThis.KS = globalThis.KS || {};
   function baslat(id) {
     var a = sesAl(id);
     if (!a) return null;
+    clearInterval(a.gecisZaman);
     a.volume = ayar().liste[id].seviye;
     a.muted = !acik;
     a.currentTime = 0;
@@ -35,31 +36,61 @@ var KS = globalThis.KS = globalThis.KS || {};
     return a;
   }
 
-  function sondur(a, seviye) {
-    var adim = 0, s = ayar().sonmeAdim;
-    var zaman = setInterval(function () {
+  // Sesi verilen sürede hedef seviyeye götürür; 0'a inince durdurur.
+  function gecis(a, hedef, sure) {
+    var adim = 0, s = ayar().sonmeAdim, bas = a.volume;
+    clearInterval(a.gecisZaman);
+    a.gecisZaman = setInterval(function () {
       adim += 1;
-      a.volume = Math.max(0, seviye * (1 - adim / s));
-      if (adim >= s) { clearInterval(zaman); a.pause(); }
-    }, ayar().sonmeSure / s);
+      a.volume = Math.max(0, Math.min(1, bas + (hedef - bas) * adim / s));
+      if (adim >= s) {
+        clearInterval(a.gecisZaman);
+        if (hedef === 0) a.pause();
+      }
+    }, sure / s);
   }
 
+  // Kanalın sesini değiştirir; null susturur. Aynı ses zaten çalıyorsa dokunmaz.
+  function kanalCal(ad, id) {
+    if (id === kanal[ad]) return;
+    if (kanal[ad] && onbellek[kanal[ad]]) gecis(onbellek[kanal[ad]], 0, ayar().gecisSure);
+    kanal[ad] = id;
+    if (!id) return;
+    var a = baslat(id);
+    if (!a) return;
+    clearInterval(a.gecisZaman);
+    a.volume = 0;
+    gecis(a, ayar().liste[id].seviye, ayar().gecisSure);
+  }
+
+  // Sekme arka plana geçince sürekli sesler durur, dönünce sürer (telefonda uygulama değiştirme).
+  document.addEventListener('visibilitychange', function () {
+    ['ortam', 'muzik'].forEach(function (ad) {
+      var a = kanal[ad] && onbellek[kanal[ad]];
+      if (!a) return;
+      if (document.hidden) a.pause();
+      else if (a.loop) { var p = a.play(); if (p) p.catch(function () { /* önemsiz */ }); }
+    });
+  });
+
   KS.ses = {
+    // Kısa efektler ilk tıklamada gecikmesin diye baştan yüklenir.
+    hazirla: function () {
+      Object.keys(ayar().liste).forEach(function (id) {
+        if (!ayar().liste[id].dongu && id.indexOf('muzik') !== 0) sesAl(id);
+      });
+    },
+
     cal: function (id) { baslat(id); },
 
     // Uzaklaşarak söner (kötü sonda kamyon ve bebek).
     calSonerek: function (id) {
       var a = baslat(id);
-      if (a) sondur(a, ayar().liste[id].seviye);
+      if (a) gecis(a, 0, ayar().sonmeSure);
     },
 
-    // Sürekli ortam sesi; null susturur. Aynı ses zaten çalıyorsa dokunmaz.
-    ortamCal: function (id) {
-      if (id === ortamId) return;
-      if (ortamId && onbellek[ortamId]) onbellek[ortamId].pause();
-      ortamId = id;
-      if (id) baslat(id);
-    },
+    ortamCal: function (id) { kanalCal('ortam', id); },
+    muzikCal: function (id) { kanalCal('muzik', id); },
 
     acikMi: function () { return acik; },
 

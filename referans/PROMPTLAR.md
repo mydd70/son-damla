@@ -58,3 +58,56 @@ Anne portresini her üretimde **Style image** olarak yükle.
 | `baba.png` | Man in his late 30s, short beard, dusty work clothes, worn out, looking slightly away. |
 
 Portreleri `assets/portraits/` klasörüne bu adlarla koy. İfade varyantları için ad sonuna ifade ekle: `anne_uzgun.png`, `komsu_kizgin.png` gibi. Oyun varyant yoksa düz portreyi gösterir.
+
+---
+
+# Detay görselleri (1 Kasım)
+
+Araç: Automatic1111 + Pixel Art Diffusion XL, portrelerle aynı ayarlar. Dosyaları `gorseldeneme/` klasörüne bu adlarla koy; Claude küçültüp saydamlaştırır ve bağlar.
+
+**Ortak başlangıç** (portreler hariç her promptun başına):
+```
+pixel art game sprite, single object centered, full object visible, flat solid pure green background, warm earthy palette, dusty ochre, terracotta, muted brown, clean outline,
+```
+**Ortak negatif:**
+```
+text, letters, watermark, logo, signature, frame, border, gradient background, scenery, multiple objects, cropped, blurry, 3d render, photo
+```
+
+## Önce bunlar
+| Dosya | Boyut | Prompt |
+|---|---|---|
+| `koylu1.png` | 512×512 | (ortak başlangıç yok) `pixel art character portrait, middle-aged Turkish village farmer man, flat cap, sunburned tired face, stubble, worn collared shirt, plain dusty beige background, bust shot, front view` |
+| `koylu2.png` | 512×512 | (ortak başlangıç yok) `pixel art character portrait, middle-aged Turkish village woman, patterned white headscarf, weathered face, stern expression, faded floral dress, plain dusty beige background, bust shot, front view` |
+| `keci_hasta.png` | 768×512 | `thin sick Anatolian black goat, side view facing right, lying down weakly, head low, dull scruffy fur` |
+| `keci_saglikli.png` | 768×512 | `healthy Anatolian black goat, side view facing right, standing, head up, small curved horns, glossy long fur, four legs visible` |
+| `ot1.png` | 256×256 | `small tuft of dry weeds, yellow-green thin grass blades, seen from the side` |
+| `ot2.png` | 256×256 | `small thorny dry weed, brown-green stems with a few tiny leaves, seen from the side` |
+| `ot3.png` | 256×256 | `small round clump of dusty green weeds, seen from the side` |
+| `ampul.png` | 256×256 | `glowing vintage light bulb icon, warm yellow glow, simple shape` |
+
+## Sonra bunlar
+| Dosya | Boyut | Prompt |
+|---|---|---|
+| `kova.png` | 256×256 | `old dented metal water bucket with handle, a little water inside, item icon` |
+| `yem.png` | 256×256 | `small open burlap sack full of golden grain feed, item icon` |
+| `sepet.png` | 256×256 | `small woven wicker basket holding bread, tomatoes and a piece of cheese, item icon` |
+| `damla.png` | 128×128 | `single round blue water drop, bright highlight, simple icon` |
+| `defter.png` | 128×128 | `small worn school notebook with brown cover and a pencil, simple icon` |
+| `ses_acik.png` | 128×128 | `simple speaker icon with sound waves, cream color` |
+| `ses_kapali.png` | 128×128 | `simple speaker icon with a cross next to it, cream color` |
+| `sekme.png` | 128×128 | `single blue water drop above a small stone well, simple icon` |
+
+## ChatGPT ile (önce anne portresini yükle, tarz bloğu yukarıda)
+| Dosya | Prompt |
+|---|---|
+| `baslangic.png` | `Same village, same art style and palette. Wide 16:9 title screen background: a stone village well in the foreground center with a coiled rope and an old bucket, cracked dry earth, mud-brick houses behind it, low hills, huge pale hazy sky filling the upper half, left empty for a title. Late afternoon light, quiet and hopeful. No people, no animals, no text.` |
+| `okul.png` | `Same village, same art style and palette. Wide 16:9: front of a small one-story village primary school, whitewashed walls with peeling paint, a flagpole, a dry schoolyard, one lit window, a bench beside the door. No people, no text.` |
+| `toplanti.png` | Muhtarlık görselini de yükle. `Keep this exact layout and style. Add a crowd of dark villager silhouettes seen from behind, sitting on benches and standing in front of the building, evening light. No faces, no text.` |
+| `sunum_karakterler.png` | Bütün portreleri yükle. `Group image for a game presentation: these eight characters standing together in front of a village well, same pixel art style and palette, keep their faces and clothes. No text.` |
+
+## En sona (zaman kalırsa)
+| Dosya | Prompt |
+|---|---|
+| `komsu_tarlasi_misir.png` | `komsutarlagpt.png` dosyasını yükle. `Keep this exact layout, house, motor hut, pipe and poles. Replace the dry sparse plants with rows of tall healthy green corn on dark irrigated soil, the only green field in a dry landscape. No people, no text.` |
+| `komsu_tarlasi_obruk_misir.png` | `komsutarlaobrukgpt.png` dosyasını yükle. Aynı metin, sonuna: `Keep the large sinkhole exactly where it is, with broken corn stalks at its edge.` |
