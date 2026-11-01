@@ -68,3 +68,17 @@ Ayrıntı ve bağlantılar: `referans/VERILER.md`.
 
 | Veri | Kaynak (link) |
 |---|---|
+
+## Sonradan eklenen görseller (1 Kasım)
+Kaynak PNG'ler `gptgörselleri/` altında. Kullanıcı, kullanım hakkının kendisinde olduğunu teyit etti.
+
+| Dosya | Araç | Lisans / kullanım şartı |
+|---|---|---|
+| `assets/ui/` keçi, ot, ampul, kova, yem, sepet, defter, damla, ses, kuyu simgesi; `assets/portraits/koylu1-3.webp` | Stable Diffusion, Pixel Art Diffusion XL (CreativeML Open RAIL++-M); arka plan silindi, 8 piksellik ızgaraya indirildi | Model lisansı |
+| `assets/ui/logo.webp`, `sekme.webp`, `baslangic.webp`, `final.webp`; `assets/img/okul.webp`, `toplanti.webp`, `komsu_tarlasi.webp`, `komsu_tarlasi_obruk.webp` | ChatGPT | OpenAI kullanım koşulları |
+
+Kullanılmayanlar: turuncu damla (renk yanlış), saksılı `ot2` (ot yerine saksı), iki alternatif grup görseli, `simge.png`, `yatankeciyedek.png`.
+
+## Final metnindeki veriler
+- 65 yıl: Kadıoğlu, MGM verisi. 740 obruk ve 2026 yağışı: Prof. Dr. F. Arık. Bağlantılar `referans/VERILER.md`'de.
+- Kuyu ölçümü (bir ayda yarım metre) kurgudur; ovada yıllık düşüş kabaca 0,5-2 metre aktarılıyor, sulama mevsiminin bir ayına uyarlandı.

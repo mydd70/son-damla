@@ -82,7 +82,7 @@ KS.ui = KS.ui || {};
       var kalan = m.otAdet;
       otKonumlari().forEach(function (k) {
         var ot = el('button', 'ot');
-        ot.innerHTML = OT_SVG;
+        KS.ui.arayuzGorseli(ot, 'ot' + (1 + Math.floor(Math.random() * m.otGorsel)), OT_SVG);
         ot.style.left = k.x + '%';
         ot.style.top = k.y + '%';
         ot.onclick = function () {
@@ -116,11 +116,13 @@ KS.ui = KS.ui || {};
 
     var alan = el('div', 'bakim');
     var keci = el('div', 'keci-siluet');
-    keci.innerHTML = KECI_SVG;
+    KS.ui.arayuzGorseli(keci, KS.state.gosterge.keci >= KS.config.KECI.sutEsigi ? 'keci_saglikli' : 'keci_hasta', KECI_SVG);
     alan.appendChild(keci);
     var esyalar = el('div', 'bakim-esya');
-    var su = el('button', '', '🪣 ' + KS.t('suKabi'));
-    var yem = el('button', '', '🌾 ' + KS.t('yem'));
+    var su = el('button', '', ' ' + KS.t('suKabi'));
+    KS.ui.ikonEkle(su, 'kova', '🪣');
+    var yem = el('button', '', ' ' + KS.t('yem'));
+    KS.ui.ikonEkle(yem, 'yem', '🌾');
     su.disabled = yem.disabled = true;
     esyalar.appendChild(su);
     esyalar.appendChild(yem);

@@ -43,7 +43,7 @@ KS.config = {
 
   // --- Mini oyunlar ---
   MINI_OYUN: {
-    otAdet: 9, otSure: 10,               // saniye
+    otAdet: 9, otSure: 10, otGorsel: 3,               // saniye
     otSutun: 5, otSatir: 3, otSarsinti: 0.3,   // otların dağılımı: ızgara ve hücre içi kayma oranı
     taramaTur: 4,                        // keçinin genişliği kadar kaç kez sürtülecek
     bitisBekleme: 600                    // milisaniye: son hamle görünsün diye
@@ -90,18 +90,20 @@ KS.config = {
   // --- Görseller: listede olmayan mekân SVG ile, olmayan portre yer tutucuyla çizilir ---
   GORSEL: {
     klasor: 'assets/img/', uzanti: '.webp',
-    dosyalar: ['avlu', 'koy_yolu', 'kuyu_basi', 'yasli_cift_evi', 'tepe', 'komsu_tarlasi', 'komsu_tarlasi_obruk', 'muhtarlik', 'sarnic', 'sarnic_onarildi', 'koy_cikisi', 'harita'],
+    dosyalar: ['avlu', 'koy_yolu', 'kuyu_basi', 'yasli_cift_evi', 'tepe', 'komsu_tarlasi', 'komsu_tarlasi_obruk', 'muhtarlik', 'sarnic', 'sarnic_onarildi', 'koy_cikisi', 'harita', 'okul', 'toplanti'],
     kendiHavasi: ['sarnic', 'sarnic_onarildi']   // kapalı hava çizili: üstüne renk katmanı konmaz
   },
   GECIS: { otomatikSure: 1200 },   // milisaniye: sebebi yazmayan yer kartı kendiliğinden kapanır
-  PORTRE: { klasor: 'assets/portraits/', uzanti: '.webp', dosyalar: ['anne', 'baba', 'dede', 'nine', 'komsu', 'mehmet', 'muhtar', 'ogretmen'] },
+  // Arayüz görselleri: listede olmayan için bugünkü SVG ya da emoji kalır. Geçerli adlar: keci_hasta, keci_saglikli, ot1-3, ampul, kova, yem, sepet, damla, defter, kuyu, ses_acik, ses_kapali, baslangic, logo, final
+  ARAYUZ_GORSEL: { klasor: 'assets/ui/', uzanti: '.webp', dosyalar: ['keci_hasta', 'keci_saglikli', 'ot1', 'ot2', 'ot3', 'ampul', 'kova', 'yem', 'sepet', 'damla', 'defter', 'kuyu', 'ses_acik', 'ses_kapali', 'baslangic', 'logo', 'final'] },
+  PORTRE: { klasor: 'assets/portraits/', uzanti: '.webp', dosyalar: ['anne', 'baba', 'dede', 'nine', 'komsu', 'mehmet', 'muhtar', 'ogretmen', 'koylu1', 'koylu2', 'koylu3'] },
 
   // --- Ses: dosyalar assets/audio/<id>.mp3; yoksa sessiz geçilir ---
   SES: {
     anahtar: 'koyumun-suyu-ses',
     klasor: 'assets/audio/', uzanti: '.mp3',
     sonmeSure: 6000, sonmeAdim: 20,      // milisaniye, adım: uzaklaşarak sönme
-    gecisSure: 800,                      // milisaniye: ortam ve müzik yumuşak geçişi
+    gecisSure: 800, finalOran: 0.5,                      // milisaniye: ortam ve müzik yumuşak geçişi
     ortam: { sabah: 'gunduz', ogle: 'gunduz', aksam: 'cirkir' },
     mekanOrtam: { tepe: 'ruzgar', kuyu_basi: 'kalabalik', komsu_tarlasi: 'motor' },   // bu mekânlarda dilimin sesi yerine
     gunOrtam: { 8: 'sicak' },            // o günün sabah ve öğlesinde dilimin sesi yerine
@@ -121,8 +123,8 @@ KS.config = {
       ipucu:       { seviye: 0.4,  uzanti: '.wav' },
       damla:       { seviye: 0.3,  uzanti: '.wav' },
       muzik_giris: { seviye: 0.35 },
-      muzik_iyi:   { seviye: 0.44 },   // lisansı gereği dosyası düzenlenmedi, seviye burada eşitlenir
-      muzik_kotu:  { seviye: 0.35 },
+      muzik_iyi:   { seviye: 0.44, dongu: true },   // lisansı gereği dosyası düzenlenmedi, seviye burada eşitlenir
+      muzik_kotu:  { seviye: 0.35, dongu: true },
       su_dok:      { seviye: 0.5 },
       ot_yol:      { seviye: 0.35 },
       yagmur:      { seviye: 0.5,  dongu: true, uzanti: '.wav' },

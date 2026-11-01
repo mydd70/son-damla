@@ -27,9 +27,13 @@ KS.ui = KS.ui || {};
     var kutu = el('div', 'gosterge');
     kutu.dataset.gosterge = 'kiler';
     kutu.appendChild(el('div', 'gosterge-ad', KS.t('gosterge_kiler')));
-    var sepet = '';
-    for (var i = 0; i < deger; i++) sepet += '🧺';
-    kutu.appendChild(el('div', 'sepetler', sepet || KS.t('kilerBos')));
+    var sepetler = el('div', 'sepetler', deger ? '' : KS.t('kilerBos'));
+    for (var i = 0; i < deger; i++) {
+      var sepet = el('span', 'ikon');
+      KS.ui.arayuzGorseli(sepet, 'sepet', '🧺');
+      sepetler.appendChild(sepet);
+    }
+    kutu.appendChild(sepetler);
     return kutu;
   }
 
@@ -75,6 +79,7 @@ KS.ui = KS.ui || {};
     ['keci', 'ev', 'bahce'].forEach(function (ad) { ust.appendChild(cubukGosterge(ad, d.gosterge[ad])); });
     ust.appendChild(kilerGosterge(d.gosterge.kiler));
     var defter = el('button', 'defter-dugme', KS.t('defter'));
+    KS.ui.ikonEkle(defter, 'defter', '');
     defter.onclick = KS.ui.defterAc;
     ust.appendChild(defter);
 
@@ -82,7 +87,9 @@ KS.ui = KS.ui || {};
     kuyu.hidden = false;
     var su = kuyu.querySelector('.kuyu-su');
     if (!su) {
-      kuyu.appendChild(el('div', '', KS.t('gosterge_kuyu')));
+      var kuyuAd = el('div', 'kuyu-ad', KS.t('gosterge_kuyu'));
+      KS.ui.ikonEkle(kuyuAd, 'kuyu', '');
+      kuyu.appendChild(kuyuAd);
       var kap = el('div', 'kuyu-kap');
       su = el('div', 'kuyu-su');
       kap.appendChild(su);

@@ -52,7 +52,9 @@ KS.ui = KS.ui || {};
       var gri = ad === 'bahce' ? KS.griSuMiktari(d, verilen.ev) : 0;
       var dolu = verilen[ad] + gri;
       for (var i = 0; i < ihtiyaclar[ad]; i++) {
-        damlalar.appendChild(el('div', 'damla' + (i < gri ? ' gri' : (i < dolu ? ' dolu' : ''))));
+        var damla = el('div', 'damla' + (i < gri ? ' gri' : (i < dolu ? ' dolu' : '')));
+        if (i >= gri && i < dolu) KS.ui.arayuzGorseli(damla, 'damla', '');
+        damlalar.appendChild(damla);
       }
       satir.appendChild(damlalar);
 

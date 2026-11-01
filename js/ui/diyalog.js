@@ -17,6 +17,15 @@ KS.ui = KS.ui || {};
     kutu.onclick();
   });
 
+  // Öğretmen ziyaretleri okulda geçer; okul görseli yoksa sahne köy yolu kalır.
+  function okulMu(olay) { return olay.ziyaret === 'ogretmen' && olay.mekan === 'koy_yolu'; }
+
+  function mekanSecenegi(olay, d) {
+    var secenek = olay.mekanSecenek ? olay.mekanSecenek(d) : {};
+    if (okulMu(olay)) secenek.okul = true;
+    return secenek;
+  }
+
   // Yer kartı: oyuncu nereye geldiğini görsün. Sebep (giris) yazılıysa tıklanana kadar bekler, basılı tuşla geçilmez.
   function gecisKarti(olay, sonra) {
     var el = KS.ui.el;
@@ -25,7 +34,7 @@ KS.ui = KS.ui || {};
     kart.textContent = '';
     kart.hidden = false;
     var bant = el('div', 'gecis-bant');
-    bant.appendChild(el('div', 'gecis-baslik', KS.t('dilim_' + KS.state.dilim) + ' · ' + KS.t('yer_' + olay.mekan)));
+    bant.appendChild(el('div', 'gecis-baslik', KS.t('dilim_' + KS.state.dilim) + ' · ' + KS.t('yer_' + (okulMu(olay) && KS.ui.gorselVar('okul') ? 'okul' : olay.mekan))));
     if (olay.giris) {
       bant.appendChild(el('div', 'gecis-giris', metinHazirla(olay.giris)));
       bant.appendChild(el('div', 'sonraki-isaret', '▼'));
@@ -60,11 +69,11 @@ KS.ui = KS.ui || {};
     (satir.sesSoner || []).forEach(KS.ses.calSonerek);
   }
 
-  function portreCiz(kim, ifade) {
+  function portreCiz(kim, ifade, metin) {
     var k = KS.KARAKTERLER[kim] || {};
     var kutu = KS.ui.el('div', 'portre' + (k.siluet ? ' siluet' : ''));
     var yerTutucu = KS.ui.el('span', '', KS.karakterAdi(kim).charAt(0));
-    var dosya = KS.ui.portreYolu(kim, ifade);
+    var dosya = KS.ui.portreYolu(kim, ifade, metin);
     if (!dosya) { kutu.appendChild(yerTutucu); return kutu; }
     var img = document.createElement('img');
     img.alt = '';
@@ -82,7 +91,9 @@ KS.ui = KS.ui || {};
     kutu.textContent = '';
     kutu.classList.toggle('ipucu-penceresi', satir.kim === 'ipucu');
     if (satir.kim === 'ipucu') {
-      kutu.appendChild(KS.ui.el('div', 'ipucu-ikon', '💡'));
+      var ampul = KS.ui.el('div', 'ipucu-ikon');
+      KS.ui.arayuzGorseli(ampul, 'ampul', '💡');
+      kutu.appendChild(ampul);
       var ipucuGovde = KS.ui.el('div', 'diyalog-govde');
       ipucuGovde.appendChild(KS.ui.el('div', 'konusan', satir.baslik ? KS.metinSec(satir.baslik) : KS.t('ipucu')));
       ipucuGovde.appendChild(KS.ui.el('div', 'satir', metinHazirla(satir)));
@@ -90,7 +101,7 @@ KS.ui = KS.ui || {};
       return ipucuGovde;
     }
     var ekran = satir.kim === 'ekran';
-    if (!ekran) kutu.appendChild(portreCiz(satir.kim, satir.ifade));
+    if (!ekran) kutu.appendChild(portreCiz(satir.kim, satir.ifade, satir.metin));
     var govde = KS.ui.el('div', 'diyalog-govde');
     if (!ekran) govde.appendChild(KS.ui.el('div', 'konusan', KS.karakterAdi(satir.kim)));
     govde.appendChild(KS.ui.el('div', 'satir' + (ekran ? ' ekran' : '') + (satir.kim === 'ic' ? ' ic' : ''), metinHazirla(satir)));
@@ -110,7 +121,7 @@ KS.ui = KS.ui || {};
 
     // Yer değişince ya da olayın sebebi yazılıysa önce yer kartı. Sonlarda kart yok, kendi metinleri var.
     var kartGerekli = olay.mekan && !olay.zaman && (olay.giris || olay.mekan !== KS.ui.sonMekan());
-    if (olay.mekan) KS.ui.sahneGoster(olay.mekan, olay.mekanSecenek ? olay.mekanSecenek(d) : {}, olay.zaman);
+    if (olay.mekan) KS.ui.sahneGoster(olay.mekan, mekanSecenegi(olay, d), olay.zaman);
 
     var kutu = document.getElementById('diyalog');
     var i;

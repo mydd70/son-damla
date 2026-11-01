@@ -7,6 +7,7 @@ KS.ui = KS.ui || {};
     var e = document.getElementById('tamEkran');
     e.textContent = '';
     e.hidden = false;
+    e.classList.remove('final');
     return e;
   }
 
@@ -40,7 +41,8 @@ KS.ui = KS.ui || {};
 
   function sesDugmesiCiz() {
     var b = document.getElementById('sesDugme');
-    b.textContent = KS.ses.acikMi() ? '🔊' : '🔇';
+    b.classList.remove('resimli');
+    KS.ui.arayuzGorseli(b, KS.ses.acikMi() ? 'ses_acik' : 'ses_kapali', KS.ses.acikMi() ? '🔊' : '🔇');
     b.title = KS.t('sesDugmesi');
     b.setAttribute('aria-label', KS.t('sesDugmesi'));
     b.onclick = function () {
@@ -52,7 +54,14 @@ KS.ui = KS.ui || {};
   // devam: kayıt varsa "Devam et" için işlev, yoksa null.
   KS.ui.baslangicAc = function (yeni, devam) {
     var e = ekran();
-    e.appendChild(KS.ui.el('h1', '', KS.t('oyunAdi')));
+    var arka = KS.ui.el('div', 'baslangic-gorsel');
+    KS.ui.arayuzGorseli(arka, 'baslangic', '');
+    e.appendChild(arka);
+    var baslik = KS.ui.el('h1');
+    // Logo Türkçe adı taşır; başka dilde yazı kalır.
+    if (KS.dil === 'tr') KS.ui.arayuzGorseli(baslik, 'logo', KS.t('oyunAdi'));
+    else baslik.textContent = KS.t('oyunAdi');
+    e.appendChild(baslik);
 
     var diller = KS.ui.el('div', 'dil-secimi');
     [['tr', 'Türkçe'], ['en', 'English']].forEach(function (d) {
@@ -136,7 +145,7 @@ KS.ui = KS.ui || {};
   // Sonlara geçerken zaman atlaması: diyalog kutusunda değil, kendi kartında.
   KS.ui.zamanKartiAc = function (oge, bitince) {
     var e = ekran();
-    e.appendChild(KS.ui.el('div', 'kart-metin', KS.metinSec(oge)));
+    e.appendChild(KS.ui.el('div', 'kart-metin buyuk', KS.metinSec(oge)));
     e.appendChild(dugme(KS.t('devam'), bitince));
   };
 

@@ -133,3 +133,9 @@ Proje dışı klasör: `C:\Users\myd\AppData\Local\Claude-Data\claude_pzs8sxrjxf
 - Uzun betikleri tek kabuk komutuna gömme (tırnak hatası); dosyaya yazıp çalıştır.
 - `?gun=N` istenen günden başlatır, kaydı ezmez. `?debug=1` durum paneli. `?dil=en`.
 - Durum yapısı değişince `config.js`'te `KAYIT.surum` artır.
+
+## Güncelleme (1 Kasım öğleden sonra)
+- Kullanıcının `gecicitalimatvediyalog/diyaloglar-deneme.md` metni `js/story.js` ve `taslak/DIYALOGLAR.md`'ye aktarıldı, yazımı düzeltildi. Görsel yaması uygulandı, görseller bağlandı, final metni yazıldı. Kuyu ölçümü "bir ayda yarım metre" oldu.
+- Çeviri bu metne göre güncel değil: `ceviri/uygula_ceviri.js` 220 satırı eksik veriyor (notlar klasörü `local_7037aff6-...`).
+- Açık mantık soruları kullanıcıda: otobüs/kamyon, ailenin tarlası, gün 7 bidonları, kötü sonda "çok geç" tekrarı.
+- Oyunun Türkçe adı "Son Damla" oldu (depo adı ve adres aynı). Yeni logo `sondamla.png` bağlandı (Türkçe ekranda). İngilizce adı "The Last Drop", İngilizcede başlık yazıdır.

@@ -11,11 +11,18 @@ KS.ui = KS.ui || {};
     return KS.config.GORSEL.klasor + ad + KS.config.GORSEL.uzanti;
   }
 
+  KS.ui.gorselVar = function (ad) {
+    return KS.config.GORSEL.dosyalar.indexOf(ad) >= 0 && !bozuk[ad];
+  };
+
   // Durum farkı olan mekânların ayrı görseli var.
   function gorselAdi(mekan, secenek) {
     var ad = mekan;
     if (mekan === 'komsu_tarlasi' && secenek.obruk) ad = 'komsu_tarlasi_obruk';
     if (mekan === 'sarnic' && secenek.onarildi) ad = 'sarnic_onarildi';
+    // Okul ve toplantı görseli varsa kullanılır; yoksa köy yolu ve muhtarlık kalır.
+    if (mekan === 'koy_yolu' && secenek.okul && KS.ui.gorselVar('okul')) ad = 'okul';
+    if (mekan === 'muhtarlik' && secenek.toplanti && KS.ui.gorselVar('toplanti')) ad = 'toplanti';
     if (KS.config.GORSEL.dosyalar.indexOf(ad) < 0 || bozuk[ad]) return null;
     return ad;
   }
@@ -85,14 +92,50 @@ KS.ui = KS.ui || {};
       img.src = gorselYolu(ad);
       onYukleme.push(img);
     });
+    var g = KS.config.ARAYUZ_GORSEL;
+    g.dosyalar.forEach(function (ad) {
+      var img = new Image();
+      img.src = g.klasor + ad + g.uzanti;
+      onYukleme.push(img);
+    });
+  };
+
+  // Arayüz görseli: listede yoksa ya da yüklenemezse kutuda yedek içerik (SVG, emoji) kalır.
+  KS.ui.arayuzGorseli = function (kutu, ad, yedek) {
+    var g = KS.config.ARAYUZ_GORSEL;
+    kutu.innerHTML = yedek;
+    if (g.dosyalar.indexOf(ad) < 0) return;
+    var img = document.createElement('img');
+    img.alt = '';
+    img.draggable = false;
+    function yerlestir() { kutu.textContent = ''; kutu.appendChild(img); kutu.classList.add('resimli'); }
+    img.onerror = function () { console.warn('Eksik arayüz görseli, yedek kullanılıyor:', ad); };
+    img.src = g.klasor + ad + g.uzanti;
+    if (img.complete && img.naturalWidth) yerlestir();   // baştan yüklendiyse titreme olmasın
+    else img.onload = yerlestir;
+  };
+
+  // Düğme metninin önüne küçük görsel.
+  KS.ui.ikonEkle = function (dugme, ad, yedek) {
+    var ikon = KS.ui.el('span', 'ikon');
+    KS.ui.arayuzGorseli(ikon, ad, yedek);
+    dugme.insertBefore(ikon, dugme.firstChild);
   };
 
   // Karakterin portre dosyası: varsa ifadeli hâli, yoksa düz portre, o da yoksa null.
-  KS.ui.portreYolu = function (kim, ifade) {
+  // Köylülerin ortak adı var: hangi yüz olduğu satırın Türkçe metninden hesaplanır, aynı satır hep aynı köylüdür.
+  function koyluPortresi(k, metin) {
+    var toplam = 0;
+    for (var i = 0; i < (metin || '').length; i++) toplam += metin.charCodeAt(i);
+    return k.portreler[toplam % k.portreler.length];
+  }
+
+  KS.ui.portreYolu = function (kim, ifade, metin) {
     var k = KS.KARAKTERLER[kim];
-    if (!k || !k.portre) return null;
+    if (!k || (!k.portre && !k.portreler)) return null;
     var p = KS.config.PORTRE;
-    var adaylar = ifade ? [k.portre + '_' + ifade, k.portre] : [k.portre];
+    var taban = k.portre || koyluPortresi(k, metin);
+    var adaylar = ifade ? [taban + '_' + ifade, taban] : [taban];
     for (var i = 0; i < adaylar.length; i++) {
       if (p.dosyalar.indexOf(adaylar[i]) >= 0 && !bozuk['p:' + adaylar[i]]) return { ad: adaylar[i], yol: p.klasor + adaylar[i] + p.uzanti };
     }

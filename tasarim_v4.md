@@ -15,7 +15,7 @@ Kodlamaya hazır sürüm. v3'ten değişenler: gecikmeli plan, gün-dilim tablos
 ## 2. Hikaye
 - **Oyunun mesajı:** Yeraltı suyu ortaktır; kararı suçlayarak değil, ölçeni ve hatırlayanı dinleyerek birlikte verirsek köy ayakta kalır. Metin vaaz vermez, kimse yalnızca kötü adam değildir (köy de Rıza'yı dışlar).
 - Ağustos 2025, Konya Ovası'nda küçük bir köy, son 65 yılın en kurak dönemi.
-- Mehmet (geçici isim), 12 yaşında. Ev: anne, bebek kardeş, keçi (adını oyuncu verir; geçim kaynağı süt/peynir, bebeğin besini değil). Baba şehirde iş arıyor. Ailenin yalnızca bahçesi var.
+- Mehmet (geçici isim), 12 yaşında. Ev: anne, bebek kardeş, keçi (adını oyuncu verir; geçim kaynağı süt/peynir, bebeğin besini değil). Baba şehirde iş arıyor. Ailenin bahçesi ve tarlası var; tarlayı kuraklıkta su yetiştiremedikleri için babası bırakmış, oyunda görünmez.
 - Açılış: Keçi ayağa kalkamıyor, bebek ağlıyor. Annesiyle sabah konuşması; Mehmet bir çözüm aramaya karar verir.
 
 ## 3. Karakterler

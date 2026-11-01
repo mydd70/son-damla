@@ -92,6 +92,12 @@ var KS = globalThis.KS = globalThis.KS || {};
     ortamCal: function (id) { kanalCal('ortam', id); },
     muzikCal: function (id) { kanalCal('muzik', id); },
 
+    // Son ekranda müzik kesilmez, kısılarak sürer.
+    muzikKis: function () {
+      var id = kanal.muzik;
+      if (id && onbellek[id]) gecis(onbellek[id], ayar().liste[id].seviye * ayar().finalOran, ayar().gecisSure);
+    },
+
     acikMi: function () { return acik; },
 
     degistir: function () {

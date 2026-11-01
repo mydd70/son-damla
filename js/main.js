@@ -186,12 +186,20 @@ var KS = globalThis.KS = globalThis.KS || {};
     ui.olaylariOynat(KS.olaylariGetir(KS.state.gun, 'aksam', KS.state), r, function () {
       KS.ses.ortamCal(null);
       ui.zamanKartiAc(KS.SON_KARTLARI[r.sonuc.iyi ? 'iyi' : 'kotu'], function () {
-        ui.olaylariOynat(KS.sonOlaylari(r.sonuc.iyi), r, function () {
+        function sonEkran() {
           KS.ses.muzikCal(KS.config.SES.muzik[r.sonuc.iyi ? 'iyi' : 'kotu']);
+          KS.ses.muzikKis();
           KS.ses.ortamCal(null);
           ui.sonAc(r.sonuc, function () {
             KS.ses.ortamCal(null);
             yeniOyun(true);
+          });
+        }
+        ui.olaylariOynat(KS.sonOlaylari(r.sonuc.iyi ? 'iyi' : 'kotu'), r, function () {
+          if (r.sonuc.iyi) { sonEkran(); return; }
+          KS.ses.ortamCal('yagmur');
+          ui.zamanKartiAc(KS.SON_KARTLARI.kotuYagmur, function () {
+            ui.olaylariOynat(KS.sonOlaylari('kotuYagmur'), r, sonEkran);
           });
         });
       });
