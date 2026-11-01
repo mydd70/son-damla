@@ -94,8 +94,8 @@ KS.config = {
     kendiHavasi: ['sarnic', 'sarnic_onarildi']   // kapalı hava çizili: üstüne renk katmanı konmaz
   },
   GECIS: { otomatikSure: 1200 },   // milisaniye: sebebi yazmayan yer kartı kendiliğinden kapanır
-  // Arayüz görselleri: listede olmayan için bugünkü SVG ya da emoji kalır. Geçerli adlar: keci_hasta, keci_saglikli, ot1-3, ampul, kova, yem, sepet, damla, damla_gri, damla_bos, tarla_zemin, defter, kuyu, ses_acik, ses_kapali, baslangic, logo, final
-  ARAYUZ_GORSEL: { klasor: 'assets/ui/', uzanti: '.webp', dosyalar: ['keci_hasta', 'keci_saglikli', 'ot1', 'ot2', 'ot3', 'ampul', 'kova', 'yem', 'sepet', 'damla', 'damla_gri', 'damla_bos', 'tarla_zemin', 'defter', 'kuyu', 'ses_acik', 'ses_kapali', 'baslangic', 'logo', 'final'] },
+  // Arayüz görselleri: listede olmayan için bugünkü SVG ya da emoji kalır. Geçerli adlar: keci_hasta, keci_saglikli, ot1-3, ampul, kova, yem, sepet, damla, damla_gri, damla_bos, tarla_zemin, keci_zemin, defter, kuyu, ses_acik, ses_kapali, baslangic, logo, final
+  ARAYUZ_GORSEL: { klasor: 'assets/ui/', uzanti: '.webp', dosyalar: ['keci_hasta', 'keci_saglikli', 'ot1', 'ot2', 'ot3', 'ampul', 'kova', 'yem', 'sepet', 'damla', 'damla_gri', 'damla_bos', 'tarla_zemin', 'keci_zemin', 'defter', 'kuyu', 'ses_acik', 'ses_kapali', 'baslangic', 'logo', 'final'] },
   PORTRE: { klasor: 'assets/portraits/', uzanti: '.webp', dosyalar: ['anne', 'baba', 'dede', 'nine', 'komsu', 'mehmet', 'muhtar', 'ogretmen', 'koylu1', 'koylu2', 'koylu3'] },
 
   // --- Ses: dosyalar assets/audio/<id>.mp3; yoksa sessiz geçilir ---
@@ -110,7 +110,7 @@ KS.config = {
     gunOrtam: { 8: 'sicak' },            // o günün sabah ve öğlesinde dilimin sesi yerine
     muzik: { giris: 'muzik_giris', iyi: 'muzik_iyi', kotu: 'muzik_kotu' },
     liste: {
-      gunduz:      { seviye: 0.35, dongu: true },
+      gunduz:      { seviye: 0.3,  dongu: true },
       ruzgar:      { seviye: 0.35, dongu: true, uzanti: '.wav' },   // kısa döngü: WAV boşluksuz döner
       cirkir:      { seviye: 0.35, dongu: true },
       kalabalik:   { seviye: 0.4,  dongu: true },

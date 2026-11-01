@@ -75,7 +75,7 @@ Kaynak PNG'ler `gptgörselleri/` altında. Kullanıcı, kullanım hakkının ken
 | Dosya | Araç | Lisans / kullanım şartı |
 |---|---|---|
 | `assets/ui/` keçi, ot, ampul, kova, yem, sepet, defter, ses, kuyu simgesi; `assets/portraits/koylu1-3.webp` | Stable Diffusion, Pixel Art Diffusion XL (CreativeML Open RAIL++-M); arka plan silindi, 8 piksellik ızgaraya indirildi | Model lisansı |
-| `assets/ui/logo.webp`, `sekme.webp`, `baslangic.webp`, `final.webp`, `damla.webp`, `damla_gri.webp`, `damla_bos.webp`, `tarla_zemin.webp`; `assets/img/okul.webp`, `toplanti.webp`, `komsu_tarlasi.webp`, `komsu_tarlasi_obruk.webp` | ChatGPT | OpenAI kullanım koşulları |
+| `assets/ui/logo.webp`, `sekme.webp`, `baslangic.webp`, `final.webp`, `damla.webp`, `damla_gri.webp`, `damla_bos.webp`, `tarla_zemin.webp`, `keci_zemin.webp`; `assets/img/okul.webp`, `toplanti.webp`, `komsu_tarlasi.webp`, `komsu_tarlasi_obruk.webp` | ChatGPT | OpenAI kullanım koşulları |
 
 Kullanılmayanlar: turuncu damla (renk yanlış), saksılı `ot2` (ot yerine saksı), iki alternatif grup görseli, `simge.png`, `yatankeciyedek.png`.
 

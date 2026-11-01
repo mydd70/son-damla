@@ -131,7 +131,8 @@ KS.ui = KS.ui || {};
   // Başlangıç ve son ekranının sol altında yapımcı bilgisi.
   KS.ui.yapimciYazisi = function () {
     var y = KS.ui.el('div', 'yapimci');
-    y.appendChild(KS.ui.el('div', '', KS.t('yapimciEtiket') + ': ' + KS.YAPIMCI.ad));
+    y.appendChild(KS.ui.el('div', 'yapimci-baslik', KS.t('yapimciEtiket')));
+    y.appendChild(KS.ui.el('div', '', KS.YAPIMCI.ad));
     y.appendChild(KS.ui.el('div', '', KS.YAPIMCI.eposta));
     return y;
   };

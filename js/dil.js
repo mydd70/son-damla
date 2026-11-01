@@ -204,7 +204,7 @@ KS.METIN = {
     finalDunya: 'Wherever you are in the world, wells reach down to the same water. If we listen to those who measure and those who remember, the last drop has not fallen yet.',
     finalMetni: 'No single rain will save us. Decisions made together will.',
     finalKaynak: 'Sources: Prof. Fetullah Arık, Konya Technical University (2026); World Meteorological Organization (WMO), State of Global Water Resources report.',
-    yapimciEtiket: 'Created by',
+    yapimciEtiket: 'Creator',
     tekrarOyna: 'Play again',
     kaynaklar: 'Credits',
     kaynaklarBaslik: 'Credits and licenses',
