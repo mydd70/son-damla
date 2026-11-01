@@ -5,7 +5,9 @@ Oyunda kullanılan her görsel, ses ve veri burada listelenir ("3. kişi haklar�
 ## Kod ve metin
 | Öğe | Kaynak | Not |
 |---|---|---|
-| Oyun kodu, diyaloglar, SVG sahneler | Claude (Anthropic) ile üretildi | — |
+| Oyun tasarımı ve hikâye | Muhammet Yahya Doğan | — |
+| Diyalog yazımı ve kodlama, SVG sahneler | Claude (Anthropic) desteğiyle geliştirildi | — |
+| İngilizce çeviri | Claude (Anthropic); çeviri kontrolü: Muhammet Yahya Doğan | — |
 
 ## Portreler
 | Dosya | Araç / kaynak | Lisans / kullanım şartı |

@@ -161,7 +161,7 @@ KS.ui = KS.ui || {};
     panel.appendChild(el('p', '', KS.t('kaynakDegisiklik')));
     bolum('kaynak_muzik', KS.KAYNAK_LISTESI.muzik);
     bolum('kaynak_gorsel', [KS.t('kaynakGorselSatir')]);
-    bolum('kaynak_kod', [KS.t('kaynakKodSatir')]);
+    bolum('kaynak_kod', [KS.t('kaynakTasarimSatir'), KS.t('kaynakKodSatir'), KS.t('kaynakCeviriSatir')]);
     bolum('kaynak_veri', [KS.t('kaynakVeriSatir')]);
     var kapat = el('button', '', KS.t('kapat'));
     kapat.onclick = function () { kutu.hidden = true; };

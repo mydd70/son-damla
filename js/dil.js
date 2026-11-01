@@ -104,11 +104,13 @@ KS.METIN = {
     kaynak_ses: 'Sesler',
     kaynak_muzik: 'Müzik',
     kaynak_gorsel: 'Görseller',
-    kaynak_kod: 'Kod ve metin',
+    kaynak_kod: 'Yapım',
     kaynak_veri: 'Son ekrandaki veriler',
     kaynakVeriSatir: 'Konya Ovası obruk sayısı ve 2026 yağışı: Prof. Dr. Fetullah Arık, Konya Teknik Üniversitesi (NTV, 17 Ağustos 2026; Ensonhaber, 2026). Nehirler ve su döngüsü: Dünya Meteoroloji Örgütü, Küresel Su Kaynakları Durumu raporları (BM Haber, 17 Eylül 2026; WMO, 7 Ekim 2024).',
     kaynakGorselSatir: 'Portreler ve küçük görseller: Stable Diffusion, Pixel Art Diffusion XL (YamerOfficial, CreativeML Open RAIL++-M). Sahneler: Claude ile SVG siluet, ChatGPT ile görsele dönüştürme.',
-    kaynakKodSatir: 'Claude (Anthropic) ile üretildi.',
+    kaynakTasarimSatir: 'Oyun tasarımı ve hikâye: Muhammet Yahya Doğan',
+    kaynakKodSatir: 'Diyalog yazımı ve kodlama: Claude (Anthropic) desteğiyle geliştirildi.',
+    kaynakCeviriSatir: 'İngilizce çeviri: Claude (Anthropic). Çeviri kontrolü: Muhammet Yahya Doğan',
     kaynakDegisiklik: 'Sesler kırpıldı, filtrelendi ya da seviyesi ayarlandı. Beautiful Piano değiştirilmedi.'
   },
   en: {
@@ -211,11 +213,13 @@ KS.METIN = {
     kaynak_ses: 'Sound',
     kaynak_muzik: 'Music',
     kaynak_gorsel: 'Images',
-    kaynak_kod: 'Code and text',
+    kaynak_kod: 'Production',
     kaynak_veri: 'Data on the final screen',
     kaynakVeriSatir: 'Konya Plain sinkhole count and 2026 rainfall: Prof. Fetullah Arık, Konya Technical University (NTV, 17 August 2026; Ensonhaber, 2026). Rivers and the water cycle: World Meteorological Organization, State of Global Water Resources reports (UN News, 17 September 2026; WMO, 7 October 2024).',
     kaynakGorselSatir: 'Portraits and small images: Stable Diffusion, Pixel Art Diffusion XL (YamerOfficial, CreativeML Open RAIL++-M). Scenes: SVG silhouettes with Claude, converted with ChatGPT.',
-    kaynakKodSatir: 'Made with Claude (Anthropic).',
+    kaynakTasarimSatir: 'Game design and story: Muhammet Yahya Doğan',
+    kaynakKodSatir: 'Dialogue writing and programming: developed with support from Claude (Anthropic).',
+    kaynakCeviriSatir: 'English translation: Claude (Anthropic). Translation review: Muhammet Yahya Doğan',
     kaynakDegisiklik: 'Sounds were trimmed, filtered or leveled. Beautiful Piano is unmodified.'
   }
 };
