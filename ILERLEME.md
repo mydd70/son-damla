@@ -15,7 +15,7 @@ Son güncelleme: 31 Ekim 2026 akşamı. Ayrıntılı devir notu ve açık konula
 | Aşama 6: sahneler, renk filtresi | Bitti, `asama-6` |
 | Oynanış paketi (dilim düğmesi, gün planı, gri su satırı, ipucu penceresi, harita düşünceleri, ikna kuralları, gün 7 sahnesi) | Bitti, etiketsiz |
 | Denge ve akış paketi (kademeli su etkisi, kiler dengesi, sofra önizlemesi, her gün mini oyun, zaman kartı, selam ve sohbetler) | Bitti, etiketsiz, yayında (`0f2563f`) |
-| Hikâye incelemesi (boşluklar, mısır tarlası, diyalog düzeltmeleri, su ipucu, öğle vedası) | Bitti ve yayında; **metin henüz kullanıcı onayından geçmedi**, değişebilir |
+| Hikâye incelemesi (boşluklar, mısır tarlası, diyalog düzeltmeleri, su ipucu, öğle vedası) | Bitti, commit edildi, **push edilmedi**; metin henüz kullanıcı onayından geçmedi, değişebilir |
 | Aşama 7: metin | **Devam ediyor.** Kullanıcı metni kesinleştirecek, sonra İngilizce çeviri |
 | Aşama 8: görsel | **Devam ediyor.** 12 arka plan ve 8 portre bağlı (commit edildi); keçi, ot, ampul ve ikonlar bekleniyor |
 | Sesler ve müzik | Bağlı, 25 dosya `assets/audio/`, commit edildi; 3 NC lisanslı ses şimdilik kalıyor, ödül ya da kâr amacı olursa değişecek |

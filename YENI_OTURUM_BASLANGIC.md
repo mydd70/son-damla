@@ -10,6 +10,8 @@
 - **Tek geçerli tasarım:** `tasarim_v4.md`. Kurallar: `CLAUDE.md`. Hikâye: `taslak/DIYALOGLAR.md` ile `js/story.js` aynı metni taşır. `SABAH_RAPORU.md` eskidir.
 - **Etiketler:** `asama-0` … `asama-6`. Aşama 7 (metin + çeviri) ve 8 (görsel) devam ediyor, etiketlenmedi. Aşama 9 başlamadı.
 
+- **Depo durumu:** Bütün iş yerelde commit edildi. **Push edilmedi** (izin denetimi engelledi, yayındaki oyun hâlâ `0f2563f`). Kullanıcı kendi terminalinden `git push origin main` yapmalı ya da yeni oturumda açıkça istemeli.
+
 ## Sıradaki adımlar (sırayla)
 1. **Kullanıcı:** Oyunu bir kez oynayarak metni okur, `taslak/DIYALOGLAR.md`'yi kesinleştirir, final metnini verir, sesleri dinler. Bitince **"metin hazır"** der.
 2. **Kullanıcı:** Görselleri üretir (`referans/PROMPTLAR.md` sonundaki "Detay görselleri"), `gorseldeneme/` klasörüne koyar. Bu klasör git dışındadır.
@@ -24,7 +26,7 @@ Hepsi **proje dışında**, notlar klasöründe yapılır (aşağıda). `story.j
 1. **Çeviriyi deneme:** `ceviri_en.txt` satırlarını projenin bir kopyasında `en` alanlarına işleyen betik yaz, `?dil=en` ile baştan sona oynat, Türkçe kalan yerleri ve taşmaları listele. Çeviriyi baştan oku, kalitesini düzelt. Betik "metin hazır" sonrası tek komutla çalışabilmeli.
 2. **Görsel bağlama yaması:** `gorsel_baglama.patch` eskidi (`config.js` parçası uymuyor). Güncel koda göre yenile; keçi, ot, ampul, kova, yem, sepet, damla, defter, ses ikonları, köylü portreleri (`koylu` için rastgele değil, sabit bir kural), başlangıç görseli, okul ve toplantı sahnesini kapsasın. Görsel yoksa bugünkü SVG ya da emoji kalsın. Sahte görsellerle kopyada dene. Mini oyunda keçi taraması çalışmaya devam etmeli.
 3. **Tam test:** Kopya olmadan yalnızca okuyarak: iyi son, kötü son, ikna var kuyu yetmedi, `?gun=8` kaba söz ve geri alma; 1280×720 ve 667×375 taşma ölçümü (Kaynaklar paneli dahil); `file://` ile başsız Chrome. Oyun hatası bulursan düzeltme, raporla.
-4. **Yayın denetimi:** Yayın adresinde bütün ses, portre ve görsel dosyaları 200 dönüyor mu, oyun açılıyor mu.
+4. **Yayın denetimi (yalnızca push yapıldıysa):** Yayın adresinde bütün ses, portre ve görsel dosyaları 200 dönüyor mu, oyun açılıyor mu.
 5. **Sunum ve video hazırlığı:** 1 dakikalık video için saniye saniye çekim planı (hangi `?gun=N`, hangi anlar); sunum için içerik taslağı (`tasarim_v4.md` bölüm 1-2 ve `referans/VERILER.md`). Şablon elimizde yok, başlıklar şablona uyarlanacak. Doğrulanmamış sayıları işaretle.
 6. **README taslağı:** Depo teslim dosyası olacağı için oyun adresi, nasıl oynanır, kaynaklara bağlantı. Notlar klasörüne yaz; projeye eklemek onay ister.
 
