@@ -106,7 +106,8 @@ KS.config = {
     gecisSure: 800, finalOran: 0.5,
     toplanti: { kalabalik: 'kalabalik', kalabalikOran: 0.6, ortamOran: 0.4 },   // kalabalık kısık, altında akşam sesi                      // milisaniye: ortam ve müzik yumuşak geçişi
     ortam: { sabah: 'gunduz', ogle: 'gunduz', aksam: 'cirkir' },
-    mekanOrtam: { tepe: 'ruzgar', kuyu_basi: 'kalabalik', komsu_tarlasi: 'motor' },   // bu mekânlarda dilimin sesi yerine
+    mekanOrtam: { tepe: 'ruzgar', komsu_tarlasi: 'motor' },   // bu mekânlarda dilimin sesi yerine
+    gunduzMekanOrtam: { kuyu_basi: 'kalabalik' },   // yalnızca sabah ve öğle; akşam dilimin sesi çalar
     gunOrtam: { 8: 'sicak' },            // o günün sabah ve öğlesinde dilimin sesi yerine
     muzik: { giris: 'muzik_giris', iyi: 'muzik_iyi', kotu: 'muzik_kotu' },
     liste: {

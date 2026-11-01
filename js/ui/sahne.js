@@ -75,7 +75,7 @@ KS.ui = KS.ui || {};
   KS.ui.ortamAdi = function (mekan) {
     var s = KS.config.SES;
     var d = KS.state;
-    return s.mekanOrtam[mekan] || (d.dilim !== 'aksam' && s.gunOrtam[d.gun]) || s.ortam[d.dilim];
+    return s.mekanOrtam[mekan] || (d.dilim !== 'aksam' && (s.gunduzMekanOrtam[mekan] || s.gunOrtam[d.gun])) || s.ortam[d.dilim];
   };
 
   KS.ui.sonMekan = function () { return sonMekan; };
